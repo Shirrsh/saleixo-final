@@ -155,70 +155,13 @@ const Packages = () => {
           ))}
         </div>
 
-        {/* À la Carte Add-On Services */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              À la Carte Add-On Services
-            </h3>
-            <p className="text-lg text-muted-foreground">
-              Customize your package with additional services
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="border-border">
-              <CardHeader>
-                <CardTitle className="text-xl">Product Photography</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground">White-Background Shots</span>
-                  <span className="font-semibold text-primary">₹600 per product</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground">Styled Lifestyle Photography</span>
-                  <span className="font-semibold text-primary">₹1,200 per product</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground">Event Coverage</span>
-                  <span className="font-semibold text-primary">₹6,000/hr</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border">
-              <CardHeader>
-                <CardTitle className="text-xl">Digital Marketing</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground">Social Media Setup & Management</span>
-                  <span className="font-semibold text-primary">₹25,000/mo</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground">Content Creation & SEO</span>
-                  <span className="font-semibold text-primary">₹15,000/mo</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground">Email Marketing Campaigns</span>
-                  <span className="font-semibold text-primary">₹10,000/campaign</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground">Custom Website Development</span>
-                  <span className="font-semibold text-primary">₹60,000</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
 
         {/* Competitive Positioning */}
         <div className="mt-16 bg-card border border-border rounded-lg p-8">
           <h4 className="text-xl font-bold text-foreground mb-6 text-center">
             Competitive Positioning
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
             <div>
               <h5 className="font-semibold text-foreground mb-2">Starter Pack</h5>
               <p className="text-muted-foreground">Undercuts typical entry-level setup fees (₹25K–₹30K) by 20%</p>
@@ -230,10 +173,6 @@ const Packages = () => {
             <div>
               <h5 className="font-semibold text-foreground mb-2">Export-Ready</h5>
               <p className="text-muted-foreground">Uniquely bundles ★photography★ with full year of account development—market standard starts at ₹2.5L without analytics</p>
-            </div>
-            <div>
-              <h5 className="font-semibold text-foreground mb-2">À la Carte Add-Ons</h5>
-              <p className="text-muted-foreground">Let clients tailor bundles, avoiding sticker shock</p>
             </div>
           </div>
         </div>
