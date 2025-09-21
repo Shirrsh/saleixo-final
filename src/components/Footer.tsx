@@ -1,0 +1,122 @@
+import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+
+const Footer = () => {
+  const socialLinks = [
+    { icon: <Facebook className="w-5 h-5" />, href: "#", label: "Facebook" },
+    { icon: <Instagram className="w-5 h-5" />, href: "#", label: "Instagram" },
+    { icon: <Twitter className="w-5 h-5" />, href: "#", label: "Twitter" },
+    { icon: <Linkedin className="w-5 h-5" />, href: "#", label: "LinkedIn" }
+  ];
+
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="bg-foreground text-background py-12">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Logo & Description */}
+          <div className="md:col-span-2">
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full"></div>
+              <span className="text-2xl font-bold">Alvaio</span>
+            </div>
+            <p className="text-background/80 mb-6 max-w-md">
+              Empowering artisans with digital transformation and professional photography services. 
+              Turn your craft into a thriving online business.
+            </p>
+            <div className="flex space-x-4">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="p-2 bg-background/10 hover:bg-background/20 rounded-full transition-colors duration-300"
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              <li>
+                <button
+                  onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-background/80 hover:text-background transition-colors"
+                >
+                  Services
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-background/80 hover:text-background transition-colors"
+                >
+                  Portfolio
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => document.querySelector('#packages')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-background/80 hover:text-background transition-colors"
+                >
+                  Packages
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-background/80 hover:text-background transition-colors"
+                >
+                  Contact
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Legal</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="text-background/80 hover:text-background transition-colors">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-background/80 hover:text-background transition-colors">
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-background/80 hover:text-background transition-colors">
+                  Cookie Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-background/80 hover:text-background transition-colors">
+                  Refund Policy
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-background/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-background/60 text-sm">
+            © {currentYear} Alvaio. All rights reserved.
+          </p>
+          <p className="text-background/60 text-sm mt-4 md:mt-0">
+            Made with ♥ for artisans worldwide
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
