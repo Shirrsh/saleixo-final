@@ -1,40 +1,47 @@
 import { Camera, ShoppingCart, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const Services = () => {
   const services = [
     {
       icon: <Camera className="w-12 h-12 text-primary" />,
-      title: "Product Photography",
-      description: "Professional product photos that showcase your crafts in the best light. High-quality images optimized for online sales and social media.",
+      title: "📸 Product Photography & Styling",
+      description: "Studio-grade quality photos that make your products stand out. From white-background shots to styled lifestyle photography.",
       features: [
-        "Studio-quality lighting setup",
-        "Multiple angles and lifestyle shots", 
-        "Image editing and enhancement",
-        "Web-optimized file formats"
-      ]
+        "Professional studio lighting setup",
+        "Multiple angles & lifestyle shots", 
+        "Advanced editing & retouching",
+        "Fast 24-48hr turnaround"
+      ],
+      cta: "Book a Shoot",
+      ctaVariant: "default" as const
     },
     {
       icon: <ShoppingCart className="w-12 h-12 text-accent" />,
-      title: "E-commerce Onboarding", 
-      description: "Complete setup of your online store with integrated payment systems, inventory management, and customer support tools.",
+      title: "🎨 Graphics & Creative Design", 
+      description: "Eye-catching visuals that convert browsers into buyers. Logo design, packaging, social media graphics, and brand identity.",
       features: [
-        "Platform setup (Shopify, Etsy, etc.)",
-        "Payment gateway integration",
-        "Inventory management system",
-        "Customer support automation"
-      ]
+        "Logo & brand identity design",
+        "Product packaging design",
+        "Social media graphics",
+        "Marketing collaterals"
+      ],
+      cta: "Get Designs",
+      ctaVariant: "outline" as const
     },
     {
       icon: <TrendingUp className="w-12 h-12 text-success" />,
-      title: "Digital Marketing",
-      description: "Strategic marketing campaigns to grow your online presence and reach more customers who appreciate handcrafted quality.",
+      title: "📢 Digital Marketing",
+      description: "Data-driven campaigns that grow your reach and sales. PPC ads, social media management, SEO optimization, and analytics.",
       features: [
-        "Social media strategy",
-        "Content calendar creation",
-        "SEO optimization",
-        "Performance analytics"
-      ]
+        "Google & Facebook Ads (PPC)",
+        "Social media management",
+        "SEO & content marketing",
+        "Performance tracking & analytics"
+      ],
+      cta: "Launch Ads",
+      ctaVariant: "success" as const
     }
   ];
 
@@ -57,12 +64,12 @@ const Services = () => {
                 <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
-                <CardTitle className="text-2xl">{service.title}</CardTitle>
+                <CardTitle className="text-xl">{service.title}</CardTitle>
                 <CardDescription className="text-base">
                   {service.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-6">
                 <ul className="space-y-2">
                   {service.features.map((feature, i) => (
                     <li key={i} className="flex items-center text-muted-foreground">
@@ -71,6 +78,16 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
+                <div className="text-center pt-4">
+                  <Button 
+                    variant={service.ctaVariant} 
+                    size="lg" 
+                    className="w-full"
+                    onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    {service.cta}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}

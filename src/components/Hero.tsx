@@ -11,21 +11,20 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-            Digital Transformation &{' '}
+            From Lens to Launch –{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              Photography Services
-            </span>{' '}
-            for Artisans
+              We Handle Everything
+            </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Transform your handcrafted products into a thriving online business. 
-            Professional photography, e-commerce setup, and digital marketing tailored for artisans.
+            Photography, design, and marketing solutions for modern brands. 
+            You focus on your craft, we handle the growth.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="hero" size="lg" onClick={scrollToContact}>
-              Get Your QR Code
+            <Button variant="success" size="lg" onClick={scrollToContact}>
+              Book a Consultation
             </Button>
             <Button variant="outline" size="lg" onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}>
               Explore Services

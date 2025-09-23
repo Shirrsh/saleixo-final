@@ -11,18 +11,18 @@ const Portfolio = () => {
   const portfolioItems = [
     {
       image: portfolio1,
-      title: "Handcrafted Ceramics",
-      description: "Professional product photography for a ceramics artisan, showcasing the beauty and craftsmanship of handmade pottery."
+      title: "Product Photography",
+      description: "Professional studio photography showcasing branded products with elegant styling and perfect lighting for e-commerce success."
     },
     {
       image: portfolio2, 
-      title: "Artisan Textiles",
-      description: "E-commerce ready photos of handwoven textiles and fabrics, highlighting texture and quality for online sales."
+      title: "Creative Design & Branding",
+      description: "Complete brand identity designs including logos, business cards, and marketing materials that capture brand essence."
     },
     {
       image: portfolio3,
-      title: "Wooden Crafts",
-      description: "Clean, professional shots of handcrafted wooden furniture and home decor items for digital marketing."
+      title: "Digital Marketing Campaigns",
+      description: "Data-driven social media campaigns and advertising strategies that deliver measurable growth and engagement."
     }
   ];
 
@@ -52,7 +52,7 @@ const Portfolio = () => {
             Our Portfolio
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            See how we've helped artisans transform their crafts into stunning online presentations
+            See how we've transformed brands with professional photography, creative design, and strategic marketing
           </p>
         </div>
 

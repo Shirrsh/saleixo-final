@@ -7,7 +7,9 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
+    { name: 'Photography', href: '#services' },
+    { name: 'Design', href: '#services' },
+    { name: 'Marketing', href: '#services' },
     { name: 'Portfolio', href: '#portfolio' },
     { name: 'Packages', href: '#packages' },
     { name: 'Contact', href: '#contact' }
@@ -45,7 +47,7 @@ const Header = () => {
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
             <Button variant="success" onClick={() => scrollToSection('#contact')}>
-              Get Your QR Code
+              Book Consultation
             </Button>
           </div>
 
@@ -72,7 +74,7 @@ const Header = () => {
                 </button>
               ))}
               <Button variant="success" onClick={() => scrollToSection('#contact')}>
-                Get Your QR Code
+                Book Consultation
               </Button>
             </div>
           </div>

@@ -3,15 +3,17 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MessageSquare, QrCode } from 'lucide-react';
+import { MessageSquare, Phone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: ''
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -22,158 +24,155 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you within 24 hours.",
-    });
-    setFormData({ name: '', email: '', message: '' });
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
+    if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
+    else if (!/^\+?[\d\s-()]{10,}$/.test(formData.phone)) newErrors.phone = 'Phone number is invalid';
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const QRCodePlaceholder = () => (
-    <svg
-      width="200"
-      height="200"
-      viewBox="0 0 200 200"
-      className="mx-auto"
-    >
-      <rect width="200" height="200" fill="white" stroke="#e5e7eb" strokeWidth="2"/>
-      <rect x="10" y="10" width="30" height="30" fill="black"/>
-      <rect x="160" y="10" width="30" height="30" fill="black"/>
-      <rect x="10" y="160" width="30" height="30" fill="black"/>
-      
-      <rect x="50" y="50" width="10" height="10" fill="black"/>
-      <rect x="70" y="50" width="10" height="10" fill="black"/>
-      <rect x="90" y="50" width="10" height="10" fill="black"/>
-      <rect x="110" y="50" width="10" height="10" fill="black"/>
-      <rect x="130" y="50" width="10" height="10" fill="black"/>
-      <rect x="150" y="50" width="10" height="10" fill="black"/>
-      
-      <rect x="50" y="70" width="10" height="10" fill="black"/>
-      <rect x="90" y="70" width="10" height="10" fill="black"/>
-      <rect x="130" y="70" width="10" height="10" fill="black"/>
-      
-      <rect x="50" y="90" width="10" height="10" fill="black"/>
-      <rect x="70" y="90" width="10" height="10" fill="black"/>
-      <rect x="110" y="90" width="10" height="10" fill="black"/>
-      <rect x="150" y="90" width="10" height="10" fill="black"/>
-      
-      <rect x="50" y="110" width="10" height="10" fill="black"/>
-      <rect x="90" y="110" width="10" height="10" fill="black"/>
-      <rect x="110" y="110" width="10" height="10" fill="black"/>
-      <rect x="150" y="110" width="10" height="10" fill="black"/>
-      
-      <rect x="50" y="130" width="10" height="10" fill="black"/>
-      <rect x="70" y="130" width="10" height="10" fill="black"/>
-      <rect x="90" y="130" width="10" height="10" fill="black"/>
-      <rect x="130" y="130" width="10" height="10" fill="black"/>
-      
-      <rect x="70" y="150" width="10" height="10" fill="black"/>
-      <rect x="90" y="150" width="10" height="10" fill="black"/>
-      <rect x="110" y="150" width="10" height="10" fill="black"/>
-      <rect x="150" y="150" width="10" height="10" fill="black"/>
-      
-      <text x="100" y="185" textAnchor="middle" className="text-xs fill-muted-foreground">
-        Scan for Demo
-      </text>
-    </svg>
-  );
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateForm()) {
+      toast({
+        title: "Message Sent!",
+        description: "We'll get back to you within 24 hours.",
+      });
+      setFormData({ name: '', email: '', phone: '', message: '' });
+      setErrors({});
+    }
+  };
+
 
   return (
     <section id="contact" className="py-16 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Get Your QR Code & Start Today
+            Ready to Transform Your Brand?
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to transform your craft into a digital success? Contact us for a free consultation and custom QR code solution.
+            Get in touch for a free consultation. Let's discuss how we can elevate your visual presence and grow your business.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* QR Code Section */}
-          <Card className="border-border">
-            <CardHeader className="text-center">
-              <QrCode className="w-12 h-12 text-primary mx-auto mb-4" />
-              <CardTitle className="text-2xl">Custom QR Code Solutions</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center">
-              <QRCodePlaceholder />
-              <p className="text-muted-foreground mt-6 mb-6">
-                Connect your physical products to your digital store with custom QR codes. 
-                Customers can instantly access product information, reviews, and purchase options.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="success" size="lg">
-                  Get Custom QR Code
-                </Button>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            {/* Contact Info Cards */}
+            <Card className="border-border text-center">
+              <CardContent className="pt-6">
+                <Phone className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="font-semibold text-foreground mb-2">Call Us</h3>
+                <p className="text-muted-foreground">+91 98765 43210</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-border text-center">
+              <CardContent className="pt-6">
+                <MessageSquare className="w-8 h-8 text-success mx-auto mb-4" />
+                <h3 className="font-semibold text-foreground mb-2">WhatsApp</h3>
                 <Button 
-                  variant="outline" 
-                  size="lg"
-                  onClick={() => window.open('https://wa.me/1234567890', '_blank')}
+                  variant="link" 
+                  className="text-success p-0 h-auto"
+                  onClick={() => window.open('https://wa.me/919876543210', '_blank')}
                 >
-                  <MessageSquare className="w-5 h-5 mr-2" />
-                  WhatsApp Us
+                  Chat with us instantly
                 </Button>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-border text-center">
+              <CardContent className="pt-6">
+                <div className="w-8 h-8 bg-accent rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-accent-foreground font-bold">@</span>
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Email</h3>
+                <p className="text-muted-foreground">hello@alvaio.com</p>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Contact Form */}
           <Card className="border-border">
             <CardHeader>
-              <CardTitle className="text-2xl">Send us a Message</CardTitle>
+              <CardTitle className="text-2xl text-center">Send us a Message</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Full Name *
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Enter your full name"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                      Full Name *
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Your full name"
+                      className={errors.name ? 'border-destructive' : ''}
+                    />
+                    {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      Email Address *
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="your@email.com"
+                      className={errors.email ? 'border-destructive' : ''}
+                    />
+                    {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    Email Address *
+                  <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                    Phone Number *
                   </label>
                   <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
                     onChange={handleInputChange}
-                    placeholder="Enter your email address"
+                    placeholder="+91 98765 43210"
+                    className={errors.phone ? 'border-destructive' : ''}
                   />
+                  {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                    Message *
+                    Project Details *
                   </label>
                   <Textarea
                     id="message"
                     name="message"
-                    required
                     rows={5}
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Tell us about your craft business and how we can help..."
+                    placeholder="Tell us about your project, goals, and how we can help grow your business..."
+                    className={errors.message ? 'border-destructive' : ''}
                   />
+                  {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
                 </div>
 
-                <Button type="submit" variant="default" size="lg" className="w-full">
+                <Button type="submit" variant="success" size="lg" className="w-full">
                   Send Message
                 </Button>
               </form>

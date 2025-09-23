@@ -1,12 +1,14 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
+import WhyAlvaio from '@/components/WhyAlvaio';
 import Packages from '@/components/Packages';
 import Portfolio from '@/components/Portfolio';
 import HowItWorks from '@/components/HowItWorks';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const Index = () => {
   return (
@@ -15,6 +17,7 @@ const Index = () => {
       <main>
         <Hero />
         <Services />
+        <WhyAlvaio />
         <Portfolio />
         <HowItWorks />
         <Packages />
@@ -22,6 +25,7 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 };

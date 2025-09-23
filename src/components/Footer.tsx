@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const socialLinks = [
@@ -21,8 +22,8 @@ const Footer = () => {
               <span className="text-2xl font-bold">Alvaio</span>
             </div>
             <p className="text-background/80 mb-6 max-w-md">
-              Empowering artisans with digital transformation and professional photography services. 
-              Turn your craft into a thriving online business.
+              Professional photography, design, and marketing services. 
+              From lens to launch - we handle everything so you can focus on growth.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
@@ -82,14 +83,14 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/privacy" className="text-background/80 hover:text-background transition-colors">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-background/80 hover:text-background transition-colors">
+                <Link to="/terms" className="text-background/80 hover:text-background transition-colors">
                   Terms of Service
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-background/80 hover:text-background transition-colors">
@@ -111,7 +112,7 @@ const Footer = () => {
             © {currentYear} Alvaio. All rights reserved.
           </p>
           <p className="text-background/60 text-sm mt-4 md:mt-0">
-            Made with ♥ for artisans worldwide
+            Made with ♥ for modern brands worldwide
           </p>
         </div>
       </div>
