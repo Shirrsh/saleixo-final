@@ -155,28 +155,6 @@ const Packages = () => {
           ))}
         </div>
 
-
-        {/* Competitive Positioning */}
-        <div className="mt-16 bg-card border border-border rounded-lg p-8">
-          <h4 className="text-xl font-bold text-foreground mb-6 text-center">
-            Competitive Positioning
-          </h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-            <div>
-              <h5 className="font-semibold text-foreground mb-2">Starter Pack</h5>
-              <p className="text-muted-foreground">Undercuts typical entry-level setup fees (₹25K–₹30K) by 20%</p>
-            </div>
-            <div>
-              <h5 className="font-semibold text-foreground mb-2">Growth Pack</h5>
-              <p className="text-muted-foreground">Matches mid-tier account management (₹80K–₹120K) plus 6-month training</p>
-            </div>
-            <div>
-              <h5 className="font-semibold text-foreground mb-2">Export-Ready</h5>
-              <p className="text-muted-foreground">Uniquely bundles ★photography★ with full year of account development—market standard starts at ₹2.5L without analytics</p>
-            </div>
-          </div>
-        </div>
-
         <div className="text-center mt-12">
           <p className="text-muted-foreground mb-4">Need something custom?</p>
           <Button variant="outline" size="lg" onClick={scrollToContact}>
