@@ -64,40 +64,6 @@ const Contact = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-            {/* Contact Info Cards */}
-            <Card className="border-border text-center">
-              <CardContent className="pt-6">
-                <Phone className="w-8 h-8 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Call Us</h3>
-                <p className="text-muted-foreground">+91 98765 43210</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-border text-center">
-              <CardContent className="pt-6">
-                <MessageSquare className="w-8 h-8 text-success mx-auto mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">WhatsApp</h3>
-                <Button 
-                  variant="link" 
-                  className="text-success p-0 h-auto"
-                  onClick={() => window.open('https://wa.me/919876543210', '_blank')}
-                >
-                  Chat with us instantly
-                </Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-border text-center">
-              <CardContent className="pt-6">
-                <div className="w-8 h-8 bg-accent rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-accent-foreground font-bold">@</span>
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Email</h3>
-                <p className="text-muted-foreground">hello@alvaio.com</p>
-              </CardContent>
-            </Card>
-          </div>
 
           {/* Contact Form */}
           <Card className="border-border">

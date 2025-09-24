@@ -16,12 +16,6 @@ const HowItWorks = () => {
     },
     {
       number: "03",
-      icon: <Rocket className="w-8 h-8" />,
-      title: "Launch & QR Codes", 
-      description: "Launch your online presence with custom QR codes that connect your physical products to your digital store."
-    },
-    {
-      number: "04",
       icon: <TrendingUp className="w-8 h-8" />,
       title: "Growth & Marketing",
       description: "Ongoing marketing support and analytics to help you grow your customer base and increase sales."
@@ -36,11 +30,11 @@ const HowItWorks = () => {
             How It Works
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Our proven 4-step process to transform your craft into a thriving online business
+            Our proven 3-step process to transform your craft into a thriving online business
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <div key={index} className="text-center group">
               <div className="relative mb-6">
