@@ -20,7 +20,6 @@ const Index = () => {
         <WhyAlvaio />
         <Portfolio />
         <HowItWorks />
-        <Packages />
         <Testimonials />
         <Contact />
       </main>
