@@ -57,23 +57,23 @@ const Portfolio = () => {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="relative overflow-hidden rounded-xl shadow-2xl">
+          <div className="relative overflow-hidden rounded-xl shadow-2xl hover-glow">
             <div 
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {portfolioItems.map((item, index) => (
                 <div key={index} className="w-full flex-shrink-0">
-                  <div className="relative">
+                  <div className="relative group">
                     <img 
                       src={item.image} 
                       alt={item.title}
-                      className="w-full h-64 md:h-96 object-cover"
+                      className="w-full h-64 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-                      <div className="p-6 text-white">
-                        <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                        <p className="text-white/90">{item.description}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end group-hover:from-black/80 transition-colors duration-300">
+                      <div className="p-6 text-white animate-slide-in-left">
+                        <h3 className="text-2xl font-bold mb-2 group-hover:scale-105 transition-transform duration-300">{item.title}</h3>
+                        <p className="text-white/90 group-hover:text-white transition-colors duration-300">{item.description}</p>
                       </div>
                     </div>
                   </div>
@@ -86,7 +86,7 @@ const Portfolio = () => {
               variant="ghost"
               size="icon"
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white border-white/20"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white border-white/20 hover-scale animate-float"
             >
               <ChevronLeft className="w-6 h-6" />
             </Button>
@@ -95,7 +95,8 @@ const Portfolio = () => {
               variant="ghost" 
               size="icon"
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white border-white/20"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white border-white/20 hover-scale animate-float"
+              style={{ animationDelay: '1s' }}
             >
               <ChevronRight className="w-6 h-6" />
             </Button>
@@ -107,8 +108,8 @@ const Portfolio = () => {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-primary' : 'bg-muted'
+                className={`w-3 h-3 rounded-full transition-all duration-300 hover-scale ${
+                  index === currentIndex ? 'bg-primary animate-pulse-glow' : 'bg-muted hover:bg-primary/50'
                 }`}
               />
             ))}

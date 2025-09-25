@@ -49,31 +49,31 @@ const Services = () => {
     <section id="services" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in">
             Our Services
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in animate-delay-200">
             Everything you need to transform your craft into a successful online business
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-border">
+            <Card key={index} className={`group hover:shadow-xl transition-all duration-500 border-border hover-lift animate-fade-in animate-delay-${(index + 1) * 100}`}>
               <CardHeader className="text-center">
-                <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300 animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
                   {service.icon}
                 </div>
-                <CardTitle className="text-xl">{service.title}</CardTitle>
-                <CardDescription className="text-base">
+                <CardTitle className="text-xl animate-scale-in animate-delay-300">{service.title}</CardTitle>
+                <CardDescription className="text-base animate-fade-in animate-delay-400">
                   {service.description}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <ul className="space-y-2">
                   {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-center text-muted-foreground">
-                      <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0"></div>
+                    <li key={i} className={`flex items-center text-muted-foreground animate-slide-in-left animate-delay-${(i + 2) * 100}`}>
+                      <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0 hover-glow"></div>
                       {feature}
                     </li>
                   ))}
@@ -82,7 +82,7 @@ const Services = () => {
                   <Button 
                     variant={service.ctaVariant} 
                     size="lg" 
-                    className="w-full"
+                    className="w-full hover-scale animate-scale-in animate-delay-500"
                     onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     {service.cta}

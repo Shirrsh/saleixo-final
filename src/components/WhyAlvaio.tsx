@@ -29,28 +29,30 @@ const WhyAlvaio = () => {
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in">
             Why Alvaio?
           </h2>
-          <p className="text-xl text-accent font-medium mb-2">
+          <p className="text-xl text-accent font-medium mb-2 animate-fade-in animate-delay-200">
             From Lens to Launch – We handle everything: photography, design, and marketing.
           </p>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground animate-fade-in animate-delay-300">
             You just sit back & grow.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {benefits.map((benefit, index) => (
-            <Card key={index} className="border-border hover:shadow-lg transition-all duration-300">
+            <Card key={index} className={`border-border hover:shadow-lg transition-all duration-500 hover-lift animate-scale-in animate-delay-${(index + 2) * 100} group`}>
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  {benefit.icon}
-                  <CardTitle className="text-xl">{benefit.title}</CardTitle>
+                  <div className="group-hover:scale-110 transition-transform duration-300 animate-float" style={{ animationDelay: `${index * 0.3}s` }}>
+                    {benefit.icon}
+                  </div>
+                  <CardTitle className="text-xl animate-slide-in-right animate-delay-400">{benefit.title}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">{benefit.description}</p>
+                <p className="text-muted-foreground animate-fade-in animate-delay-500">{benefit.description}</p>
               </CardContent>
             </Card>
           ))}

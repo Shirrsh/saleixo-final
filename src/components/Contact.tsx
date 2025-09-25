@@ -55,10 +55,10 @@ const Contact = () => {
     <section id="contact" className="py-16 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in">
             Ready to Transform Your Brand?
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in animate-delay-200">
             Get in touch for a free consultation. Let's discuss how we can elevate your visual presence and grow your business.
           </p>
         </div>
@@ -66,14 +66,14 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto">
 
           {/* Contact Form */}
-          <Card className="border-border">
+          <Card className="border-border hover-glow animate-scale-in animate-delay-300">
             <CardHeader>
-              <CardTitle className="text-2xl text-center">Send us a Message</CardTitle>
+              <CardTitle className="text-2xl text-center animate-fade-in animate-delay-400">Send us a Message</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
+                  <div className="animate-slide-in-left animate-delay-500">
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                       Full Name *
                     </label>
@@ -84,12 +84,12 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Your full name"
-                      className={errors.name ? 'border-destructive' : ''}
+                      className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 ${errors.name ? 'border-destructive' : ''}`}
                     />
                     {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
                   </div>
 
-                  <div>
+                  <div className="animate-slide-in-right animate-delay-500">
                     <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                       Email Address *
                     </label>
@@ -100,13 +100,13 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="your@email.com"
-                      className={errors.email ? 'border-destructive' : ''}
+                      className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 ${errors.email ? 'border-destructive' : ''}`}
                     />
                     {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
-                <div>
+                <div className="animate-fade-in animate-delay-600">
                   <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
                     Phone Number *
                   </label>
@@ -117,12 +117,12 @@ const Contact = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="+91 98765 43210"
-                    className={errors.phone ? 'border-destructive' : ''}
+                    className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 ${errors.phone ? 'border-destructive' : ''}`}
                   />
                   {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
                 </div>
 
-                <div>
+                <div className="animate-fade-in animate-delay-700">
                   <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                     Project Details *
                   </label>
@@ -133,14 +133,16 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Tell us about your project, goals, and how we can help grow your business..."
-                    className={errors.message ? 'border-destructive' : ''}
+                    className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 ${errors.message ? 'border-destructive' : ''}`}
                   />
                   {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
                 </div>
 
-                <Button type="submit" variant="success" size="lg" className="w-full">
-                  Send Message
-                </Button>
+                <div className="animate-scale-in animate-delay-800">
+                  <Button type="submit" variant="success" size="lg" className="w-full hover-lift hover-glow">
+                    Send Message
+                  </Button>
+                </div>
               </form>
             </CardContent>
           </Card>

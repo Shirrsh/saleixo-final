@@ -27,33 +27,33 @@ const Testimonials = () => {
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in">
             What Our Clients Say
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in animate-delay-200">
             Don't just take our word for it - hear from artisans who've transformed their businesses with Alvaio
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="border-border hover:shadow-lg transition-all duration-300">
+            <Card key={index} className={`border-border hover:shadow-lg transition-all duration-500 hover-lift animate-scale-in animate-delay-${(index + 2) * 100} group`}>
               <CardContent className="p-6">
                 {/* Rating Stars */}
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current text-accent" />
+                    <Star key={i} className={`w-5 h-5 fill-current text-accent hover-scale animate-fade-in animate-delay-${(index * 100) + (i * 50)}`} />
                   ))}
                 </div>
                 
                 {/* Testimonial Text */}
-                <blockquote className="text-foreground mb-6 leading-relaxed">
+                <blockquote className={`text-foreground mb-6 leading-relaxed animate-fade-in animate-delay-${(index + 3) * 100}`}>
                   "{testimonial.text}"
                 </blockquote>
                 
                 {/* Author */}
-                <div className="border-t border-border pt-4">
-                  <div className="font-semibold text-foreground">{testimonial.name}</div>
+                <div className={`border-t border-border pt-4 animate-slide-in-left animate-delay-${(index + 4) * 100}`}>
+                  <div className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300">{testimonial.name}</div>
                   <div className="text-sm text-muted-foreground">{testimonial.business}</div>
                 </div>
               </CardContent>
