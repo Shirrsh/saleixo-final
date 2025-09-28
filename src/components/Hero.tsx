@@ -1,14 +1,20 @@
 import { Button } from '@/components/ui/button';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+import { useAnimatedCounter } from '@/hooks/useAnimatedCounter';
 
 const Hero = () => {
+  const [ref, isIntersecting] = useIntersectionObserver();
+  const artisansCount = useAnimatedCounter(500, 2000, isIntersecting);
+  const satisfactionCount = useAnimatedCounter(98, 2000, isIntersecting);
+  
   const scrollToContact = () => {
     const element = document.querySelector('#contact');
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="home" className="pt-20 pb-16 bg-gradient-to-br from-background to-secondary overflow-hidden">
-      <div className="container mx-auto px-4 py-16">
+    <section id="home" className="pt-20 pb-16 bg-gradient-to-br from-background to-secondary overflow-hidden relative">
+      <div className="container mx-auto px-4 py-16" ref={ref}>
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
             From Lens to Launch –{' '}
@@ -32,16 +38,20 @@ const Hero = () => {
           </div>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="animate-counter animate-delay-300 hover-scale">
-              <div className="text-3xl font-bold text-primary mb-2 animate-float">500+</div>
+            <div className="animate-counter animate-delay-300 hover-scale group">
+              <div className="text-3xl font-bold text-primary mb-2 animate-float group-hover:scale-110 transition-transform duration-300">
+                {artisansCount}+
+              </div>
               <div className="text-muted-foreground">Artisans Helped</div>
             </div>
-            <div className="animate-counter animate-delay-400 hover-scale">
-              <div className="text-3xl font-bold text-accent mb-2 animate-float" style={{ animationDelay: '1s' }}>98%</div>
+            <div className="animate-counter animate-delay-400 hover-scale group">
+              <div className="text-3xl font-bold text-accent mb-2 animate-float group-hover:scale-110 transition-transform duration-300" style={{ animationDelay: '1s' }}>
+                {satisfactionCount}%
+              </div>
               <div className="text-muted-foreground">Satisfaction Rate</div>
             </div>
-            <div className="animate-counter animate-delay-500 hover-scale">
-              <div className="text-3xl font-bold text-success mb-2 animate-float" style={{ animationDelay: '2s' }}>24h</div>
+            <div className="animate-counter animate-delay-500 hover-scale group">
+              <div className="text-3xl font-bold text-success mb-2 animate-float group-hover:scale-110 transition-transform duration-300" style={{ animationDelay: '2s' }}>24h</div>
               <div className="text-muted-foreground">Average Setup Time</div>
             </div>
           </div>

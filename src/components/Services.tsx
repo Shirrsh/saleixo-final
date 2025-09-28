@@ -59,7 +59,23 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className={`group hover:shadow-xl transition-all duration-500 border-border hover-lift animate-fade-in animate-delay-${(index + 1) * 100}`}>
+            <Card 
+              key={index} 
+              className={`group hover:shadow-xl transition-all duration-500 border-border hover-lift animate-fade-in animate-delay-${(index + 1) * 100} hover:bg-gradient-to-br hover:from-background hover:to-secondary/20 hover:border-primary/20 cursor-pointer transform hover:-translate-y-2`}
+              style={{ 
+                transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg)',
+                transition: 'all 0.3s ease-out'
+              }}
+              onMouseEnter={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                e.currentTarget.style.transform = `perspective(1000px) rotateX(${-y / 10}deg) rotateY(${x / 10}deg) translateZ(20px)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+              }}
+            >
               <CardHeader className="text-center">
                 <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300 animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
                   {service.icon}

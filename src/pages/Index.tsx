@@ -9,10 +9,20 @@ import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import ParticleBackground from '@/components/ParticleBackground';
+import ScrollProgress from '@/components/ScrollProgress';
+import ThemeToggle from '@/components/ThemeToggle';
+import LoadingScreen from '@/components/LoadingScreen';
+import CursorFollower from '@/components/CursorFollower';
 
 const Index = () => {
   return (
     <>
+      <LoadingScreen />
+      <ParticleBackground />
+      <ScrollProgress />
+      <ThemeToggle />
+      <CursorFollower />
       <Header />
       <main>
         <Hero />

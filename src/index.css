@@ -117,6 +117,25 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    cursor: none;
+  }
+
+  /* Style scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-hover));
   }
 }
 
@@ -244,6 +263,26 @@ All colors MUST be HSL.
   animation-delay: 500ms;
 }
 
+.animate-delay-600 {
+  animation-delay: 600ms;
+}
+
+.animate-delay-700 {
+  animation-delay: 700ms;
+}
+
+.animate-delay-800 {
+  animation-delay: 800ms;
+}
+
+.animate-delay-900 {
+  animation-delay: 900ms;
+}
+
+.animate-delay-1000 {
+  animation-delay: 1000ms;
+}
+
 /* Hover Effects */
 .hover-lift {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -268,4 +307,25 @@ All colors MUST be HSL.
 
 .hover-glow:hover {
   box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
+}
+
+/* Interactive Elements */
+.cursor-interactive {
+  cursor: pointer;
+}
+
+.cursor-interactive:hover ~ .cursor-follower {
+  transform: scale(1.5);
+  background-color: hsl(var(--primary));
+}
+
+/* Special effects for mobile - enable cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+  
+  .cursor-follower {
+    display: none !important;
+  }
 }
