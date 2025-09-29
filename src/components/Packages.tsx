@@ -99,7 +99,7 @@ const Packages = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
           {packages.map((pkg, index) => (
-            <Card key={index} className={`relative ${pkg.popular ? 'border-primary shadow-xl scale-105' : 'border-border'} transition-all duration-300 hover:shadow-lg`}>
+            <Card key={index} className={`relative card-sweep ${pkg.popular ? 'border-primary shadow-xl scale-105' : 'border-border'}`}>
               {pkg.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <div className="bg-primary text-primary-foreground px-4 py-2 rounded-full flex items-center gap-2">
