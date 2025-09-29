@@ -13,46 +13,46 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="pt-20 pb-16 bg-gradient-to-br from-background to-secondary overflow-hidden relative">
-      <div className="container mx-auto px-4 py-16" ref={ref}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
+    <section id="home" className="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-br from-background to-secondary overflow-hidden relative min-h-screen flex items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16" ref={ref}>
+        <div className="max-w-5xl mx-auto text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in leading-tight">
             From Lens to Launch –{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent animate-pulse-glow">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent animate-pulse-glow block sm:inline">
               We Handle Everything
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in animate-delay-200">
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-4xl mx-auto animate-fade-in animate-delay-200 leading-relaxed">
             Photography, design, and marketing solutions for modern brands. 
             You focus on your craft, we handle the growth.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in animate-delay-400">
-            <Button variant="success" size="lg" onClick={scrollToContact} className="hover-lift hover-glow">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in animate-delay-400 mb-12 md:mb-20">
+            <Button variant="success" size="lg" onClick={scrollToContact} className="hover-lift hover-glow min-h-[48px] px-8" aria-label="Book a consultation with Alvaio">
               Book a Consultation
             </Button>
-            <Button variant="outline" size="lg" onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })} className="hover-scale">
+            <Button variant="outline" size="lg" onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })} className="hover-scale min-h-[48px] px-8" aria-label="Explore our services">
               Explore Services
             </Button>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="animate-counter animate-delay-300 hover-scale group">
-              <div className="text-3xl font-bold text-primary mb-2 animate-float group-hover:scale-110 transition-transform duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-center">
+            <div className="animate-counter animate-delay-300 hover-scale group p-4 md:p-6 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2 animate-float group-hover:scale-110 transition-transform duration-300">
                 {artisansCount}+
               </div>
-              <div className="text-muted-foreground">Artisans Helped</div>
+              <div className="text-sm md:text-base text-muted-foreground font-medium">Artisans Helped</div>
             </div>
-            <div className="animate-counter animate-delay-400 hover-scale group">
-              <div className="text-3xl font-bold text-accent mb-2 animate-float group-hover:scale-110 transition-transform duration-300" style={{ animationDelay: '1s' }}>
+            <div className="animate-counter animate-delay-400 hover-scale group p-4 md:p-6 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-accent mb-2 animate-float group-hover:scale-110 transition-transform duration-300" style={{ animationDelay: '1s' }}>
                 {satisfactionCount}%
               </div>
-              <div className="text-muted-foreground">Satisfaction Rate</div>
+              <div className="text-sm md:text-base text-muted-foreground font-medium">Satisfaction Rate</div>
             </div>
-            <div className="animate-counter animate-delay-500 hover-scale group">
-              <div className="text-3xl font-bold text-success mb-2 animate-float group-hover:scale-110 transition-transform duration-300" style={{ animationDelay: '2s' }}>24h</div>
-              <div className="text-muted-foreground">Average Setup Time</div>
+            <div className="animate-counter animate-delay-500 hover-scale group p-4 md:p-6 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50">
+              <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-success mb-2 animate-float group-hover:scale-110 transition-transform duration-300" style={{ animationDelay: '2s' }}>24h</div>
+              <div className="text-sm md:text-base text-muted-foreground font-medium">Average Setup Time</div>
             </div>
           </div>
         </div>

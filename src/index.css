@@ -113,29 +113,63 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Account for fixed header */
   }
 
   body {
     @apply bg-background text-foreground;
     cursor: none;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Style scrollbar */
+  /* Improve focus visibility for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Enhanced scrollbar styling */
   ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
     background: hsl(var(--muted));
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary));
     border-radius: 4px;
   }
 
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    border-radius: 4px;
+    border: 1px solid hsl(var(--border));
+  }
+
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary-hover));
+    background: linear-gradient(180deg, hsl(var(--primary-hover)), hsl(var(--accent)));
+    box-shadow: 0 2px 4px hsl(var(--primary) / 0.3);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: hsl(var(--muted));
   }
 }
 
@@ -319,7 +353,7 @@ All colors MUST be HSL.
   background-color: hsl(var(--primary));
 }
 
-/* Special effects for mobile - enable cursor on touch devices */
+/* Mobile optimizations */
 @media (hover: none) and (pointer: coarse) {
   body {
     cursor: auto;
@@ -327,5 +361,50 @@ All colors MUST be HSL.
   
   .cursor-follower {
     display: none !important;
+  }
+
+  /* Larger touch targets for mobile */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .hover-glow:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Smoother scrolling on mobile */
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --primary: 210 100% 20%;
+    --accent: 25 100% 40%;
+    --border: 210 20% 80%;
+  }
+}
+
+/* Print styles */
+@media print {
+  .cursor-follower,
+  .theme-toggle,
+  .scroll-progress,
+  .animate-float,
+  [class*="animate-"] {
+    display: none !important;
+  }
+  
+  body {
+    cursor: auto !important;
   }
 }

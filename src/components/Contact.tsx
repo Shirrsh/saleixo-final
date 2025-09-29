@@ -52,13 +52,13 @@ const Contact = () => {
 
 
   return (
-    <section id="contact" className="py-16 bg-secondary">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in">
+    <section id="contact" className="py-16 md:py-24 bg-secondary">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 animate-fade-in">
             Ready to Transform Your Brand?
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in animate-delay-200">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in animate-delay-200">
             Get in touch for a free consultation. Let's discuss how we can elevate your visual presence and grow your business.
           </p>
         </div>
@@ -84,9 +84,11 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Your full name"
-                      className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 ${errors.name ? 'border-destructive' : ''}`}
+                      className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 min-h-[44px] ${errors.name ? 'border-destructive' : ''}`}
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                      required
                     />
-                    {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
+                    {errors.name && <p id="name-error" className="text-sm text-destructive mt-1" role="alert">{errors.name}</p>}
                   </div>
 
                   <div className="animate-slide-in-right animate-delay-500">
@@ -100,9 +102,11 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="your@email.com"
-                      className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 ${errors.email ? 'border-destructive' : ''}`}
+                      className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 min-h-[44px] ${errors.email ? 'border-destructive' : ''}`}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      required
                     />
-                    {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+                    {errors.email && <p id="email-error" className="text-sm text-destructive mt-1" role="alert">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -117,9 +121,11 @@ const Contact = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="+91 98765 43210"
-                    className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 ${errors.phone ? 'border-destructive' : ''}`}
+                    className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 min-h-[44px] ${errors.phone ? 'border-destructive' : ''}`}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
+                    required
                   />
-                  {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
+                  {errors.phone && <p id="phone-error" className="text-sm text-destructive mt-1" role="alert">{errors.phone}</p>}
                 </div>
 
                 <div className="animate-fade-in animate-delay-700">
@@ -133,13 +139,15 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Tell us about your project, goals, and how we can help grow your business..."
-                    className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 ${errors.message ? 'border-destructive' : ''}`}
+                    className={`transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary/20 resize-y ${errors.message ? 'border-destructive' : ''}`}
+                    aria-describedby={errors.message ? "message-error" : undefined}
+                    required
                   />
-                  {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
+                  {errors.message && <p id="message-error" className="text-sm text-destructive mt-1" role="alert">{errors.message}</p>}
                 </div>
 
                 <div className="animate-scale-in animate-delay-800">
-                  <Button type="submit" variant="success" size="lg" className="w-full hover-lift hover-glow">
+                  <Button type="submit" variant="success" size="lg" className="w-full hover-lift hover-glow min-h-[48px]">
                     Send Message
                   </Button>
                 </div>

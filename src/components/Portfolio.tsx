@@ -63,12 +63,14 @@ const Portfolio = () => {
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {portfolioItems.map((item, index) => (
-                <div key={index} className="w-full flex-shrink-0">
+                  <div key={index} className="w-full flex-shrink-0">
                   <div className="relative group">
                     <img 
                       src={item.image} 
-                      alt={item.title}
+                      alt={`${item.title} - Professional photography and design project showcase`}
                       className="w-full h-64 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end group-hover:from-black/80 transition-colors duration-300">
                       <div className="p-6 text-white animate-slide-in-left">

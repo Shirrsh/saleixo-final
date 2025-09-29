@@ -33,12 +33,13 @@ const ThemeToggle = () => {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className="fixed top-4 right-4 z-50 bg-background/80 backdrop-blur-sm border border-border hover-scale animate-float"
+      className="fixed top-4 right-4 z-50 bg-background/90 backdrop-blur-sm border border-border hover-scale animate-float shadow-lg hover:shadow-xl transition-all duration-300"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? (
-        <Sun className="h-5 w-5 text-foreground" />
+        <Sun className="h-5 w-5 text-foreground transition-transform duration-300 hover:rotate-180" />
       ) : (
-        <Moon className="h-5 w-5 text-foreground" />
+        <Moon className="h-5 w-5 text-foreground transition-transform duration-300 hover:-rotate-12" />
       )}
     </Button>
   );

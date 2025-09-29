@@ -83,21 +83,21 @@ const Packages = () => {
   };
 
   return (
-    <section id="packages" className="py-16 bg-secondary">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+    <section id="packages" className="py-16 md:py-24 bg-secondary">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6">
             Pricing & Packages
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
             Choose the perfect package to launch your artisan business online
           </p>
-          <p className="text-sm text-amber-600 font-medium mt-2">
+          <p className="text-sm md:text-base text-amber-600 font-medium bg-amber-50 dark:bg-amber-900/20 px-4 py-2 rounded-full inline-block">
             *Early-bird offer valid for bookings before September 23, 2025
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
           {packages.map((pkg, index) => (
             <Card key={index} className={`relative ${pkg.popular ? 'border-primary shadow-xl scale-105' : 'border-border'} transition-all duration-300 hover:shadow-lg`}>
               {pkg.popular && (
@@ -144,9 +144,10 @@ const Packages = () => {
                 
                 <Button 
                   variant={pkg.popular ? "success" : "default"} 
-                  className="w-full" 
+                  className="w-full hover-lift min-h-[48px]" 
                   size="lg"
                   onClick={scrollToContact}
+                  aria-label={`Select ${pkg.name} package`}
                 >
                   {pkg.cta}
                 </Button>

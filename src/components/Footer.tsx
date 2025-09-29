@@ -12,26 +12,26 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-foreground text-background py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-foreground text-background py-12 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo & Description */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full"></div>
-              <span className="text-2xl font-bold">Alvaio</span>
+              <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full" role="img" aria-label="Alvaio logo"></div>
+              <span className="text-xl md:text-2xl font-bold">Alvaio</span>
             </div>
-            <p className="text-background/80 mb-6 max-w-md">
+            <p className="text-background/80 mb-6 max-w-md leading-relaxed">
               Professional photography, design, and marketing services. 
               From lens to launch - we handle everything so you can focus on growth.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-3">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
-                  aria-label={social.label}
-                  className="p-2 bg-background/10 hover:bg-background/20 rounded-full transition-colors duration-300"
+                  aria-label={`Follow us on ${social.label}`}
+                  className="p-3 bg-background/10 hover:bg-background/20 rounded-full transition-all duration-300 hover:scale-110"
                 >
                   {social.icon}
                 </a>
@@ -107,11 +107,11 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-background/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-background/60 text-sm">
+        <div className="border-t border-background/20 mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-background/60 text-sm text-center md:text-left">
             © {currentYear} Alvaio. All rights reserved.
           </p>
-          <p className="text-background/60 text-sm mt-4 md:mt-0">
+          <p className="text-background/60 text-sm text-center md:text-right">
             Made with ♥ for modern brands worldwide
           </p>
         </div>
