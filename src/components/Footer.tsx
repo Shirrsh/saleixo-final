@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Linkedin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -16,14 +16,14 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo & Description */}
-          <div className="md:col-span-2 lg:col-span-2">
+          <div className="md:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full" role="img" aria-label="Alvaio logo"></div>
               <span className="text-xl md:text-2xl font-bold">Alvaio</span>
             </div>
-            <p className="text-background/80 mb-6 max-w-md leading-relaxed">
+            <p className="text-background/80 mb-6 leading-relaxed">
               Professional photography, design, and marketing services. 
-              From lens to launch - we handle everything so you can focus on growth.
+              From lens to launch - we handle everything.
             </p>
             <div className="flex space-x-3">
               {socialLinks.map((social, index) => (
@@ -36,6 +36,46 @@ const Footer = () => {
                   {social.icon}
                 </a>
               ))}
+            </div>
+          </div>
+
+          {/* Contact Information */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Get in Touch</h4>
+            <div className="space-y-3">
+              <a 
+                href="tel:+917011441159"
+                className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group"
+                aria-label="Call us at +91 7011441159"
+              >
+                <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span>+91 7011441159</span>
+              </a>
+              <a 
+                href="mailto:info@alvaio.com"
+                className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group"
+                aria-label="Email us at info@alvaio.com"
+              >
+                <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span>info@alvaio.com</span>
+              </a>
+              <div className="flex items-center gap-2 text-background/80">
+                <Clock className="w-4 h-4" />
+                <span>2 AM - 10 PM IST</span>
+              </div>
+              <a 
+                href="https://wa.me/917011441159"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group"
+                aria-label="WhatsApp us at +91 7011441159"
+              >
+                <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span>WhatsApp Available</span>
+              </a>
+              <p className="text-xs text-background/60 mt-2">
+                🌍 International clients welcome
+              </p>
             </div>
           </div>
 

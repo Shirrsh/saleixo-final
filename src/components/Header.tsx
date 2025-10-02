@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,8 +45,16 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button - Desktop */}
-          <div className="hidden md:block">
+          {/* CTA Buttons - Desktop */}
+          <div className="hidden md:flex items-center gap-3">
+            <a 
+              href="tel:+917011441159"
+              className="flex items-center gap-2 px-4 py-2 text-primary hover:text-primary/80 transition-colors duration-200 font-medium border border-primary/20 rounded-lg hover:bg-primary/5"
+              aria-label="Call us at +91 7011441159"
+            >
+              <Phone className="w-4 h-4" />
+              <span>+91 7011441159</span>
+            </a>
             <Button variant="success" onClick={() => scrollToSection('#contact')} className="hover-lift">
               Book Consultation
             </Button>

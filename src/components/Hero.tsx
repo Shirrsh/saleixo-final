@@ -23,10 +23,33 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-4xl mx-auto animate-fade-in animate-delay-200 leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-4xl mx-auto animate-fade-in animate-delay-200 leading-relaxed">
             Photography, design, and marketing solutions for modern brands. 
             You focus on your craft, we handle the growth.
           </p>
+
+          {/* Contact CTAs */}
+          <div className="mb-8 md:mb-10 animate-fade-in animate-delay-300">
+            <p className="text-lg md:text-xl font-semibold text-foreground mb-4">
+              Ready to Transform Your Brand?
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="tel:+917011441159"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300 min-h-[48px]"
+                aria-label="Call us at +91 7011441159"
+              >
+                <span className="text-lg font-medium">📞 Call +91 7011441159</span>
+              </a>
+              <a 
+                href="mailto:info@alvaio.com"
+                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent to-success text-white rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-300 min-h-[48px]"
+                aria-label="Email us at info@alvaio.com"
+              >
+                <span className="text-lg font-medium">✉️ Email Us</span>
+              </a>
+            </div>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in animate-delay-400 mb-12 md:mb-20">
             <Button variant="success" size="lg" onClick={scrollToContact} className="hover-lift hover-glow min-h-[48px] px-8" aria-label="Book a consultation with Alvaio">
