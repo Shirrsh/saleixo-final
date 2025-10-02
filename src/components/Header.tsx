@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, LogOut, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -55,6 +58,27 @@ const Header = () => {
               <Phone className="w-4 h-4" />
               <span>+91 7011441159</span>
             </a>
+            
+            {user ? (
+              <>
+                <span className="text-sm text-muted-foreground flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  {user.email || user.phone}
+                </span>
+                <Button variant="outline" size="sm" onClick={signOut}>
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <Link to="/auth">
+                <Button variant="outline" size="sm">
+                  <User className="w-4 h-4 mr-2" />
+                  Sign In
+                </Button>
+              </Link>
+            )}
+            
             <Button variant="success" onClick={() => scrollToSection('#contact')} className="hover-lift">
               Book Consultation
             </Button>
@@ -86,6 +110,25 @@ const Header = () => {
                 </button>
               ))}
               <div className="pt-2">
+                {user ? (
+                  <div className="space-y-3">
+                    <div className="text-sm text-muted-foreground flex items-center gap-2 px-1">
+                      <User className="w-4 h-4" />
+                      {user.email || user.phone}
+                    </div>
+                    <Button variant="outline" size="sm" onClick={() => { signOut(); setIsMenuOpen(false); }} className="w-full">
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="outline" size="sm" className="w-full mb-3">
+                      <User className="w-4 h-4 mr-2" />
+                      Sign In
+                    </Button>
+                  </Link>
+                )}
                 <Button variant="success" onClick={() => scrollToSection('#contact')} className="w-full animate-scale-in animate-delay-500">
                   Book Consultation
                 </Button>
