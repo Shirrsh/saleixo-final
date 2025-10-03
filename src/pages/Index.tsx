@@ -14,6 +14,7 @@ import ScrollProgress from '@/components/ScrollProgress';
 import ThemeToggle from '@/components/ThemeToggle';
 import LoadingScreen from '@/components/LoadingScreen';
 import CursorFollower from '@/components/CursorFollower';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const Index = () => {
   return (
@@ -36,6 +37,7 @@ const Index = () => {
       </main>
       <Footer />
       <ScrollToTop />
+      <WhatsAppButton />
     </>
   );
 };
