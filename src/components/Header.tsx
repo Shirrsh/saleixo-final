@@ -10,8 +10,7 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', href: '#home', type: 'scroll' },
-    { name: 'Categories', href: '/categories', type: 'route' },
-    { name: 'Photography', href: '#services', type: 'scroll' },
+    { name: 'Photography', href: '/categories', type: 'route' },
     { name: 'Design', href: '#services', type: 'scroll' },
     { name: 'Marketing', href: '#services', type: 'scroll' },
     { name: 'Portfolio', href: '#portfolio', type: 'scroll' },
