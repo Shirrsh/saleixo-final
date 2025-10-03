@@ -9,12 +9,13 @@ const Header = () => {
   const { user, signOut } = useAuth();
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Photography', href: '#services' },
-    { name: 'Design', href: '#services' },
-    { name: 'Marketing', href: '#services' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', href: '#home', type: 'scroll' },
+    { name: 'Categories', href: '/categories', type: 'route' },
+    { name: 'Photography', href: '#services', type: 'scroll' },
+    { name: 'Design', href: '#services', type: 'scroll' },
+    { name: 'Marketing', href: '#services', type: 'scroll' },
+    { name: 'Portfolio', href: '#portfolio', type: 'scroll' },
+    { name: 'Contact', href: '#contact', type: 'scroll' }
   ];
 
   const scrollToSection = (href: string) => {
@@ -36,15 +37,27 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8" role="navigation" aria-label="Main navigation">
             {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => scrollToSection(link.href)}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium py-2 px-1 relative group"
-                aria-label={`Navigate to ${link.name} section`}
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"></span>
-              </button>
+              link.type === 'route' ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium py-2 px-1 relative group"
+                  aria-label={`Navigate to ${link.name} page`}
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"></span>
+                </Link>
+              ) : (
+                <button
+                  key={link.name}
+                  onClick={() => scrollToSection(link.href)}
+                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium py-2 px-1 relative group"
+                  aria-label={`Navigate to ${link.name} section`}
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"></span>
+                </button>
+              )
             ))}
           </nav>
 
@@ -100,14 +113,26 @@ const Header = () => {
           <div className="md:hidden mt-4 pb-4 border-t border-border animate-fade-in">
             <nav className="flex flex-col space-y-3 pt-4" role="navigation" aria-label="Mobile navigation">
               {navLinks.map((link, index) => (
-                <button
-                  key={link.name}
-                  onClick={() => scrollToSection(link.href)}
-                  className={`text-left text-foreground hover:text-primary transition-colors duration-200 py-2 px-1 font-medium animate-slide-in-left animate-delay-${index * 100}`}
-                  aria-label={`Navigate to ${link.name} section`}
-                >
-                  {link.name}
-                </button>
+                link.type === 'route' ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`text-left text-foreground hover:text-primary transition-colors duration-200 py-2 px-1 font-medium animate-slide-in-left animate-delay-${index * 100}`}
+                    aria-label={`Navigate to ${link.name} page`}
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.name}
+                    onClick={() => scrollToSection(link.href)}
+                    className={`text-left text-foreground hover:text-primary transition-colors duration-200 py-2 px-1 font-medium animate-slide-in-left animate-delay-${index * 100}`}
+                    aria-label={`Navigate to ${link.name} section`}
+                  >
+                    {link.name}
+                  </button>
+                )
               ))}
               <div className="pt-2">
                 {user ? (
