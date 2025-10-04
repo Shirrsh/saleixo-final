@@ -57,35 +57,35 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto">
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className={`group card-sweep border-border animate-fade-in animate-delay-${(index + 1) * 100} hover:border-primary/20 cursor-pointer`}
+              className={`group card-sweep border-border animate-fade-in animate-delay-${(index + 1) * 100} hover:border-primary/20 transition-all duration-300`}
             >
-              <CardHeader className="text-center">
+              <CardHeader className="text-center pb-4">
                 <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300 animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
                   {service.icon}
                 </div>
-                <CardTitle className="text-xl animate-scale-in animate-delay-300">{service.title}</CardTitle>
-                <CardDescription className="text-base animate-fade-in animate-delay-400">
+                <CardTitle className="text-lg sm:text-xl md:text-2xl mb-3 animate-scale-in animate-delay-300">{service.title}</CardTitle>
+                <CardDescription className="text-sm sm:text-base leading-relaxed animate-fade-in animate-delay-400">
                   {service.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <ul className="space-y-2">
+              <CardContent className="space-y-4 sm:space-y-6">
+                <ul className="space-y-2 sm:space-y-3">
                   {service.features.map((feature, i) => (
-                    <li key={i} className={`flex items-center text-muted-foreground animate-slide-in-left animate-delay-${(i + 2) * 100}`}>
-                      <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0 hover-glow"></div>
-                      {feature}
+                    <li key={i} className={`flex items-start text-sm sm:text-base text-muted-foreground animate-slide-in-left animate-delay-${(i + 2) * 100}`}>
+                      <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="text-center pt-4">
+                <div className="text-center pt-2 sm:pt-4">
                   <Button 
                     variant={service.ctaVariant} 
                     size="lg" 
-                    className="w-full hover-scale animate-scale-in animate-delay-500"
+                    className="w-full hover-scale animate-scale-in animate-delay-500 min-h-[48px]"
                     onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     {service.cta}

@@ -123,7 +123,6 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    cursor: none;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
