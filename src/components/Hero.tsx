@@ -5,19 +5,17 @@ import showcase1 from '@/assets/hero/showcase-1.jpg';
 import showcase2 from '@/assets/hero/showcase-2.jpg';
 import showcase3 from '@/assets/hero/showcase-3.jpg';
 import showcase4 from '@/assets/hero/showcase-4.jpg';
-
 const Hero = () => {
   const [ref, isIntersecting] = useIntersectionObserver();
   const artisansCount = useAnimatedCounter(500, 2000, isIntersecting);
   const satisfactionCount = useAnimatedCounter(98, 2000, isIntersecting);
-  
   const scrollToContact = () => {
     const element = document.querySelector('#contact');
-    element?.scrollIntoView({ behavior: 'smooth' });
+    element?.scrollIntoView({
+      behavior: 'smooth'
+    });
   };
-
-  return (
-    <section id="home" className="pt-24 md:pt-32 pb-16 md:pb-24 bg-background overflow-hidden relative min-h-screen flex items-center">
+  return <section id="home" className="pt-24 md:pt-32 pb-16 md:pb-24 bg-background overflow-hidden relative min-h-screen flex items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
           
@@ -44,21 +42,15 @@ const Hero = () => {
               <Button variant="default" size="lg" onClick={scrollToContact} className="hover-lift hover-glow min-h-[56px] px-8 text-lg" aria-label="Book a free strategy call">
                 Book Free Strategy Call
               </Button>
-              <Button variant="outline" size="lg" onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })} className="hover-scale min-h-[56px] px-8 text-lg" aria-label="View our work">
+              <Button variant="outline" size="lg" onClick={() => document.querySelector('#services')?.scrollIntoView({
+              behavior: 'smooth'
+            })} className="hover-scale min-h-[56px] px-8 text-lg" aria-label="View our work">
                 View Our Work
               </Button>
             </div>
 
             {/* Phone Contact */}
-            <div className="animate-fade-in animate-delay-500">
-              <a 
-                href="tel:+917011441159"
-                className="inline-flex items-center gap-2 text-base md:text-lg text-foreground hover:text-primary transition-colors"
-                aria-label="Call us at +91 7011441159"
-              >
-                <span>📞 +91 7011441159</span>
-              </a>
-            </div>
+            
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 md:gap-6 mt-12 animate-fade-in animate-delay-600">
@@ -85,39 +77,19 @@ const Hero = () => {
           <div className="order-1 lg:order-2 animate-fade-in animate-delay-300">
             <div className="grid grid-cols-2 gap-4 md:gap-6">
               <div className="group relative overflow-hidden rounded-2xl shadow-xl hover-lift aspect-square">
-                <img 
-                  src={showcase1} 
-                  alt="Professional product photography showcase" 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="eager"
-                />
+                <img src={showcase1} alt="Professional product photography showcase" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <div className="group relative overflow-hidden rounded-2xl shadow-xl hover-lift aspect-square mt-8">
-                <img 
-                  src={showcase2} 
-                  alt="Brand design and packaging showcase" 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="eager"
-                />
+                <img src={showcase2} alt="Brand design and packaging showcase" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <div className="group relative overflow-hidden rounded-2xl shadow-xl hover-lift aspect-square -mt-8">
-                <img 
-                  src={showcase3} 
-                  alt="Lifestyle photography showcase" 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="eager"
-                />
+                <img src={showcase3} alt="Lifestyle photography showcase" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <div className="group relative overflow-hidden rounded-2xl shadow-xl hover-lift aspect-square">
-                <img 
-                  src={showcase4} 
-                  alt="Marketing content creation showcase" 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="eager"
-                />
+                <img src={showcase4} alt="Marketing content creation showcase" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             </div>
@@ -127,10 +99,12 @@ const Hero = () => {
       </div>
       
       {/* Subtle Background Elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '0s' }}></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-    </section>
-  );
+      <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl animate-float" style={{
+      animationDelay: '0s'
+    }}></div>
+      <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl animate-float" style={{
+      animationDelay: '2s'
+    }}></div>
+    </section>;
 };
-
 export default Hero;
