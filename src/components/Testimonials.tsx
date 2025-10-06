@@ -1,5 +1,12 @@
 import { Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 
 const Testimonials = () => {
   const testimonials = [
@@ -20,11 +27,29 @@ const Testimonials = () => {
       business: "Artisan Textiles",
       text: "From zero online presence to a thriving e-commerce store in just two weeks. The marketing support and QR code integration have been game-changers for my textile business.",
       rating: 5
+    },
+    {
+      name: "Maya Patel",
+      business: "Golden Threads Jewelry",
+      text: "The product photography made my handmade jewelry look absolutely stunning. Sales doubled within the first month, and customers constantly compliment the professional presentation.",
+      rating: 5
+    },
+    {
+      name: "James O'Connor",
+      business: "Artisan Roasters Coffee",
+      text: "Their e-commerce solution and branding work elevated my specialty coffee business. The seamless ordering system and beautiful packaging designs have customers coming back for more.",
+      rating: 4
+    },
+    {
+      name: "Sophia Kim",
+      business: "Natural Glow Skincare",
+      text: "The complete package - stunning product photos, user-friendly website, and smart marketing. My natural skincare line reached customers I never thought possible. Worth every penny!",
+      rating: 5
     }
   ];
 
   return (
-    <section className="py-16 bg-background">
+    <section className="py-16 bg-gradient-to-b from-background to-background/50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 animate-fade-in">
@@ -35,30 +60,53 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className={`border-border hover:shadow-lg transition-all duration-500 hover-lift animate-scale-in animate-delay-${(index + 2) * 100} group`}>
-              <CardContent className="p-6">
-                {/* Rating Stars */}
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className={`w-5 h-5 fill-current text-accent hover-scale animate-fade-in animate-delay-${(index * 100) + (i * 50)}`} />
-                  ))}
-                </div>
-                
-                {/* Testimonial Text */}
-                <blockquote className={`text-foreground mb-6 leading-relaxed animate-fade-in animate-delay-${(index + 3) * 100}`}>
-                  "{testimonial.text}"
-                </blockquote>
-                
-                {/* Author */}
-                <div className={`border-t border-border pt-4 animate-slide-in-left animate-delay-${(index + 4) * 100}`}>
-                  <div className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300">{testimonial.name}</div>
-                  <div className="text-sm text-muted-foreground">{testimonial.business}</div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="max-w-7xl mx-auto">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                  <Card className="border-border hover:shadow-xl transition-all duration-500 hover-lift group h-full bg-card/50 backdrop-blur-sm">
+                    <CardContent className="p-6 flex flex-col h-full">
+                      {/* Rating Stars */}
+                      <div className="flex items-center gap-1 mb-4">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            className={`w-5 h-5 transition-all ${
+                              i < testimonial.rating 
+                                ? 'fill-yellow-400 text-yellow-400' 
+                                : 'fill-muted text-muted'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      
+                      {/* Testimonial Text */}
+                      <blockquote className="text-foreground mb-6 leading-relaxed flex-grow">
+                        "{testimonial.text}"
+                      </blockquote>
+                      
+                      {/* Author */}
+                      <div className="border-t border-border pt-4">
+                        <div className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                          {testimonial.name}
+                        </div>
+                        <div className="text-sm text-muted-foreground">{testimonial.business}</div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex -left-12" />
+            <CarouselNext className="hidden md:flex -right-12" />
+          </Carousel>
         </div>
       </div>
     </section>
