@@ -9,7 +9,6 @@ const Header = () => {
   const { user, signOut } = useAuth();
 
   const navLinks = [
-    { name: 'Home', href: '#home', type: 'scroll' },
     { name: 'Photography', href: '/categories', type: 'route' },
     { name: 'Design', href: '#services', type: 'scroll' },
     { name: 'Marketing', href: '#services', type: 'scroll' },
