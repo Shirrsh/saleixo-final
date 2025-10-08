@@ -61,7 +61,7 @@ const Hero = () => {
                 <div className="text-xs md:text-sm text-muted-foreground font-medium">Brands Helped</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-accent mb-1">
+                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-1">
                   {satisfactionCount}%
                 </div>
                 <div className="text-xs md:text-sm text-muted-foreground font-medium">Success Rate</div>
