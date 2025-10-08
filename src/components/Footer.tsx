@@ -1,18 +1,25 @@
 import { Facebook, Instagram, Twitter, Linkedin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const Footer = () => {
-  const socialLinks = [
-    { icon: <Facebook className="w-5 h-5" />, href: "#", label: "Facebook" },
-    { icon: <Instagram className="w-5 h-5" />, href: "#", label: "Instagram" },
-    { icon: <Twitter className="w-5 h-5" />, href: "#", label: "Twitter" },
-    { icon: <Linkedin className="w-5 h-5" />, href: "#", label: "LinkedIn" }
-  ];
-
+  const socialLinks = [{
+    icon: <Facebook className="w-5 h-5" />,
+    href: "#",
+    label: "Facebook"
+  }, {
+    icon: <Instagram className="w-5 h-5" />,
+    href: "#",
+    label: "Instagram"
+  }, {
+    icon: <Twitter className="w-5 h-5" />,
+    href: "#",
+    label: "Twitter"
+  }, {
+    icon: <Linkedin className="w-5 h-5" />,
+    href: "#",
+    label: "LinkedIn"
+  }];
   const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="bg-foreground text-background py-12 md:py-16">
+  return <footer className="bg-foreground text-background py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo & Description */}
@@ -26,16 +33,9 @@ const Footer = () => {
               From lens to launch - we handle everything.
             </p>
             <div className="flex space-x-3">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  aria-label={`Follow us on ${social.label}`}
-                  className="p-3 bg-background/10 hover:bg-background/20 rounded-full transition-all duration-300 hover:scale-110"
-                >
+              {socialLinks.map((social, index) => <a key={index} href={social.href} aria-label={`Follow us on ${social.label}`} className="p-3 bg-background/10 hover:bg-background/20 rounded-full transition-all duration-300 hover:scale-110">
                   {social.icon}
-                </a>
-              ))}
+                </a>)}
             </div>
           </div>
 
@@ -43,33 +43,19 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Get in Touch</h4>
             <div className="space-y-3">
-              <a 
-                href="tel:+917011441159"
-                className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group"
-                aria-label="Call us at +91 7011441159"
-              >
+              <a href="tel:+917011441159" className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group" aria-label="Call us at +91 7011441159">
                 <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>+91 7011441159</span>
               </a>
-              <a 
-                href="mailto:info@alvaio.com"
-                className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group"
-                aria-label="Email us at info@alvaio.com"
-              >
+              <a href="mailto:info@alvaio.com" className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group" aria-label="Email us at info@alvaio.com">
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>info@alvaio.com</span>
               </a>
               <div className="flex items-center gap-2 text-background/80">
                 <Clock className="w-4 h-4" />
-                <span>2 AM - 10 PM IST</span>
+                <span>2 PM - 10 PM IST</span>
               </div>
-              <a 
-                href="https://wa.me/917011441159"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group"
-                aria-label="WhatsApp us at +91 7011441159"
-              >
+              <a href="https://wa.me/917011441159" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group" aria-label="WhatsApp us at +91 7011441159">
                 <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>WhatsApp Available</span>
               </a>
@@ -84,34 +70,30 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <button
-                  onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-background/80 hover:text-background transition-colors"
-                >
+                <button onClick={() => document.querySelector('#services')?.scrollIntoView({
+                behavior: 'smooth'
+              })} className="text-background/80 hover:text-background transition-colors">
                   Services
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-background/80 hover:text-background transition-colors"
-                >
+                <button onClick={() => document.querySelector('#portfolio')?.scrollIntoView({
+                behavior: 'smooth'
+              })} className="text-background/80 hover:text-background transition-colors">
                   Portfolio
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => document.querySelector('#packages')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-background/80 hover:text-background transition-colors"
-                >
+                <button onClick={() => document.querySelector('#packages')?.scrollIntoView({
+                behavior: 'smooth'
+              })} className="text-background/80 hover:text-background transition-colors">
                   Packages
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-background/80 hover:text-background transition-colors"
-                >
+                <button onClick={() => document.querySelector('#contact')?.scrollIntoView({
+                behavior: 'smooth'
+              })} className="text-background/80 hover:text-background transition-colors">
                   Contact
                 </button>
               </li>
@@ -156,8 +138,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
