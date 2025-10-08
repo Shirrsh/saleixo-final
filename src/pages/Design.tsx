@@ -47,29 +47,6 @@ const Design = () => {
     }
   ];
 
-  const brandCategories = [
-    {
-      title: 'Food & Beverage',
-      brands: ['Nandos', 'Chilis.in', 'Pizza Express', 'Round Glass Thali', 'Spice Market', 'Quickish', 'Chai Chun']
-    },
-    {
-      title: 'Technology & Electronics',
-      brands: ['Gionee', 'Sansui', 'Karbonn', 'Applesutra', 'Park+']
-    },
-    {
-      title: 'Lifestyle & Wellness',
-      brands: ['Skin Alive', 'Naturewala', 'Gunas']
-    },
-    {
-      title: 'Real Estate & Events',
-      brands: ['Max Estate', 'Jaipur Lt. Festival']
-    },
-    {
-      title: 'Retail & Others',
-      brands: ['Sunmart', 'Trip Advisor', 'Raja Radha Reddy', 'EMT']
-    }
-  ];
-
   const designProcess = [
     {
       icon: Target,
@@ -181,42 +158,6 @@ const Design = () => {
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-base">{service.description}</CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Brands We've Worked With */}
-        <section className="py-20 px-4">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Brands We've Worked With</h2>
-              <p className="text-muted-foreground text-lg">
-                Trusted by leading brands across diverse industries
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              {brandCategories.map((category, index) => (
-                <Card key={index} className="hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="text-xl flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-primary" />
-                      {category.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-3">
-                      {category.brands.map((brand, idx) => (
-                        <span
-                          key={idx}
-                          className="px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full text-sm font-medium hover:scale-105 transition-transform cursor-default"
-                        >
-                          {brand}
-                        </span>
-                      ))}
-                    </div>
                   </CardContent>
                 </Card>
               ))}
