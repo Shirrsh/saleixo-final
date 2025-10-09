@@ -10,105 +10,79 @@ import { Palette, Package, Share2, Smartphone, ShoppingBag, Layout, ChevronLeft,
 import portfolio1 from '@/assets/portfolio-1.jpg';
 import portfolio2 from '@/assets/portfolio-2.jpg';
 import portfolio3 from '@/assets/portfolio-3.jpg';
-
 const Design = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const designServices = [
-    {
-      icon: Palette,
-      title: 'Logo & Brand Identity',
-      description: 'Create memorable brand identities that stand out in the market and resonate with your audience.'
-    },
-    {
-      icon: Package,
-      title: 'Packaging Design',
-      description: 'Eye-catching packaging that tells your brand story and drives purchase decisions.'
-    },
-    {
-      icon: Share2,
-      title: 'Social Media Graphics',
-      description: 'Engaging visual content optimized for all social media platforms to boost engagement.'
-    },
-    {
-      icon: Smartphone,
-      title: 'Marketing Collateral',
-      description: 'Professional brochures, flyers, business cards, and marketing materials that convert.'
-    },
-    {
-      icon: ShoppingBag,
-      title: 'E-commerce Design',
-      description: 'Product banners, promotional graphics, and e-commerce assets that drive sales.'
-    },
-    {
-      icon: Layout,
-      title: 'UI/UX Design',
-      description: 'User-centered design concepts that enhance digital experiences and user satisfaction.'
-    }
-  ];
-
-  const designProcess = [
-    {
-      icon: Target,
-      title: 'Discovery & Research',
-      description: 'Understanding your brand, audience, and goals to create a strategic foundation.'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Concept Development',
-      description: 'Brainstorming creative concepts and developing initial design directions.'
-    },
-    {
-      icon: Sparkles,
-      title: 'Design & Refinement',
-      description: 'Crafting detailed designs and refining based on feedback until perfect.'
-    },
-    {
-      icon: Rocket,
-      title: 'Delivery & Support',
-      description: 'Final delivery with all formats and ongoing support for implementation.'
-    }
-  ];
-
-  const portfolioItems = [
-    {
-      image: portfolio1,
-      title: 'Brand Identity Design',
-      description: 'Complete branding solutions for diverse industries'
-    },
-    {
-      image: portfolio2,
-      title: 'Marketing & Packaging',
-      description: 'Creative designs that drive engagement and sales'
-    },
-    {
-      image: portfolio3,
-      title: 'Digital & Social Media',
-      description: 'Eye-catching graphics for online platforms'
-    }
-  ];
-
+  const designServices = [{
+    icon: Palette,
+    title: 'Logo & Brand Identity',
+    description: 'Create memorable brand identities that stand out in the market and resonate with your audience.'
+  }, {
+    icon: Package,
+    title: 'Packaging Design',
+    description: 'Eye-catching packaging that tells your brand story and drives purchase decisions.'
+  }, {
+    icon: Share2,
+    title: 'Social Media Graphics',
+    description: 'Engaging visual content optimized for all social media platforms to boost engagement.'
+  }, {
+    icon: Smartphone,
+    title: 'Marketing Collateral',
+    description: 'Professional brochures, flyers, business cards, and marketing materials that convert.'
+  }, {
+    icon: ShoppingBag,
+    title: 'E-commerce Design',
+    description: 'Product banners, promotional graphics, and e-commerce assets that drive sales.'
+  }, {
+    icon: Layout,
+    title: 'UI/UX Design',
+    description: 'User-centered design concepts that enhance digital experiences and user satisfaction.'
+  }];
+  const designProcess = [{
+    icon: Target,
+    title: 'Discovery & Research',
+    description: 'Understanding your brand, audience, and goals to create a strategic foundation.'
+  }, {
+    icon: Lightbulb,
+    title: 'Concept Development',
+    description: 'Brainstorming creative concepts and developing initial design directions.'
+  }, {
+    icon: Sparkles,
+    title: 'Design & Refinement',
+    description: 'Crafting detailed designs and refining based on feedback until perfect.'
+  }, {
+    icon: Rocket,
+    title: 'Delivery & Support',
+    description: 'Final delivery with all formats and ongoing support for implementation.'
+  }];
+  const portfolioItems = [{
+    image: portfolio1,
+    title: 'Brand Identity Design',
+    description: 'Complete branding solutions for diverse industries'
+  }, {
+    image: portfolio2,
+    title: 'Marketing & Packaging',
+    description: 'Creative designs that drive engagement and sales'
+  }, {
+    image: portfolio3,
+    title: 'Digital & Social Media',
+    description: 'Eye-catching graphics for online platforms'
+  }];
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % portfolioItems.length);
+      setCurrentSlide(prev => (prev + 1) % portfolioItems.length);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
-
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % portfolioItems.length);
+    setCurrentSlide(prev => (prev + 1) % portfolioItems.length);
   };
-
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length);
+    setCurrentSlide(prev => (prev - 1 + portfolioItems.length) % portfolioItems.length);
   };
-
   const scrollToContact = () => {
     window.location.href = '/#contact';
   };
-
-  return (
-    <>
+  return <>
       <ThemeToggle />
       <Header />
       
@@ -119,7 +93,7 @@ const Design = () => {
           <div className="container mx-auto text-center max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6 animate-fade-in">
               <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">10+ Years of Design Excellence</span>
+              <span className="text-sm font-medium">Design Excellence</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent animate-fade-in">
               Creative Design Solutions That Elevate Brands
@@ -131,7 +105,9 @@ const Design = () => {
               <Button size="lg" onClick={scrollToContact} className="hover-scale">
                 Start Your Project
               </Button>
-              <Button size="lg" variant="outline" onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button size="lg" variant="outline" onClick={() => document.getElementById('portfolio')?.scrollIntoView({
+              behavior: 'smooth'
+            })}>
                 View Our Work
               </Button>
             </div>
@@ -148,8 +124,7 @@ const Design = () => {
               </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {designServices.map((service, index) => (
-                <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              {designServices.map((service, index) => <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                   <CardHeader>
                     <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <service.icon className="w-6 h-6 text-primary-foreground" />
@@ -159,8 +134,7 @@ const Design = () => {
                   <CardContent>
                     <CardDescription className="text-base">{service.description}</CardDescription>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
         </section>
@@ -175,8 +149,7 @@ const Design = () => {
               </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {designProcess.map((step, index) => (
-                <div key={index} className="relative">
+              {designProcess.map((step, index) => <div key={index} className="relative">
                   <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                     <CardHeader>
                       <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold shadow-lg">
@@ -191,8 +164,7 @@ const Design = () => {
                       <CardDescription>{step.description}</CardDescription>
                     </CardContent>
                   </Card>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
@@ -207,15 +179,12 @@ const Design = () => {
               </p>
             </div>
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-              <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-                {portfolioItems.map((item, index) => (
-                  <div key={index} className="min-w-full relative">
+              <div className="flex transition-transform duration-500 ease-in-out" style={{
+              transform: `translateX(-${currentSlide * 100}%)`
+            }}>
+                {portfolioItems.map((item, index) => <div key={index} className="min-w-full relative">
                     <div className="aspect-[16/9] relative overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                      />
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent flex items-end">
                         <div className="p-8 w-full">
                           <h3 className="text-2xl md:text-3xl font-bold mb-2 text-foreground">{item.title}</h3>
@@ -223,38 +192,20 @@ const Design = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
               
               {/* Navigation */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-all shadow-lg hover:scale-110"
-                aria-label="Previous slide"
-              >
+              <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-all shadow-lg hover:scale-110" aria-label="Previous slide">
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-all shadow-lg hover:scale-110"
-                aria-label="Next slide"
-              >
+              <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center hover:bg-background transition-all shadow-lg hover:scale-110" aria-label="Next slide">
                 <ChevronRight className="w-6 h-6" />
               </button>
 
               {/* Dots */}
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-                {portfolioItems.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      currentSlide === index ? 'bg-primary w-8' : 'bg-muted-foreground/50'
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
+                {portfolioItems.map((_, index) => <button key={index} onClick={() => setCurrentSlide(index)} className={`w-2 h-2 rounded-full transition-all ${currentSlide === index ? 'bg-primary w-8' : 'bg-muted-foreground/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
               </div>
             </div>
           </div>
@@ -284,8 +235,6 @@ const Design = () => {
       <Footer />
       <ScrollToTop />
       <WhatsAppButton />
-    </>
-  );
+    </>;
 };
-
 export default Design;
