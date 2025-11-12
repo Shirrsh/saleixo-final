@@ -23,7 +23,7 @@ const AdminDashboard = () => {
           supabase.from('portfolio_projects').select('*', { count: 'exact', head: true }),
           supabase.from('services').select('*', { count: 'exact', head: true }).eq('active', true),
           supabase
-            .from('activity_logs')
+            .from('activity_log')
             .select('*')
             .order('created_at', { ascending: false })
             .limit(10),

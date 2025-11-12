@@ -41,7 +41,16 @@ const AdminHomepage = () => {
       if (error) throw error;
 
       if (data) {
-        setHomepageData(data);
+        setHomepageData({
+          id: data.id,
+          hero_title: data.hero_title || '',
+          hero_subtitle: data.hero_subtitle || '',
+          hero_cta_text: data.hero_cta_text || '',
+          hero_cta_link: data.hero_cta_link || '',
+          hero_image_url: data.hero_image_url || '',
+          meta_title: data.meta_title || '',
+          meta_description: data.meta_description || '',
+        });
       }
     } catch (error: any) {
       toast({
@@ -81,7 +90,7 @@ const AdminHomepage = () => {
       if (error) throw error;
 
       // Log activity
-      await supabase.from('activity_logs').insert({
+      await supabase.from('activity_log').insert({
         action: 'Updated homepage content',
         item_type: 'homepage',
         item_id: homepageData.id,

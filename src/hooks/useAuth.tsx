@@ -116,6 +116,71 @@ export const useAuth = () => {
     }
   };
 
+  const signUpWithEmail = async (email: string, password: string) => {
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/`,
+        },
+      });
+
+      if (error) {
+        toast({
+          title: 'Error',
+          description: error.message,
+          variant: 'destructive',
+        });
+        return { error };
+      }
+
+      toast({
+        title: 'Success',
+        description: 'Please check your email to confirm your account',
+      });
+      return { error: null };
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'An unexpected error occurred',
+        variant: 'destructive',
+      });
+      return { error };
+    }
+  };
+
+  const signInWithEmail = async (email: string, password: string) => {
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast({
+          title: 'Error',
+          description: error.message,
+          variant: 'destructive',
+        });
+        return { error };
+      }
+
+      toast({
+        title: 'Success',
+        description: 'Successfully signed in',
+      });
+      return { error: null };
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'An unexpected error occurred',
+        variant: 'destructive',
+      });
+      return { error };
+    }
+  };
+
   const signOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -142,6 +207,8 @@ export const useAuth = () => {
     signInWithGoogle,
     signInWithPhone,
     verifyOtp,
+    signUpWithEmail,
+    signInWithEmail,
     signOut,
   };
 };
