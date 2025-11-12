@@ -23,7 +23,8 @@ const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
-  const { user, signInWithGoogle, signInWithPhone, verifyOtp, signUpWithEmail, signInWithEmail } = useAuth();
+  const [showResend, setShowResend] = useState(false);
+  const { user, signInWithGoogle, signInWithPhone, verifyOtp, signUpWithEmail, signInWithEmail, resendConfirmation } = useAuth();
   const navigate = useNavigate();
 
   // Redirect if already logged in
@@ -68,7 +69,10 @@ const Auth = () => {
 
     setLoading(true);
     if (isSignUp) {
-      await signUpWithEmail(email, password);
+      const result = await signUpWithEmail(email, password);
+      if (result?.needsConfirmation) {
+        setShowResend(true);
+      }
     } else {
       await signInWithEmail(email, password);
     }
@@ -141,10 +145,33 @@ const Auth = () => {
                   type="button"
                   variant="ghost"
                   className="w-full"
-                  onClick={() => setIsSignUp(!isSignUp)}
+                  onClick={() => {
+                    setIsSignUp(!isSignUp);
+                    setShowResend(false);
+                  }}
                 >
                   {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
                 </Button>
+                {showResend && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full"
+                    onClick={async () => {
+                      setLoading(true);
+                      await resendConfirmation(email);
+                      setLoading(false);
+                    }}
+                    disabled={loading || !email}
+                  >
+                    Resend Confirmation Email
+                  </Button>
+                )}
+                {isSignUp && (
+                  <p className="text-xs text-muted-foreground text-center">
+                    Note: Check spam folder if you don't receive the confirmation email
+                  </p>
+                )}
               </form>
             </TabsContent>
 

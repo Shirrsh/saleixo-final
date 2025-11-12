@@ -118,7 +118,7 @@ export const useAuth = () => {
 
   const signUpWithEmail = async (email: string, password: string) => {
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -132,12 +132,53 @@ export const useAuth = () => {
           description: error.message,
           variant: 'destructive',
         });
+        return { error, data: null };
+      }
+
+      // Check if session was created (email confirmation disabled)
+      if (data.session) {
+        toast({
+          title: 'Success',
+          description: 'Account created! You are now signed in.',
+        });
+        return { error: null, data, needsConfirmation: false };
+      }
+
+      // Email confirmation required
+      toast({
+        title: 'Check your email',
+        description: 'Please check your email to confirm your account',
+      });
+      return { error: null, data, needsConfirmation: true };
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'An unexpected error occurred',
+        variant: 'destructive',
+      });
+      return { error, data: null };
+    }
+  };
+
+  const resendConfirmation = async (email: string) => {
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email,
+      });
+
+      if (error) {
+        toast({
+          title: 'Error',
+          description: error.message,
+          variant: 'destructive',
+        });
         return { error };
       }
 
       toast({
-        title: 'Success',
-        description: 'Please check your email to confirm your account',
+        title: 'Email sent',
+        description: 'Please check your email for the confirmation link',
       });
       return { error: null };
     } catch (error) {
@@ -209,6 +250,7 @@ export const useAuth = () => {
     verifyOtp,
     signUpWithEmail,
     signInWithEmail,
+    resendConfirmation,
     signOut,
   };
 };
