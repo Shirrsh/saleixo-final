@@ -12,7 +12,13 @@ const AdminDashboard = () => {
     portfolioItems: 0,
     activeServices: 0,
   });
-  const [recentActivity, setRecentActivity] = useState<any[]>([]);
+  const [recentActivity, setRecentActivity] = useState<Array<{
+    id: string;
+    action: string | null;
+    item_type: string | null;
+    user_email: string | null;
+    created_at: string;
+  }>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,10 +27,10 @@ const AdminDashboard = () => {
         const [blogCount, portfolioCount, servicesCount, activityData] = await Promise.all([
           supabase.from('blog_posts').select('*', { count: 'exact', head: true }),
           supabase.from('portfolio_projects').select('*', { count: 'exact', head: true }),
-          supabase.from('services').select('*', { count: 'exact', head: true }).eq('active', true),
+          supabase.from('services').select('*', { count: 'exact', head: true }),
           supabase
             .from('activity_log')
-            .select('*')
+            .select('id, action, item_type, user_email, created_at')
             .order('created_at', { ascending: false })
             .limit(10),
         ]);

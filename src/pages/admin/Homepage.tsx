@@ -34,7 +34,7 @@ const AdminHomepage = () => {
     try {
       const { data, error } = await supabase
         .from('homepage_content')
-        .select('*')
+        .select('id, hero_title, hero_subtitle, hero_cta_text, hero_cta_link, hero_image_url, meta_title, meta_description, created_at')
         .limit(1)
         .maybeSingle();
 
@@ -43,13 +43,13 @@ const AdminHomepage = () => {
       if (data) {
         setHomepageData({
           id: data.id,
-          hero_title: data.hero_title || '',
-          hero_subtitle: data.hero_subtitle || '',
-          hero_cta_text: data.hero_cta_text || '',
-          hero_cta_link: data.hero_cta_link || '',
-          hero_image_url: data.hero_image_url || '',
-          meta_title: data.meta_title || '',
-          meta_description: data.meta_description || '',
+          hero_title: (data.hero_title as string) || '',
+          hero_subtitle: (data.hero_subtitle as string) || '',
+          hero_cta_text: (data.hero_cta_text as string) || '',
+          hero_cta_link: (data.hero_cta_link as string) || '',
+          hero_image_url: (data.hero_image_url as string) || '',
+          meta_title: (data.meta_title as string) || '',
+          meta_description: (data.meta_description as string) || '',
         });
       }
     } catch (error: any) {

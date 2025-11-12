@@ -47,21 +47,27 @@ export type Database = {
           admin_id: string | null
           created_at: string | null
           id: string
-          table_name: string | null
+          item_id: string | null
+          item_type: string | null
+          user_email: string | null
         }
         Insert: {
           action?: string | null
           admin_id?: string | null
           created_at?: string | null
           id?: string
-          table_name?: string | null
+          item_id?: string | null
+          item_type?: string | null
+          user_email?: string | null
         }
         Update: {
           action?: string | null
           admin_id?: string | null
           created_at?: string | null
           id?: string
-          table_name?: string | null
+          item_id?: string | null
+          item_type?: string | null
+          user_email?: string | null
         }
         Relationships: []
       }
@@ -146,24 +152,36 @@ export type Database = {
       homepage_content: {
         Row: {
           created_at: string | null
+          hero_cta_link: string | null
+          hero_cta_text: string | null
           hero_image_url: string | null
           hero_subtitle: string | null
           hero_title: string | null
           id: string
+          meta_description: string | null
+          meta_title: string | null
         }
         Insert: {
           created_at?: string | null
+          hero_cta_link?: string | null
+          hero_cta_text?: string | null
           hero_image_url?: string | null
           hero_subtitle?: string | null
           hero_title?: string | null
           id?: string
+          meta_description?: string | null
+          meta_title?: string | null
         }
         Update: {
           created_at?: string | null
+          hero_cta_link?: string | null
+          hero_cta_text?: string | null
           hero_image_url?: string | null
           hero_subtitle?: string | null
           hero_title?: string | null
           id?: string
+          meta_description?: string | null
+          meta_title?: string | null
         }
         Relationships: []
       }
