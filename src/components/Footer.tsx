@@ -70,11 +70,9 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => document.querySelector('#services')?.scrollIntoView({
-                behavior: 'smooth'
-              })} className="text-background/80 hover:text-background transition-colors">
+                <Link to="/services" className="text-background/80 hover:text-background transition-colors">
                   Services
-                </button>
+                </Link>
               </li>
               <li>
                 <button onClick={() => document.querySelector('#portfolio')?.scrollIntoView({
@@ -84,18 +82,16 @@ const Footer = () => {
                 </button>
               </li>
               <li>
-                <button onClick={() => document.querySelector('#packages')?.scrollIntoView({
-                behavior: 'smooth'
-              })} className="text-background/80 hover:text-background transition-colors">
-                  Packages
-                </button>
-              </li>
-              <li>
                 <button onClick={() => document.querySelector('#contact')?.scrollIntoView({
                 behavior: 'smooth'
               })} className="text-background/80 hover:text-background transition-colors">
                   Contact
                 </button>
+              </li>
+              <li>
+                <Link to="/custom-pricing" className="text-background/80 hover:text-background transition-colors">
+                  Pricing Info
+                </Link>
               </li>
             </ul>
           </div>

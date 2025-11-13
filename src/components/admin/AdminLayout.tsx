@@ -12,7 +12,6 @@ import {
   FileText,
   MessageSquare,
   HelpCircle,
-  DollarSign,
   Users,
   Settings,
   Menu,
@@ -83,7 +82,6 @@ const AdminLayout = () => {
     { name: 'Blog Posts', path: '/admin/blog', icon: FileText },
     { name: 'Testimonials', path: '/admin/testimonials', icon: MessageSquare },
     { name: 'FAQ', path: '/admin/faq', icon: HelpCircle },
-    { name: 'Pricing', path: '/admin/pricing', icon: DollarSign },
     { name: 'Team', path: '/admin/team', icon: Users },
     { name: 'Settings', path: '/admin/settings', icon: Settings },
   ];

@@ -18,9 +18,9 @@ const Header = () => {
     href: '/design',
     type: 'route'
   }, {
-    name: 'Marketing',
-    href: '#services',
-    type: 'scroll'
+    name: 'Services',
+    href: '/services',
+    type: 'route'
   }, {
     name: 'Portfolio',
     href: '#portfolio',

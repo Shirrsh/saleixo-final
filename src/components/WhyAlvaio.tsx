@@ -5,8 +5,8 @@ const WhyAlvaio = () => {
   const benefits = [
     {
       icon: <CheckCircle className="w-8 h-8 text-success" />,
-      title: "Studio-Grade Quality, Startup-Friendly Pricing",
-      description: "Professional results without the enterprise price tag. Quality that competes with the best, pricing that works for growing businesses."
+      title: "Studio-Grade Quality, Exceptional Value",
+      description: "Professional results that drive real business growth. Quality that competes with the best, with solutions customized to your goals."
     },
     {
       icon: <Clock className="w-8 h-8 text-primary" />,
