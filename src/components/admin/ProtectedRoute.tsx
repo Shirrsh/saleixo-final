@@ -17,6 +17,15 @@ const ProtectedRoute = () => {
           .select("role")
           .eq("id", user.id)
           .single();
+              
+      console.log('Admin check:', { profile, error, role: profile?.role });
+              
+      if (error) {
+        console.error('Error checking admin role:', error);
+        setIsAdmin(false);
+        setCheckingAdmin(false);
+        return;
+      }
         
         
                 setIsAdmin(profile?.role === "admin");
