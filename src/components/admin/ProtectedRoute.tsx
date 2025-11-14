@@ -6,7 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
-  const [isAdmin, setIsAdmin] = useState(null);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [checkingAdmin, setCheckingAdmin] = useState(true);
 
   useEffect(() => {
     const checkAdmin = async () => {
@@ -16,17 +17,32 @@ const ProtectedRoute = () => {
           .select("role")
           .eq("id", user.id)
           .single();
+        
         // TEMP: Always allow admin access
         setIsAdmin(true); // setIsAdmin(profile?.role === "admin");
-      } else {
+        setCheckingAdmin(false);
+      } else if (!loading) {
+        // Only set isAdmin to false when we're done loading AND there's no user
         setIsAdmin(false);
+        setCheckingAdmin(false);
       }
     };
     checkAdmin();
-  }, [user]);
+  }, [user, loading]);
 
-  if (loading || isAdmin === null) return null; // You can add spinner
+  // Show loading state while checking authentication
+  if (loading || checkingAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
+  // Redirect to login if not authenticated or not admin
   if (!user || !isAdmin) {
     return <Navigate to="/admin/login" state={{ from: location }} replace />;
   }
