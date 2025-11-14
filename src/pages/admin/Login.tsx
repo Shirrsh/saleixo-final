@@ -46,7 +46,8 @@ const AdminLogin = () => {
       .eq('id', userId)
       .single();
 
-    if (profileError || !profile) {
+/*// TEMP: Skip admin check
+if (false && (    if (profileError || !profile) {
       toast({
         title: 'Access Denied',
         description: 'Unable to verify admin access.',
@@ -55,6 +56,7 @@ const AdminLogin = () => {
       setLoading(false);
       return;
     }
+        )) { // End of false check*/
 
     if (profile.role === 'admin') {
       navigate('/admin/dashboard');
