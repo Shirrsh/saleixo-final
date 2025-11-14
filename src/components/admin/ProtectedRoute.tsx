@@ -38,8 +38,6 @@ const ProtectedRoute = () => {
             return;
           }
 
-          setIsAdmin(profile?.role === "admin");
-          setCheckingAdmin(false);
         } catch (err) {
           console.error('Timeout or unexpected error:', err);
           // On timeout or error, assume not admin and redirect to login
@@ -51,17 +49,8 @@ const ProtectedRoute = () => {
         setIsAdmin(false);
         setCheckingAdmin(false);
       }
-    };        
-        
-                setIsAdmin(profile?.role === "admin");
-        setCheckingAdmin(false);
-      } else if (!loading) {
-        // Only set isAdmin to false when we're done loading AND there's no user
-        setIsAdmin(false);
-        setCheckingAdmin(false);
-      }
     };
-    checkAdmin();
+        checkAdmin();
   }, [user, loading]);
 
   // Show loading state while checking authentication
