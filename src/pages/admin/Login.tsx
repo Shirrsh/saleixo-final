@@ -42,8 +42,7 @@ const AdminLogin = () => {
 
     const userId = data?.user?.id;
     const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('role')
+.from('admin_users')      .select('role')
       .eq('id', userId)
       .single();
 
