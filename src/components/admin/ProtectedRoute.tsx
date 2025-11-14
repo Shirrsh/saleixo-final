@@ -18,8 +18,8 @@ const ProtectedRoute = () => {
           .eq("id", user.id)
           .single();
         
-        // TEMP: Always allow admin access
-        setIsAdmin(true); // setIsAdmin(profile?.role === "admin");
+        
+                setIsAdmin(profile?.role === "admin");
         setCheckingAdmin(false);
       } else if (!loading) {
         // Only set isAdmin to false when we're done loading AND there's no user
