@@ -18,6 +18,7 @@ import Enterprise from "./pages/services/Enterprise";
 import CustomPricing from "./pages/CustomPricing";
 import AdminLogin from "./pages/admin/Login";
 import AdminLayout from "@/components/admin/AdminLayout";
+import ProtectedRoute from "@/components/admin/ProtectedRoute";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminHomepage from "./pages/admin/Homepage";
 import AdminServices from "./pages/admin/Services";
@@ -49,9 +50,21 @@ const App = () => (
             <Route path="/custom-pricing" element={<CustomPricing />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            
+            {/* Admin Login - No authentication required */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminLayout />}>
+            
+            {/* Protected Admin Routes - Authentication required */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<AdminDashboard />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="homepage" element={<AdminHomepage />} />
               <Route path="services" element={<AdminServices />} />
               <Route path="portfolio" element={<AdminPortfolio />} />
@@ -63,6 +76,7 @@ const App = () => (
               <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="settings" element={<AdminSettings />} />
             </Route>
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
         </Routes>
