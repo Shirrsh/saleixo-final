@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
-import Auth from "./pages/Auth";
+
 import Categories from "./pages/Categories";
 import Design from "./pages/Design";
 import Services from "./pages/Services";
@@ -31,7 +31,6 @@ const App = () => (
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/design" element={<Design />} />
             <Route path="/services" element={<Services />} />
