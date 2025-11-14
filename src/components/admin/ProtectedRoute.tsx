@@ -12,21 +12,46 @@ const ProtectedRoute = () => {
   useEffect(() => {
     const checkAdmin = async () => {
       if (user) {
-        const { data: profile, error } = await supabase
-          .from("admin_users")
-          .select("role")
-          .eq("id", user.id)
-          .single();
-              
-      console.log('Admin check:', { profile, error, role: profile?.role });
-              
-      if (error) {
-        console.error('Error checking admin role:', error);
+        try {
+          // Add a timeout promise to prevent infinite loading
+          const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('Query timeout after 5 seconds')), 5000)
+          );
+          
+          const queryPromise = supabase
+            .from("admin_users")
+            .select("role")
+            .eq("id", user.id)
+            .single();
+
+          const { data: profile, error } = await Promise.race([
+            queryPromise,
+            timeoutPromise
+          ]);
+
+          console.log('Admin check result:', { profile, error, role: profile?.role });
+
+          if (error) {
+            console.error('Error checking admin role:', error);
+            setIsAdmin(false);
+            setCheckingAdmin(false);
+            return;
+          }
+
+          setIsAdmin(profile?.role === "admin");
+          setCheckingAdmin(false);
+        } catch (err) {
+          console.error('Timeout or unexpected error:', err);
+          // On timeout or error, assume not admin and redirect to login
+          setIsAdmin(false);
+          setCheckingAdmin(false);
+        }
+      } else if (!loading) {
+        // Only set isAdmin to false when we're done loading AND there's no user
         setIsAdmin(false);
         setCheckingAdmin(false);
-        return;
       }
-        
+    };        
         
                 setIsAdmin(profile?.role === "admin");
         setCheckingAdmin(false);
