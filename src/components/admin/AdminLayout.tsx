@@ -41,28 +41,27 @@ const AdminLayout = () => {
       }
 
       try {
-        const { data, error } = await supabase.rpc('has_role', {
-          _user_id: user.id,
-          _role: 'admin',
-        });
+        const { data: profile, error } = await supabase
+        .from('admin_users')
+        .select('role')
+        .eq('id', user.id)
+        .single();
 
         if (error) throw error;
 
-        setIsAdmin(data || false);
+        setIsAdmin(profile?.role === 'admin');
         
-        if (!data) {
+        if (!profile || profile.role !== 'admin') {
           toast({
             title: 'Access Denied',
             description: 'You do not have admin privileges',
             variant: 'destructive',
           });
-          navigate('/');
-        }
+        navigate('/admin/login');        }
       } catch (error) {
         console.error('Error checking admin role:', error);
         setIsAdmin(false);
-        navigate('/');
-      } finally {
+        navigate('/admin/login');      } finally {
         setCheckingAdmin(false);
       }
     };
