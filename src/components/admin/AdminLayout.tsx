@@ -17,6 +17,8 @@ import {
   Menu,
   LogOut,
   Shield,
+  Mail,
+  TrendingUp,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
@@ -83,6 +85,8 @@ const AdminLayout = () => {
     { name: 'Testimonials', path: '/admin/testimonials', icon: MessageSquare },
     { name: 'FAQ', path: '/admin/faq', icon: HelpCircle },
     { name: 'Team', path: '/admin/team', icon: Users },
+    { name: 'Lead Inquiries', path: '/admin/leads', icon: Mail },
+    { name: 'Analytics', path: '/admin/analytics', icon: TrendingUp },
     { name: 'Settings', path: '/admin/settings', icon: Settings },
   ];
 

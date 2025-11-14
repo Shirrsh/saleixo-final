@@ -20,6 +20,15 @@ import AdminLogin from "./pages/admin/Login";
 import AdminLayout from "@/components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminHomepage from "./pages/admin/Homepage";
+import AdminServices from "./pages/admin/Services";
+import AdminPortfolio from "./pages/admin/Portfolio";
+import AdminBlog from "./pages/admin/Blog";
+import AdminTestimonials from "./pages/admin/Testimonials";
+import AdminFAQ from "./pages/admin/FAQ";
+import AdminTeam from "./pages/admin/Team";
+import AdminLeads from "./pages/admin/Leads";
+import AdminAnalytics from "./pages/admin/Analytics";
+import AdminSettings from "./pages/admin/Settings";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +53,15 @@ const App = () => (
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="homepage" element={<AdminHomepage />} />
+              <Route path="services" element={<AdminServices />} />
+              <Route path="portfolio" element={<AdminPortfolio />} />
+              <Route path="blog" element={<AdminBlog />} />
+              <Route path="testimonials" element={<AdminTestimonials />} />
+              <Route path="faq" element={<AdminFAQ />} />
+              <Route path="team" element={<AdminTeam />} />
+              <Route path="leads" element={<AdminLeads />} />
+              <Route path="analytics" element={<AdminAnalytics />} />
+              <Route path="settings" element={<AdminSettings />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
