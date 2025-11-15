@@ -107,9 +107,6 @@ const AdminLayout = () => {
     );
   }
 
-  if (!user || !isAdmin) {
-    return null;
-  }
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
