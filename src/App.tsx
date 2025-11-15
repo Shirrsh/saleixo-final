@@ -54,9 +54,8 @@ const App = () => (
             {/* Admin Login - No authentication required */}
             <Route path="/admin/login" element={<AdminLogin />} />
             
-            {/* Protected Admin Routes - Authentication required */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/admin" element={<AdminLayout />}>
+            {/* TEMP: Admin Routes - Authentication DISABLED for setup */}
+            <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="homepage" element={<AdminHomepage />} />
@@ -69,7 +68,6 @@ const App = () => (
               <Route path="leads" element={<AdminLeads />} />
               <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="settings" element={<AdminSettings />} />
-            </Route>
             </Route>
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
