@@ -22,6 +22,11 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Show dashboard after 1 second max, even if data hasn't loaded
+    const forceLoadTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
     const fetchStats = async () => {
       try {
         const [blogCount, portfolioCount, servicesCount, activityData] = await Promise.all([
@@ -42,14 +47,18 @@ const AdminDashboard = () => {
         });
 
         setRecentActivity(activityData.data || []);
+        clearTimeout(forceLoadTimeout);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching stats:', error);
-      } finally {
+        clearTimeout(forceLoadTimeout);
         setLoading(false);
       }
     };
 
     fetchStats();
+
+    return () => clearTimeout(forceLoadTimeout);
   }, []);
 
   return (

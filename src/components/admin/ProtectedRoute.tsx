@@ -24,20 +24,23 @@ const ProtectedRoute = () => {
             .eq("id", user.id)
             .single();
 
-          const { data: profile, error } = await Promise.race([
+          const result: any = await Promise.race([
             queryPromise,
             timeoutPromise
           ]);
 
-          console.log('Admin check result:', { profile, error, role: profile?.role });
+          console.log('Admin check result:', { result });
 
-          if (error) {
-            console.error('Error checking admin role:', error);
+          if (result.error) {
+            console.error('Error checking admin role:', result.error);
             setIsAdmin(false);
             setCheckingAdmin(false);
             return;
           }
 
+          // Set admin status and stop checking
+          setIsAdmin(result.data?.role === 'admin');
+          setCheckingAdmin(false);
         } catch (err) {
           console.error('Timeout or unexpected error:', err);
           // On timeout or error, assume not admin and redirect to login
