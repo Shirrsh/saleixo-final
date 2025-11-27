@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 
+import Blog from "./pages/Blog";
 import Categories from "./pages/Categories";
 import Design from "./pages/Design";
 import Services from "./pages/Services";
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/design" element={<Design />} />
+                        <Route path="/blog" element={<Blog />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/visibility" element={<Visibility />} />
             <Route path="/services/professional" element={<Professional />} />
