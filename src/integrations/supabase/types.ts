@@ -278,6 +278,42 @@ export type Database = {
         }
         Relationships: []
       }
+      site_images: {
+        Row: {
+          alt_text: string | null
+          created_at: string | null
+          display_order: number | null
+          id: string
+          image_key: string
+          image_url: string
+          is_active: boolean | null
+          section: string
+          updated_at: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_key: string
+          image_url: string
+          is_active?: boolean | null
+          section: string
+          updated_at?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_key?: string
+          image_url?: string
+          is_active?: boolean | null
+          section?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           created_at: string | null

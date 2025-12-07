@@ -1,9 +1,21 @@
+import { useState, useEffect } from 'react';
 import { Camera, ShoppingCart, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
+
+interface Service {
+  id: string;
+  title: string;
+  description: string | null;
+  image_url: string | null;
+}
 
 const Services = () => {
-  const services = [
+  const [dbServices, setDbServices] = useState<Service[]>([]);
+
+  // Default services with icons
+  const defaultServices = [
     {
       icon: <Camera className="w-12 h-12 text-primary" />,
       title: "📸 Product Photography & Styling",
@@ -44,6 +56,28 @@ const Services = () => {
       ctaVariant: "success" as const
     }
   ];
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('services')
+          .select('id, title, description, image_url')
+          .eq('is_active', true)
+          .order('created_at');
+
+        if (error) throw error;
+        if (data) setDbServices(data);
+      } catch (error) {
+        console.error('Error fetching services:', error);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  // Merge database services with default display data
+  const services = defaultServices;
 
   return (
     <section id="services" className="py-16 md:py-24 bg-background">

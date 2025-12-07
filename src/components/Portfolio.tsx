@@ -1,26 +1,33 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import portfolio1 from '@/assets/portfolio-1.jpg';
-import portfolio2 from '@/assets/portfolio-2.jpg';
-import portfolio3 from '@/assets/portfolio-3.jpg';
+import { useSiteImages } from '@/hooks/useSiteImages';
+
+// Fallback images
+import portfolio1Fallback from '@/assets/portfolio-1.jpg';
+import portfolio2Fallback from '@/assets/portfolio-2.jpg';
+import portfolio3Fallback from '@/assets/portfolio-3.jpg';
 
 const Portfolio = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { getImageUrl, getAltText } = useSiteImages('portfolio');
 
   const portfolioItems = [
     {
-      image: portfolio1,
+      imageKey: 'portfolio_1',
+      fallback: portfolio1Fallback,
       title: "Product Photography",
       description: "Professional studio photography showcasing branded products with elegant styling and perfect lighting for e-commerce success."
     },
     {
-      image: portfolio2, 
+      imageKey: 'portfolio_2',
+      fallback: portfolio2Fallback,
       title: "Creative Design & Branding",
       description: "Complete brand identity designs including logos, business cards, and marketing materials that capture brand essence."
     },
     {
-      image: portfolio3,
+      imageKey: 'portfolio_3',
+      fallback: portfolio3Fallback,
       title: "Digital Marketing Campaigns",
       description: "Data-driven social media campaigns and advertising strategies that deliver measurable growth and engagement."
     }
@@ -63,11 +70,11 @@ const Portfolio = () => {
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {portfolioItems.map((item, index) => (
-                  <div key={index} className="w-full flex-shrink-0">
+                <div key={index} className="w-full flex-shrink-0">
                   <div className="relative group">
                     <img 
-                      src={item.image} 
-                      alt={`${item.title} - Professional photography and design project showcase`}
+                      src={getImageUrl(item.imageKey, item.fallback)} 
+                      alt={getAltText(item.imageKey, `${item.title} - Professional photography and design project showcase`)}
                       className="w-full h-64 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700"
                       loading="lazy"
                       decoding="async"
