@@ -19,6 +19,7 @@ import {
   Shield,
   Mail,
   TrendingUp,
+  Image,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
@@ -80,6 +81,7 @@ const AdminLayout = () => {
   const navItems = [
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { name: 'Homepage Editor', path: '/admin/homepage', icon: Home },
+    { name: 'Images', path: '/admin/images', icon: Image },
     { name: 'Services', path: '/admin/services', icon: Briefcase },
     { name: 'Portfolio', path: '/admin/portfolio', icon: FolderOpen },
     { name: 'Blog Posts', path: '/admin/blog', icon: FileText },
