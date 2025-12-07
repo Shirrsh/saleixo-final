@@ -99,24 +99,33 @@ export type Database = {
         Row: {
           content: string | null
           created_at: string | null
+          excerpt: string | null
           featured_image_url: string | null
           id: string
+          published_date: string | null
+          slug: string | null
           status: string | null
           title: string
         }
         Insert: {
           content?: string | null
           created_at?: string | null
+          excerpt?: string | null
           featured_image_url?: string | null
           id?: string
+          published_date?: string | null
+          slug?: string | null
           status?: string | null
           title: string
         }
         Update: {
           content?: string | null
           created_at?: string | null
+          excerpt?: string | null
           featured_image_url?: string | null
           id?: string
+          published_date?: string | null
+          slug?: string | null
           status?: string | null
           title?: string
         }
