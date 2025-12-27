@@ -17,12 +17,12 @@ const AdminLogin = () => {
 
   useEffect(() => {
     if (!authLoading && user) {
-      // Check if user is admin before redirecting
+      // Check if user is admin by email (admin_users.id is not the same as auth.uid)
       const checkAdmin = async () => {
         const { data: profile } = await supabase
           .from('admin_users')
           .select('role')
-          .eq('id', user.id)
+          .eq('email', user.email)
           .single();
 
         if (profile?.role === 'admin') {
