@@ -44,23 +44,7 @@ const AdminLogin = () => {
     e.preventDefault();
     setLoading(true);
 
-    // First check if email is in admin_users
-    const { data: adminCheck } = await supabase
-      .from('admin_users')
-      .select('email')
-      .eq('email', email)
-      .single();
-
-    if (!adminCheck) {
-      toast({
-        title: 'Access Denied',
-        description: 'This email is not registered as an admin.',
-        variant: 'destructive',
-      });
-      setLoading(false);
-      return;
-    }
-
+    // Send magic link - admin verification happens after login via useEffect
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
