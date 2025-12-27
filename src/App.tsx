@@ -32,6 +32,7 @@ import AdminLeads from "./pages/admin/Leads";
 import AdminAnalytics from "./pages/admin/Analytics";
 import AdminSettings from "./pages/admin/Settings";
 import AdminImages from "./pages/admin/Images";
+import AdminCategories from "./pages/admin/Categories";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,7 @@ const App = () => (
               <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="images" element={<AdminImages />} />
+              <Route path="categories" element={<AdminCategories />} />
             </Route>
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -19,6 +19,7 @@ import {
   Shield,
   Mail,
   TrendingUp,
+  Layers,
   Image,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -81,6 +82,7 @@ const AdminLayout = () => {
   const navItems = [
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { name: 'Homepage Editor', path: '/admin/homepage', icon: Home },
+    { name: 'Categories', path: '/admin/categories', icon: Layers },
     { name: 'Images', path: '/admin/images', icon: Image },
     { name: 'Services', path: '/admin/services', icon: Briefcase },
     { name: 'Portfolio', path: '/admin/portfolio', icon: FolderOpen },
