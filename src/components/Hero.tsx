@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useAnimatedCounter } from '@/hooks/useAnimatedCounter';
 import { useSiteImages } from '@/hooks/useSiteImages';
+import { useHomepageContent } from '@/hooks/useHomepageContent';
 
 // Fallback images
 import showcase1Fallback from '@/assets/hero/showcase-1.jpg';
@@ -13,7 +14,8 @@ const Hero = () => {
   const [ref, isIntersecting] = useIntersectionObserver();
   const artisansCount = useAnimatedCounter(500, 2000, isIntersecting);
   const satisfactionCount = useAnimatedCounter(98, 2000, isIntersecting);
-  const { getImageUrl, getAltText, loading } = useSiteImages('hero');
+  const { getImageUrl, getAltText } = useSiteImages('hero');
+  const { content } = useHomepageContent();
 
   const scrollToContact = () => {
     const element = document.querySelector('#contact');
@@ -36,14 +38,20 @@ const Hero = () => {
           {/* Left Column - Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in leading-tight">
-              Transform Your Brand Into{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent animate-pulse-glow">
-                Market-Winning Brands
-              </span>
+              {content.hero_title.includes('Market-Winning') ? (
+                <>
+                  Transform Your Brand Into{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent animate-pulse-glow">
+                    Market-Winning Brands
+                  </span>
+                </>
+              ) : (
+                content.hero_title
+              )}
             </h1>
             
             <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 animate-fade-in animate-delay-200 leading-relaxed">
-              Photography, design, and marketing that actually grows revenue. You focus on your craft, we handle the growth.
+              {content.hero_subtitle}
             </p>
 
             {/* Trust Signal */}
@@ -53,8 +61,8 @@ const Hero = () => {
 
             {/* Primary CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-in animate-delay-400 mb-8">
-              <Button variant="default" size="lg" onClick={scrollToContact} className="hover-lift hover-glow min-h-[56px] px-8 text-lg" aria-label="Book a free strategy call">
-                Book Free Strategy Call
+              <Button variant="default" size="lg" onClick={scrollToContact} className="hover-lift hover-glow min-h-[56px] px-8 text-lg" aria-label={content.hero_cta_text}>
+                {content.hero_cta_text}
               </Button>
               <Button variant="outline" size="lg" onClick={() => document.querySelector('#services')?.scrollIntoView({
               behavior: 'smooth'
