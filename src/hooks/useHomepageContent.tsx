@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
-interface HomepageContent {
+export interface HomepageContent {
   hero_title: string;
   hero_subtitle: string;
   hero_cta_text: string;
@@ -9,6 +9,13 @@ interface HomepageContent {
   hero_image_url: string;
   meta_title: string;
   meta_description: string;
+  badge_1_icon: string;
+  badge_1_text: string;
+  badge_2_icon: string;
+  badge_2_text: string;
+  badge_3_icon: string;
+  badge_3_text: string;
+  trust_badges: string;
 }
 
 interface ValueProposition {
@@ -28,6 +35,13 @@ const defaultContent: HomepageContent = {
   hero_image_url: '',
   meta_title: 'Alvaio - Transform Your Brand',
   meta_description: 'Professional photography, design, and marketing services',
+  badge_1_icon: 'Target',
+  badge_1_text: 'Revenue-Focused',
+  badge_2_icon: 'Zap',
+  badge_2_text: '48h Turnaround',
+  badge_3_icon: 'Users',
+  badge_3_text: 'Founder-Led',
+  trust_badges: 'Based in India | Est. 2024 | Boutique Studio',
 };
 
 export const useHomepageContent = () => {
@@ -54,6 +68,13 @@ export const useHomepageContent = () => {
             hero_image_url: data.hero_image_url || defaultContent.hero_image_url,
             meta_title: data.meta_title || defaultContent.meta_title,
             meta_description: data.meta_description || defaultContent.meta_description,
+            badge_1_icon: data.badge_1_icon || defaultContent.badge_1_icon,
+            badge_1_text: data.badge_1_text || defaultContent.badge_1_text,
+            badge_2_icon: data.badge_2_icon || defaultContent.badge_2_icon,
+            badge_2_text: data.badge_2_text || defaultContent.badge_2_text,
+            badge_3_icon: data.badge_3_icon || defaultContent.badge_3_icon,
+            badge_3_text: data.badge_3_text || defaultContent.badge_3_text,
+            trust_badges: data.trust_badges || defaultContent.trust_badges,
           });
         }
       } catch (error) {

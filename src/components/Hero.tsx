@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { useAnimatedCounter } from '@/hooks/useAnimatedCounter';
 import { useSiteImages } from '@/hooks/useSiteImages';
 import { useHomepageContent } from '@/hooks/useHomepageContent';
+import { Target, Zap, Users, Heart, Star, CheckCircle, Award, Clock, Shield, Sparkles, TrendingUp, Rocket, type LucideIcon } from 'lucide-react';
 
 // Fallback images
 import showcase1Fallback from '@/assets/hero/showcase-1.jpg';
@@ -10,10 +10,24 @@ import showcase2Fallback from '@/assets/hero/showcase-2.jpg';
 import showcase3Fallback from '@/assets/hero/showcase-3.jpg';
 import showcase4Fallback from '@/assets/hero/showcase-4.jpg';
 
+// Icon mapping for dynamic badge icons
+const iconMap: Record<string, LucideIcon> = {
+  Target,
+  Zap,
+  Users,
+  Heart,
+  Star,
+  CheckCircle,
+  Award,
+  Clock,
+  Shield,
+  Sparkles,
+  TrendingUp,
+  Rocket,
+};
+
 const Hero = () => {
   const [ref, isIntersecting] = useIntersectionObserver();
-  const artisansCount = useAnimatedCounter(500, 2000, isIntersecting);
-  const satisfactionCount = useAnimatedCounter(98, 2000, isIntersecting);
   const { getImageUrl, getAltText } = useSiteImages('hero');
   const { content } = useHomepageContent();
 
@@ -29,6 +43,11 @@ const Hero = () => {
   const showcase2 = getImageUrl('hero_showcase_2', showcase2Fallback);
   const showcase3 = getImageUrl('hero_showcase_3', showcase3Fallback);
   const showcase4 = getImageUrl('hero_showcase_4', showcase4Fallback);
+
+  // Get badge icons
+  const Badge1Icon = iconMap[content.badge_1_icon] || Target;
+  const Badge2Icon = iconMap[content.badge_2_icon] || Zap;
+  const Badge3Icon = iconMap[content.badge_3_icon] || Users;
 
   return (
     <section id="home" className="pt-24 md:pt-32 pb-16 md:pb-24 bg-background overflow-hidden relative min-h-screen flex items-center">
@@ -55,8 +74,8 @@ const Hero = () => {
             </p>
 
             {/* Trust Signal */}
-            <p className="text-base md:text-lg text-muted-foreground mb-6 animate-fade-in animate-delay-300 font-medium">
-              Join 500+ successful brands
+            <p className="text-sm md:text-base text-muted-foreground/80 mb-6 animate-fade-in animate-delay-300 font-medium tracking-wide">
+              {content.trust_badges}
             </p>
 
             {/* Primary CTAs */}
@@ -71,23 +90,25 @@ const Hero = () => {
               </Button>
             </div>
 
-            {/* Stats */}
+            {/* Value Badges */}
             <div className="grid grid-cols-3 gap-4 md:gap-6 mt-12 animate-fade-in animate-delay-600">
-              <div className="text-center lg:text-left">
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1">
-                  {artisansCount}+
+              <div className="text-center lg:text-left group">
+                <div className="inline-flex items-center justify-center lg:justify-start mb-2">
+                  <Badge1Icon className="w-8 h-8 md:w-10 md:h-10 text-primary transition-transform group-hover:scale-110" />
                 </div>
-                <div className="text-xs md:text-sm text-muted-foreground font-medium">Brands Helped</div>
+                <div className="text-sm md:text-base font-semibold text-foreground">{content.badge_1_text}</div>
               </div>
-              <div className="text-center lg:text-left">
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-1">
-                  {satisfactionCount}%
+              <div className="text-center lg:text-left group">
+                <div className="inline-flex items-center justify-center lg:justify-start mb-2">
+                  <Badge2Icon className="w-8 h-8 md:w-10 md:h-10 text-primary transition-transform group-hover:scale-110" />
                 </div>
-                <div className="text-xs md:text-sm text-muted-foreground font-medium">Success Rate</div>
+                <div className="text-sm md:text-base font-semibold text-foreground">{content.badge_2_text}</div>
               </div>
-              <div className="text-center lg:text-left">
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-success mb-1">24h</div>
-                <div className="text-xs md:text-sm text-muted-foreground font-medium">Setup Time</div>
+              <div className="text-center lg:text-left group">
+                <div className="inline-flex items-center justify-center lg:justify-start mb-2">
+                  <Badge3Icon className="w-8 h-8 md:w-10 md:h-10 text-primary transition-transform group-hover:scale-110" />
+                </div>
+                <div className="text-sm md:text-base font-semibold text-foreground">{content.badge_3_text}</div>
               </div>
             </div>
           </div>
