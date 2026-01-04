@@ -5,7 +5,29 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, Trash2, Save } from 'lucide-react';
+import { Plus, Trash2, Save, Target, Zap, Users, Heart, Star, CheckCircle, Award, Clock, Shield, Sparkles, TrendingUp, Rocket, type LucideIcon } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const iconOptions: { value: string; label: string; Icon: LucideIcon }[] = [
+  { value: 'Target', label: 'Target', Icon: Target },
+  { value: 'Zap', label: 'Zap', Icon: Zap },
+  { value: 'Users', label: 'Users', Icon: Users },
+  { value: 'Heart', label: 'Heart', Icon: Heart },
+  { value: 'Star', label: 'Star', Icon: Star },
+  { value: 'CheckCircle', label: 'CheckCircle', Icon: CheckCircle },
+  { value: 'Award', label: 'Award', Icon: Award },
+  { value: 'Clock', label: 'Clock', Icon: Clock },
+  { value: 'Shield', label: 'Shield', Icon: Shield },
+  { value: 'Sparkles', label: 'Sparkles', Icon: Sparkles },
+  { value: 'TrendingUp', label: 'TrendingUp', Icon: TrendingUp },
+  { value: 'Rocket', label: 'Rocket', Icon: Rocket },
+];
 
 const AdminHomepage = () => {
   const { toast } = useToast();
@@ -21,6 +43,13 @@ const AdminHomepage = () => {
     hero_image_url: '',
     meta_title: '',
     meta_description: '',
+    badge_1_icon: 'Target',
+    badge_1_text: '',
+    badge_2_icon: 'Zap',
+    badge_2_text: '',
+    badge_3_icon: 'Users',
+    badge_3_text: '',
+    trust_badges: '',
   });
 
   const [valueProps, setValueProps] = useState<any[]>([]);
@@ -34,7 +63,7 @@ const AdminHomepage = () => {
     try {
       const { data, error } = await supabase
         .from('homepage_content')
-        .select('id, hero_title, hero_subtitle, hero_cta_text, hero_cta_link, hero_image_url, meta_title, meta_description, created_at')
+        .select('*')
         .limit(1)
         .maybeSingle();
 
@@ -50,6 +79,13 @@ const AdminHomepage = () => {
           hero_image_url: (data.hero_image_url as string) || '',
           meta_title: (data.meta_title as string) || '',
           meta_description: (data.meta_description as string) || '',
+          badge_1_icon: (data.badge_1_icon as string) || 'Target',
+          badge_1_text: (data.badge_1_text as string) || '',
+          badge_2_icon: (data.badge_2_icon as string) || 'Zap',
+          badge_2_text: (data.badge_2_text as string) || '',
+          badge_3_icon: (data.badge_3_icon as string) || 'Users',
+          badge_3_text: (data.badge_3_text as string) || '',
+          trust_badges: (data.trust_badges as string) || '',
         });
       }
     } catch (error: any) {
@@ -267,6 +303,152 @@ const AdminHomepage = () => {
               }
               placeholder="https://..."
             />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Hero Badges */}
+      <Card className="bg-white border-[#ecf0f1]">
+        <CardHeader>
+          <CardTitle className="text-[#2c3e50]">Hero Badges</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Badge 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+            <div>
+              <label className="block text-sm font-medium text-[#2c3e50] mb-2">
+                Badge 1 Icon
+              </label>
+              <Select
+                value={homepageData.badge_1_icon}
+                onValueChange={(value) =>
+                  setHomepageData({ ...homepageData, badge_1_icon: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {iconOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      <div className="flex items-center gap-2">
+                        <option.Icon className="w-4 h-4" />
+                        <span>{option.label}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-[#2c3e50] mb-2">
+                Badge 1 Text
+              </label>
+              <Input
+                value={homepageData.badge_1_text || ''}
+                onChange={(e) =>
+                  setHomepageData({ ...homepageData, badge_1_text: e.target.value })
+                }
+                placeholder="Revenue-Focused"
+              />
+            </div>
+          </div>
+
+          {/* Badge 2 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+            <div>
+              <label className="block text-sm font-medium text-[#2c3e50] mb-2">
+                Badge 2 Icon
+              </label>
+              <Select
+                value={homepageData.badge_2_icon}
+                onValueChange={(value) =>
+                  setHomepageData({ ...homepageData, badge_2_icon: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {iconOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      <div className="flex items-center gap-2">
+                        <option.Icon className="w-4 h-4" />
+                        <span>{option.label}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-[#2c3e50] mb-2">
+                Badge 2 Text
+              </label>
+              <Input
+                value={homepageData.badge_2_text || ''}
+                onChange={(e) =>
+                  setHomepageData({ ...homepageData, badge_2_text: e.target.value })
+                }
+                placeholder="48h Turnaround"
+              />
+            </div>
+          </div>
+
+          {/* Badge 3 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+            <div>
+              <label className="block text-sm font-medium text-[#2c3e50] mb-2">
+                Badge 3 Icon
+              </label>
+              <Select
+                value={homepageData.badge_3_icon}
+                onValueChange={(value) =>
+                  setHomepageData({ ...homepageData, badge_3_icon: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {iconOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      <div className="flex items-center gap-2">
+                        <option.Icon className="w-4 h-4" />
+                        <span>{option.label}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-[#2c3e50] mb-2">
+                Badge 3 Text
+              </label>
+              <Input
+                value={homepageData.badge_3_text || ''}
+                onChange={(e) =>
+                  setHomepageData({ ...homepageData, badge_3_text: e.target.value })
+                }
+                placeholder="Founder-Led"
+              />
+            </div>
+          </div>
+
+          {/* Trust Badges */}
+          <div>
+            <label className="block text-sm font-medium text-[#2c3e50] mb-2">
+              Trust Badges Text
+            </label>
+            <Input
+              value={homepageData.trust_badges || ''}
+              onChange={(e) =>
+                setHomepageData({ ...homepageData, trust_badges: e.target.value })
+              }
+              placeholder="Based in India | Est. 2024 | Boutique Studio"
+            />
+            <p className="text-xs text-[#7f8c8d] mt-1">Use | to separate items</p>
           </div>
         </CardContent>
       </Card>

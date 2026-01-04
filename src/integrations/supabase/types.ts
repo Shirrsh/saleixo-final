@@ -202,6 +202,12 @@ export type Database = {
       }
       homepage_content: {
         Row: {
+          badge_1_icon: string | null
+          badge_1_text: string | null
+          badge_2_icon: string | null
+          badge_2_text: string | null
+          badge_3_icon: string | null
+          badge_3_text: string | null
           created_at: string | null
           hero_cta_link: string | null
           hero_cta_text: string | null
@@ -211,8 +217,15 @@ export type Database = {
           id: string
           meta_description: string | null
           meta_title: string | null
+          trust_badges: string | null
         }
         Insert: {
+          badge_1_icon?: string | null
+          badge_1_text?: string | null
+          badge_2_icon?: string | null
+          badge_2_text?: string | null
+          badge_3_icon?: string | null
+          badge_3_text?: string | null
           created_at?: string | null
           hero_cta_link?: string | null
           hero_cta_text?: string | null
@@ -222,8 +235,15 @@ export type Database = {
           id?: string
           meta_description?: string | null
           meta_title?: string | null
+          trust_badges?: string | null
         }
         Update: {
+          badge_1_icon?: string | null
+          badge_1_text?: string | null
+          badge_2_icon?: string | null
+          badge_2_text?: string | null
+          badge_3_icon?: string | null
+          badge_3_text?: string | null
           created_at?: string | null
           hero_cta_link?: string | null
           hero_cta_text?: string | null
@@ -233,6 +253,7 @@ export type Database = {
           id?: string
           meta_description?: string | null
           meta_title?: string | null
+          trust_badges?: string | null
         }
         Relationships: []
       }
