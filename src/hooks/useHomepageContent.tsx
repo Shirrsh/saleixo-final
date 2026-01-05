@@ -29,19 +29,19 @@ interface ValueProposition {
 
 const defaultContent: HomepageContent = {
   hero_title: 'Transform Your Brand Into Market-Winning Brands',
-  hero_subtitle: 'Photography, design, and marketing that actually grows revenue. You focus on your craft, we handle the growth.',
+  hero_subtitle: 'Professional product photography and ecommerce solutions for Amazon, Flipkart, Etsy, Shopify and more across US, UK, EU, and India.',
   hero_cta_text: 'Book Free Strategy Call',
   hero_cta_link: '#contact',
   hero_image_url: '',
   meta_title: 'Alvaio - Transform Your Brand',
   meta_description: 'Professional photography, design, and marketing services',
-  badge_1_icon: 'Target',
-  badge_1_text: 'Revenue-Focused',
-  badge_2_icon: 'Zap',
-  badge_2_text: '48h Turnaround',
-  badge_3_icon: 'Users',
-  badge_3_text: 'Founder-Led',
-  trust_badges: 'Based in India | Est. 2024 | Boutique Studio',
+  badge_1_icon: 'Camera',
+  badge_1_text: 'Studio-Grade Photography',
+  badge_2_icon: 'ShoppingCart',
+  badge_2_text: '9 Marketplaces | 7 Countries',
+  badge_3_icon: '',
+  badge_3_text: '',
+  trust_badges: 'Amazon | eBay | Etsy | Shopify | Flipkart | Walmart',
 };
 
 export const useHomepageContent = () => {

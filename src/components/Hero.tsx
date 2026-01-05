@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useSiteImages } from '@/hooks/useSiteImages';
 import { useHomepageContent } from '@/hooks/useHomepageContent';
-import { Target, Zap, Users, Heart, Star, CheckCircle, Award, Clock, Shield, Sparkles, TrendingUp, Rocket, type LucideIcon } from 'lucide-react';
+import { Target, Zap, Users, Heart, Star, CheckCircle, Award, Clock, Shield, Sparkles, TrendingUp, Rocket, Camera, ShoppingCart, ChevronDown, type LucideIcon } from 'lucide-react';
 
 // Fallback images
 import showcase1Fallback from '@/assets/hero/showcase-1.jpg';
@@ -24,6 +24,8 @@ const iconMap: Record<string, LucideIcon> = {
   Sparkles,
   TrendingUp,
   Rocket,
+  Camera,
+  ShoppingCart,
 };
 
 const Hero = () => {
@@ -44,9 +46,12 @@ const Hero = () => {
   const showcase3 = getImageUrl('hero_showcase_3', showcase3Fallback);
   const showcase4 = getImageUrl('hero_showcase_4', showcase4Fallback);
 
-  // Get badge icons
-  const Badge1Icon = iconMap[content.badge_1_icon] || Target;
-  const Badge2Icon = iconMap[content.badge_2_icon] || Zap;
+  // Get badge icons (only 2 badges now)
+  const Badge1Icon = iconMap[content.badge_1_icon] || Camera;
+  const Badge2Icon = iconMap[content.badge_2_icon] || ShoppingCart;
+  
+  // Check if badge 3 should be shown (not empty)
+  const showBadge3 = content.badge_3_text && content.badge_3_text.trim() !== '';
   const Badge3Icon = iconMap[content.badge_3_icon] || Users;
 
   return (
@@ -90,8 +95,8 @@ const Hero = () => {
               </Button>
             </div>
 
-            {/* Value Badges */}
-            <div className="grid grid-cols-3 gap-4 md:gap-6 mt-12 animate-fade-in animate-delay-600">
+            {/* Value Badges - 2 or 3 depending on content */}
+            <div className={`grid ${showBadge3 ? 'grid-cols-3' : 'grid-cols-2'} gap-4 md:gap-6 mt-12 animate-fade-in animate-delay-600`}>
               <div className="text-center lg:text-left group">
                 <div className="inline-flex items-center justify-center lg:justify-start mb-2">
                   <Badge1Icon className="w-8 h-8 md:w-10 md:h-10 text-primary transition-transform group-hover:scale-110" />
@@ -104,12 +109,14 @@ const Hero = () => {
                 </div>
                 <div className="text-sm md:text-base font-semibold text-foreground">{content.badge_2_text}</div>
               </div>
-              <div className="text-center lg:text-left group">
-                <div className="inline-flex items-center justify-center lg:justify-start mb-2">
-                  <Badge3Icon className="w-8 h-8 md:w-10 md:h-10 text-primary transition-transform group-hover:scale-110" />
+              {showBadge3 && (
+                <div className="text-center lg:text-left group">
+                  <div className="inline-flex items-center justify-center lg:justify-start mb-2">
+                    <Badge3Icon className="w-8 h-8 md:w-10 md:h-10 text-primary transition-transform group-hover:scale-110" />
+                  </div>
+                  <div className="text-sm md:text-base font-semibold text-foreground">{content.badge_3_text}</div>
                 </div>
-                <div className="text-sm md:text-base font-semibold text-foreground">{content.badge_3_text}</div>
-              </div>
+              )}
             </div>
           </div>
 
@@ -159,12 +166,14 @@ const Hero = () => {
       </div>
       
       {/* Subtle Background Elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl animate-float" style={{
-      animationDelay: '0s'
-    }}></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl animate-float" style={{
-      animationDelay: '2s'
-    }}></div>
+      <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '0s' }}></div>
+      <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+      
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in animate-delay-700">
+        <span className="text-xs text-muted-foreground font-medium">Scroll to explore</span>
+        <ChevronDown className="w-5 h-5 text-primary animate-bounce-scroll" />
+      </div>
     </section>
   );
 };

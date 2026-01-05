@@ -1,6 +1,8 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import Services from '@/components/Services';
+import WaveDivider from '@/components/WaveDivider';
+import MarketplaceLogos from '@/components/MarketplaceLogos';
+import FeaturedServices from '@/components/FeaturedServices';
 import WhyAlvaio from '@/components/WhyAlvaio';
 import Portfolio from '@/components/Portfolio';
 import HowItWorks from '@/components/HowItWorks';
@@ -8,12 +10,11 @@ import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
-
 import ScrollProgress from '@/components/ScrollProgress';
 import ThemeToggle from '@/components/ThemeToggle';
 import LoadingScreen from '@/components/LoadingScreen';
-
 import WhatsAppButton from '@/components/WhatsAppButton';
+import FloatingCTA from '@/components/FloatingCTA';
 
 const Index = () => {
   return (
@@ -26,7 +27,13 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <Services />
+        <div className="bg-secondary/30">
+          <WaveDivider />
+        </div>
+        <MarketplaceLogos />
+        <WaveDivider flip />
+        <FeaturedServices />
+        <WaveDivider />
         <WhyAlvaio />
         <Portfolio />
         <HowItWorks />
@@ -36,6 +43,7 @@ const Index = () => {
       <Footer />
       <ScrollToTop />
       <WhatsAppButton />
+      <FloatingCTA />
     </>
   );
 };

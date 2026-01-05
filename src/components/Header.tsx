@@ -28,29 +28,14 @@ const Header = () => {
     fetchHeaderCategories();
   }, []);
 
-  // Static nav links + dynamic categories from database
-  const staticLinks = [
-    { name: 'Photography', href: '/categories', type: 'route' as const },
-    { name: 'Design', href: '/design', type: 'route' as const },
-    { name: 'Services', href: '/services', type: 'route' as const },
-  ];
-
-  // Convert categories to nav links (only if they exist)
-  const categoryLinks = headerCategories.map(cat => ({
-    name: cat.name,
-    href: `/categories/${cat.slug}`,
-    type: 'route' as const,
-  }));
-
-  const scrollLinks = [
+  // Simplified navigation focusing on core services
+  const navLinks = [
+    { name: 'Photoshoots', href: '/categories', type: 'route' as const },
+    { name: 'Ecommerce', href: '/design', type: 'route' as const },
+    { name: 'Blog', href: '/blog', type: 'route' as const },
     { name: 'Portfolio', href: '#portfolio', type: 'scroll' as const },
     { name: 'Contact', href: '#contact', type: 'scroll' as const },
   ];
-
-  // Use static links if no categories in DB, otherwise use categories
-  const navLinks = headerCategories.length > 0 
-    ? [...categoryLinks, ...scrollLinks]
-    : [...staticLinks, ...scrollLinks];
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);

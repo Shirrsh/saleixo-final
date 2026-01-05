@@ -246,6 +246,17 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes bounce-scroll {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.7;
+  }
+}
+
 /* Animation Classes */
 .animate-fade-in {
   animation: fade-in 0.6s ease-out;
@@ -273,6 +284,10 @@ All colors MUST be HSL.
 
 .animate-counter {
   animation: counter 0.8s ease-out;
+}
+
+.animate-bounce-scroll {
+  animation: bounce-scroll 2s ease-in-out infinite;
 }
 
 /* Staggered Animation Delays */
