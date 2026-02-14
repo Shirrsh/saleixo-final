@@ -1,16 +1,16 @@
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
-// Marketplace data with real logos from CDN
+// Marketplace data with text-based display (reliable, no external CDN dependency)
 const marketplaces = [
-  { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
-  { name: 'eBay', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg' },
-  { name: 'Walmart', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg' },
-  { name: 'Shopify', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Shopify_logo_2018.svg' },
-  { name: 'Etsy', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Etsy_logo.svg' },
-  { name: 'WooCommerce', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/WooCommerce_logo.svg' },
-  { name: 'Flipkart', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Flipkart_Logo.png' },
-  { name: 'Meesho', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Meesho_New_Logo.svg' },
-  { name: 'Shein', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Shein_logo.svg' },
+  { name: 'Amazon', display: 'amazon' },
+  { name: 'eBay', display: 'eBay' },
+  { name: 'Walmart', display: 'Walmart' },
+  { name: 'Shopify', display: 'Shopify' },
+  { name: 'Etsy', display: 'Etsy' },
+  { name: 'WooCommerce', display: 'WooCommerce' },
+  { name: 'Flipkart', display: 'Flipkart' },
+  { name: 'Meesho', display: 'Meesho' },
+  { name: 'Shein', display: 'SHEIN' },
 ];
 
 // Country flags with emoji for simplicity and performance
@@ -35,7 +35,7 @@ const MarketplaceLogos = () => {
           Trusted across leading global marketplaces
         </p>
 
-        {/* Marketplace Logos */}
+        {/* Marketplace Logos as styled text */}
         <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-10 mb-10">
           {marketplaces.map((marketplace, index) => (
             <div
@@ -45,15 +45,8 @@ const MarketplaceLogos = () => {
               }`}
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <img
-                src={marketplace.logo}
-                alt={`${marketplace.name} marketplace`}
-                className="h-6 md:h-8 w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                loading="lazy"
-              />
-              {/* Tooltip */}
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-foreground text-background text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                {marketplace.name}
+              <span className="text-lg md:text-xl font-bold text-muted-foreground/50 hover:text-foreground transition-colors duration-300 tracking-tight">
+                {marketplace.display}
               </span>
             </div>
           ))}
