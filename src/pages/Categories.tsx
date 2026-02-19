@@ -78,6 +78,50 @@ const fallbackCategories = [
   },
 ];
 
+const CategoryCard = ({ category, index }: { category: Category; index: number }) => {
+  const [ref, inView] = useIntersectionObserver();
+  
+  return (
+    <div
+      ref={ref}
+      className={`${inView ? 'animate-fade-in' : 'opacity-0'}`}
+      style={{ animationDelay: `${index * 100}ms` }}
+    >
+      <Card className="group overflow-hidden hover-lift border-border/50 bg-card/50 backdrop-blur-sm h-full">
+        <div className="relative overflow-hidden aspect-[4/3]">
+          <img
+            src={category.image_url || '/placeholder.svg'}
+            alt={category.alt_text || category.name}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+            <Button 
+              variant="secondary" 
+              size="sm"
+              className="w-full"
+              onClick={() => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+              }}
+            >
+              Get a Quote <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+        <CardContent className="p-6 space-y-3">
+          <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+            {category.name}
+          </h3>
+          <p className="text-muted-foreground leading-relaxed">
+            {category.description}
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -139,50 +183,9 @@ const Categories = () => {
               <div className="text-center py-12 text-muted-foreground">Loading categories...</div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {categories.map((category, index) => {
-                  const [ref, inView] = useIntersectionObserver();
-                  
-                  return (
-                    <div
-                      key={category.id}
-                      ref={ref}
-                      className={`${inView ? 'animate-fade-in' : 'opacity-0'}`}
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
-                      <Card className="group overflow-hidden hover-lift border-border/50 bg-card/50 backdrop-blur-sm h-full">
-                        <div className="relative overflow-hidden aspect-[4/3]">
-                          <img
-                            src={category.image_url || '/placeholder.svg'}
-                            alt={category.alt_text || category.name}
-                            loading="lazy"
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                            <Button 
-                              variant="secondary" 
-                              size="sm"
-                              className="w-full"
-                              onClick={() => {
-                                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-                              }}
-                            >
-                              Get a Quote <ArrowRight className="ml-2 w-4 h-4" />
-                            </Button>
-                          </div>
-                        </div>
-                        <CardContent className="p-6 space-y-3">
-                          <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
-                            {category.name}
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed">
-                            {category.description}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  );
-                })}
+                {categories.map((category, index) => (
+                  <CategoryCard key={category.id} category={category} index={index} />
+                ))}
               </div>
             )}
           </div>
