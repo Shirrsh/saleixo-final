@@ -1,37 +1,67 @@
 
 
-## Redesign /design Page Into Comprehensive Ecommerce Services Page
+## Enhance Ecommerce Services Page with Competitor-Matched Offerings
 
-### Overview
-Rewrite `src/pages/Design.tsx` to replace the generic design services page with a detailed, sales-focused ecommerce services page that shows customers exactly how the process works and highlights the expert team.
+### What's Missing vs. SellerRocket
 
-### Page Sections (in order)
+Your current page covers photography, listing optimization, marketing, and platform management well. However, the competitor offers several additional services and sections you're missing:
 
-1. **Hero Section** -- "Your Products. Our Expertise. Global Sales." with badge "9 Marketplaces | 7 Countries", two CTAs (Get Started, See Our Process)
+**New Services to Add:**
+1. **E-Commerce Seller Account Management** -- End-to-end account management with focus on sustained sales growth
+2. **Global Seller Account Management** -- International expansion and cross-border selling
+3. **Quick Commerce Onboarding** -- Blinkit, Zepto, Swiggy Instamart setup and management
+4. **Website Design & Development** -- Custom ecommerce websites (Shopify, WooCommerce, WordPress)
+5. **Digital Marketing** -- SEO, PPC, social media marketing, lead generation
+6. **Video Editing** -- Product videos, reels, brand storytelling content
+7. **Branding** -- Complete brand identity (logo, packaging, brand guidelines)
 
-2. **How It Works (6-Step Timeline)** -- Visual numbered timeline:
-   - Onboarding Call (understand products, market research)
-   - Product Photography (studio catalog + lifestyle shots)
-   - Listing Creation & Optimization (SEO titles, A+ content, backend keywords)
-   - Store Setup & Launch (multi-platform accounts, storefront design, payments)
-   - Marketing & Ads (PPC, social media, deal strategy)
-   - Growth & Reporting (weekly analytics, pricing optimization, ongoing improvements)
+**New Sections to Add:**
+1. **Core Services Grid** (9 service cards) -- Before the "How It Works" section
+2. **Quick Commerce Platforms** -- Blinkit, Zepto, Instamart cards
+3. **Stats Counter Bar** -- Animated numbers (500+ Clients, 1000+ Campaigns, Rs 10 Cr+ Revenue, 15+ Years)
+4. **Our Strategy** -- 3-step strategy overview (Sales Plan, Marketing Strategy, Marketplace Expansion)
+5. **Why Choose Us** -- Trust signals (91% Client Retention, Amazon SPN Partner, Expert Managers, WhatsApp Support)
+6. **Social Media Marketing** -- Highlight digital marketing ROI metrics (+250% lead volume, +122% organic growth, etc.)
+7. **Additional Platforms** -- Add Myntra, AJIO, Nykaa, JioMart, Tata CLiQ, FirstCry, GlowRoad, Lazada, Alibaba, AliExpress, Mercado Libre to the platforms list
+8. **Free Audit CTA** -- "Get your free Seller account audit today" mid-page callout
 
-3. **Our Expert Team** -- 6-card grid showing dedicated roles: Product Photographers, Photo/Video Editors, Listing & SEO Specialists, PPC & Marketing Managers, Brand Designers, Dedicated Account Managers. Tagline: "Every client gets a dedicated team, not a single freelancer."
+### Updated Page Flow
 
-4. **Platforms We Master** -- 9 marketplace cards (Amazon, Flipkart, Shopify, Etsy, eBay, Walmart, Meesho, WooCommerce, Shein) each listing 3-4 platform-specific services
-
-5. **What You Get** -- 3 columns (Sales Growth, Brand Visibility, Ongoing Support) with bullet points, plus satisfaction guarantee banner: "100% Satisfaction | Unlimited Revisions | Dedicated Manager"
-
-6. **CTA Section** -- "Ready to Sell Globally?" with consultation button and phone number
+```text
+1. HERO (keep existing, update badge to "15+ Marketplaces | 25+ Countries")
+2. STATS COUNTER BAR (NEW) -- 500+ Clients | 1000+ Campaigns | 10 Cr+ Revenue | 15+ Years
+3. CORE SERVICES GRID (NEW) -- 9 service cards matching competitor
+4. HOW IT WORKS (keep existing 6-step timeline)
+5. OUR STRATEGY (NEW) -- 3-step: Sales Plan > Marketing Strategy > Marketplace Expansion
+6. EXPERT TEAM (keep existing)
+7. PLATFORMS WE MASTER (expand with 15+ more platforms, split into Domestic/Global/Quick Commerce)
+8. WHY CHOOSE US (NEW) -- 8 trust signal cards
+9. SOCIAL MEDIA MARKETING (NEW) -- ROI metrics section
+10. WHAT YOU GET (keep existing)
+11. FREE AUDIT CTA (NEW) -- Mid-page conversion section
+12. FINAL CTA (keep existing)
+```
 
 ### Technical Details
 
-**File:** `src/pages/Design.tsx` -- full rewrite
+**File Modified:** `src/pages/Design.tsx` -- major expansion
 
-**Reused components:** Header, Footer, ScrollToTop, ThemeToggle, WhatsAppButton, Button, Card (all existing)
+**New Data Arrays:**
+- `coreServices` -- 9 items (Account Mgmt, Global Selling, Quick Commerce, Website Dev, Digital Marketing, Shopify, Photography, Video Editing, Branding)
+- `strategySteps` -- 3 items (Sales Plan, Marketing Strategy, Marketplace Expansion)
+- `whyChooseUs` -- 8 items (500+ Clients, 91% Retention, Amazon SPN, Expert Managers, Sales Focus, 15+ Years, WhatsApp Support, Dedicated Manager)
+- `quickCommercePlatforms` -- Blinkit, Zepto, Instamart
+- `socialMediaStats` -- ROI metrics (+250% leads, +122% organic, 70% visibility, 50% ROAS)
+- Expanded `platforms` array split into: domestic (Amazon, Flipkart, Myntra, AJIO, Meesho, JioMart, Tata CLiQ, Nykaa, FirstCry, GlowRoad), global (Amazon Global, eBay, Walmart, Etsy, Lazada, Alibaba, AliExpress, Mercado Libre, Shopee, Shein), quick commerce (Blinkit, Zepto, Instamart)
 
-**Icons:** All from `lucide-react` -- Phone, Users, Camera, Search, ShoppingCart, BarChart3, Megaphone, Target, Headphones, Shield, Sparkles, CheckCircle2, Package, Globe, TrendingUp, etc.
+**New Sections Built:**
+- Stats counter bar with animated counting numbers using existing `useAnimatedCounter` hook
+- 9-card services grid with icons and descriptions
+- 3-step strategy section with numbered cards
+- 8-card "Why Choose Us" trust signals grid
+- Social media marketing ROI metrics display
+- "Free Account Audit" mid-page CTA banner
+- Platform section reorganized with tabs (Domestic / Global / Quick Commerce)
 
-**No new dependencies or files needed.**
+**No new dependencies needed.** All built with existing Card, Button, Tabs components and lucide-react icons.
 
