@@ -12,7 +12,7 @@ import {
   Store, Star, ArrowRight
 } from 'lucide-react';
 
-import StatsCounter from '@/components/design/StatsCounter';
+
 import CoreServices from '@/components/design/CoreServices';
 import StrategySection from '@/components/design/StrategySection';
 import WhyChooseUs from '@/components/design/WhyChooseUs';
@@ -115,9 +115,6 @@ const Design = () => {
             </div>
           </div>
         </section>
-
-        {/* ───── STATS ───── */}
-        <StatsCounter />
 
         {/* ───── CORE SERVICES ───── */}
         <CoreServices />
