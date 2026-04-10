@@ -176,7 +176,7 @@ const CustomPricing = () => {
                         <MessageSquare className="mr-2 w-5 h-5" />
                         Chat With Specialist
                       </Button>
-                      <Button variant="outline" size="lg" className="h-auto py-4" onClick={() => window.location.href = 'mailto:contact@alvaio.com'}>
+                      <Button variant="outline" size="lg" className="h-auto py-4" onClick={() => window.location.href = 'mailto:contact@indistores.com'}>
                         <Mail className="mr-2 w-5 h-5" />
                         Email Your Project
                       </Button>
