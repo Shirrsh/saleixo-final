@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import WaveDivider from '@/components/WaveDivider';
 import MarketplaceLogos from '@/components/MarketplaceLogos';
 import FeaturedServices from '@/components/FeaturedServices';
-import WhyAlvaio from '@/components/WhyAlvaio';
+import WhyIndistores from '@/components/WhyIndistores';
 import Portfolio from '@/components/Portfolio';
 import HowItWorks from '@/components/HowItWorks';
 import Testimonials from '@/components/Testimonials';
@@ -35,7 +35,7 @@ const Index = () => {
         <WaveDivider flip />
         <FeaturedServices />
         <WaveDivider />
-        <WhyAlvaio />
+        <WhyIndistores />
         <Portfolio />
         <HowItWorks />
         <Testimonials />

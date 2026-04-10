@@ -33,7 +33,7 @@ const defaultContent: HomepageContent = {
   hero_cta_text: 'Book Free Strategy Call',
   hero_cta_link: '#contact',
   hero_image_url: '',
-  meta_title: 'Alvaio - Transform Your Brand',
+  meta_title: 'Indistores - Transform Your Brand',
   meta_description: 'Professional photography, design, and marketing services',
   badge_1_icon: 'Camera',
   badge_1_text: 'Studio-Grade Photography',

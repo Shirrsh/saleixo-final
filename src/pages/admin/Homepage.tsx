@@ -247,7 +247,7 @@ const AdminHomepage = () => {
               onChange={(e) =>
                 setHomepageData({ ...homepageData, hero_title: e.target.value })
               }
-              placeholder="Welcome to Alvaio"
+              placeholder="Welcome to Indistores"
             />
           </div>
 
@@ -513,7 +513,7 @@ const AdminHomepage = () => {
               onChange={(e) =>
                 setHomepageData({ ...homepageData, meta_title: e.target.value })
               }
-              placeholder="Alvaio - Digital Excellence"
+              placeholder="Indistores - Digital Excellence"
             />
           </div>
 

@@ -56,7 +56,7 @@ serve(async (req) => {
 
     // Handle /start command
     if (text === '/start') {
-      await sendTelegramMessage(chatId, `🤖 <b>Alvaio Admin Bot</b>\n\nI can help you manage your website. Just send me commands in natural language like:\n\n• "Add a new blog post about summer trends"\n• "Show all testimonials"\n• "Update the hero title to Welcome to Alvaio"\n• "Add a new FAQ about shipping"\n• "List all categories"\n• "Delete the blog post titled Old Article"\n\nYour Chat ID: <code>${chatId}</code>`);
+      await sendTelegramMessage(chatId, `🤖 <b>Indistores Admin Bot</b>\n\nI can help you manage your website. Just send me commands in natural language like:\n\n• "Add a new blog post about summer trends"\n• "Show all testimonials"\n• "Update the hero title to Welcome to Indistores"\n• "Add a new FAQ about shipping"\n• "List all categories"\n• "Delete the blog post titled Old Article"\n\nYour Chat ID: <code>${chatId}</code>`);
       return new Response(JSON.stringify({ ok: true }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });

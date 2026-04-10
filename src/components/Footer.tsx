@@ -25,8 +25,8 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="md:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full" role="img" aria-label="Alvaio logo"></div>
-              <span className="text-xl md:text-2xl font-bold">Alvaio</span>
+              <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full" role="img" aria-label="Indistores logo"></div>
+              <span className="text-xl md:text-2xl font-bold">Indistores</span>
             </div>
             <p className="text-background/80 mb-6 leading-relaxed">
               Professional photography, design, and marketing services. 
@@ -47,9 +47,9 @@ const Footer = () => {
                 <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>+91 7011441159</span>
               </a>
-              <a href="mailto:info@alvaio.com" className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group" aria-label="Email us at info@alvaio.com">
+              <a href="mailto:info@indistores.com" className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group" aria-label="Email us at info@indistores.com">
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                <span>info@alvaio.com</span>
+                <span>info@indistores.com</span>
               </a>
               <div className="flex items-center gap-2 text-background/80">
                 <Clock className="w-4 h-4" />
@@ -127,7 +127,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-background/20 mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-background/60 text-sm text-center md:text-left">
-            © {currentYear} Alvaio. All rights reserved.
+            © {currentYear} Indistores. All rights reserved.
           </p>
           <p className="text-background/60 text-sm text-center md:text-right">
             Made with ♥ for modern brands worldwide

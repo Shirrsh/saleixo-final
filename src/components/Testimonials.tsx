@@ -26,7 +26,7 @@ const Testimonials = () => {
     {
       id: '1',
       client_name: "Sarah Martinez - Martinez Pottery Studio",
-      quote: "Alvaio transformed my pottery business completely. The professional photos and e-commerce setup helped me increase sales by 300% in just 3 months.",
+      quote: "Indistores transformed my pottery business completely. The professional photos and e-commerce setup helped me increase sales by 300% in just 3 months.",
       rating: 5
     },
     {
@@ -80,7 +80,7 @@ const Testimonials = () => {
             What Our Clients Say
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in animate-delay-200">
-            Don't just take our word for it - hear from artisans who've transformed their businesses with Alvaio
+            Don't just take our word for it - hear from artisans who've transformed their businesses with Indistores
           </p>
         </div>
 
