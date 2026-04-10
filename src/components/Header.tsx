@@ -49,7 +49,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full shadow-md" role="img" aria-label="Alvaio logo"></div>
+            <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full shadow-md" role="img" aria-label="Indistores logo"></div>
             <span className="text-xl md:text-2xl font-bold text-foreground">Indistores</span>
           </Link>
 

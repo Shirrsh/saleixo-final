@@ -27,7 +27,7 @@ const Terms = () => {
             <section>
               <h2 className="text-xl font-semibold mb-3">Intellectual Property</h2>
               <p className="text-muted-foreground">
-                All work created by Alvaio becomes the property of the client upon full payment. We retain the right to showcase work in our portfolio unless otherwise agreed.
+                All work created by Indistores becomes the property of the client upon full payment. We retain the right to showcase work in our portfolio unless otherwise agreed.
               </p>
             </section>
 

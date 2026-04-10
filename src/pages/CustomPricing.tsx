@@ -73,7 +73,7 @@ const CustomPricing = () => {
                       <p>Your timeline is your own.</p>
                       <p>Your budget constraints are individual.</p>
                       <p className="font-semibold text-foreground pt-4">So why would your pricing be generic?</p>
-                      <p>At Alvaio, we don't believe in one-size-fits-all pricing. We believe in custom solutions that match YOUR specific situation.</p>
+                      <p>At Indistores, we don't believe in one-size-fits-all pricing. We believe in custom solutions that match YOUR specific situation.</p>
                       <p>That's why we take time to understand your business before we quote a price.</p>
                     </div>
                   </CardContent>
