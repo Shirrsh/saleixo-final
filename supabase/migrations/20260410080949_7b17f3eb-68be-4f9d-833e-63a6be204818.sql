@@ -1,0 +1,1 @@
+UPDATE testimonials SET quote = REPLACE(quote, 'Alvaio', 'Indistores') WHERE quote ILIKE '%alvaio%';
