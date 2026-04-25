@@ -1,79 +1,64 @@
+## Remaining security work
 
+The database migration already shipped and fixed the critical RLS findings (blog_posts/services RLS, admin_users password_hash exposure, draft post leakage, duplicate policies, user_roles escalation). The items below are what's left.
 
-## Category Detail Pages with Photo Gallery and Before/After Showcase
+---
 
-### What We're Building
-Each category card on the `/categories` page will become clickable, linking to a dedicated page (e.g., `/categories/jewelry-photography`) that showcases your work for that specific type of photoshoot -- with a photo gallery, before/after comparisons, and a contact CTA.
+### 1. Lock down the `admin-ai-webhook` edge function (CRITICAL)
 
-### New Database Table
+Currently anyone on the internet can POST to it and run AI commands that create / update / delete content using the service role key. The `telegram-bot` function calls it server-to-server and needs to keep working.
 
-A new `category_images` table to store gallery images per category:
+Fix: require **either** a valid admin JWT **or** an internal shared-secret header.
 
-| Column | Type | Purpose |
-|--------|------|---------|
-| id | uuid | Primary key |
-| category_id | uuid (FK) | Links to `categories.id` |
-| image_url | text | Image URL |
-| alt_text | text | SEO alt text |
-| display_order | int | Sort order |
-| is_before_after | boolean | If true, this is a before/after pair |
-| before_image_url | text | "Before" image (only when is_before_after = true) |
-| is_active | boolean | Toggle visibility |
-| created_at | timestamp | Auto |
+- Add a new runtime secret `INTERNAL_WEBHOOK_SECRET` (random string).
+- In `supabase/functions/admin-ai-webhook/index.ts`:
+  - If header `x-internal-secret` matches `INTERNAL_WEBHOOK_SECRET` → allow (server-to-server path used by telegram-bot).
+  - Else require `Authorization: Bearer <jwt>`, validate via `supabase.auth.getClaims(token)`, then check `has_role(user.id, 'admin')` using a user-scoped client. Reject with 401/403 otherwise.
+  - Only after the auth check, instantiate the service-role client used to perform the writes.
+  - Restrict CORS `Access-Control-Allow-Origin` to the site origin instead of `*`, and add `x-internal-secret` to allowed headers.
+- In `supabase/functions/telegram-bot/index.ts`:
+  - Forward `x-internal-secret: ${Deno.env.get('INTERNAL_WEBHOOK_SECRET')}` when calling `admin-ai-webhook`.
 
-RLS: public can view active images; admins can manage all.
+### 2. Fix pre-existing TypeScript errors (blocking deploy)
 
-### Pages and Routes
+Three `'error' is of type 'unknown'` errors in catch blocks need narrowing so the edge functions compile and deploy:
 
-1. **`/categories`** (existing) -- category cards become `<Link to={/categories/${slug}}>` instead of static cards
-2. **`/categories/:slug`** (new page: `src/pages/CategoryDetail.tsx`) -- the detail page
+- `supabase/functions/admin-ai-webhook/index.ts` lines 307 and 443
+- `supabase/functions/telegram-bot/index.ts` line 107
 
-### Category Detail Page Layout
+Replace `error.message` with `error instanceof Error ? error.message : String(error)`.
 
-**Section 1 -- Hero Banner**
-- Category name as large heading
-- Category description
-- Cover image (the existing `image_url` from the `categories` table)
+### 3. Make `admin-uploads` storage bucket private
 
-**Section 2 -- Photo Gallery Grid**
-- Responsive masonry-style grid of all images for this category
-- Clicking an image opens a lightbox/modal with full-size view
-- Supports 20+ images, lazy-loaded
+The scanner flagged all four public buckets. `portfolio`, `blog`, `team` legitimately serve public content (product photos, blog images). Only `admin-uploads` is a generic admin scratchpad and should be private.
 
-**Section 3 -- Before/After Showcase**
-- Side-by-side comparison cards showing raw vs edited photos
-- Uses the `before_image_url` and `image_url` fields from `category_images` where `is_before_after = true`
+Migration:
+- `UPDATE storage.buckets SET public = false WHERE id = 'admin-uploads';`
+- Add storage.objects policies allowing only admins (via `has_role`) to SELECT / INSERT / UPDATE / DELETE objects in that bucket.
+- Any code that displays files from `admin-uploads` will need to use `createSignedUrl` instead of public URLs. (Quick code search will confirm if anything actually references it; if not, no client changes needed.)
 
-**Section 4 -- CTA + Contact**
-- "Book a Consultation" button
-- "Call Us" button
-- Links to WhatsApp
+### 4. Enable Leaked Password Protection (user action)
 
-### File Changes
+This is a Supabase Auth toggle, not a code change. After implementation I'll surface a one-click link to:
+`Authentication → Providers → Email → "Leaked password protection"` in the Supabase dashboard for the user to enable.
 
-| File | Action |
-|------|--------|
-| `supabase/migrations/..._create_category_images.sql` | Create new table + RLS + storage bucket |
-| `src/pages/CategoryDetail.tsx` | New detail page component |
-| `src/pages/Categories.tsx` | Make cards clickable links to `/categories/:slug` |
-| `src/App.tsx` | Add route `/categories/:slug` |
-| `src/pages/admin/CategoryImages.tsx` | Admin page to manage images per category |
-| `src/App.tsx` | Add admin route `/admin/category-images` |
-| `src/components/admin/AdminLayout.tsx` | Add sidebar link for Category Images |
+---
 
-### Admin Management
+### Items intentionally NOT changing
 
-A new admin page at `/admin/category-images` will let you:
-- Select a category from a dropdown
-- Upload gallery images (bulk upload support)
-- Mark images as before/after pairs
-- Reorder and toggle visibility
+- **`portfolio`, `blog`, `team` buckets staying public** — they serve public-facing imagery; signed URLs would break the site for no security benefit.
+- **Client-side activity logging** (warn-level finding) — moving to DB triggers is a larger refactor and not part of the current security pass; can be a follow-up.
+- **`admin_users` table not deprecated** — the codebase still queries it in `Login.tsx`, `ProtectedRoute.tsx`, `AdminLayout.tsx`. Migrating fully to `user_roles` is a separate refactor; the new RLS already prevents the data leak.
 
-### Technical Details
+---
 
-- Images stored in existing `site-assets` or a new `category-images` storage bucket
-- Gallery uses lazy loading for performance with 20+ images
-- Lightbox modal for full-size image viewing built with Radix Dialog
-- Before/After section only renders if before/after images exist for the category
-- Category data fetched from DB with fallback to hardcoded defaults (same pattern as current Categories page)
+### Files to be touched
 
+- `supabase/functions/admin-ai-webhook/index.ts` — auth gate + CORS + TS fix
+- `supabase/functions/telegram-bot/index.ts` — forward internal secret + TS fix
+- New migration — privatize `admin-uploads` bucket + add admin-only storage policies
+- New runtime secret: `INTERNAL_WEBHOOK_SECRET`
+
+### After implementation
+
+I'll re-run the security scan and the Supabase linter to confirm the remaining `OPEN_ENDPOINTS` and `STORAGE_EXPOSURE` findings are cleared, then mark them resolved.
