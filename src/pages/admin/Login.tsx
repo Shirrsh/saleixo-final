@@ -88,7 +88,7 @@ const AdminLogin = () => {
             <div className="w-16 h-16 bg-[#1a3a3a] rounded-full flex items-center justify-center mb-4">
               <Shield className="w-8 h-8 text-[#d4af37]" />
             </div>
-            <h1 className="text-2xl font-bold text-[#2c3e50]">Salixo Admin</h1>
+            <h1 className="text-2xl font-bold text-[#2c3e50]">Saleixo Admin</h1>
             <p className="text-[#7f8c8d] mt-2">Sign in to manage your content</p>
           </div>
 
@@ -117,7 +117,7 @@ const AdminLogin = () => {
                   <label className="block text-sm font-medium text-[#2c3e50] mb-2">Email Address</label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#7f8c8d]" />
-                    <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="pl-10" placeholder="admin@salixo.com" required />
+                    <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="pl-10" placeholder="admin@saleixo.com" required />
                   </div>
                 </div>
 
