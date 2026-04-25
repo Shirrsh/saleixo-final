@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import saleixoLogo from '@/assets/saleixo-logo.png';
 
 type NavLink = {
   name: string;
@@ -69,9 +70,14 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full shadow-md" role="img" aria-label="Saleixo logo"></div>
-            <span className="text-xl md:text-2xl font-bold text-foreground">Saleixo</span>
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity" aria-label="Saleixo home">
+            <img
+              src={saleixoLogo}
+              alt="Saleixo logo"
+              width={1584}
+              height={672}
+              className="h-9 md:h-11 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

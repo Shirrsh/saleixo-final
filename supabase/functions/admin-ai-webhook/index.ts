@@ -304,7 +304,8 @@ async function executeAction(supabase: any, functionName: string, args: any): Pr
     }
   } catch (error) {
     console.error('Database error:', error);
-    return `❌ Error: ${error.message}`;
+    const message = error instanceof Error ? error.message : String(error);
+    return `❌ Error: ${message}`;
   }
 }
 
@@ -439,8 +440,9 @@ Parse the user's natural language command and call the appropriate function. Be 
 
   } catch (error) {
     console.error('Error in admin-ai-webhook:', error);
+    const message = error instanceof Error ? error.message : String(error);
     return new Response(JSON.stringify({ 
-      error: error.message,
+      error: message,
       message: '❌ An error occurred. Please try again.' 
     }), {
       status: 500,
