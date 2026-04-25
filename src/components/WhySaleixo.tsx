@@ -16,7 +16,7 @@ const defaultIcons = [
   <Users className="w-8 h-8 text-success" />,
 ];
 
-const WhyIndistores = () => {
+const WhySaleixo = () => {
   const { valueProps } = useValuePropositions();
 
   return (
@@ -24,11 +24,11 @@ const WhyIndistores = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 animate-fade-in">
-            Why Indistores?
+            Why Saleixo?
           </h2>
           <div className="space-y-4 text-left md:text-center">
             <p className="text-lg md:text-xl text-muted-foreground animate-fade-in animate-delay-200 leading-relaxed">
-              <strong className="text-foreground">Indistores</strong> is a team of master photographers, editors & stylists, each bringing over <strong className="text-primary">two decades of specialized expertise</strong> in luxury product photography.
+              <strong className="text-foreground">Saleixo</strong> is a team of master photographers, editors & stylists, each bringing over <strong className="text-primary">two decades of specialized expertise</strong> in luxury product photography.
             </p>
             <p className="text-lg md:text-xl text-muted-foreground animate-fade-in animate-delay-300 leading-relaxed">
               Our international training from prestigious <strong className="text-accent">Australian universities</strong>, combined with extensive startup consulting experience, positions us as <strong className="text-foreground">India's premier digital photography studio</strong>.
@@ -64,4 +64,4 @@ const WhyIndistores = () => {
   );
 };
 
-export default WhyIndistores;
+export default WhySaleixo;

@@ -25,8 +25,8 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="md:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full" role="img" aria-label="Salixo logo"></div>
-              <span className="text-xl md:text-2xl font-bold">Salixo</span>
+              <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full" role="img" aria-label="Saleixo logo"></div>
+              <span className="text-xl md:text-2xl font-bold">Saleixo</span>
             </div>
             <p className="text-background/80 mb-6 leading-relaxed">
               Professional photography, design, and marketing services. 
@@ -47,9 +47,9 @@ const Footer = () => {
                 <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>+91 7011441159</span>
               </a>
-              <a href="mailto:info@salixo.com" className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group" aria-label="Email us at info@salixo.com">
+              <a href="mailto:info@saleixo.com" className="flex items-center gap-2 text-background/80 hover:text-background transition-colors group" aria-label="Email us at info@saleixo.com">
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                <span>info@salixo.com</span>
+                <span>info@saleixo.com</span>
               </a>
               <div className="flex items-center gap-2 text-background/80">
                 <Clock className="w-4 h-4" />
@@ -127,7 +127,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-background/20 mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-background/60 text-sm text-center md:text-left">
-            © {currentYear} Salixo. All rights reserved.
+            © {currentYear} Saleixo. All rights reserved.
           </p>
           <p className="text-background/60 text-sm text-center md:text-right">
             Made with ♥ for modern brands worldwide

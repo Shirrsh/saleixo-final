@@ -73,7 +73,7 @@ const CustomPricing = () => {
                       <p>Your timeline is your own.</p>
                       <p>Your budget constraints are individual.</p>
                       <p className="font-semibold text-foreground pt-4">So why would your pricing be generic?</p>
-                      <p>At Salixo, we don't believe in one-size-fits-all pricing. We believe in custom solutions that match YOUR specific situation.</p>
+                      <p>At Saleixo, we don't believe in one-size-fits-all pricing. We believe in custom solutions that match YOUR specific situation.</p>
                       <p>That's why we take time to understand your business before we quote a price.</p>
                     </div>
                   </CardContent>
@@ -176,7 +176,7 @@ const CustomPricing = () => {
                         <MessageSquare className="mr-2 w-5 h-5" />
                         Chat With Specialist
                       </Button>
-                      <Button variant="outline" size="lg" className="h-auto py-4" onClick={() => window.location.href = 'mailto:contact@salixo.com'}>
+                      <Button variant="outline" size="lg" className="h-auto py-4" onClick={() => window.location.href = 'mailto:contact@saleixo.com'}>
                         <Mail className="mr-2 w-5 h-5" />
                         Email Your Project
                       </Button>
