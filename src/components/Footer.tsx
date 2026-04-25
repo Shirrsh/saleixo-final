@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Twitter, Linkedin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import saleixoLogo from '@/assets/saleixo-logo.png';
 const Footer = () => {
   const socialLinks = [{
     icon: <Facebook className="w-5 h-5" />,
