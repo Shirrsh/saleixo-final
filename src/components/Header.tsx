@@ -82,9 +82,7 @@ const Header = () => {
                 link={link}
                 className="text-foreground hover:text-primary transition-colors duration-200 font-medium py-2 px-1 relative group"
                 onClick={() => handleNavClick(link)}
-              >
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"></span>
-              </NavItem>
+              />
             ))}
           </nav>
 
