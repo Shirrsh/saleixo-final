@@ -25,9 +25,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo & Description */}
           <div className="md:col-span-2 lg:col-span-1">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-accent to-primary rounded-full" role="img" aria-label="Saleixo logo"></div>
-              <span className="text-xl md:text-2xl font-bold">Saleixo</span>
+            <div className="mb-4">
+              <img
+                src={saleixoLogo}
+                alt="Saleixo logo"
+                width={1584}
+                height={672}
+                loading="lazy"
+                className="h-12 w-auto brightness-0 invert"
+              />
             </div>
             <p className="text-background/80 mb-6 leading-relaxed">
               Professional photography, design, and marketing services. 
