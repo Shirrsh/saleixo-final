@@ -107,7 +107,7 @@ const AdminSettings = () => {
             <Input
               value={settings.site_title}
               onChange={(e) => setSettings({ ...settings, site_title: e.target.value })}
-              placeholder="Indistores"
+              placeholder="Salixo"
               className="mt-1"
             />
           </div>
@@ -143,7 +143,7 @@ const AdminSettings = () => {
               type="email"
               value={settings.email}
               onChange={(e) => setSettings({ ...settings, email: e.target.value })}
-              placeholder="info@indistores.com"
+              placeholder="info@salixo.com"
               className="mt-1"
             />
           </div>

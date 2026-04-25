@@ -13,7 +13,7 @@ const Terms = () => {
             <section>
               <h2 className="text-xl font-semibold mb-3">Service Agreement</h2>
               <p className="text-muted-foreground">
-                By using Indistores Digital Studio's services, you agree to these terms. We provide professional photography, design, and marketing services as outlined in our packages.
+                By using Salixo's services, you agree to these terms. We provide professional photography, design, and marketing services as outlined in our packages.
               </p>
             </section>
             
@@ -27,14 +27,14 @@ const Terms = () => {
             <section>
               <h2 className="text-xl font-semibold mb-3">Intellectual Property</h2>
               <p className="text-muted-foreground">
-                All work created by Indistores becomes the property of the client upon full payment. We retain the right to showcase work in our portfolio unless otherwise agreed.
+                All work created by Salixo becomes the property of the client upon full payment. We retain the right to showcase work in our portfolio unless otherwise agreed.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold mb-3">Contact Us</h2>
               <p className="text-muted-foreground">
-                For questions about these terms, contact us at hello@indistores.com
+                For questions about these terms, contact us at hello@salixo.com
               </p>
             </section>
           </CardContent>

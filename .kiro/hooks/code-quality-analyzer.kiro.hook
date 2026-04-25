@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Code Quality Analyzer",
+  "description": "Analyzes modified source code files for potential improvements including code smells, design patterns, best practices, readability, maintainability, and performance optimizations",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.js",
+      "src/**/*.jsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analyze the recently modified source code file for potential improvements. Look for:\n1. Code smells (duplicated code, long methods, large classes, etc.)\n2. Design pattern opportunities or violations\n3. Best practices for the language/framework in use\n4. Readability improvements (naming, comments, structure)\n5. Maintainability concerns (coupling, cohesion, complexity)\n6. Performance optimizations\n\nProvide specific, actionable suggestions while preserving the existing functionality. Be concise and prioritize the most impactful improvements."
+  }
+}

@@ -30,6 +30,6 @@ SELECT
   'Zap', '48h Turnaround',
   'Users', 'Founder-Led',
   'Based in India | Est. 2024 | Boutique Studio',
-  'Alvaio - Transform Your Brand',
+  'Saleixo - Transform Your Brand',
   'Professional photography, design, and marketing services'
 WHERE NOT EXISTS (SELECT 1 FROM homepage_content LIMIT 1);

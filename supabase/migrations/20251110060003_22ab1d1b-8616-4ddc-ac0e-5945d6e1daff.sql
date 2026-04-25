@@ -281,12 +281,12 @@ CREATE POLICY "Public can view team" ON storage.objects
 
 -- Insert default homepage content
 INSERT INTO public.homepage_content (hero_title, hero_subtitle, hero_cta_text, hero_cta_link)
-VALUES ('Welcome to Alvaio', 'Your trusted partner in digital excellence', 'Get Started', '/contact')
+VALUES ('Welcome to Saleixo', 'Your trusted partner in digital excellence', 'Get Started', '/contact')
 ON CONFLICT DO NOTHING;
 
 -- Insert default site settings
 INSERT INTO public.site_settings (site_title, site_tagline, phone, email)
-VALUES ('Alvaio', 'Digital Excellence', '+91 7011441159', 'contact@alvaio.com')
+VALUES ('Saleixo', 'Digital Excellence', '+91 7011441159', 'contact@saleixo.com')
 ON CONFLICT DO NOTHING;
 
 -- Create triggers for updated_at

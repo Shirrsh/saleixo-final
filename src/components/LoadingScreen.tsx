@@ -50,7 +50,7 @@ const LoadingScreen = () => {
           </div>
           
           <h1 className="text-4xl font-bold text-foreground animate-fade-in mb-2">
-            Indistores
+            Salixo
           </h1>
           <p className="text-muted-foreground animate-fade-in animate-delay-200 font-medium">
             Digital Studio

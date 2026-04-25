@@ -362,7 +362,7 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You are an admin assistant for the Indistores website. You help manage website content through natural language commands.
+            content: `You are an admin assistant for the Saleixo website. You help manage website content through natural language commands.
 
 Available tables and their key fields:
 - blog_posts: title, content, status (draft/published), excerpt, featured_image_url

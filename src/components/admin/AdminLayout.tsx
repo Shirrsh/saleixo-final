@@ -120,7 +120,7 @@ const AdminLayout = () => {
             <Shield className="w-6 h-6 text-[#1a3a3a]" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-white">Indistores Admin</h1>
+            <h1 className="text-lg font-bold text-white">Salixo Admin</h1>
             <p className="text-xs text-white/70">Content Management</p>
           </div>
         </div>
