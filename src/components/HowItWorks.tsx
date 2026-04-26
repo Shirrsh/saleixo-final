@@ -3,12 +3,12 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { FileText, Search, UserCheck, Camera, Rocket, BarChart3 } from 'lucide-react';
 
 const steps = [
-  { id: 1, label: 'Requirements', icon: <FileText className="w-6 h-6" />, title: 'Share Your Requirements', description: 'Tell us about your products, target marketplaces, and goals. We map out a custom strategy tailored to your brand.', color: '#A855F7' },
-  { id: 2, label: 'Free Audit',    icon: <Search className="w-6 h-6" />,   title: 'Free Brand Audit',         description: 'We analyse your current listings, photography, and market position — identifying exactly where revenue is being left on the table.', color: '#7C3AED' },
-  { id: 3, label: 'Onboarding',   icon: <UserCheck className="w-6 h-6" />, title: 'Seamless Onboarding',      description: 'We set up your accounts, collect product samples, and brief our studio team — zero friction, fully managed.', color: '#4F46E5' },
-  { id: 4, label: 'Photography',  icon: <Camera className="w-6 h-6" />,    title: 'Studio Shoot & Design',    description: 'Professional product photography, A+ content, and listing design — all crafted to convert browsers into buyers.', color: '#A855F7' },
-  { id: 5, label: 'Launch',       icon: <Rocket className="w-6 h-6" />,    title: 'Go Live Across Platforms', description: 'We publish optimised listings across Amazon, Flipkart, Etsy, Shopify and more — simultaneously, in every target market.', color: '#7C3AED' },
-  { id: 6, label: 'Growth',       icon: <BarChart3 className="w-6 h-6" />, title: 'Scale & Optimise',         description: 'Ongoing analytics, ad management, and content refresh keep your sales climbing month after month.', color: '#4F46E5' },
+  { id: 1, label: 'Requirements', icon: <FileText className="w-6 h-6" />, title: 'Share Your Requirements', description: 'Tell us about your products, target marketplaces, and goals. We map out a custom strategy tailored to your brand.', color: '#a3e635' },
+  { id: 2, label: 'Free Audit',    icon: <Search className="w-6 h-6" />,   title: 'Free Brand Audit',         description: 'We analyse your current listings, photography, and market position — identifying exactly where revenue is being left on the table.', color: '#4ade80' },
+  { id: 3, label: 'Onboarding',   icon: <UserCheck className="w-6 h-6" />, title: 'Seamless Onboarding',      description: 'We set up your accounts, collect product samples, and brief our studio team — zero friction, fully managed.', color: '#34d399' },
+  { id: 4, label: 'Photography',  icon: <Camera className="w-6 h-6" />,    title: 'Studio Shoot & Design',    description: 'Professional product photography, A+ content, and listing design — all crafted to convert browsers into buyers.', color: '#a3e635' },
+  { id: 5, label: 'Launch',       icon: <Rocket className="w-6 h-6" />,    title: 'Go Live Across Platforms', description: 'We publish optimised listings across Amazon, Flipkart, Etsy, Shopify and more — simultaneously, in every target market.', color: '#4ade80' },
+  { id: 6, label: 'Growth',       icon: <BarChart3 className="w-6 h-6" />, title: 'Scale & Optimise',         description: 'Ongoing analytics, ad management, and content refresh keep your sales climbing month after month.', color: '#34d399' },
 ];
 
 // 7 circles like the reference — scattered organically
@@ -41,13 +41,13 @@ const HowItWorks = () => {
   return (
     <div ref={containerRef} style={{ height: `280vh` }} className="relative">
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center bg-[hsl(262_70%_6%)]">
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center bg-[hsl(160_60%_5%)]">
 
         {/* Background aura */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 80% 60% at 50% 30%, hsl(271 91% 55% / 0.18) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse 80% 60% at 50% 30%, hsl(155 80% 30% / 0.18) 0%, transparent 70%)',
           }}
         />
 
@@ -129,7 +129,7 @@ const HowItWorks = () => {
                       background: useTransform(
                         circleProgress,
                         [0.5, 1],
-                        ['hsl(265 65% 9% / 0)', 'hsl(265 65% 9% / 0.7)']
+                        ['hsl(158 55% 8% / 0)', 'hsl(158 55% 8% / 0.7)']
                       ),
                       boxShadow: useTransform(
                         glowSize,
@@ -180,7 +180,7 @@ const HowItWorks = () => {
                 <motion.line
                   key={i}
                   x1={x1} y1={y1} x2={x2} y2={y2}
-                  stroke="hsl(262 83% 58% / 0.2)"
+                  stroke="hsl(155 80% 35% / 0.2)"
                   strokeWidth="0.3"
                   strokeDasharray="1 1"
                   initial={{ pathLength: 0, opacity: 0 }}
@@ -261,7 +261,7 @@ const ActiveStepInner = ({ stepIndexRaw }: { stepIndexRaw: ReturnType<typeof use
             style={{
               width: 6,
               height: i === idx ? 18 : 6,
-              background: i === idx ? step.color : 'hsl(260 45% 20%)',
+              background: i === idx ? step.color : 'hsl(158 40% 16%)',
             }}
           />
         ))}

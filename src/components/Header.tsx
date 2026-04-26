@@ -97,7 +97,7 @@ const Header = () => {
           <Button 
             size="sm"
             onClick={() => scrollToSection('#contact')} 
-            className="rounded-full bg-primary hover:bg-primary-hover hover:shadow-[0_0_20px_hsl(262_83%_58%/0.4)] transition-all duration-300"
+            className="rounded-full bg-primary hover:bg-primary-hover hover:shadow-[0_0_20px_hsl(78_85%_52%/0.4)] transition-all duration-300"
           >
             Book Call
           </Button>

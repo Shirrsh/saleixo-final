@@ -167,11 +167,11 @@ const Testimonials = () => {
                     height: cardH,
                     borderRadius: 24,
                     border: isActive
-                      ? '1.5px solid hsl(271 91% 65% / 0.5)'
-                      : '1px solid hsl(260 45% 20% / 0.5)',
+                      ? '1.5px solid hsl(78 85% 52% / 0.5)'
+                      : '1px solid hsl(158 40% 16% / 0.5)',
                     boxShadow: isActive
-                      ? '0 32px 80px hsl(262 70% 6% / 0.9), 0 0 40px hsl(271 91% 65% / 0.15)'
-                      : '0 16px 48px hsl(262 70% 6% / 0.7)',
+                      ? '0 32px 80px hsl(160 60% 5% / 0.9), 0 0 40px hsl(78 85% 52% / 0.15)'
+                      : '0 16px 48px hsl(160 60% 5% / 0.7)',
                   }}
                 >
                   {/* Product photo fills the card */}
@@ -186,7 +186,7 @@ const Testimonials = () => {
                   <div
                     className="absolute inset-0"
                     style={{
-                      background: 'linear-gradient(to top, hsl(262 70% 6% / 0.95) 0%, hsl(262 70% 6% / 0.4) 45%, transparent 70%)',
+                      background: 'linear-gradient(to top, hsl(160 60% 5% / 0.95) 0%, hsl(160 60% 5% / 0.4) 45%, transparent 70%)',
                     }}
                   />
 
@@ -194,9 +194,9 @@ const Testimonials = () => {
                   <div
                     className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold"
                     style={{
-                      background: 'hsl(271 91% 65% / 0.2)',
-                      border: '1px solid hsl(271 91% 65% / 0.4)',
-                      color: '#A855F7',
+                      background: 'hsl(78 85% 52% / 0.15)',
+                      border: '1px solid hsl(78 85% 52% / 0.4)',
+                      color: '#a3e635',
                       backdropFilter: 'blur(8px)',
                     }}
                   >
@@ -214,7 +214,7 @@ const Testimonials = () => {
                           className="w-3 h-3"
                           style={{
                             fill: si < item.rating ? '#facc15' : 'transparent',
-                            color: si < item.rating ? '#facc15' : 'hsl(260 30% 40%)',
+                            color: si < item.rating ? '#facc15' : 'hsl(158 30% 30%)',
                           }}
                         />
                       ))}
@@ -225,7 +225,7 @@ const Testimonials = () => {
                   {isActive && (
                     <motion.div
                       className="absolute inset-0 rounded-[24px] pointer-events-none"
-                      style={{ border: '1px solid hsl(271 91% 65% / 0.35)' }}
+                      style={{ border: '1px solid hsl(78 85% 52% / 0.35)' }}
                       animate={{ opacity: [0.5, 1, 0.5] }}
                       transition={{ duration: 2.5, repeat: Infinity }}
                     />
@@ -249,8 +249,8 @@ const Testimonials = () => {
             <div
               className="rounded-2xl p-8 relative"
               style={{
-                background: 'hsl(265 65% 9% / 0.6)',
-                border: '1px solid hsl(260 45% 20% / 0.6)',
+                background: 'hsl(158 55% 8% / 0.6)',
+                border: '1px solid hsl(158 40% 16% / 0.6)',
                 backdropFilter: 'blur(20px)',
               }}
             >
@@ -266,9 +266,9 @@ const Testimonials = () => {
                 <div
                   className="px-4 py-2 rounded-full text-sm font-bold"
                   style={{
-                    background: 'hsl(271 91% 65% / 0.15)',
-                    border: '1px solid hsl(271 91% 65% / 0.3)',
-                    color: '#A855F7',
+                    background: 'hsl(78 85% 52% / 0.12)',
+                    border: '1px solid hsl(78 85% 52% / 0.3)',
+                    color: '#a3e635',
                   }}
                 >
                   {current.result}
@@ -288,7 +288,7 @@ const Testimonials = () => {
               style={{
                 width: i === active ? 28 : 6,
                 height: 6,
-                background: i === active ? '#A855F7' : 'hsl(260 45% 20%)',
+                background: i === active ? '#a3e635' : 'hsl(158 40% 16%)',
               }}
             />
           ))}

@@ -31,7 +31,7 @@ const Card = ({
     className={`relative overflow-hidden rounded-2xl cursor-pointer group flex-shrink-0 ${className ?? ''}`}
     style={{
       height,
-      border: '1px solid hsl(260 45% 20% / 0.5)',
+      border: '1px solid hsl(158 40% 16% / 0.5)',
     }}
   >
     <img
@@ -52,9 +52,9 @@ const Card = ({
     <motion.div
       className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase"
       style={{
-        background: 'hsl(265 65% 9% / 0.85)',
-        border: '1px solid hsl(271 91% 65% / 0.4)',
-        color: '#C084FC',
+        background: 'hsl(158 55% 8% / 0.85)',
+        border: '1px solid hsl(78 85% 52% / 0.4)',
+        color: '#a3e635',
         backdropFilter: 'blur(10px)',
       }}
       initial={{ opacity: 0, y: -6 }}
@@ -78,9 +78,9 @@ const Card = ({
       <span
         className="px-2.5 py-1 rounded-full text-[10px] font-bold ml-3 flex-shrink-0"
         style={{
-          background: 'hsl(271 91% 65% / 0.2)',
-          border: '1px solid hsl(271 91% 65% / 0.35)',
-          color: '#C084FC',
+          background: 'hsl(78 85% 52% / 0.15)',
+          border: '1px solid hsl(78 85% 52% / 0.35)',
+          color: '#a3e635',
           backdropFilter: 'blur(8px)',
         }}
       >
@@ -91,7 +91,7 @@ const Card = ({
     {/* Hover glow border */}
     <div
       className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      style={{ boxShadow: 'inset 0 0 0 1px hsl(271 91% 65% / 0.35)' }}
+      style={{ boxShadow: 'inset 0 0 0 1px hsl(78 85% 52% / 0.35)' }}
     />
   </motion.div>
 );
@@ -172,8 +172,8 @@ const Portfolio = () => (
             key={i}
             className="rounded-2xl p-4 text-center"
             style={{
-              background: 'hsl(265 65% 9% / 0.5)',
-              border: '1px solid hsl(260 45% 20% / 0.4)',
+              background: 'hsl(158 55% 8% / 0.5)',
+              border: '1px solid hsl(158 40% 16% / 0.4)',
               backdropFilter: 'blur(12px)',
             }}
           >

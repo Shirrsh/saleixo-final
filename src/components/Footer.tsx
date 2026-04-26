@@ -31,18 +31,18 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden border-t" style={{ borderColor: 'hsl(260 45% 20% / 0.4)' }}>
+    <footer className="relative overflow-hidden border-t" style={{ borderColor: 'hsl(158 40% 16% / 0.4)' }}>
 
       {/* Subtle top glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] pointer-events-none"
-        style={{ background: 'linear-gradient(90deg, transparent, hsl(271 91% 65% / 0.5), transparent)' }}
+        style={{ background: 'linear-gradient(90deg, transparent, hsl(78 85% 52% / 0.5), transparent)' }}
       />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-0">
 
         {/* ── Top grid: logo+desc | services | company | contact ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b" style={{ borderColor: 'hsl(260 45% 20% / 0.3)' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b" style={{ borderColor: 'hsl(158 40% 16% / 0.3)' }}>
 
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -58,12 +58,12 @@ const Footer = () => {
                   aria-label={s.label}
                   className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                   style={{
-                    background: 'hsl(265 65% 9% / 0.8)',
-                    border: '1px solid hsl(260 45% 20% / 0.6)',
-                    color: 'hsl(260 30% 65%)',
+                    background: 'hsl(158 55% 8% / 0.8)',
+                    border: '1px solid hsl(158 40% 16% / 0.6)',
+                    color: 'hsl(155 20% 65%)',
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.borderColor = 'hsl(271 91% 65% / 0.5)')}
-                  onMouseLeave={e => (e.currentTarget.style.borderColor = 'hsl(260 45% 20% / 0.6)')}
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = 'hsl(78 85% 52% / 0.5)')}
+                  onMouseLeave={e => (e.currentTarget.style.borderColor = 'hsl(158 40% 16% / 0.6)')}
                 >
                   {s.icon}
                 </a>
@@ -135,12 +135,12 @@ const Footer = () => {
                       rel="noopener noreferrer"
                       className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-white transition-colors duration-200 group"
                     >
-                      <span style={{ color: '#A855F7' }}>{item.icon}</span>
+                      <span style={{ color: '#a3e635' }}>{item.icon}</span>
                       {item.label}
                     </a>
                   ) : (
                     <div className="flex items-center gap-2.5 text-sm text-foreground/50">
-                      <span style={{ color: '#A855F7' }}>{item.icon}</span>
+                      <span style={{ color: '#a3e635' }}>{item.icon}</span>
                       {item.label}
                     </div>
                   )}
@@ -149,7 +149,7 @@ const Footer = () => {
             </ul>
 
             {/* Markets */}
-            <div className="mt-6 pt-4 border-t" style={{ borderColor: 'hsl(260 45% 20% / 0.3)' }}>
+            <div className="mt-6 pt-4 border-t" style={{ borderColor: 'hsl(158 40% 16% / 0.3)' }}>
               <p className="text-[10px] text-muted-foreground/50 uppercase tracking-widest mb-2">Markets</p>
               <p className="text-xs text-muted-foreground/70">US · UK · FR · DE · AU · CA · IN</p>
             </div>
@@ -170,7 +170,7 @@ const Footer = () => {
               style={{
                 fontFamily: '"Inter Tight", Inter, sans-serif',
                 fontSize: 'clamp(5rem, 18vw, 16rem)',
-                WebkitTextStroke: '1px hsl(260 45% 25% / 0.6)',
+                WebkitTextStroke: '1px hsl(158 40% 20% / 0.6)',
               }}
             >
               saleixo
@@ -181,7 +181,7 @@ const Footer = () => {
           <div
             className="absolute inset-0 pointer-events-none flex items-center justify-center"
             style={{
-              background: 'radial-gradient(ellipse 60% 50% at 50% 50%, hsl(271 91% 65% / 0.06), transparent)',
+              background: 'radial-gradient(ellipse 60% 50% at 50% 50%, hsl(78 85% 52% / 0.06), transparent)',
             }}
           />
         </div>
@@ -189,7 +189,7 @@ const Footer = () => {
         {/* ── Bottom bar ── */}
         <div
           className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 border-t text-xs text-muted-foreground/50"
-          style={{ borderColor: 'hsl(260 45% 20% / 0.3)' }}
+          style={{ borderColor: 'hsl(158 40% 16% / 0.3)' }}
         >
           <span>© {currentYear} Saleixo. All rights reserved.</span>
           <span>Made with ♥ for modern brands worldwide</span>

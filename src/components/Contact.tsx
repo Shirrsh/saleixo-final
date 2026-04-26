@@ -133,8 +133,8 @@ const Contact = () => {
             <div
               className="rounded-2xl p-6"
               style={{
-                background: 'hsl(265 65% 9% / 0.6)',
-                border: '1px solid hsl(260 45% 20% / 0.6)',
+                background: 'hsl(158 55% 8% / 0.6)',
+                border: '1px solid hsl(158 40% 16% / 0.6)',
                 backdropFilter: 'blur(20px)',
               }}
             >
@@ -156,9 +156,9 @@ const Contact = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3 + i * 0.08 }}
                   className="flex items-center gap-3 py-2.5 border-b last:border-0"
-                  style={{ borderColor: 'hsl(260 45% 20% / 0.4)' }}
+                  style={{ borderColor: 'hsl(158 40% 16% / 0.4)' }}
                 >
-                  <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: '#A855F7' }} />
+                  <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: '#a3e635' }} />
                   <span className="text-sm text-foreground/80">{item}</span>
                 </motion.div>
               ))}
@@ -168,8 +168,8 @@ const Contact = () => {
             <div
               className="rounded-2xl p-6 space-y-4"
               style={{
-                background: 'hsl(265 65% 9% / 0.6)',
-                border: '1px solid hsl(260 45% 20% / 0.6)',
+                background: 'hsl(158 55% 8% / 0.6)',
+                border: '1px solid hsl(158 40% 16% / 0.6)',
                 backdropFilter: 'blur(20px)',
               }}
             >
@@ -181,7 +181,7 @@ const Contact = () => {
                 <div key={i} className="flex items-center gap-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'hsl(271 91% 65% / 0.15)', color: '#A855F7' }}
+                    style={{ background: 'hsl(78 85% 52% / 0.15)', color: '#a3e635' }}
                   >
                     {item.icon}
                   </div>
@@ -202,8 +202,8 @@ const Contact = () => {
             <div
               className="rounded-2xl p-8"
               style={{
-                background: 'hsl(265 65% 9% / 0.7)',
-                border: '1px solid hsl(260 45% 20% / 0.6)',
+                background: 'hsl(158 55% 8% / 0.7)',
+                border: '1px solid hsl(158 40% 16% / 0.6)',
                 backdropFilter: 'blur(20px)',
               }}
             >
@@ -215,7 +215,7 @@ const Contact = () => {
                 >
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
-                    style={{ background: 'hsl(271 91% 65% / 0.2)' }}
+                    style={{ background: 'hsl(78 85% 52% / 0.15)' }}
                   >
                     <CheckCircle2 className="w-8 h-8 text-accent-violet" />
                   </div>
@@ -293,9 +293,9 @@ const Contact = () => {
                             onClick={() => toggleService(s)}
                             className="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200"
                             style={{
-                              background: sel ? 'hsl(271 91% 65% / 0.2)' : 'hsl(260 45% 20% / 0.5)',
-                              border: `1px solid ${sel ? 'hsl(271 91% 65% / 0.5)' : 'hsl(260 45% 20%)'}`,
-                              color: sel ? '#A855F7' : 'hsl(260 30% 65%)',
+                              background: sel ? 'hsl(78 85% 52% / 0.15)' : 'hsl(158 40% 16% / 0.5)',
+                              border: `1px solid ${sel ? 'hsl(78 85% 52% / 0.5)' : 'hsl(158 40% 16%)'}`,
+                              color: sel ? '#a3e635' : 'hsl(155 20% 60%)',
                             }}
                           >
                             {sel && '✓ '}{s}
@@ -332,8 +332,8 @@ const Contact = () => {
                       <div
                         className="w-5 h-5 rounded-md flex items-center justify-center transition-all duration-200"
                         style={{
-                          background: formData.newsletter ? 'hsl(271 91% 65% / 0.3)' : 'hsl(260 45% 20% / 0.5)',
-                          border: `1.5px solid ${formData.newsletter ? '#A855F7' : 'hsl(260 45% 30%)'}`,
+                          background: formData.newsletter ? 'hsl(78 85% 52% / 0.25)' : 'hsl(158 40% 16% / 0.5)',
+                          border: `1.5px solid ${formData.newsletter ? '#a3e635' : 'hsl(158 40% 20%)'}`,
                         }}
                       >
                         {formData.newsletter && (
@@ -342,7 +342,7 @@ const Contact = () => {
                             animate={{ scale: 1 }}
                             width="10" height="8" viewBox="0 0 10 8" fill="none"
                           >
-                            <path d="M1 4L3.5 6.5L9 1" stroke="#A855F7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M1 4L3.5 6.5L9 1" stroke="#a3e635" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </motion.svg>
                         )}
                       </div>
@@ -356,7 +356,7 @@ const Contact = () => {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full rounded-full h-13 text-base font-semibold bg-white text-black hover:bg-white/90 hover:shadow-[0_0_40px_hsl(271_91%_65%/0.5)] transition-all duration-300 group"
+                    className="w-full rounded-full h-13 text-base font-semibold bg-primary text-black hover:bg-primary-hover hover:shadow-[0_0_40px_hsl(78_85%_52%/0.5)] transition-all duration-300 group"
                   >
                     Book Free Consultation
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -123,7 +123,7 @@ const FeaturedServices = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0, 0, 0.7, 0, 0.5, 0] }}
                     transition={{ duration: 0.55, times: [0, 0.2, 0.3, 0.45, 0.6, 1], ease: 'easeOut' }}
-                    style={{ background: 'radial-gradient(ellipse 80% 60% at 70% 15%, hsl(0 0% 100% / 1) 0%, hsl(260 80% 90% / 0.5) 40%, transparent 70%)' }}
+                    style={{ background: 'radial-gradient(ellipse 80% 60% at 70% 15%, hsl(0 0% 100% / 1) 0%, hsl(155 80% 80% / 0.5) 40%, transparent 70%)' }}
                   />
                   {/* Rim light flash — bottom edge */}
                   <motion.div
@@ -178,7 +178,7 @@ const FeaturedServices = () => {
               <Button
                 size="lg"
                 onClick={scrollToContact}
-                className="rounded-full px-8 bg-primary hover:bg-primary-hover hover:shadow-[0_0_30px_hsl(262_83%_58%/0.4)] transition-all duration-300"
+                className="rounded-full px-8 bg-primary hover:bg-primary-hover hover:shadow-[0_0_30px_hsl(78_85%_52%/0.4)] transition-all duration-300"
               >
                 Book a Shoot
               </Button>
@@ -245,7 +245,7 @@ const FeaturedServices = () => {
                 size="lg"
                 variant="outline"
                 onClick={scrollToContact}
-                className="rounded-full px-8 border-border-glow/50 hover:border-primary hover:bg-primary/10 hover:shadow-[0_0_30px_hsl(262_83%_58%/0.3)] transition-all duration-300"
+                className="rounded-full px-8 border-border-glow/50 hover:border-primary hover:bg-primary/10 hover:shadow-[0_0_30px_hsl(78_85%_52%/0.3)] transition-all duration-300"
               >
                 Boost Your Sales
               </Button>

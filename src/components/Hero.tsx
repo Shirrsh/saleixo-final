@@ -62,11 +62,11 @@ const Hero = () => {
         className="absolute inset-0 pointer-events-none"
         style={{ opacity }}
       >
-        {/* Primary center aura — large violet sphere */}
+        {/* Primary center aura — large teal sphere */}
         <motion.div
           className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, hsl(271 91% 65% / 0.7) 0%, hsl(262 83% 58% / 0.45) 30%, hsl(250 70% 30% / 0.2) 60%, transparent 75%)',
+            background: 'radial-gradient(circle, hsl(155 80% 35% / 0.7) 0%, hsl(160 70% 20% / 0.45) 30%, hsl(158 60% 12% / 0.2) 60%, transparent 75%)',
             filter: 'blur(40px)',
             x: mousePos.x * -15,
             y: mousePos.y * -10,
@@ -78,7 +78,7 @@ const Hero = () => {
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse 70% 70% at 50% 40%, transparent 40%, hsl(262 70% 6% / 0.85) 100%)',
+            background: 'radial-gradient(ellipse 70% 70% at 50% 40%, transparent 40%, hsl(160 60% 5% / 0.85) 100%)',
           }}
         />
       </motion.div>
@@ -135,10 +135,10 @@ const Hero = () => {
             className="absolute inset-0 rounded-full"
             style={{
               background: `
-                radial-gradient(circle at 35% 35%, hsl(271 91% 75% / 0.9) 0%, transparent 50%),
-                radial-gradient(circle at 65% 65%, hsl(239 84% 65% / 0.8) 0%, transparent 50%),
-                radial-gradient(circle at 50% 20%, hsl(280 80% 80% / 0.6) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, hsl(262 83% 58% / 0.95) 0%, hsl(250 70% 40% / 0.8) 50%, transparent 70%)
+                radial-gradient(circle at 35% 35%, hsl(78 85% 65% / 0.9) 0%, transparent 50%),
+                radial-gradient(circle at 65% 65%, hsl(155 80% 45% / 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, hsl(90 75% 70% / 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, hsl(155 80% 35% / 0.95) 0%, hsl(160 70% 20% / 0.8) 50%, transparent 70%)
               `,
               filter: 'blur(2px)',
             }}
@@ -186,7 +186,7 @@ const Hero = () => {
             }}
           >
             <div
-              className="relative overflow-hidden shadow-[0_40px_100px_hsl(262_70%_6%/0.9)]"
+              className="relative overflow-hidden shadow-[0_40px_100px_hsl(160_60%_5%/0.9)]"
               style={{ borderRadius: '20px' }}
             >
               <img
@@ -199,7 +199,7 @@ const Hero = () => {
               <div
                 className="absolute inset-0"
                 style={{
-                  background: 'linear-gradient(135deg, hsl(0 0% 100% / 0.08) 0%, transparent 50%, hsl(262 83% 58% / 0.15) 100%)',
+                  background: 'linear-gradient(135deg, hsl(0 0% 100% / 0.08) 0%, transparent 50%, hsl(155 80% 35% / 0.15) 100%)',
                   borderRadius: '20px',
                 }}
               />
@@ -226,7 +226,7 @@ const Hero = () => {
             }}
           >
             <div
-              className="relative overflow-hidden shadow-[0_30px_80px_hsl(262_70%_6%/0.8)]"
+              className="relative overflow-hidden shadow-[0_30px_80px_hsl(160_60%_5%/0.8)]"
               style={{ borderRadius: '16px' }}
             >
               <img
@@ -238,7 +238,7 @@ const Hero = () => {
               <div
                 className="absolute inset-0"
                 style={{
-                  background: 'linear-gradient(135deg, hsl(0 0% 100% / 0.06) 0%, transparent 50%, hsl(271 91% 65% / 0.2) 100%)',
+                  background: 'linear-gradient(135deg, hsl(0 0% 100% / 0.06) 0%, transparent 50%, hsl(78 85% 52% / 0.2) 100%)',
                   borderRadius: '16px',
                 }}
               />
@@ -264,7 +264,7 @@ const Hero = () => {
         <Button
           size="sm"
           onClick={scrollToContact}
-          className="w-full rounded-full bg-white text-black hover:bg-white/90 text-xs font-semibold hover:shadow-[0_0_20px_hsl(271_91%_65%/0.5)] transition-all"
+          className="w-full rounded-full bg-white text-black hover:bg-white/90 text-xs font-semibold hover:shadow-[0_0_20px_hsl(78_85%_52%/0.5)] transition-all"
         >
           Claim Yours
         </Button>
