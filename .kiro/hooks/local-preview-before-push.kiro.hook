@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Local Preview Before Push",
+  "description": "Reminds you to run npm run dev and verify the design locally before pushing to GitHub. Blocks the push workflow until you confirm you've previewed.",
+  "version": "1",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": [
+      "shell"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check if the shell command about to run is a `git push` command. If it is, STOP and do NOT proceed with the push. Instead, tell the user: \"⚠️ Before pushing to GitHub, please verify the design on your local dev server first. Run `npm run dev` in your terminal, open http://localhost:5173, check the pages look correct, then come back and say 'looks good, push it' to proceed.\" If the command is NOT a git push, allow it to proceed normally."
+  }
+}

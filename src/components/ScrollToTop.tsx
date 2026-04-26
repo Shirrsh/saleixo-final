@@ -33,9 +33,8 @@ const ScrollToTop = () => {
   return (
     <Button
       onClick={scrollToTop}
-      variant="success"
       size="icon"
-      className="fixed bottom-8 right-8 z-40 shadow-lg hover:shadow-xl transition-all duration-300"
+      className="fixed bottom-8 right-8 z-40 glass-purple border-border-glow/40 hover:border-primary/60 hover:shadow-[0_0_20px_hsl(262_83%_58%/0.5)] transition-all duration-300 rounded-full text-muted-foreground hover:text-foreground"
       aria-label="Scroll to top"
     >
       <ChevronUp className="h-6 w-6" />

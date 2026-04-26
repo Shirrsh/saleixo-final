@@ -34,7 +34,7 @@ const Terms = () => {
             <section>
               <h2 className="text-xl font-semibold mb-3">Contact Us</h2>
               <p className="text-muted-foreground">
-                For questions about these terms, contact us at hello@saleixo.com
+                For questions about these terms, contact us at info@saleixo.com
               </p>
             </section>
           </CardContent>

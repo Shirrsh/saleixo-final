@@ -66,77 +66,79 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border z-50 shadow-sm">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity" aria-label="Saleixo home">
-            <img
-              src={saleixoLogo}
-              alt="Saleixo logo"
-              width={1584}
-              height={672}
-              className="h-9 md:h-11 w-auto"
-            />
-          </Link>
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+      {/* Glass pill navigation */}
+      <div className="glass-purple rounded-full px-6 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center hover:opacity-80 transition-opacity" aria-label="Saleixo home">
+          <img
+            src={saleixoLogo}
+            alt="Saleixo logo"
+            width={1584}
+            height={672}
+            className="h-7 md:h-8 w-auto"
+          />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8" aria-label="Main navigation">
-            {navLinks.map(link => (
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8" aria-label="Main navigation">
+          {navLinks.map(link => (
+            <NavItem
+              key={link.name}
+              link={link}
+              className="text-foreground/90 hover:text-foreground transition-all duration-200 font-medium text-sm relative group"
+              onClick={() => handleNavClick(link)}
+            />
+          ))}
+        </nav>
+
+        {/* CTA Button - Desktop */}
+        <div className="hidden md:flex items-center">
+          <Button 
+            size="sm"
+            onClick={() => scrollToSection('#contact')} 
+            className="rounded-full bg-primary hover:bg-primary-hover hover:shadow-[0_0_20px_hsl(262_83%_58%/0.4)] transition-all duration-300"
+          >
+            Book Call
+          </Button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 hover:bg-surface-elevated/50 rounded-full transition-colors duration-200"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? <X size={20} className="text-foreground" /> : <Menu size={20} className="text-foreground" />}
+        </button>
+      </div>
+
+      {/* Mobile Navigation Dropdown */}
+      {isMenuOpen && (
+        <div className="md:hidden mt-3 glass-purple rounded-2xl p-4 animate-fade-in">
+          <nav className="flex flex-col space-y-3" aria-label="Mobile navigation">
+            {navLinks.map((link, index) => (
               <NavItem
                 key={link.name}
                 link={link}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium py-2 px-1 relative group"
+                className="text-left text-foreground/90 hover:text-foreground transition-colors duration-200 py-2 px-3 font-medium animate-slide-in-left rounded-lg hover:bg-surface-elevated/50"
+                style={{ animationDelay: `${index * 50}ms` }}
                 onClick={() => handleNavClick(link)}
               />
             ))}
+            <div className="pt-2">
+              <Button
+                onClick={() => scrollToSection('#contact')}
+                className="w-full rounded-full bg-primary hover:bg-primary-hover animate-scale-in"
+                style={{ animationDelay: '250ms' }}
+              >
+                Book Consultation
+              </Button>
+            </div>
           </nav>
-
-          {/* CTA Button - Desktop */}
-          <div className="hidden md:flex items-center gap-3">
-            <Button variant="success" onClick={() => scrollToSection('#contact')} className="hover-lift">
-              Book Consultation
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 -mr-2 hover:bg-accent/10 rounded-md transition-colors duration-200"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X size={24} className="text-foreground" /> : <Menu size={24} className="text-foreground" />}
-          </button>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-border animate-fade-in">
-            <nav className="flex flex-col space-y-3 pt-4" aria-label="Mobile navigation">
-              {navLinks.map((link, index) => (
-                <NavItem
-                  key={link.name}
-                  link={link}
-                  className="text-left text-foreground hover:text-primary transition-colors duration-200 py-2 px-1 font-medium animate-slide-in-left"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                  onClick={() => handleNavClick(link)}
-                />
-              ))}
-              <div className="pt-2">
-                <Button
-                  variant="success"
-                  onClick={() => scrollToSection('#contact')}
-                  className="w-full animate-scale-in"
-                  style={{ animationDelay: '500ms' }}
-                >
-                  Book Consultation
-                </Button>
-              </div>
-            </nav>
-          </div>
-        )}
-      </div>
+      )}
     </header>
   );
 };

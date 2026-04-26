@@ -31,9 +31,9 @@ const FloatingCTA = () => {
       <Button
         onClick={scrollToContact}
         size="lg"
-        className="shadow-lg hover-lift hover-glow rounded-full px-6 gap-2"
+        className="glass-purple rounded-full px-6 gap-2 border-border-glow/40 hover:border-primary/60 hover:shadow-[0_0_32px_hsl(271_91%_65%/0.5)] transition-all duration-300 text-foreground"
       >
-        <MessageCircle className="w-5 h-5" />
+        <MessageCircle className="w-5 h-5 text-accent-violet" />
         <span className="hidden sm:inline">Get a Free Quote</span>
         <span className="sm:hidden">Quote</span>
       </Button>
