@@ -4,7 +4,9 @@ Guidance for Claude Code when working in this repository.
 
 ## Project
 
-**Alvaio Digital Studio** — marketing website for a digital studio offering design, photography, and marketing services, plus an admin CMS backed by Supabase. Originally scaffolded with Lovable; now being maintained and redesigned through Claude Code.
+**Saleixo** (formerly "Alvaio Digital Studio") — marketing website for a digital studio offering professional photography, creative design, and data-driven marketing for artisans and ecommerce sellers. Headlines: "500+ artisans helped, 98% satisfaction rate." Plus an admin CMS backed by Supabase. Originally scaffolded with Lovable; now being maintained and redesigned through Claude Code.
+
+The site is currently deployed at `https://saleixo-final.vercel.app/` (canonical: `https://saleixo.com`). The current visual is a deep cosmic purple "Superconscious"-style hero with an oversized white wordmark. **That is the OLD direction. The new direction is Webflow.com style — see below.**
 
 Public site lives at `/`, full admin panel at `/admin/*`. Both share the same design system.
 
@@ -16,7 +18,7 @@ Public site lives at `/`, full admin panel at `/admin/*`. Both share the same de
 - **React Router 6** for routing (`src/App.tsx`)
 - **TanStack Query 5** for server state
 - **react-hook-form + zod** for forms
-- **next-themes** for theme switching (dark is the only canonical theme for the redesign)
+- **next-themes** for theme switching (the redesign supports BOTH light and dark — light is canonical, dark is a real variant)
 - **Supabase** for auth + data (`src/integrations/supabase/`)
 - **Vercel Analytics** wired in `App.tsx`
 - **Bun** is the preferred package manager (`bun.lockb` is committed). `npm` also works.
@@ -73,137 +75,194 @@ Path alias: `@/*` → `./src/*` (used everywhere — keep using it).
 
 ---
 
-## Current state vs. redesign target
+## Redesign target — "Webflow" style
 
-> **The current `src/index.css` describes a gold/teal "luxury ecommerce" palette. That is the OLD system. The redesign replaces it entirely with the spec below. Do not preserve the gold/teal tokens.**
+The new visual reference is **webflow.com**. Strip the cosmic purple, replace it with Webflow's confident SaaS-brand language: clean monochrome canvas, bold geometric sans, vivid pink→purple→blue gradient as a **focused accent** (not a wash), bento grid feature sections, generous whitespace, motion-rich without feeling mystical.
 
-### Redesign target — "Superconscious" style
+### Vibe
 
-Vibe: **deep cosmic purple, liquid 3D, oversized editorial sans, glassmorphic chrome, motion-rich.** Think app-launch landing page meets premium spiritual product. Dark, immersive, slightly mystical, very modern.
+Confident, professional, modern, clean. Premium-but-approachable. The site should feel like a serious studio that ships work, not a meditation app. **Light theme is the canonical primary**, with a high-quality dark variant. Both must be polished.
 
-#### Color palette (encode these in `src/index.css` and `tailwind.config.ts`)
+### Color palette
 
-| Token | Hex | HSL | Usage |
-|---|---|---|---|
-| `--background` | `#0A0418` | `262 70% 6%` | Outer page bg, deepest layer |
-| `--surface` | `#150828` | `265 65% 9%` | Inner card/frame container |
-| `--surface-elevated` | `#1F0F3A` | `262 60% 14%` | Elevated cards, nav pill bg |
-| `--primary` | `#7C3AED` | `262 83% 58%` | CTA buttons, accent glow |
-| `--primary-hover` | `#9333EA` | `271 81% 56%` | Hover state |
-| `--accent-violet` | `#A855F7` | `271 91% 65%` | Glow halos, gradient stops |
-| `--accent-indigo` | `#4F46E5` | `239 84% 60%` | Secondary glow, gradient stops |
-| `--foreground` | `#FFFFFF` | `0 0% 100%` | Primary text (the giant headline is pure white) |
-| `--muted-foreground` | `#A89BC9` | `260 30% 70%` | Subtitles, secondary copy |
-| `--border` | `#2A1B4A` | `260 45% 20%` | Glass borders, dividers |
-| `--border-glow` | `#5B3FBF` | `255 50% 50%` | Inner highlight on glass surfaces |
+The palette is monochrome-first with one accent gradient. **Most surfaces are white/black/gray. Color appears in deliberate splashes — gradient-filled headline accent words, CTA glows, hover halos.**
 
-Background uses a **radial purple vignette**: bright violet glow top-center fading to near-black at the corners. Implement as a fixed full-viewport gradient layer behind everything.
+#### Light mode (canonical)
 
-```css
-background:
-  radial-gradient(ellipse 80% 60% at 50% -10%, hsl(271 91% 65% / 0.35), transparent 60%),
-  radial-gradient(ellipse 60% 40% at 50% 110%, hsl(262 83% 58% / 0.20), transparent 60%),
-  hsl(262 70% 6%);
-```
+| Token | Value | Usage |
+|---|---|---|
+| `--background` | `#FFFFFF` | Page background |
+| `--surface` | `#FAFAFA` | Section backgrounds |
+| `--surface-elevated` | `#F4F4F5` | Cards, bento tiles |
+| `--foreground` | `#0A0A0A` | Primary text — near black, not pure |
+| `--muted-foreground` | `#52525B` | Secondary text, labels |
+| `--border` | `#E4E4E7` | Card borders, dividers |
+| `--border-strong` | `#A1A1AA` | Emphasized borders |
+| `--primary` | `#146EF5` | Webflow blue — primary CTA fill |
+| `--primary-foreground` | `#FFFFFF` | Text on primary |
+| `--accent-pink` | `#FF5C8A` | Gradient stop A |
+| `--accent-purple` | `#8B5CF6` | Gradient stop B |
+| `--accent-blue` | `#146EF5` | Gradient stop C |
 
-#### Typography
+#### Dark mode
 
-- **Display headline**: very large, modern geometric sans, light/regular weight, extremely wide tracking *negative* (-0.04em). Target font: **"Instrument Sans"** or **"PP Neue Montreal"**; fallback **"Inter Display"** (Google Font: `Inter Tight` weight 300–400 works as a close substitute). Hero headline sizes: `clamp(4rem, 11vw, 10rem)`.
-- **Sub-headline**: `Inter`, weight 400, all lowercase or sentence case, color `--muted-foreground`, letter-spacing slightly loose (+0.02em).
-- **Body**: `Inter`, weight 400, line-height 1.6, color `--foreground` at 90% opacity.
-- **UI labels** (nav, buttons, small CTAs): `Inter`, weight 500, size `0.875rem`, sometimes with subtle letter-spacing.
+| Token | Value | Usage |
+|---|---|---|
+| `--background` | `#0A0A0A` | Page bg |
+| `--surface` | `#111113` | Section bg |
+| `--surface-elevated` | `#18181B` | Cards |
+| `--foreground` | `#FAFAFA` | Primary text |
+| `--muted-foreground` | `#A1A1AA` | Secondary text |
+| `--border` | `#27272A` | Borders |
+| `--primary` | `#3B82F6` | Slightly brighter blue for dark contrast |
+| Gradient stops same as light | | |
 
-> The `<h1>/<h2>/<h3> em { color: gold }` rule from the old system MUST be removed — there are no italic gold accents in the new design. Headlines are pure white.
-
-#### Radius scale
-
-- Outer page frame: `2rem` (the whole hero sits inside a rounded container with a subtle 1px gradient border)
-- Cards: `1.5rem`
-- Glass pill nav: `9999px`
-- CTA buttons: `9999px` pill
-- Inputs: `0.75rem`
-
-#### Glass / glow surfaces
-
-The nav pill, the bottom-right CTA card, and feature cards all use a **glassmorphic** treatment:
+#### The signature gradient
 
 ```css
-background: hsl(265 65% 9% / 0.6);
-backdrop-filter: blur(20px) saturate(180%);
-border: 1px solid hsl(260 45% 20% / 0.8);
-box-shadow:
-  inset 0 1px 0 hsl(255 50% 50% / 0.3),   /* top inner highlight */
-  0 8px 32px hsl(262 70% 6% / 0.5);        /* soft outer shadow */
+--gradient-accent: linear-gradient(
+  135deg,
+  hsl(340 100% 68%) 0%,    /* pink  #FF5C8A */
+  hsl(258 90% 66%) 50%,    /* purple #8B5CF6 */
+  hsl(217 91% 52%) 100%    /* blue   #146EF5 */
+);
 ```
 
-A `.glass-purple` utility class should encode this in `index.css`.
+Use it for:
+- One accent word inside the hero headline (with `background-clip: text`)
+- The hover glow/halo on the primary CTA
+- A subtle ambient blob in the hero corner (low opacity, blurred, not the centerpiece)
+- Section eyebrow underlines
+- Selection color (`::selection`)
 
-#### Liquid 3D hero asset
+**Do not wash entire sections in this gradient.** It's a spotlight, not the floor.
 
-The hero centerpiece is a **chrome/iridescent liquid blob** with an iPhone embedded in front of it. For implementation:
-- **Preferred**: a pre-rendered PNG/WebP with transparent background (place under `src/assets/hero/liquid-blob.webp`). Designer-provided.
-- **Fallback if no asset**: animated SVG blob using two overlapping radial gradients with `filter: blur(40px)` and a slow rotation animation, layered behind a phone mockup PNG.
-- The blob has a violet-to-magenta iridescent surface with visible highlights — looks like a metallic liquid mercury form.
+### Typography
 
-#### Animation language
+- **Display / headings**: a geometric sans with Avant-Garde / Futura DNA. Recommended: **Inter Tight** at weight 600 (already loaded in `index.html`), or **Geist** if installed. Headlines are *semibold*, not light. Tracking `-0.03em` to `-0.04em`. Line-height `1.05`.
+- **Body**: `Inter` weight 400, line-height 1.6.
+- **UI / labels**: `Inter` weight 500, size `0.875rem`, slight tracking on uppercase eyebrows (`tracking-wider uppercase text-xs`).
+- Hero headline size: `clamp(3rem, 7vw, 6rem)` — large but not absurd. Webflow's hero is bold, not oversized to the point of breaking layout.
 
-This site is **motion-first**. Use `framer-motion` for everything beyond a simple fade.
+> The previous spec called for the giant `clamp(4rem, 11vw, 10rem)` "saleixo" wordmark. **Drop that.** The new hero leads with a *sentence*, not a single word. Saleixo's name belongs in the nav and footer, with a wordmark logo lockup.
 
-1. **Hero entrance**: headline characters fade-up with a 30ms stagger (split with a Splitting.js-style approach or framer's `whileInView` per-character map). Sub-headline and CTA pill fade in 400ms after.
-2. **Liquid blob**: continuous slow rotation + scale breathing (8s loop, ease-in-out).
-3. **Scroll-triggered circle grid** (mid-page, see frame 2 of the reference): 6 hollow circle outlines arranged in a 3-row layout (1-2-1-2 pattern). On scroll into view, they fade in with stagger, then each circle expands with a breathing pulse. These are likely service / feature anchors — treat as the entry to a feature section where each circle becomes a labeled card on hover or further scroll.
-4. **Glass pill nav**: floats, doesn't stick. Has a subtle hover glow on links (purple radial bloom under cursor).
-5. **CTA buttons**: pure-white pill on dark, with hover that adds a violet outer glow (`box-shadow: 0 0 32px hsl(271 91% 65% / 0.5)`).
-6. **Scroll velocity**: enable Lenis smooth scroll (`bun add lenis`) for the buttery feel that matches this aesthetic.
-7. **Cursor**: optional custom cursor — small white dot with delayed trailing larger circle, both blend-mode `difference`.
+### Radius scale
 
-#### Layout container
+- Cards / bento tiles: `1rem` (16px)
+- Inputs: `0.625rem` (10px)
+- Buttons: `0.5rem` rounded — NOT pill, except for compact tag chips
+- Section containers: `1.5rem` (24px) when used
 
-The whole page lives inside a **rounded outer frame** (`rounded-[2rem] mx-4 my-4 lg:mx-8 lg:my-6`) with a subtle gradient border (`border border-border-glow/40`) and the deep purple radial bg behind it. This gives the "windowed app preview" feel visible in every frame of the reference.
+### Layout primitives
 
-#### Hero composition (matches frame 3 of the reference)
+1. **Container**: `max-w-7xl mx-auto px-6 lg:px-8` — Webflow uses a strong centered column with generous side gutters.
+2. **Section spacing**: `py-24 lg:py-32` — air, not cram.
+3. **Bento grid for features**: 12-column CSS grid where each card spans varying col/row counts. Gaps `gap-4` to `gap-6`. Card radius `1rem`. Each card has its own visual treatment — illustration, gradient accent, screenshot, stat — so the grid feels alive.
+
+### Hero composition
 
 ```
-┌────────────────────────────────────────────────────┐
-│                                                    │
-│           ╭──────────────────────────╮             │
-│           │ ⬢  About  How  Whom  Cts │  ← glass pill nav, centered top
-│           ╰──────────────────────────╯             │
-│                                                    │
-│                                                    │
-│             s u p e r c o n s c i o u s            │  ← oversized white sans
-│                  the manifestation app             │  ← muted lavender subtitle
-│                                                    │
-│                  ╭────────────╮                    │
-│                  │  [ blob ]  │   ╭─────────────╮  │
-│                  │   📱        │   │ Coming…     │  │  ← bottom-right CTA card
-│                  │            │   │ [Join WL]   │  │     (glass pill style)
-│                  ╰────────────╯   ╰─────────────╯  │
-│                                                    │
-└────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│   [logo]   nav links                       [Book Call]  │   ← solid bar, not pill
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│   eyebrow chip: "Photography · Design · Marketing"      │
+│                                                         │
+│   The studio that turns                                 │   ← serious headline,
+│   your craft into a [brand].                            │     "brand" gradient-filled
+│                                                         │
+│   One paragraph subhead, max-w-2xl, muted-foreground.   │
+│                                                         │
+│   [ Book a free audit →  ]   [ See our work ]           │   ← primary blue + ghost
+│                                                         │
+│   ────────────────────────────                          │
+│                                                         │
+│   ┌───────┐ ┌─────────────────────┐ ┌───────┐           │
+│   │ stat  │ │  hero illustration  │ │ stat  │           │   ← bento preview row
+│   │ tile  │ │  or product mosaic  │ │ tile  │           │     (optional)
+│   └───────┘ └─────────────────────┘ └───────┘           │
+└─────────────────────────────────────────────────────────┘
 ```
 
-For Alvaio specifically:
-- Replace "superconscious" with **"alvaio"** as the giant display word
-- Subtitle: **"design · photography · marketing"** or current tagline
-- Replace the iPhone-app-blob with a 3D-rendered glossy purple object (or use one of the existing portfolio images styled with a purple gradient overlay until a custom asset is available)
-- Bottom-right pill CTA: **"Free brand audit / Book a call"** with the existing contact CTA logic
+Key shifts from the old hero:
+- Headline is a **sentence**, not a single word. One word inside it gets the gradient-text treatment.
+- CTAs are **two buttons side-by-side**: primary solid blue + secondary ghost. No glass pill in the bottom-right corner.
+- Nav is a **solid bar across the top**, left logo / center links / right CTA. No floating glass capsule.
+- Below the fold (or in the lower half of the viewport on tall screens), a **bento preview** hints at the work — small stat tiles flanking a hero asset.
+- No outer rounded frame container. Webflow's pages run edge to edge.
+
+### Section pattern (repeats throughout the page)
+
+Every section follows this rhythm:
+
+1. Eyebrow chip (uppercase, tracked, gradient-text or muted)
+2. Section headline (2-line max, one word gradient-accented)
+3. One-paragraph subhead, max-w-2xl
+4. The actual content — bento grid, image+text split, logo strip, etc.
+5. Optional inline CTA at the bottom
+
+### Bento grids — the workhorse layout
+
+**Replace the current single-column `Services.tsx` and `FeaturedServices.tsx` with bento grids.** Each card spans different col/row counts. Cards include a mix of:
+
+- Large feature card with illustration/image (col-span-2, row-span-2)
+- Stat card with one big number + label (col-span-1)
+- Quote / testimonial card
+- Mini case study with thumbnail
+- "All services" card with icon list
+
+12-24px gaps, 16px radius, light borders, subtle hover lift (translateY -2px + shadow grow). On hover, a card may reveal its gradient accent border or animate its visual.
+
+### Motion language
+
+Use `framer-motion` for non-trivial motion. The vibe is **confident micro-motion**, not theatrical.
+
+1. **Section reveals**: 30px fade-up with 80ms stagger on direct children, triggered via `whileInView`.
+2. **Headline gradient word**: subtle 8s gradient pan animation (`background-position` shift) so the accent word feels alive without being distracting.
+3. **CTA hover**: button scales 1.02 + adds gradient outer glow `box-shadow: 0 0 32px hsl(258 90% 66% / 0.4)`.
+4. **Bento card hover**: translateY -2px, ring-1 ring-border-strong, shadow grows.
+5. **Marquee logo strip**: optional slow-scrolling client/marketplace strip below hero (`9 Marketplaces` etc.).
+6. **Page nav**: fades in solid background after 60px scroll, otherwise transparent on top of hero.
+7. **Reduced-motion** respected — fall back to plain fades.
+
+### Components to add
+
+Add these new files (do not delete existing ones):
+
+- `src/components/Nav.tsx` — solid top bar with logo, links, CTA. Replaces the floating glass pill nav.
+- `src/components/GradientText.tsx` — wraps a span in `bg-gradient-accent bg-clip-text text-transparent` for the headline accent word.
+- `src/components/Bento.tsx` + `src/components/BentoCard.tsx` — generic bento grid + card primitives.
+- `src/components/Reveal.tsx` — framer-motion `whileInView` fade-up wrapper used everywhere.
+
+### Components to retire (visually)
+
+- The "liquid blob + phone" centerpiece — gone. The hero is text + buttons + a clean bento preview.
+- `.glass-purple` — keep the file for reference but stop importing. Replace with light cards that have `border` and `shadow-sm`.
+- `.text-gold-shimmer` — already gone from old gold system; do not reintroduce.
+- The bottom-right glass CTA pill from the Superconscious version — gone.
 
 ---
 
 ## Redesign workflow
 
-When asked to "apply the new design":
+When asked to "apply the new (Webflow) design":
 
-1. **Pass 1 — Tokens.** Replace the `:root` and `.dark` blocks in `src/index.css` with the purple palette above. Update `tailwind.config.ts` to expose `bg-surface`, `bg-surface-elevated`, `text-accent-violet`, `text-accent-indigo`, `border-glow`, etc. Add the radial-gradient body background. Add Google Font imports for `Inter Tight` (or load the chosen display face) in `index.html`. Remove the gold-italic `<em>` rule. Remove or minimize the `.light` block — this redesign is dark-only; keep `.light` as a near-clone of dark to avoid breaking next-themes.
-2. **Pass 2 — Outer frame.** Wrap `src/pages/Index.tsx` content in the rounded frame container described above.
-3. **Pass 3 — Hero.** Rebuild `src/components/Hero.tsx` to match frame 3. Install framer-motion if needed. Add the liquid blob (use a placeholder gradient SVG until a real asset is added). Wire the glass pill nav as a floating top element (extract to `src/components/Nav.tsx` if it currently lives elsewhere).
-4. **Pass 4 — Sections.** Restyle in order: `FeaturedServices.tsx` → `Services.tsx` → `Portfolio.tsx` → `HowItWorks.tsx` → `Contact.tsx`. The 6-circle scroll-in pattern from frame 2 belongs in either `FeaturedServices` or `HowItWorks` — pick whichever currently has 6-ish items. Each circle is a service/step entry; on scroll it expands into a label.
-5. **Pass 5 — Floating elements.** Restyle `FloatingCTA`, `WhatsAppButton`, `ScrollProgress`, `ThemeToggle` to match the glass-purple language. ScrollProgress becomes a thin violet bar. ThemeToggle stays functional but is visually de-emphasized (this design is dark-only).
-6. **Pass 6 — `pages/Design.tsx` and `components/design/`.** Apply the same token + glass treatment to all sub-components.
-7. **Pass 7 — Polish.** Smooth scroll (Lenis), focus rings in violet, ::selection color violet, mobile pass at 375px, reduced-motion check, image lazy-loading, lighthouse pass.
+1. **Pass 1 — Tokens.** Replace the `:root`, `.dark`, and `.light` blocks in `src/index.css` with the palette above (light is canonical). Update `tailwind.config.ts` to expose `bg-surface`, `bg-surface-elevated`, `bg-primary`, `text-primary`, `border-strong`, `bg-gradient-accent`, `text-accent-pink/purple/blue`, etc. Replace the body radial-gradient bg with a clean `--background` plus an optional very-low-opacity gradient orb fixed in the hero corner. Add a `.gradient-text` utility class. Remove `.glass-purple` from active utilities.
+2. **Pass 2 — Nav.** Build `src/components/Nav.tsx` as a solid top bar. Logo left, links centered, primary CTA right. Wire it in `Index.tsx` above `<Hero />`.
+3. **Pass 3 — Hero.** Rebuild `src/components/Hero.tsx`:
+   - Eyebrow chip at top
+   - Sentence headline with one gradient-accented word via `<GradientText>`
+   - Subhead paragraph
+   - Two CTAs (primary solid blue + ghost)
+   - Optional 3-tile bento preview row below
+   - No giant single-word "saleixo" wordmark.
+4. **Pass 4 — Bento everywhere.** Convert `FeaturedServices.tsx` and `Services.tsx` into bento grids using `<Bento>` and `<BentoCard>`. Keep the underlying service data; change only the layout.
+5. **Pass 5 — Sections.** Restyle in order: `Portfolio.tsx` → `HowItWorks.tsx` → `Contact.tsx` → footer. Each follows the eyebrow → headline → subhead → content rhythm.
+6. **Pass 6 — Floating elements.** Restyle `FloatingCTA`, `WhatsAppButton`, `ScrollProgress`, `ThemeToggle` to match the new clean language. ScrollProgress = thin gradient bar. ThemeToggle is now actually useful (light/dark both supported) — promote to nav.
+7. **Pass 7 — `pages/Design.tsx` and `components/design/`.** Same token + bento + Reveal treatment.
+8. **Pass 8 — Polish.** Smooth scroll, focus rings in primary blue, ::selection gradient, mobile pass at 375px, reduced-motion check, image lazy-loading, lighthouse pass.
 
-After every pass, run `bun run build` and screenshot the homepage.
+After every pass, run `bun run build` and screenshot the homepage at 1440px and 375px.
 
 **Admin panel is out of scope for the redesign.** It will inherit the new tokens for free; that's enough.
 
@@ -213,12 +272,13 @@ After every pass, run `bun run build` and screenshot the homepage.
 
 - **Do not change** routes in `App.tsx`, the Supabase client/types, `src/lib/utils.ts`, or any file under `src/integrations/`.
 - **Do not modify shadcn primitives in `src/components/ui/`** as a way to change appearance — change the tokens instead. If a primitive needs a real structural change, copy it under a new name and edit there.
-- **Do not remove** existing components (`FloatingCTA`, `WhatsAppButton`, `ScrollProgress`, `ScrollToTop`, `ThemeToggle`, `WaveDivider`, `LoadingScreen`) — restyle them in place. `WaveDivider` may end up unused in the new design; leave the file but stop importing it if it doesn't fit.
-- **Do not invent new image paths.** Reuse files under `src/assets/`. If a new asset is genuinely needed (e.g. the liquid blob render), add it under `src/assets/hero/` and import it normally. Note in the commit message that a real designer-provided asset should replace the placeholder.
+- **Do not remove** existing components (`FloatingCTA`, `WhatsAppButton`, `ScrollProgress`, `ScrollToTop`, `ThemeToggle`, `WaveDivider`, `LoadingScreen`) — restyle them in place. `WaveDivider` may end up unused; leave the file but stop importing it.
+- **Do not invent new image paths.** Reuse files under `src/assets/`. If a new asset is genuinely needed, add it under the right subfolder and import it normally.
 - **Preserve component prop signatures** unless the user asks for a behavior change.
 - **Preserve all admin-route protection logic** in `src/components/admin/`.
 - **Do not commit** `.env`. It exists locally and contains Supabase keys.
-- **Do not preserve the gold/teal palette anywhere.** Old tokens, old `.text-gold-shimmer`, old `.glass-gold` — all gone. Replace with violet equivalents.
+- **Do not preserve the cosmic-purple Superconscious palette anywhere.** No `--accent-violet`, no `.glass-purple` in active use, no giant single-word wordmark, no liquid blob. The Webflow direction replaces all of it.
+- **Do not wash entire sections in the gradient.** It is an accent only — used on one word, on hover halos, in tiny accent bars. Most surfaces are pure white or pure black.
 
 ## Conventions
 
@@ -227,29 +287,26 @@ After every pass, run `bun run build` and screenshot the homepage.
 - **Forms**: react-hook-form + zod resolver + shadcn `Form` primitives. Don't reinvent.
 - **Toasts**: use `sonner` for new code (already mounted in `App.tsx`); `useToast` from `@/hooks/use-toast` is the legacy path used by older shadcn pieces.
 - **Data fetching**: TanStack Query with the existing `queryClient` in `App.tsx`.
-- **Icons**: `lucide-react` only, stroke-width `1.5` to match the thin geometric language of the reference.
+- **Icons**: `lucide-react`, stroke-width `1.5`. Match Webflow's clean line iconography.
 - **Class name composition**: always use `cn()` from `@/lib/utils`.
 - **Responsive**: mobile-first Tailwind. Test at `375px`, `768px`, `1024px`, `1440px`.
-- **Accessibility**: keep `*:focus-visible` rings (now violet), preserve `<label>` associations, prefer semantic HTML, ensure the giant display headline still reads as a real `<h1>`.
+- **Accessibility**: focus rings now use `--primary` blue. Preserve `<label>` associations, prefer semantic HTML, ensure headlines are real `<h1>`/`<h2>`/etc.
 
 ## Workflow expectations
 
 - Read `src/index.css` and `tailwind.config.ts` before any styling task.
 - Read the target component file before editing it.
 - Prefer `Edit` over `Write` for existing files. The exception is `src/index.css` for Pass 1 — that one is a near-total rewrite.
-- After token changes, do a fast visual sweep of: homepage hero, a service card, the contact form, and the admin login page (`/admin/login`). All four should still feel cohesive (admin will look purple but functional — that's fine).
+- After token changes, sweep: homepage hero, a service bento card, the contact form, and the admin login page (`/admin/login`). All four should feel cohesive (admin will inherit the new neutral tokens — fine).
 - Run `bun run lint` and `bun run build` before declaring done.
 
 ## Reference
 
-The visual reference is the **Superconscious / Manifestation App** landing page (provided by the user as screen recording + screenshot frames). Key frames:
-- **Frame 1**: Mid-scroll with a rotated phone+blob composition transitioning out of view, glass nav pill at top, glass CTA card bottom-right.
-- **Frame 2**: 6 hollow circles arranged on a black-purple field, mid-scroll feature reveal moment.
-- **Frame 3**: Hero — giant white "superconscious" wordmark, "the manifestation app" subtitle, central blob+phone composition, nav and CTA in their respective corners.
+The visual reference is **webflow.com** — clean monochrome SaaS marketing site with one signature pink→purple→blue gradient used as a focused accent. Headlines are confident sentences with one gradient-filled word. Layouts are bento-grid heavy. Motion is micro and tasteful, never theatrical. Both light and dark modes are first-class.
 
-Adapt the brand wordmark to "alvaio" and the tagline to whatever the current homepage uses; everything else (palette, type, motion, glass surfaces, liquid 3D centerpiece, circle scroll pattern) maps over directly.
+Adapt this language to **Saleixo's** positioning: a digital studio for artisans and ecommerce sellers offering photography, design, and marketing. The tone shifts from Webflow's developer/SaaS audience to a creative-services audience, but the visual grammar transfers cleanly: bold sentence headlines, bento feature grids, gradient-accent moments, generous whitespace, micro-motion.
 
 ## Out of context for Claude Code
 
 - Lovable still has a connection to this repo (see `lovable-tagger` in devDependencies and the Lovable URL in `README.md`). Changes pushed here flow back to Lovable. That's fine — just be aware the README's instructions are Lovable-flavored and don't reflect the Claude Code workflow.
-- The deployed analytics use Vercel Analytics; no action required from edits.
+- The deployed site is at `saleixo-final.vercel.app` (canonical domain `saleixo.com`). The current deployment still shows the Superconscious purple hero — that's the state being replaced.
