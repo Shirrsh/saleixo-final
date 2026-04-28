@@ -431,7 +431,7 @@ const MarketplaceMockup = () => {
                 onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
                 className="text-[9px] px-2 py-0.5 rounded transition-all"
                 style={{
-                  background: i === current ? 'hsl(155 80% 35% / 0.3)' : 'transparent',
+                  background: i === current ? 'hsl(174 37% 20% / 0.3)' : 'transparent',
                   color: i === current ? '#fff' : 'rgba(255,255,255,0.4)',
                 }}
               >
@@ -482,7 +482,7 @@ const MarketplaceMockup = () => {
             style={{
               width: i === current ? 24 : 6,
               height: 6,
-              background: i === current ? mp.accent : 'hsl(158 40% 16%)',
+              background: i === current ? mp.accent : 'hsl(174 30% 22%)',
             }}
           />
         ))}

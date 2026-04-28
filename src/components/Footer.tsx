@@ -1,6 +1,5 @@
 import { Facebook, Instagram, Twitter, Linkedin, Phone, Mail, Clock, MessageCircle, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import saleixoLogo from '@/assets/saleixo-logo.png';
 
 const Footer = () => {
@@ -31,18 +30,18 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden border-t" style={{ borderColor: 'hsl(158 40% 16% / 0.4)' }}>
+    <footer className="relative overflow-hidden border-t border-border/40">
 
       {/* Subtle top glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] pointer-events-none"
-        style={{ background: 'linear-gradient(90deg, transparent, hsl(78 85% 52% / 0.5), transparent)' }}
+        style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent-violet) / 0.4), transparent)' }}
       />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-0">
 
         {/* ── Top grid: logo+desc | services | company | contact ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b" style={{ borderColor: 'hsl(158 40% 16% / 0.3)' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-14 border-b border-border/30">
 
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -56,14 +55,7 @@ const Footer = () => {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-                  style={{
-                    background: 'hsl(158 55% 8% / 0.8)',
-                    border: '1px solid hsl(158 40% 16% / 0.6)',
-                    color: 'hsl(155 20% 65%)',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.borderColor = 'hsl(78 85% 52% / 0.5)')}
-                  onMouseLeave={e => (e.currentTarget.style.borderColor = 'hsl(158 40% 16% / 0.6)')}
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 bg-surface border border-border/60 text-muted-foreground hover:border-accent-violet/60 hover:text-foreground"
                 >
                   {s.icon}
                 </a>
@@ -122,7 +114,6 @@ const Footer = () => {
             <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground mb-5">Contact</h4>
             <ul className="space-y-3">
               {[
-                { icon: <Phone className="w-3.5 h-3.5" />,         label: '+91 7011441159',    href: 'tel:+917011441159'              },
                 { icon: <Mail className="w-3.5 h-3.5" />,          label: 'info@saleixo.com',  href: 'mailto:info@saleixo.com'        },
                 { icon: <MessageCircle className="w-3.5 h-3.5" />, label: 'WhatsApp Us',       href: 'https://wa.me/917011441159'     },
                 { icon: <Clock className="w-3.5 h-3.5" />,         label: '2 PM – 10 PM IST',  href: null                            },
@@ -135,12 +126,12 @@ const Footer = () => {
                       rel="noopener noreferrer"
                       className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-white transition-colors duration-200 group"
                     >
-                      <span style={{ color: '#a3e635' }}>{item.icon}</span>
+                      <span className="text-muted-foreground">{item.icon}</span>
                       {item.label}
                     </a>
                   ) : (
                     <div className="flex items-center gap-2.5 text-sm text-foreground/50">
-                      <span style={{ color: '#a3e635' }}>{item.icon}</span>
+                      <span className="text-muted-foreground">{item.icon}</span>
                       {item.label}
                     </div>
                   )}
@@ -149,47 +140,16 @@ const Footer = () => {
             </ul>
 
             {/* Markets */}
-            <div className="mt-6 pt-4 border-t" style={{ borderColor: 'hsl(158 40% 16% / 0.3)' }}>
+            <div className="mt-6 pt-4 border-t border-border/30">
               <p className="text-[10px] text-muted-foreground/50 uppercase tracking-widest mb-2">Markets</p>
               <p className="text-xs text-muted-foreground/70">US · UK · FR · DE · AU · CA · IN</p>
             </div>
           </div>
         </div>
 
-        {/* ── Giant wordmark ── */}
-        <div className="relative overflow-hidden py-6 md:py-8">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center select-none pointer-events-none"
-          >
-            <span
-              className="font-extralight leading-none tracking-[-0.04em] text-transparent"
-              style={{
-                fontFamily: '"Inter Tight", Inter, sans-serif',
-                fontSize: 'clamp(5rem, 18vw, 16rem)',
-                WebkitTextStroke: '1px hsl(158 40% 20% / 0.6)',
-              }}
-            >
-              saleixo
-            </span>
-          </motion.div>
-
-          {/* Glow behind wordmark */}
-          <div
-            className="absolute inset-0 pointer-events-none flex items-center justify-center"
-            style={{
-              background: 'radial-gradient(ellipse 60% 50% at 50% 50%, hsl(78 85% 52% / 0.06), transparent)',
-            }}
-          />
-        </div>
-
         {/* ── Bottom bar ── */}
         <div
-          className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 border-t text-xs text-muted-foreground/50"
-          style={{ borderColor: 'hsl(158 40% 16% / 0.3)' }}
+          className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 border-t border-border/30 text-xs text-muted-foreground/50"
         >
           <span>© {currentYear} Saleixo. All rights reserved.</span>
           <span>Made with ♥ for modern brands worldwide</span>

@@ -107,13 +107,13 @@ const FAQ = () => {
                   className="rounded-2xl border transition-all duration-300 overflow-hidden"
                   style={{
                     background: isOpen
-                      ? 'hsl(158 55% 8% / 0.8)'
-                      : 'hsl(158 55% 8% / 0.4)',
+                      ? 'hsl(174 37% 16% / 0.8)'
+                      : 'hsl(174 37% 16% / 0.4)',
                     borderColor: isOpen
-                      ? 'hsl(78 85% 52% / 0.35)'
-                      : 'hsl(158 40% 16% / 0.5)',
+                      ? 'hsl(43 65% 52% / 0.35)'
+                      : 'hsl(174 30% 22% / 0.5)',
                     boxShadow: isOpen
-                      ? '0 0 30px hsl(78 85% 52% / 0.08)'
+                      ? '0 0 30px hsl(43 65% 52% / 0.08)'
                       : 'none',
                     backdropFilter: 'blur(20px)',
                   }}
@@ -135,9 +135,9 @@ const FAQ = () => {
                       className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200"
                       style={{
                         background: isOpen
-                          ? 'hsl(78 85% 52% / 0.15)'
-                          : 'hsl(158 40% 16% / 0.6)',
-                        border: `1px solid ${isOpen ? 'hsl(78 85% 52% / 0.4)' : 'hsl(158 40% 20%)'}`,
+                          ? 'hsl(43 65% 52% / 0.15)'
+                          : 'hsl(174 30% 22% / 0.6)',
+                        border: `1px solid ${isOpen ? 'hsl(43 65% 52% / 0.4)' : 'hsl(174 30% 22%)'}`,
                       }}
                     >
                       {isOpen
@@ -159,7 +159,7 @@ const FAQ = () => {
                         <div className="px-6 pb-6">
                           <div
                             className="w-full h-px mb-4"
-                            style={{ background: 'hsl(78 85% 52% / 0.15)' }}
+                            style={{ background: 'hsl(43 65% 52% / 0.15)' }}
                           />
                           <p className="text-muted-foreground leading-relaxed">
                             {faq.answer}

@@ -57,13 +57,13 @@ const FeaturedServices = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-transparent">
+    <section className="py-12 md:py-16 bg-transparent">
       {/* Photoshoot Services Block */}
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="container mx-auto px-4 sm:px-6 lg:px-8 mb-16 md:mb-24"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12 md:mb-16"
       >
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Photography Image — studio flash on hover */}
@@ -76,7 +76,7 @@ const FeaturedServices = () => {
             <img
               src={photographyImg}
               alt="Professional product photography studio setup"
-              className="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-[320px] md:h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
 
@@ -123,7 +123,7 @@ const FeaturedServices = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0, 0, 0.7, 0, 0.5, 0] }}
                     transition={{ duration: 0.55, times: [0, 0.2, 0.3, 0.45, 0.6, 1], ease: 'easeOut' }}
-                    style={{ background: 'radial-gradient(ellipse 80% 60% at 70% 15%, hsl(0 0% 100% / 1) 0%, hsl(155 80% 80% / 0.5) 40%, transparent 70%)' }}
+                    style={{ background: 'radial-gradient(ellipse 80% 60% at 70% 15%, hsl(0 0% 100% / 1) 0%, hsl(43 80% 80% / 0.5) 40%, transparent 70%)' }}
                   />
                   {/* Rim light flash — bottom edge */}
                   <motion.div
@@ -178,7 +178,7 @@ const FeaturedServices = () => {
               <Button
                 size="lg"
                 onClick={scrollToContact}
-                className="rounded-full px-8 bg-primary hover:bg-primary-hover hover:shadow-[0_0_30px_hsl(78_85%_52%/0.4)] transition-all duration-300"
+                className="rounded-full px-8 bg-primary hover:bg-primary-hover hover:shadow-[0_0_30px_hsl(43_65%_52%/0.4)] transition-all duration-300"
               >
                 Book a Shoot
               </Button>
@@ -245,7 +245,7 @@ const FeaturedServices = () => {
                 size="lg"
                 variant="outline"
                 onClick={scrollToContact}
-                className="rounded-full px-8 border-border-glow/50 hover:border-primary hover:bg-primary/10 hover:shadow-[0_0_30px_hsl(78_85%_52%/0.3)] transition-all duration-300"
+                className="rounded-full px-8 border-border-glow/50 hover:border-primary hover:bg-primary/10 hover:shadow-[0_0_30px_hsl(43_65%_52%/0.3)] transition-all duration-300"
               >
                 Boost Your Sales
               </Button>

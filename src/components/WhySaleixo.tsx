@@ -1,22 +1,6 @@
-import { CheckCircle, Clock, Zap, Users } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useValuePropositions } from '@/hooks/useHomepageContent';
 import { motion } from 'framer-motion';
 
-type IconRenderer = () => React.ReactNode;
-
-const iconMap: Record<string, IconRenderer> = {
-  CheckCircle: () => <CheckCircle className="w-8 h-8 text-success" />,
-  Clock: () => <Clock className="w-8 h-8 text-primary" />,
-  Zap: () => <Zap className="w-8 h-8 text-accent" />,
-  Users: () => <Users className="w-8 h-8 text-success" />,
-};
-
-const defaultIconRenderers = Object.values(iconMap);
-
 const WhySaleixo = () => {
-  const { valueProps } = useValuePropositions();
-
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
     visible: (i = 0) => ({
@@ -27,13 +11,13 @@ const WhySaleixo = () => {
   };
 
   return (
-    <section className="py-16 bg-transparent">
+    <section className="py-10 bg-transparent">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="text-center mb-16 max-w-4xl mx-auto"
+          className="text-center mb-6 max-w-4xl mx-auto"
         >
           <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-4xl font-light text-foreground mb-6 tracking-tight">
             Why Saleixo?
@@ -56,37 +40,6 @@ const WhySaleixo = () => {
             From Lens to Launch – We handle everything: photography, design, and marketing.
           </motion.p>
         </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-          {valueProps.map((benefit, index) => {
-            const renderIcon = (benefit.icon && iconMap[benefit.icon])
-              ? iconMap[benefit.icon]
-              : defaultIconRenderers[index % defaultIconRenderers.length];
-            return (
-              <motion.div
-                key={benefit.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.1 }}
-              >
-                <Card className="glass-purple border-border-glow/30 hover:border-primary/40 transition-all duration-500 group h-full">
-                  <CardHeader>
-                    <div className="flex items-center gap-4">
-                      <div className="group-hover:scale-110 transition-transform duration-300">
-                        {renderIcon()}
-                      </div>
-                      <CardTitle className="text-xl font-medium text-foreground">{benefit.title}</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </div>
       </div>
     </section>
   );

@@ -217,11 +217,9 @@ const Categories = () => {
                 size="lg" 
                 variant="outline" 
                 className="text-lg px-8"
-                onClick={() => {
-                  window.location.href = 'tel:+917011441159';
-                }}
+                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Call Us: +91 701 144 1159
+                Get In Touch
               </Button>
             </div>
           </div>

@@ -1,272 +1,376 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef, useState } from 'react';
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValueEvent,
+} from 'framer-motion';
 import { FileText, Search, UserCheck, Camera, Rocket, BarChart3 } from 'lucide-react';
 
 const steps = [
-  { id: 1, label: 'Requirements', icon: <FileText className="w-6 h-6" />, title: 'Share Your Requirements', description: 'Tell us about your products, target marketplaces, and goals. We map out a custom strategy tailored to your brand.', color: '#a3e635' },
-  { id: 2, label: 'Free Audit',    icon: <Search className="w-6 h-6" />,   title: 'Free Brand Audit',         description: 'We analyse your current listings, photography, and market position — identifying exactly where revenue is being left on the table.', color: '#4ade80' },
-  { id: 3, label: 'Onboarding',   icon: <UserCheck className="w-6 h-6" />, title: 'Seamless Onboarding',      description: 'We set up your accounts, collect product samples, and brief our studio team — zero friction, fully managed.', color: '#34d399' },
-  { id: 4, label: 'Photography',  icon: <Camera className="w-6 h-6" />,    title: 'Studio Shoot & Design',    description: 'Professional product photography, A+ content, and listing design — all crafted to convert browsers into buyers.', color: '#a3e635' },
-  { id: 5, label: 'Launch',       icon: <Rocket className="w-6 h-6" />,    title: 'Go Live Across Platforms', description: 'We publish optimised listings across Amazon, Flipkart, Etsy, Shopify and more — simultaneously, in every target market.', color: '#4ade80' },
-  { id: 6, label: 'Growth',       icon: <BarChart3 className="w-6 h-6" />, title: 'Scale & Optimise',         description: 'Ongoing analytics, ad management, and content refresh keep your sales climbing month after month.', color: '#34d399' },
+  {
+    id: 1, label: 'Requirements', Icon: FileText,
+    title: 'Share Your Requirements',
+    description: 'Tell us about your products, target marketplaces, and goals. We map out a custom strategy tailored to your brand.',
+  },
+  {
+    id: 2, label: 'Free Audit', Icon: Search,
+    title: 'Free Brand Audit',
+    description: 'We analyse your current listings, photography, and market position — identifying exactly where revenue is being left on the table.',
+  },
+  {
+    id: 3, label: 'Onboarding', Icon: UserCheck,
+    title: 'Seamless Onboarding',
+    description: 'We set up your accounts, collect product samples, and brief our studio team — zero friction, fully managed.',
+  },
+  {
+    id: 4, label: 'Photography', Icon: Camera,
+    title: 'Studio Shoot & Design',
+    description: 'Professional product photography, A+ content, and listing design — all crafted to convert browsers into buyers.',
+  },
+  {
+    id: 5, label: 'Launch', Icon: Rocket,
+    title: 'Go Live Across Platforms',
+    description: 'We publish optimised listings across Amazon, Flipkart, Etsy, Shopify and more — simultaneously, in every target market.',
+  },
+  {
+    id: 6, label: 'Growth', Icon: BarChart3,
+    title: 'Scale & Optimise',
+    description: 'Ongoing analytics, ad management, and content refresh keep your sales climbing month after month.',
+  },
 ];
 
-// 7 circles like the reference — scattered organically
-const circles = [
-  { cx: 50,  cy: 28,  r: 52 },  // top center
-  { cx: 25,  cy: 48,  r: 44 },  // mid left
-  { cx: 75,  cy: 48,  r: 44 },  // mid right
-  { cx: 50,  cy: 52,  r: 40 },  // mid center (below top)
-  { cx: 18,  cy: 68,  r: 38 },  // lower left
-  { cx: 50,  cy: 72,  r: 38 },  // lower center
-  { cx: 82,  cy: 68,  r: 38 },  // lower right
-];
-
-// Which step each circle belongs to (0-indexed, circle 0 = step 0, etc, last circle shared)
-const circleStep = [0, 1, 2, 3, 3, 4, 5];
-
+// ─── Main section ─────────────────────────────────────────────────────────────
 const HowItWorks = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef              = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
+  const smooth = useSpring(scrollYProgress, { stiffness: 55, damping: 20 });
 
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
+  // Steps fill from 12 % → 97 % of total scroll
+  const stepRaw = useTransform(smooth, [0.12, 0.97], [0, steps.length - 0.01]);
+  useMotionValueEvent(stepRaw, 'change', v =>
+    setActiveIdx(Math.min(steps.length - 1, Math.max(0, Math.floor(v))))
+  );
 
-  // Active step index (0–5) derived from scroll
-  const activeStep = useTransform(smoothProgress, [0, 1], [0, steps.length - 0.01]);
+  const introOpacity = useTransform(smooth, [0, 0.06, 0.12], [1, 0.5, 0]);
+  const mainOpacity  = useTransform(smooth, [0.08, 0.18], [0, 1]);
+
+  const ActiveIcon = steps[activeIdx].Icon;
 
   return (
-    <div ref={containerRef} style={{ height: `280vh` }} className="relative">
-      {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center bg-[hsl(160_60%_5%)]">
-
-        {/* Background aura */}
+    <div ref={containerRef} className="relative" style={{ height: '580vh' }}>
+      <div
+        className="sticky top-0 h-screen overflow-hidden"
+        style={{ background: '#0A0418' }}
+      >
+        {/* Ambient glow */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 80% 60% at 50% 30%, hsl(155 80% 30% / 0.18) 0%, transparent 70%)',
+            background:
+              'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(124,58,237,0.1), transparent 70%)',
           }}
         />
 
-        {/* Section title — fades out as scroll begins */}
+        {/* ── Intro overlay ── */}
         <motion.div
-          style={{ opacity: useTransform(smoothProgress, [0, 0.12], [1, 0]) }}
-          className="absolute top-16 left-1/2 -translate-x-1/2 text-center z-20 pointer-events-none"
+          style={{ opacity: introOpacity }}
+          className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none"
         >
-          <h2 className="text-4xl md:text-6xl font-light text-white tracking-tight mb-3">
+          <h2
+            className="font-light tracking-tight mb-3"
+            style={{
+              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+              color: '#ffffff',
+              fontFamily: '"Inter Tight", Inter, sans-serif',
+            }}
+          >
             How It Works
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p style={{ color: 'rgba(168,155,201,0.85)', fontSize: '0.95rem' }}>
             Six steps from first conversation to scaling sales
           </p>
           <motion.div
-            className="mt-8 flex flex-col items-center gap-2"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            animate={{ y: [0, 7, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity }}
+            className="flex flex-col items-center gap-1.5 mt-7"
           >
-            <span className="text-xs text-white/30 tracking-widest uppercase">Scroll</span>
-            <div className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent" />
+            <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.2em' }}>
+              SCROLL
+            </span>
+            <div
+              style={{
+                width: 1,
+                height: 28,
+                background: 'linear-gradient(to bottom, rgba(255,255,255,0.2), transparent)',
+              }}
+            />
           </motion.div>
         </motion.div>
 
-        {/* Full-screen circle field */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-full h-full max-w-4xl mx-auto">
-            {circles.map((c, i) => {
-              const stepIdx = circleStep[i];
-              const step = steps[stepIdx];
+        {/* ── Main layout ── */}
+        <motion.div style={{ opacity: mainOpacity }} className="absolute inset-0 flex">
 
-              // Each circle activates when scroll reaches its step
-              const activateAt = stepIdx / steps.length;
-              const fullyActiveAt = (stepIdx + 0.5) / steps.length;
+          {/* LEFT — step index (desktop) */}
+          <div
+            className="hidden lg:flex flex-col justify-center"
+            style={{
+              width: 290,
+              flexShrink: 0,
+              padding: '0 36px 0 52px',
+              borderRight: '1px solid rgba(255,255,255,0.05)',
+            }}
+          >
+            <span
+              style={{
+                fontSize: 9,
+                color: 'rgba(124,58,237,0.75)',
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                display: 'block',
+                marginBottom: 36,
+              }}
+            >
+              How It Works
+            </span>
 
-              const circleProgress = useTransform(
-                smoothProgress,
-                [activateAt, fullyActiveAt],
-                [0, 1]
-              );
-
-              const scale = useTransform(circleProgress, [0, 1], [0.6, 1]);
-              const opacity = useTransform(circleProgress, [0, 1], [0.2, 1]);
-              const borderOpacity = useTransform(circleProgress, [0, 1], [0.3, 1]);
-              const glowSize = useTransform(circleProgress, [0, 1], [0, 30]);
-
-              return (
-                <motion.div
-                  key={i}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center"
-                  style={{
-                    left: `${c.cx}%`,
-                    top: `${c.cy}%`,
-                    width: c.r * 2,
-                    height: c.r * 2,
-                    scale,
-                    opacity,
-                  }}
-                >
-                  {/* Outer breathing ring */}
-                  <motion.div
-                    className="absolute rounded-full border"
-                    style={{
-                      width: c.r * 2.4,
-                      height: c.r * 2.4,
-                      borderColor: step.color,
-                      opacity: useTransform(circleProgress, [0, 1], [0, 0.2]),
-                    }}
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 3 + i * 0.4, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-
-                  {/* Main circle */}
-                  <motion.div
-                    className="w-full h-full rounded-full flex flex-col items-center justify-center relative"
-                    style={{
-                      border: `1.5px solid ${step.color}`,
-                      borderOpacity,
-                      background: useTransform(
-                        circleProgress,
-                        [0.5, 1],
-                        ['hsl(158 55% 8% / 0)', 'hsl(158 55% 8% / 0.7)']
-                      ),
-                      boxShadow: useTransform(
-                        glowSize,
-                        (v) => `0 0 ${v}px ${step.color}66, 0 0 ${v * 2}px ${step.color}22`
-                      ),
-                      backdropFilter: 'blur(12px)',
-                    }}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {steps.map((step, i) => {
+                const isActive = i === activeIdx;
+                const isDone   = i < activeIdx;
+                return (
+                  <div
+                    key={step.id}
+                    style={{ display: 'flex', alignItems: 'stretch', gap: 14 }}
                   >
-                    {/* Step number */}
+                    {/* Timeline spine */}
                     <div
-                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold text-black"
-                      style={{ background: step.color }}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: 14,
+                        flexShrink: 0,
+                      }}
                     >
-                      {String(step.id).padStart(2, '0')}
+                      <motion.div
+                        animate={{
+                          background: isActive
+                            ? '#7C3AED'
+                            : isDone
+                            ? 'rgba(124,58,237,0.45)'
+                            : 'rgba(255,255,255,0.1)',
+                          boxShadow: isActive
+                            ? '0 0 12px rgba(124,58,237,0.9)'
+                            : 'none',
+                          scale: isActive ? 1.3 : 1,
+                        }}
+                        transition={{ duration: 0.35 }}
+                        style={{
+                          width: 10,
+                          height: 10,
+                          borderRadius: '50%',
+                          flexShrink: 0,
+                          marginTop: 6,
+                        }}
+                      />
+                      {i < steps.length - 1 && (
+                        <div
+                          style={{
+                            flex: 1,
+                            width: 1,
+                            marginTop: 4,
+                            background:
+                              isDone || isActive
+                                ? 'linear-gradient(to bottom, rgba(124,58,237,0.5), rgba(124,58,237,0.12))'
+                                : 'rgba(255,255,255,0.06)',
+                          }}
+                        />
+                      )}
                     </div>
 
-                    {/* Icon */}
+                    {/* Step label */}
                     <motion.div
-                      style={{ color: step.color, opacity: useTransform(circleProgress, [0.3, 1], [0, 1]) }}
-                      className="mb-1 scale-75"
+                      animate={{ opacity: isActive ? 1 : isDone ? 0.5 : 0.28 }}
+                      transition={{ duration: 0.4 }}
+                      style={{
+                        paddingTop: 2,
+                        paddingBottom: i < steps.length - 1 ? 20 : 0,
+                      }}
                     >
-                      {step.icon}
+                      <span
+                        style={{
+                          display: 'block',
+                          fontSize: 9,
+                          letterSpacing: '0.15em',
+                          color: isActive
+                            ? 'rgba(168,85,247,0.9)'
+                            : 'rgba(255,255,255,0.25)',
+                          marginBottom: 2,
+                        }}
+                      >
+                        {String(step.id).padStart(2, '0')}
+                      </span>
+                      <span
+                        style={{
+                          display: 'block',
+                          fontSize: '0.8125rem',
+                          color: isActive ? '#ffffff' : 'rgba(255,255,255,0.5)',
+                          fontWeight: isActive ? 500 : 400,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {step.label}
+                      </span>
                     </motion.div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-                    {/* Label */}
-                    <motion.span
-                      style={{ opacity: useTransform(circleProgress, [0.4, 1], [0, 1]), color: step.color }}
-                      className="text-[9px] font-semibold tracking-wide uppercase text-center px-2 leading-tight"
-                    >
-                      {step.label}
-                    </motion.span>
-                  </motion.div>
-                </motion.div>
-              );
-            })}
+          {/* RIGHT — step detail */}
+          <div
+            className="flex-1 flex flex-col justify-center relative overflow-hidden"
+            style={{ padding: '0 9% 0 7%' }}
+          >
+            {/* Ghost step number */}
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={`n-${activeIdx}`}
+                className="absolute pointer-events-none select-none"
+                style={{
+                  right: '-0.04em',
+                  top: '50%',
+                  transform: 'translateY(-55%)',
+                  fontSize: 'clamp(9rem, 23vw, 19rem)',
+                  fontWeight: 800,
+                  fontFamily: '"Inter Tight", Inter, sans-serif',
+                  letterSpacing: '-0.05em',
+                  color: 'rgba(124,58,237,0.07)',
+                  lineHeight: 1,
+                  userSelect: 'none',
+                }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -25 }}
+                transition={{ duration: 0.5 }}
+              >
+                {String(steps[activeIdx].id).padStart(2, '0')}
+              </motion.span>
+            </AnimatePresence>
 
-            {/* SVG connecting lines */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-              {[
-                [50, 28, 25, 48],
-                [50, 28, 75, 48],
-                [25, 48, 18, 68],
-                [25, 48, 50, 72],
-                [75, 48, 50, 72],
-                [75, 48, 82, 68],
-                [50, 52, 50, 72],
-              ].map(([x1, y1, x2, y2], i) => (
-                <motion.line
+            {/* Mobile step counter */}
+            <p
+              className="lg:hidden"
+              style={{
+                fontSize: 9,
+                color: 'rgba(124,58,237,0.9)',
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                marginBottom: 20,
+              }}
+            >
+              Step {String(steps[activeIdx].id).padStart(2, '0')} &nbsp;/&nbsp; 06
+            </p>
+
+            {/* Icon */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`icon-${activeIdx}`}
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.6 }}
+                transition={{ duration: 0.35 }}
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: 14,
+                  background: 'rgba(124,58,237,0.15)',
+                  border: '1px solid rgba(124,58,237,0.3)',
+                  boxShadow: '0 0 24px rgba(124,58,237,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 24,
+                }}
+              >
+                <ActiveIcon
+                  style={{ width: 20, height: 20, color: 'rgba(168,85,247,0.9)', strokeWidth: 1.5 }}
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Title */}
+            <AnimatePresence mode="wait">
+              <motion.h3
+                key={`t-${activeIdx}`}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="font-light tracking-tight"
+                style={{
+                  fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                  color: '#ffffff',
+                  lineHeight: 1.15,
+                  letterSpacing: '-0.02em',
+                  marginBottom: 20,
+                  fontFamily: '"Inter Tight", Inter, sans-serif',
+                  maxWidth: '14ch',
+                }}
+              >
+                {steps[activeIdx].title}
+              </motion.h3>
+            </AnimatePresence>
+
+            {/* Description */}
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`d-${activeIdx}`}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, delay: 0.07, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  fontSize: '1.05rem',
+                  color: 'rgba(168,155,201,0.9)',
+                  lineHeight: 1.75,
+                  maxWidth: 430,
+                  marginBottom: 36,
+                }}
+              >
+                {steps[activeIdx].description}
+              </motion.p>
+            </AnimatePresence>
+
+            {/* Progress pills */}
+            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              {steps.map((_, i) => (
+                <motion.div
                   key={i}
-                  x1={x1} y1={y1} x2={x2} y2={y2}
-                  stroke="hsl(155 80% 35% / 0.2)"
-                  strokeWidth="0.3"
-                  strokeDasharray="1 1"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1, duration: 0.8 }}
+                  style={{ borderRadius: 999, height: 6 }}
+                  animate={{
+                    width: i === activeIdx ? 32 : 8,
+                    background:
+                      i === activeIdx
+                        ? '#7C3AED'
+                        : i < activeIdx
+                        ? 'rgba(124,58,237,0.35)'
+                        : 'rgba(255,255,255,0.12)',
+                  }}
+                  transition={{ duration: 0.3 }}
                 />
               ))}
-            </svg>
+            </div>
           </div>
-        </div>
-
-        {/* Active step detail — bottom center */}
-        <ActiveStepCard smoothProgress={smoothProgress} />
+        </motion.div>
       </div>
     </div>
-  );
-};
-
-// Separate component so hooks work cleanly
-const ActiveStepCard = ({ smoothProgress }: { smoothProgress: ReturnType<typeof useSpring> }) => {
-  const opacity = useTransform(smoothProgress, [0.08, 0.18], [0, 1]);
-  const y = useTransform(smoothProgress, [0.08, 0.18], [30, 0]);
-
-  // Which step is active
-  const stepIndexRaw = useTransform(smoothProgress, [0, 1], [0, steps.length - 0.01]);
-
-  return (
-    <motion.div
-      style={{ opacity, y }}
-      className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 w-full max-w-lg px-4"
-    >
-      <ActiveStepInner stepIndexRaw={stepIndexRaw} />
-    </motion.div>
-  );
-};
-
-import { useMotionValueEvent } from 'framer-motion';
-import { useState } from 'react';
-
-const ActiveStepInner = ({ stepIndexRaw }: { stepIndexRaw: ReturnType<typeof useTransform> }) => {
-  const [idx, setIdx] = useState(0);
-
-  useMotionValueEvent(stepIndexRaw, 'change', (v) => {
-    setIdx(Math.min(steps.length - 1, Math.max(0, Math.floor(v))));
-  });
-
-  const step = steps[idx];
-
-  return (
-    <motion.div
-      key={idx}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35 }}
-      className="glass-purple rounded-2xl px-6 py-5 border flex items-start gap-4"
-      style={{ borderColor: `${step.color}40` }}
-    >
-      <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-        style={{ background: `${step.color}20`, color: step.color }}
-      >
-        {step.icon}
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: step.color }}>
-          Step {String(step.id).padStart(2, '0')} · {step.label}
-        </div>
-        <div className="text-base font-medium text-white mb-1">{step.title}</div>
-        <div className="text-xs text-muted-foreground leading-relaxed">{step.description}</div>
-      </div>
-      {/* Progress dots */}
-      <div className="flex flex-col gap-1.5 flex-shrink-0 pt-1">
-        {steps.map((s, i) => (
-          <div
-            key={i}
-            className="rounded-full transition-all duration-300"
-            style={{
-              width: 6,
-              height: i === idx ? 18 : 6,
-              background: i === idx ? step.color : 'hsl(158 40% 16%)',
-            }}
-          />
-        ))}
-      </div>
-    </motion.div>
   );
 };
 

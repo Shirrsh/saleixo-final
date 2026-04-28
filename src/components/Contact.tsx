@@ -1,38 +1,17 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowRight, Mail, Phone, MapPin, CheckCircle2, Sparkles } from 'lucide-react';
+import { ArrowRight, Mail, Phone, CheckCircle2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-
-const services = [
-  'Product Photography',
-  'Ecommerce Design',
-  'A+ Content',
-  'Social Media Marketing',
-  'Brand Strategy',
-  'Marketplace Setup',
-];
 
 const Contact = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    newsletter: true,
-  });
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
-
-  const toggleService = (s: string) =>
-    setSelectedServices(prev =>
-      prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]
-    );
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -42,7 +21,7 @@ const Contact = () => {
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!formData.name.trim()) e.name = 'Required';
+    if (!formData.name.trim())  e.name  = 'Required';
     if (!formData.email.trim()) e.email = 'Required';
     else if (!/\S+@\S+\.\S+/.test(formData.email)) e.email = 'Invalid email';
     if (!formData.phone.trim()) e.phone = 'Required';
@@ -53,323 +32,210 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-
+    setLoading(true);
     try {
-      // Save to leads table
-      const { error } = await supabase.from('leads' as any).insert({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-        services: selectedServices,
-        newsletter: formData.newsletter,
-        source: 'website_contact_form',
-        status: 'new',
-        priority: 'medium',
+      await supabase.from('leads' as any).insert({
+        name: formData.name, email: formData.email,
+        phone: formData.phone, message: formData.message,
+        source: 'website_contact_form', status: 'new', priority: 'medium',
       });
-
-      if (error) throw error;
-
-      setSubmitted(true);
-      toast({ title: 'Message sent!', description: "We'll get back to you within 24 hours." });
-    } catch (err) {
-      console.error('Form submission error:', err);
-      // Still show success — fallback to activity_log
+    } catch {
       await supabase.from('activity_log').insert({
-        action: JSON.stringify({
-          type: 'contact_form',
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-          services: selectedServices,
-          newsletter: formData.newsletter,
-          submitted_at: new Date().toISOString(),
-        }),
-        item_type: 'contact_submission',
-        user_email: formData.email,
+        action: JSON.stringify({ type: 'contact_form', ...formData, submitted_at: new Date().toISOString() }),
+        item_type: 'contact_submission', user_email: formData.email,
       });
+    } finally {
+      setLoading(false);
       setSubmitted(true);
       toast({ title: 'Message sent!', description: "We'll get back to you within 24 hours." });
     }
   };
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
-    visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08, ease: 'easeOut' } }),
-  };
-
   return (
-    <section id="contact" className="py-20 md:py-28 bg-transparent">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="contact" className="py-12 md:py-16 bg-transparent">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
 
-        {/* Header */}
         <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-3xl overflow-hidden"
+          style={{
+            background: 'hsl(var(--surface))',
+            border: '1px solid hsl(var(--border))',
+          }}
         >
-          <motion.p variants={fadeUp} custom={0} className="text-xs font-bold tracking-[0.3em] uppercase text-accent-violet mb-3">
-            Get In Touch
-          </motion.p>
-          <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-5xl font-light text-white tracking-tight mb-4">
-            Ready to Transform<br />Your Brand?
-          </motion.h2>
-          <motion.p variants={fadeUp} custom={2} className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Book a free consultation — no commitment, just a conversation about your goals.
-          </motion.p>
-        </motion.div>
+          <div className="grid lg:grid-cols-2">
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
-
-          {/* ── Left info panel ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-2 space-y-6"
-          >
-            {/* What you get */}
+            {/* ── LEFT — headline + info ── */}
             <div
-              className="rounded-2xl p-6"
-              style={{
-                background: 'hsl(158 55% 8% / 0.6)',
-                border: '1px solid hsl(158 40% 16% / 0.6)',
-                backdropFilter: 'blur(20px)',
-              }}
+              className="p-8 md:p-10 flex flex-col justify-between"
+              style={{ borderRight: '1px solid hsl(var(--border))' }}
             >
-              <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-4 h-4 text-accent-violet" />
-                <span className="text-sm font-semibold text-white">What you get for free</span>
-              </div>
-              {[
-                'Full listing quality audit',
-                'Competitor benchmarking',
-                'Photography assessment',
-                'Custom growth roadmap',
-                'No obligation, ever',
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.08 }}
-                  className="flex items-center gap-3 py-2.5 border-b last:border-0"
-                  style={{ borderColor: 'hsl(158 40% 16% / 0.4)' }}
+              <div>
+                <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-4">
+                  Get In Touch
+                </p>
+                <h2
+                  className="font-bold leading-tight tracking-tight mb-4 text-foreground"
+                  style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}
                 >
-                  <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: '#a3e635' }} />
-                  <span className="text-sm text-foreground/80">{item}</span>
-                </motion.div>
-              ))}
-            </div>
+                  Let's Build<br />Something Great
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-8 max-w-xs">
+                  Book a free consultation. No commitment — just a conversation about your goals.
+                </p>
 
-            {/* Contact details */}
-            <div
-              className="rounded-2xl p-6 space-y-4"
-              style={{
-                background: 'hsl(158 55% 8% / 0.6)',
-                border: '1px solid hsl(158 40% 16% / 0.6)',
-                backdropFilter: 'blur(20px)',
-              }}
-            >
-              {[
-                { icon: <Mail className="w-4 h-4" />, label: 'info@saleixo.com' },
-                { icon: <Phone className="w-4 h-4" />, label: '+91 98765 43210' },
-                { icon: <MapPin className="w-4 h-4" />, label: 'Mumbai · Delhi · Bangalore' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'hsl(78 85% 52% / 0.15)', color: '#a3e635' }}
-                  >
-                    {item.icon}
-                  </div>
-                  <span className="text-sm text-foreground/70">{item.label}</span>
+                {/* What you get */}
+                <div className="space-y-3 mb-8">
+                  {[
+                    'Full listing quality audit',
+                    'Competitor benchmarking',
+                    'Custom growth roadmap',
+                    'No obligation, ever',
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-primary" />
+                      <span className="text-sm text-muted-foreground">{item}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </motion.div>
+              </div>
 
-          {/* ── Form ── */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-3"
-          >
-            <div
-              className="rounded-2xl p-8"
-              style={{
-                background: 'hsl(158 55% 8% / 0.7)',
-                border: '1px solid hsl(158 40% 16% / 0.6)',
-                backdropFilter: 'blur(20px)',
-              }}
-            >
-              {submitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-16 text-center"
+              {/* Contact links */}
+              <div className="space-y-3">
+                <a
+                  href="mailto:info@saleixo.com"
+                  className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
                 >
-                  <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
-                    style={{ background: 'hsl(78 85% 52% / 0.15)' }}
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <Mail className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                  info@saleixo.com
+                </a>
+              </div>
+            </div>
+
+            {/* ── RIGHT — form ── */}
+            <div className="p-8 md:p-10">
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="h-full flex flex-col items-center justify-center text-center py-8"
                   >
-                    <CheckCircle2 className="w-8 h-8 text-accent-violet" />
-                  </div>
-                  <h3 className="text-2xl font-light text-white mb-2">Message Sent!</h3>
-                  <p className="text-muted-foreground">We'll get back to you within 24 hours.</p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="mt-6 text-sm text-accent-violet hover:underline"
+                    <div className="w-14 h-14 rounded-full bg-primary/15 flex items-center justify-center mb-5">
+                      <CheckCircle2 className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Message Sent!</h3>
+                    <p className="text-sm text-muted-foreground mb-6">We'll get back to you within 24 hours.</p>
+                    <button
+                      onClick={() => { setSubmitted(false); setFormData({ name: '', email: '', phone: '', message: '' }); }}
+                      className="text-xs text-primary hover:underline"
+                    >
+                      Send another message
+                    </button>
+                  </motion.div>
+                ) : (
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
+                    noValidate
                   >
-                    Send another message
-                  </button>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-
-                  {/* Name + Email */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                        Full Name *
-                      </label>
-                      <Input
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Your name"
-                        className={`bg-surface/50 border-border-glow/30 focus:border-accent-violet/60 focus:ring-accent-violet/20 rounded-xl h-12 ${errors.name ? 'border-red-500/60' : ''}`}
-                      />
-                      {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                        Email Address *
-                      </label>
-                      <Input
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="your@email.com"
-                        className={`bg-surface/50 border-border-glow/30 focus:border-accent-violet/60 focus:ring-accent-violet/20 rounded-xl h-12 ${errors.email ? 'border-red-500/60' : ''}`}
-                      />
-                      {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
-                    </div>
-                  </div>
-
-                  {/* Phone */}
-                  <div>
-                    <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                      Phone Number *
-                    </label>
-                    <Input
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+91 98765 43210"
-                      className={`bg-surface/50 border-border-glow/30 focus:border-accent-violet/60 focus:ring-accent-violet/20 rounded-xl h-12 ${errors.phone ? 'border-red-500/60' : ''}`}
-                    />
-                    {errors.phone && <p className="text-xs text-red-400 mt-1">{errors.phone}</p>}
-                  </div>
-
-                  {/* Services selector */}
-                  <div>
-                    <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-                      Services Interested In
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {services.map(s => {
-                        const sel = selectedServices.includes(s);
-                        return (
-                          <button
-                            key={s}
-                            type="button"
-                            onClick={() => toggleService(s)}
-                            className="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200"
-                            style={{
-                              background: sel ? 'hsl(78 85% 52% / 0.15)' : 'hsl(158 40% 16% / 0.5)',
-                              border: `1px solid ${sel ? 'hsl(78 85% 52% / 0.5)' : 'hsl(158 40% 16%)'}`,
-                              color: sel ? '#a3e635' : 'hsl(155 20% 60%)',
-                            }}
-                          >
-                            {sel && '✓ '}{s}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                      Project Details
-                    </label>
-                    <Textarea
-                      name="message"
-                      rows={4}
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell us about your products, marketplaces, and goals..."
-                      className="bg-surface/50 border-border-glow/30 focus:border-accent-violet/60 focus:ring-accent-violet/20 rounded-xl resize-none"
-                    />
-                  </div>
-
-                  {/* Newsletter checkbox */}
-                  <label className="flex items-start gap-3 cursor-pointer group">
-                    <div className="relative mt-0.5 flex-shrink-0">
-                      <input
-                        type="checkbox"
-                        checked={formData.newsletter}
-                        onChange={e => setFormData(p => ({ ...p, newsletter: e.target.checked }))}
-                        className="sr-only"
-                      />
-                      <div
-                        className="w-5 h-5 rounded-md flex items-center justify-center transition-all duration-200"
-                        style={{
-                          background: formData.newsletter ? 'hsl(78 85% 52% / 0.25)' : 'hsl(158 40% 16% / 0.5)',
-                          border: `1.5px solid ${formData.newsletter ? '#a3e635' : 'hsl(158 40% 20%)'}`,
-                        }}
-                      >
-                        {formData.newsletter && (
-                          <motion.svg
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            width="10" height="8" viewBox="0 0 10 8" fill="none"
-                          >
-                            <path d="M1 4L3.5 6.5L9 1" stroke="#a3e635" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </motion.svg>
-                        )}
+                    {/* Name + Email row */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-medium text-muted-foreground mb-1.5">
+                          Full Name <span className="text-primary">*</span>
+                        </label>
+                        <Input
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Your name"
+                          className={`h-10 rounded-xl text-sm bg-background border-border focus:border-primary/50 ${errors.name ? 'border-red-500/60' : ''}`}
+                        />
+                        {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-muted-foreground mb-1.5">
+                          Email <span className="text-primary">*</span>
+                        </label>
+                        <Input
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="you@email.com"
+                          className={`h-10 rounded-xl text-sm bg-background border-border focus:border-primary/50 ${errors.email ? 'border-red-500/60' : ''}`}
+                        />
+                        {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
                       </div>
                     </div>
-                    <span className="text-sm text-muted-foreground leading-relaxed">
-                      Subscribe to our newsletter for ecommerce tips, photography insights, and exclusive offers.
-                    </span>
-                  </label>
 
-                  {/* Submit */}
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full rounded-full h-13 text-base font-semibold bg-primary text-black hover:bg-primary-hover hover:shadow-[0_0_40px_hsl(78_85%_52%/0.5)] transition-all duration-300 group"
-                  >
-                    Book Free Consultation
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                    {/* Phone */}
+                    <div>
+                      <label className="block text-xs font-medium text-muted-foreground mb-1.5">
+                        Phone <span className="text-primary">*</span>
+                      </label>
+                      <Input
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Your phone number"
+                        className={`h-10 rounded-xl text-sm bg-background border-border focus:border-primary/50 ${errors.phone ? 'border-red-500/60' : ''}`}
+                      />
+                      {errors.phone && <p className="text-xs text-red-400 mt-1">{errors.phone}</p>}
+                    </div>
 
-                  <p className="text-center text-xs text-muted-foreground/60">
-                    No spam. No commitment. We respond within 24 hours.
-                  </p>
-                </form>
-              )}
+                    {/* Message */}
+                    <div>
+                      <label className="block text-xs font-medium text-muted-foreground mb-1.5">
+                        Tell us about your project
+                      </label>
+                      <Textarea
+                        name="message"
+                        rows={4}
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Products, marketplaces, goals..."
+                        className="rounded-xl text-sm bg-background border-border focus:border-primary/50 resize-none"
+                      />
+                    </div>
+
+                    {/* Submit */}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all duration-200 group"
+                      style={{
+                        background: 'hsl(var(--primary))',
+                        color: 'hsl(var(--primary-foreground))',
+                        opacity: loading ? 0.7 : 1,
+                      }}
+                    >
+                      {loading ? 'Sending...' : 'Book Free Consultation'}
+                      {!loading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+                    </button>
+
+                    <p className="text-center text-xs text-muted-foreground/50">
+                      No spam. No commitment. Response within 24 hours.
+                    </p>
+                  </motion.form>
+                )}
+              </AnimatePresence>
             </div>
-          </motion.div>
-        </div>
+
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

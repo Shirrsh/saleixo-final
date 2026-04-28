@@ -275,11 +275,6 @@ const Design = () => {
               <Button size="lg" onClick={scrollToContact} className="hover-scale">
                 Book Free Consultation
               </Button>
-              <a href="tel:+917011441159">
-                <Button size="lg" variant="outline">
-                  <Phone className="w-4 h-4 mr-2" /> Call +91 7011441159
-                </Button>
-              </a>
             </div>
           </div>
         </section>

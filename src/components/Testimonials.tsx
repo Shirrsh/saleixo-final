@@ -77,8 +77,8 @@ const fan = [
   { rotate: 10,  scale: 0.80, offsetX:  260, zIndex: 1 },
 ];
 
-const CARD_W = 220;
-const CARD_H_CENTER = 400;
+const CARD_W = 200;
+const CARD_H_CENTER = 320;
 
 const Testimonials = () => {
   const [items, setItems] = useState<Testimonial[]>(fallback);
@@ -109,7 +109,7 @@ const Testimonials = () => {
   const current = items[active];
 
   return (
-    <section className="py-20 md:py-28 bg-transparent overflow-hidden">
+    <section className="py-12 md:py-16 bg-transparent overflow-hidden">
       <div className="container mx-auto px-4">
 
         {/* Header */}
@@ -118,7 +118,7 @@ const Testimonials = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <p className="text-xs font-bold tracking-[0.3em] uppercase text-accent-violet mb-3">
             Client Results
@@ -167,11 +167,11 @@ const Testimonials = () => {
                     height: cardH,
                     borderRadius: 24,
                     border: isActive
-                      ? '1.5px solid hsl(78 85% 52% / 0.5)'
-                      : '1px solid hsl(158 40% 16% / 0.5)',
+                      ? '1.5px solid hsl(43 65% 52% / 0.5)'
+                      : '1px solid hsl(174 30% 22% / 0.5)',
                     boxShadow: isActive
-                      ? '0 32px 80px hsl(160 60% 5% / 0.9), 0 0 40px hsl(78 85% 52% / 0.15)'
-                      : '0 16px 48px hsl(160 60% 5% / 0.7)',
+                      ? '0 32px 80px hsl(174 33% 9% / 0.9), 0 0 40px hsl(43 65% 52% / 0.15)'
+                      : '0 16px 48px hsl(174 33% 9% / 0.7)',
                   }}
                 >
                   {/* Product photo fills the card */}
@@ -186,7 +186,7 @@ const Testimonials = () => {
                   <div
                     className="absolute inset-0"
                     style={{
-                      background: 'linear-gradient(to top, hsl(160 60% 5% / 0.95) 0%, hsl(160 60% 5% / 0.4) 45%, transparent 70%)',
+                      background: 'linear-gradient(to top, hsl(174 33% 9% / 0.95) 0%, hsl(174 33% 9% / 0.4) 45%, transparent 70%)',
                     }}
                   />
 
@@ -194,9 +194,9 @@ const Testimonials = () => {
                   <div
                     className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold"
                     style={{
-                      background: 'hsl(78 85% 52% / 0.15)',
-                      border: '1px solid hsl(78 85% 52% / 0.4)',
-                      color: '#a3e635',
+                      background: 'hsl(43 65% 52% / 0.15)',
+                      border: '1px solid hsl(43 65% 52% / 0.4)',
+                      color: '#d4af37',
                       backdropFilter: 'blur(8px)',
                     }}
                   >
@@ -214,7 +214,7 @@ const Testimonials = () => {
                           className="w-3 h-3"
                           style={{
                             fill: si < item.rating ? '#facc15' : 'transparent',
-                            color: si < item.rating ? '#facc15' : 'hsl(158 30% 30%)',
+                            color: si < item.rating ? '#facc15' : 'hsl(174 30% 30%)',
                           }}
                         />
                       ))}
@@ -225,7 +225,7 @@ const Testimonials = () => {
                   {isActive && (
                     <motion.div
                       className="absolute inset-0 rounded-[24px] pointer-events-none"
-                      style={{ border: '1px solid hsl(78 85% 52% / 0.35)' }}
+                      style={{ border: '1px solid hsl(43 65% 52% / 0.35)' }}
                       animate={{ opacity: [0.5, 1, 0.5] }}
                       transition={{ duration: 2.5, repeat: Infinity }}
                     />
@@ -249,8 +249,8 @@ const Testimonials = () => {
             <div
               className="rounded-2xl p-8 relative"
               style={{
-                background: 'hsl(158 55% 8% / 0.6)',
-                border: '1px solid hsl(158 40% 16% / 0.6)',
+                background: 'hsl(174 37% 16% / 0.6)',
+                border: '1px solid hsl(174 30% 22% / 0.6)',
                 backdropFilter: 'blur(20px)',
               }}
             >
@@ -266,9 +266,9 @@ const Testimonials = () => {
                 <div
                   className="px-4 py-2 rounded-full text-sm font-bold"
                   style={{
-                    background: 'hsl(78 85% 52% / 0.12)',
-                    border: '1px solid hsl(78 85% 52% / 0.3)',
-                    color: '#a3e635',
+                    background: 'hsl(43 65% 52% / 0.12)',
+                    border: '1px solid hsl(43 65% 52% / 0.3)',
+                    color: '#d4af37',
                   }}
                 >
                   {current.result}
@@ -288,7 +288,7 @@ const Testimonials = () => {
               style={{
                 width: i === active ? 28 : 6,
                 height: 6,
-                background: i === active ? '#a3e635' : 'hsl(158 40% 16%)',
+                background: i === active ? '#d4af37' : 'hsl(174 30% 22%)',
               }}
             />
           ))}

@@ -31,7 +31,7 @@ const Card = ({
     className={`relative overflow-hidden rounded-2xl cursor-pointer group flex-shrink-0 ${className ?? ''}`}
     style={{
       height,
-      border: '1px solid hsl(158 40% 16% / 0.5)',
+      border: '1px solid hsl(174 30% 22% / 0.5)',
     }}
   >
     <img
@@ -52,9 +52,9 @@ const Card = ({
     <motion.div
       className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase"
       style={{
-        background: 'hsl(158 55% 8% / 0.85)',
-        border: '1px solid hsl(78 85% 52% / 0.4)',
-        color: '#a3e635',
+        background: 'hsl(174 37% 16% / 0.85)',
+        border: '1px solid hsl(43 65% 52% / 0.4)',
+        color: '#d4af37',
         backdropFilter: 'blur(10px)',
       }}
       initial={{ opacity: 0, y: -6 }}
@@ -78,9 +78,9 @@ const Card = ({
       <span
         className="px-2.5 py-1 rounded-full text-[10px] font-bold ml-3 flex-shrink-0"
         style={{
-          background: 'hsl(78 85% 52% / 0.15)',
-          border: '1px solid hsl(78 85% 52% / 0.35)',
-          color: '#a3e635',
+          background: 'hsl(43 65% 52% / 0.15)',
+          border: '1px solid hsl(43 65% 52% / 0.35)',
+          color: '#d4af37',
           backdropFilter: 'blur(8px)',
         }}
       >
@@ -91,13 +91,13 @@ const Card = ({
     {/* Hover glow border */}
     <div
       className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      style={{ boxShadow: 'inset 0 0 0 1px hsl(78 85% 52% / 0.35)' }}
+      style={{ boxShadow: 'inset 0 0 0 1px hsl(43 65% 52% / 0.35)' }}
     />
   </motion.div>
 );
 
 const Portfolio = () => (
-  <section id="portfolio" className="py-20 md:py-28 bg-transparent">
+  <section id="portfolio" className="py-12 md:py-16 bg-transparent">
     <div className="container mx-auto px-4 max-w-6xl">
 
       {/* Header */}
@@ -127,16 +127,16 @@ const Portfolio = () => (
       <div className="hidden md:grid grid-cols-3 gap-4">
 
         {/* Row 1 */}
-        <Card img={cat1} title="Diamond Earrings"     tag="Studio Photography" result="+312% CTR"    height={280} delay={0}    />
-        <Card img={cat2} title="Necklace Collection"  tag="Product Photography" result="Top Seller"  height={280} delay={0.07} />
-        <Card img={cat3} title="Incense Packaging"    tag="Brand Design"        result="3× Sales"    height={280} delay={0.14} />
+        <Card img={cat1} title="Diamond Earrings"     tag="Studio Photography" result="+312% CTR"    height={220} delay={0}    />
+        <Card img={cat2} title="Necklace Collection"  tag="Product Photography" result="Top Seller"  height={220} delay={0.07} />
+        <Card img={cat3} title="Incense Packaging"    tag="Brand Design"        result="3× Sales"    height={220} delay={0.14} />
 
-        {/* Row 2 — first card is tall (spans 2 rows visually via larger height) */}
+        {/* Row 2 */}
         <div className="row-span-1">
-          <Card img={cat4} title="Rudraksha Collection" tag="Lifestyle Shoot"   result="+180% Rev"   height={340} delay={0.21} className="w-full" />
+          <Card img={cat4} title="Rudraksha Collection" tag="Lifestyle Shoot"   result="+180% Rev"   height={260} delay={0.21} className="w-full" />
         </div>
-        <Card img={cat5} title="Aquamarine Bracelet"  tag="Product Photography" result="5★ Reviews"  height={340} delay={0.28} />
-        <Card img={cat6} title="Spiritual Products"   tag="Full Service"        result="2× Orders"   height={340} delay={0.35} />
+        <Card img={cat5} title="Aquamarine Bracelet"  tag="Product Photography" result="5★ Reviews"  height={260} delay={0.28} />
+        <Card img={cat6} title="Spiritual Products"   tag="Full Service"        result="2× Orders"   height={260} delay={0.35} />
 
       </div>
 
@@ -172,8 +172,8 @@ const Portfolio = () => (
             key={i}
             className="rounded-2xl p-4 text-center"
             style={{
-              background: 'hsl(158 55% 8% / 0.5)',
-              border: '1px solid hsl(158 40% 16% / 0.4)',
+              background: 'hsl(174 37% 16% / 0.5)',
+              border: '1px solid hsl(174 30% 22% / 0.4)',
               backdropFilter: 'blur(12px)',
             }}
           >

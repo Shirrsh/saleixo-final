@@ -8,46 +8,44 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Teal-Green Design System - Dark-first */
-    --background: 160 60% 5%;        /* #050f0b - Deep dark teal */
-    --surface: 158 55% 8%;           /* #0a1f16 - Inner container */
-    --surface-elevated: 156 50% 12%; /* #112b1e - Elevated cards */
-    
-    --foreground: 0 0% 100%;         /* #FFFFFF - Primary text */
-    --muted-foreground: 155 20% 65%; /* #8fb5a0 - Secondary text */
+    /* ── DARK THEME (default) — Metallic Blue ── */
+    --background: 220 30% 7%;
+    --surface: 220 28% 12%;
+    --surface-elevated: 220 26% 17%;
 
-    --card: 158 55% 8%;
+    --foreground: 0 0% 100%;
+    --muted-foreground: 215 20% 65%;
+
+    --card: 220 28% 12%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 156 50% 12%;
+    --popover: 220 26% 17%;
     --popover-foreground: 0 0% 100%;
 
-    /* Primary: Lime-green for CTAs and accents */
-    --primary: 78 85% 52%;           /* #c8f135 - Lime green */
-    --primary-foreground: 160 60% 5%;/* Dark text on lime */
-    --primary-hover: 82 80% 45%;     /* Slightly deeper lime */
+    --primary: 210 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 210 90% 48%;
 
-    /* Accent colors for glows and gradients */
-    --accent-violet: 155 80% 45%;    /* #16a869 - Teal green glow */
-    --accent-indigo: 170 75% 35%;    /* #0e8a6b - Deep teal */
-    
-    --secondary: 156 50% 12%;
+    --accent-violet: 210 85% 70%;
+    --accent-indigo: 220 60% 40%;
+
+    --secondary: 220 26% 17%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 158 40% 16%;
-    --muted-foreground: 155 20% 65%;
+    --muted: 220 25% 15%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 78 85% 52%;
-    --accent-foreground: 160 60% 5%;
-    --accent-hover: 82 80% 45%;
+    --accent: 210 85% 55%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 210 90% 48%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 158 40% 16%;           /* Teal-tinted border */
-    --border-glow: 155 70% 35%;      /* Teal glass highlight */
-    --input: 156 50% 12%;
-    --ring: 78 85% 52%;
+    --border: 220 25% 20%;
+    --border-glow: 210 85% 55%;
+    --input: 220 26% 17%;
+    --ring: 210 85% 55%;
 
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
@@ -55,68 +53,110 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    --sidebar-background: 158 55% 8%;
+    --sidebar-background: 220 28% 12%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 78 85% 52%;
-    --sidebar-primary-foreground: 160 60% 5%;
-    --sidebar-accent: 156 50% 12%;
+    --sidebar-primary: 210 85% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 26% 17%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 158 40% 16%;
-    --sidebar-ring: 78 85% 52%;
+    --sidebar-border: 220 25% 20%;
+    --sidebar-ring: 210 85% 55%;
   }
 
-  .dark {
-    /* Dark mode uses same tokens - this is a dark-first design */
-    --background: 160 60% 5%;
-    --surface: 158 55% 8%;
-    --surface-elevated: 156 50% 12%;
-    
-    --foreground: 0 0% 100%;
-    --muted-foreground: 155 20% 65%;
+  /* ── LIGHT THEME — Clean white like Dreamflux reference ── */
+  .light {
+    --background: 0 0% 100%;          /* pure white */
+    --surface: 0 0% 97%;              /* off-white surface */
+    --surface-elevated: 0 0% 100%;    /* white cards */
 
-    --card: 158 55% 8%;
-    --card-foreground: 0 0% 100%;
+    --foreground: 0 0% 5%;            /* near black text */
+    --muted-foreground: 0 0% 40%;     /* medium grey */
 
-    --popover: 156 50% 12%;
-    --popover-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
 
-    --primary: 78 85% 52%;
-    --primary-foreground: 160 60% 5%;
-    --primary-hover: 82 80% 45%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
 
-    --accent-violet: 155 80% 45%;
-    --accent-indigo: 170 75% 35%;
+    --primary: 0 0% 8%;               /* black CTA button */
+    --primary-foreground: 0 0% 100%;  /* white text on black */
+    --primary-hover: 0 0% 18%;
 
-    --secondary: 156 50% 12%;
-    --secondary-foreground: 0 0% 100%;
+    --accent-violet: 210 85% 50%;     /* blue accent for highlights */
+    --accent-indigo: 220 60% 40%;
 
-    --muted: 158 40% 16%;
-    --muted-foreground: 155 20% 65%;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 5%;
 
-    --accent: 78 85% 52%;
-    --accent-foreground: 160 60% 5%;
-    --accent-hover: 82 80% 45%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 40%;
 
-    --destructive: 0 84% 60%;
+    --accent: 0 0% 8%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 0 0% 18%;
+
+    --destructive: 0 84% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 158 40% 16%;
-    --border-glow: 155 70% 35%;
-    --input: 156 50% 12%;
-    --ring: 78 85% 52%;
+    --border: 0 0% 88%;               /* light grey border */
+    --border-glow: 0 0% 70%;
+    --input: 0 0% 94%;
+    --ring: 0 0% 8%;
 
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
     --success-hover: 142 76% 31%;
 
-    --sidebar-background: 158 55% 8%;
+    --sidebar-background: 0 0% 97%;
+    --sidebar-foreground: 0 0% 5%;
+    --sidebar-primary: 0 0% 8%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 92%;
+    --sidebar-accent-foreground: 0 0% 5%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 0 0% 8%;
+  }
+
+  /* dark class mirrors :root (dark is default) */
+  .dark {
+    --background: 220 30% 7%;
+    --surface: 220 28% 12%;
+    --surface-elevated: 220 26% 17%;
+    --foreground: 0 0% 100%;
+    --muted-foreground: 215 20% 65%;
+    --card: 220 28% 12%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 26% 17%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 210 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 210 90% 48%;
+    --accent-violet: 210 85% 70%;
+    --accent-indigo: 220 60% 40%;
+    --secondary: 220 26% 17%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 25% 15%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 210 85% 55%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 210 90% 48%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 25% 20%;
+    --border-glow: 210 85% 55%;
+    --input: 220 26% 17%;
+    --ring: 210 85% 55%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --success-hover: 142 76% 31%;
+    --sidebar-background: 220 28% 12%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 78 85% 52%;
-    --sidebar-primary-foreground: 160 60% 5%;
-    --sidebar-accent: 156 50% 12%;
+    --sidebar-primary: 210 85% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 26% 17%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 158 40% 16%;
-    --sidebar-ring: 78 85% 52%;
+    --sidebar-border: 220 25% 20%;
+    --sidebar-ring: 210 85% 55%;
   }
 }
 
@@ -128,22 +168,48 @@ All colors MUST be HSL.
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* Account for fixed header */
+    scroll-padding-top: 72px;
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
     @apply text-foreground;
     font-family: 'Inter Tight', Inter, system-ui, sans-serif;
-    background:
-      radial-gradient(ellipse 100% 90% at 50% 10%, hsl(155 80% 30% / 0.55) 0%, hsl(160 70% 15% / 0.25) 45%, transparent 65%),
-      hsl(160 60% 5%);
+    background: hsl(var(--background));
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
+    /* Smooth theme transition */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Dark mode body background */
+  :root body, .dark body {
+    background:
+      radial-gradient(ellipse 100% 90% at 50% 10%, hsl(210 85% 45% / 0.18) 0%, hsl(220 28% 12% / 0.3) 45%, transparent 65%),
+      hsl(220 30% 7%);
+  }
+
+  /* Light mode body background — pure white, no gradients */
+  .light body {
+    background: #ffffff;
+  }
+
+  /* Smooth transition for all color-bearing elements */
+  *, *::before, *::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+  }
+
+  /* But don't slow down transforms/animations */
+  [class*="animate-"], [style*="animation"], [style*="transform"] {
+    transition-property: opacity, box-shadow, border-color;
   }
 
   ::selection {
-    background: hsl(78 85% 52% / 0.35);
+    background: hsl(210 85% 55% / 0.35);
     color: hsl(0 0% 100%);
   }
 
@@ -176,13 +242,13 @@ All colors MUST be HSL.
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, hsl(var(--primary)), hsl(155 80% 40%));
+    background: linear-gradient(180deg, hsl(210 85% 55%), hsl(210 90% 48%));
     border-radius: 4px;
     border: 1px solid hsl(var(--border));
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, hsl(var(--primary-hover)), hsl(155 80% 45%));
+    background: linear-gradient(180deg, hsl(210 90% 48%), hsl(210 85% 70%));
     box-shadow: 0 2px 4px hsl(var(--primary) / 0.3);
   }
 
@@ -299,12 +365,63 @@ All colors MUST be HSL.
 
 /* Glassmorphic Surface */
 .glass-purple {
-  background: hsl(158 55% 8% / 0.6);
+  background: hsl(220 28% 12% / 0.65);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid hsl(158 40% 16% / 0.8);
+  border: 1px solid hsl(220 25% 25% / 0.8);
   box-shadow:
-    inset 0 1px 0 hsl(155 70% 35% / 0.3),
-    0 8px 32px hsl(160 60% 5% / 0.5);
+    inset 0 1px 0 hsl(210 85% 70% / 0.15),
+    0 8px 32px hsl(220 30% 7% / 0.6);
+}
+
+.light .glass-purple {
+  background: hsl(0 0% 100% / 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(0 0% 88%);
+  box-shadow: 0 2px 16px hsl(0 0% 0% / 0.08);
+}
+
+/* ── Hero light mode overrides ── */
+.light .hero-badge {
+  background: hsl(0 0% 94%);
+  border: 1px solid hsl(0 0% 82%);
+  color: hsl(0 0% 20%);
+  box-shadow: none;
+}
+
+.light .hero-text-white {
+  color: #0a0a0a !important;
+}
+
+.light .hero-text-accent {
+  color: hsl(210 85% 45%) !important;
+  text-shadow: none !important;
+}
+
+.light .hero-subtitle {
+  color: hsl(0 0% 35%) !important;
+}
+
+/* ── Hero gallery scroll animations — GPU composited, true 60fps ── */
+@keyframes scroll-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(var(--scroll-total, -1080px)); }
+}
+
+@keyframes scroll-down {
+  0%   { transform: translateY(var(--scroll-total, -1080px)); }
+  100% { transform: translateY(0); }
+}
+
+/* Mobile horizontal scroll */
+@keyframes mobile-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Marketplace logos marquee */
+@keyframes marquee-x {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* Animation Classes */
@@ -433,7 +550,7 @@ All colors MUST be HSL.
     45deg,
     transparent 30%,
     hsl(var(--primary) / 0.12) 45%,
-    hsl(155 80% 45% / 0.22) 50%,
+    hsl(43 65% 52% / 0.22) 50%,
     hsl(var(--primary) / 0.12) 55%,
     transparent 70%
   );
@@ -449,7 +566,7 @@ All colors MUST be HSL.
 
 .card-sweep:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 30px hsl(160 60% 5% / 0.5), 
+  box-shadow: 0 12px 30px hsl(220 30% 7% / 0.6),
               0 4px 12px hsl(var(--primary) / 0.3);
 }
 
@@ -503,9 +620,9 @@ All colors MUST be HSL.
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {
-    --primary: 78 100% 40%;
-    --accent: 155 100% 35%;
-    --border: 158 20% 80%;
+    --primary: 43 100% 45%;
+    --accent: 43 65% 52%;
+    --border: 174 20% 80%;
   }
 }
 

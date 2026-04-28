@@ -23,33 +23,25 @@ const Index = () => {
       <ScrollProgress />
       <ThemeToggle />
       
-      {/* Cosmic outer frame — top sections */}
-      <div className="mx-4 mt-4 lg:mx-8 lg:mt-6">
-        <div className="rounded-[2rem] border border-border-glow/40 overflow-hidden bg-surface/20 backdrop-blur-sm">
-          <Header />
-          <main>
-            <Hero />
-            <MarketplaceLogos />
-            <FeaturedServices />
-            <WhySaleixo />
-            <Portfolio />
-          </main>
-        </div>
-      </div>
+      {/* No frame wrapper — clean full-width layout */}
+      <Header />
+      <main>
+        <Hero />
+        <MarketplaceLogos />
+        <FeaturedServices />
+        <WhySaleixo />
+        <Portfolio />
+      </main>
 
       {/* HowItWorks — outside overflow-hidden so sticky scroll works */}
       <HowItWorks />
 
-      {/* Cosmic outer frame — bottom sections */}
-      <div className="mx-4 mb-4 lg:mx-8 lg:mb-6">
-        <div className="rounded-[2rem] border border-border-glow/40 overflow-hidden bg-surface/20 backdrop-blur-sm">
-          <main>
-            <Testimonials />
-            <Contact />
-          </main>
-          <Footer />
-        </div>
-      </div>
+      {/* Bottom sections — no frame */}
+      <main>
+        <Testimonials />
+        <Contact />
+      </main>
+      <Footer />
       
       <ScrollToTop />
       <WhatsAppButton />
