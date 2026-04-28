@@ -1,194 +1,385 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import {
+  Menu, X, Camera, ShoppingCart, BookOpen, Grid,
+  Mail, MessageCircle, ArrowRight, Star, HelpCircle,
+  Users, LogIn, Sun, Moon,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import saleixoLogo from '@/assets/saleixo-logo.png';
 
-type NavLink = { name: string; href: string; type: 'route' | 'scroll' };
-
-const navLinks: NavLink[] = [
-  { name: 'Photoshoots', href: '/categories', type: 'route'  },
-  { name: 'Ecommerce',   href: '/design',     type: 'route'  },
-  { name: 'Blog',        href: '/blog',        type: 'route'  },
-  { name: 'Portfolio',   href: '#portfolio',   type: 'scroll' },
-  { name: 'Contact',     href: '#contact',     type: 'scroll' },
+// ─── Desktop nav (matches live site exactly) ──────────────────────────────────
+const desktopNav = [
+  { name: 'Photoshoots', href: '/categories', type: 'route'  as const },
+  { name: 'Ecommerce',   href: '/design',     type: 'route'  as const },
+  { name: 'Blog',        href: '/blog',       type: 'route'  as const },
+  { name: 'Portfolio',   href: '#portfolio',  type: 'scroll' as const },
+  { name: 'Contact',     href: '#contact',    type: 'scroll' as const },
 ];
 
-const NavItem = ({ link, className, onClick, style }: {
-  link: NavLink; className: string; onClick?: () => void; style?: React.CSSProperties;
-}) => {
-  if (link.type === 'route') {
-    return <Link to={link.href} className={className} onClick={onClick} style={style}>{link.name}</Link>;
-  }
-  return <button className={className} onClick={onClick} style={style}>{link.name}</button>;
-};
+// ─── Mobile menu sections ─────────────────────────────────────────────────────
+const menuSections = [
+  {
+    label: 'Services',
+    items: [
+      { icon: Camera,       name: 'Product Photography', desc: 'Studio-grade shoots',    href: '/categories',           type: 'route'  as const },
+      { icon: ShoppingCart, name: 'Ecommerce Design',    desc: 'Listings & A+ content',  href: '/design',               type: 'route'  as const },
+      { icon: Grid,         name: 'All Services',        desc: 'Full service overview',  href: '/services',             type: 'route'  as const },
+    ],
+  },
+  {
+    label: 'Explore',
+    items: [
+      { icon: Star,       name: 'Portfolio',    desc: 'Our work & results', href: '#portfolio',            type: 'scroll' as const },
+      { icon: BookOpen,   name: 'Blog',         desc: 'Tips & insights',    href: '/blog',                 type: 'route'  as const },
+      { icon: HelpCircle, name: 'FAQ',          desc: 'Common questions',   href: '#faq',                  type: 'scroll' as const },
+      { icon: Users,      name: 'How It Works', desc: '6-step process',     href: '#how-it-works-section', type: 'scroll' as const },
+    ],
+  },
+];
 
+// ─── Header ───────────────────────────────────────────────────────────────────
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [isLight, setIsLight] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
+  const [isLight, setIsLight]       = useState(false);
 
+  // Track theme class on <html>
   useEffect(() => {
-    const checkTheme = () => setIsLight(document.documentElement.classList.contains('light'));
-    checkTheme();
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
+    const sync = () => setIsLight(document.documentElement.classList.contains('light'));
+    sync();
+    const obs = new MutationObserver(sync);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => obs.disconnect();
   }, []);
 
+  // Scroll-triggered glass background
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
+  const scrollTo = (href: string, closeMobile = false) => {
+    if (closeMobile) setMobileOpen(false);
+    setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }), closeMobile ? 300 : 50);
   };
 
-  const handleNavClick = (link: NavLink) => {
-    if (link.type === 'scroll') scrollToSection(link.href);
-    else setIsMenuOpen(false);
+  const toggleTheme = () => {
+    const html = document.documentElement;
+    const next = !isLight;
+    html.classList.toggle('light', next);
+    html.classList.toggle('dark', !next);
+    localStorage.setItem('theme', next ? 'light' : 'dark');
   };
 
-  // Colors based on theme + scroll state
-  const headerBg = scrolled
-    ? (isLight ? 'rgba(255,255,255,0.96)' : 'hsl(220 30% 7% / 0.92)')
-    : 'transparent';
+  // ── Derived tokens ────────────────────────────────────────────────────────
+  const navColor   = isLight ? 'hsl(0 0% 20%)'  : 'hsl(215 15% 68%)';
+  const navHover   = isLight ? '#000'            : '#fff';
+  const ctaBg      = isLight ? '#0d0d0d'         : '#ffffff';
+  const ctaFg      = isLight ? '#ffffff'         : '#0d0d0d';
+  const menuBg     = isLight ? '#ffffff'         : 'hsl(220 30% 8%)';
+  const menuText   = isLight ? '#0a0a0a'         : '#ffffff';
+  const menuMuted  = isLight ? 'hsl(0 0% 45%)'  : 'hsl(215 20% 60%)';
+  const menuBorder = isLight ? 'hsl(0 0% 90%)'  : 'hsl(220 25% 18%)';
+  const menuCard   = isLight ? 'hsl(0 0% 97%)'  : 'hsl(220 28% 12%)';
 
-  const headerBorder = scrolled
-    ? (isLight ? '1px solid hsl(0 0% 90%)' : '1px solid hsl(220 25% 18% / 0.6)')
+  const glassBg = isLight
+    ? (scrolled ? 'rgba(255,255,255,0.95)' : 'transparent')
+    : (scrolled ? 'hsl(220 30% 7% / 0.92)' : 'transparent');
+  const glassBorder = scrolled
+    ? (isLight ? '1px solid hsl(0 0% 90%)' : '1px solid hsl(220 25% 16% / 0.6)')
     : '1px solid transparent';
 
-  const navColor    = isLight ? 'hsl(0 0% 35%)'  : 'hsl(215 20% 68%)';
-  const navHoverBg  = isLight ? 'hsl(0 0% 95%)'  : 'hsl(220 25% 18%)';
-
-  // CTA pill — black on light, white outline on dark
-  const ctaBg     = isLight ? '#0a0a0a' : '#ffffff';
-  const ctaColor  = isLight ? '#ffffff' : '#0a0a0a';
-  const ctaBorder = isLight ? '#0a0a0a' : '#ffffff';
+  // Nav text needs to be readable over the hero in both themes
+  const navColorFinal   = scrolled ? navColor   : (isLight ? 'hsl(0 0% 20%)' : 'hsl(215 15% 80%)');
+  const navHoverFinal   = scrolled ? navHover   : (isLight ? '#000' : '#fff');
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={{
-        background: headerBg,
-        borderBottom: headerBorder,
-        backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <>
+      {/* ── Fixed bar ──────────────────────────────────────────────────────── */}
+      <header
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        style={{
+          background: glassBg,
+          borderBottom: glassBorder,
+          backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-5 lg:px-10">
+          <div className="flex items-center justify-between h-16">
 
-          {/* Logo — left */}
-          <Link
-            to="/"
-            className="flex items-center flex-shrink-0 hover:opacity-75 transition-opacity"
-            aria-label="Saleixo home"
-          >
-            <img
-              src={saleixoLogo}
-              alt="Saleixo"
-              width={1584}
-              height={672}
-              className="h-6 md:h-7 w-auto"
-            />
-          </Link>
+            {/* ── Logo ─────────────────────────────────────────────────────── */}
+            <Link
+              to="/"
+              className="flex-shrink-0 hover:opacity-70 transition-opacity duration-200"
+              aria-label="Saleixo home"
+              onClick={() => setMobileOpen(false)}
+            >
+              <img src={saleixoLogo} alt="Saleixo" width={1584} height={672} className="h-6 md:h-7 w-auto" />
+            </Link>
 
-          {/* Nav — centered absolutely */}
-          <nav
-            className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2"
-            aria-label="Main navigation"
-          >
-            {navLinks.map(link => (
-              <NavItem
-                key={link.name}
-                link={link}
-                className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150"
-                style={{ color: navColor }}
-                onClick={() => handleNavClick(link)}
-              />
-            ))}
-          </nav>
+            {/* ── Desktop center nav ────────────────────────────────────────── */}
+            <nav className="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2" aria-label="Main navigation">
+              {desktopNav.map(link =>
+                link.type === 'route' ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-sm transition-colors duration-150"
+                    style={{ color: navColorFinal }}
+                    onMouseEnter={e => (e.currentTarget.style.color = navHoverFinal)}
+                    onMouseLeave={e => (e.currentTarget.style.color = navColorFinal)}
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.name}
+                    onClick={() => scrollTo(link.href)}
+                    className="text-sm transition-colors duration-150"
+                    style={{ color: navColorFinal }}
+                    onMouseEnter={e => (e.currentTarget.style.color = navHoverFinal)}
+                    onMouseLeave={e => (e.currentTarget.style.color = navColorFinal)}
 
-          {/* Right side — CTA pill + mobile menu */}
-          <div className="flex items-center gap-3">
-            {/* CTA pill button */}
+                  >
+                    {link.name}
+                  </button>
+                )
+              )}
+            </nav>
+
+            {/* ── Desktop right: Book Call + theme toggle ───────────────────── */}
+            <div className="hidden md:flex items-center gap-3">
+              <button
+                onClick={() => scrollTo('#contact')}
+                className="px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 hover:opacity-80 active:scale-95"
+                style={{ background: ctaBg, color: ctaFg }}
+              >
+                Book Call
+              </button>
+
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:opacity-80 active:scale-95"
+                style={{
+                  background: isLight ? 'hsl(0 0% 93%)' : 'hsl(220 25% 16%)',
+                  border: isLight ? '1px solid hsl(0 0% 84%)' : '1px solid hsl(220 25% 24%)',
+                  color: isLight ? 'hsl(0 0% 35%)' : 'hsl(215 20% 65%)',
+                }}
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  {isLight ? (
+                    <motion.span key="moon" initial={{ rotate: 90, opacity: 0, scale: 0.5 }} animate={{ rotate: 0, opacity: 1, scale: 1 }} exit={{ rotate: -90, opacity: 0, scale: 0.5 }} transition={{ duration: 0.18 }}>
+                      <Moon size={14} />
+                    </motion.span>
+                  ) : (
+                    <motion.span key="sun" initial={{ rotate: -90, opacity: 0, scale: 0.5 }} animate={{ rotate: 0, opacity: 1, scale: 1 }} exit={{ rotate: 90, opacity: 0, scale: 0.5 }} transition={{ duration: 0.18 }}>
+                      <Sun size={14} />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+            </div>
+
+            {/* ── Mobile hamburger ─────────────────────────────────────────── */}
             <button
-              onClick={() => scrollToSection('#contact')}
-              className="hidden md:flex items-center rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200"
+              className="md:hidden flex items-center justify-center rounded-xl transition-all duration-200 active:scale-95"
               style={{
-                background: ctaBg,
-                color: ctaColor,
-                border: `1.5px solid ${ctaBorder}`,
+                width: 44, height: 44,
+                color: isLight ? '#111' : (scrolled ? 'hsl(215 20% 70%)' : '#ffffff'),
+                background: mobileOpen ? (isLight ? 'hsl(0 0% 94%)' : 'hsl(220 28% 14%)') : 'transparent',
               }}
-              onMouseEnter={e => {
-                const el = e.currentTarget;
-                el.style.opacity = '0.82';
-                el.style.transform = 'translateY(-1px)';
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget;
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-              }}
+              onClick={() => setMobileOpen(v => !v)}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             >
-              Book Call
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileOpen ? (
+                  <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <X size={20} />
+                  </motion.span>
+                ) : (
+                  <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <Menu size={20} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
 
-            {/* Mobile hamburger */}
-            <button
-              className="md:hidden p-2 rounded-lg transition-colors"
-              style={{ color: isLight ? '#111' : 'hsl(215 20% 70%)' }}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile dropdown */}
+      {/* ── Full-screen mobile menu ───────────────────────────────────────────── */}
       <AnimatePresence>
-        {isMenuOpen && (
+        {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
-            style={{
-              background: isLight ? 'rgba(255,255,255,0.98)' : 'hsl(220 30% 7% / 0.97)',
-              backdropFilter: 'blur(20px)',
-              borderBottom: isLight ? '1px solid hsl(0 0% 90%)' : '1px solid hsl(220 25% 18%)',
-            }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 md:hidden flex flex-col"
+            style={{ background: menuBg, paddingTop: '64px' }}
           >
-            <nav className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
-              {navLinks.map(link => (
-                <NavItem
-                  key={link.name}
-                  link={link}
-                  className="text-left py-3 px-3 text-sm font-medium rounded-xl transition-colors"
-                  style={{ color: isLight ? 'hsl(0 0% 20%)' : 'hsl(215 20% 72%)' }}
-                  onClick={() => handleNavClick(link)}
-                />
+            {/* Scrollable body */}
+            <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-6 space-y-6">
+
+              {menuSections.map((section, si) => (
+                <div key={si}>
+                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: menuMuted }}>
+                    {section.label}
+                  </p>
+                  <div className="space-y-2">
+                    {section.items.map((item, ii) => {
+                      const Icon = item.icon;
+                      const row = (
+                        <motion.div
+                          key={ii}
+                          initial={{ opacity: 0, x: -12 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: si * 0.08 + ii * 0.05 }}
+                          className="flex items-center gap-4 p-4 rounded-2xl active:scale-[0.98] transition-transform"
+                          style={{ background: menuCard, minHeight: 64 }}
+                          onClick={() => {
+                            if (item.type === 'scroll') scrollTo(item.href, true);
+                            else setMobileOpen(false);
+                          }}
+                        >
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style={{ background: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 28% 18%)' }}>
+                            <Icon size={18} style={{ color: isLight ? '#0a0a0a' : '#93c5fd' }} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-semibold text-sm" style={{ color: menuText }}>{item.name}</div>
+                            <div className="text-xs mt-0.5" style={{ color: menuMuted }}>{item.desc}</div>
+                          </div>
+                          <ArrowRight size={16} style={{ color: menuMuted, flexShrink: 0 }} />
+                        </motion.div>
+                      );
+                      return item.type === 'route'
+                        ? <Link key={ii} to={item.href} onClick={() => setMobileOpen(false)}>{row}</Link>
+                        : <div key={ii} className="cursor-pointer">{row}</div>;
+                    })}
+                  </div>
+                </div>
               ))}
-              <div className="pt-2 pb-1">
+
+              <div style={{ height: 1, background: menuBorder }} />
+
+              {/* Sign In */}
+              <div>
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: menuMuted }}>Account</p>
+                <Link to="/admin/login" onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-4 p-4 rounded-2xl active:opacity-70"
+                  style={{ background: menuCard }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 28% 18%)' }}>
+                    <LogIn size={18} style={{ color: isLight ? '#0a0a0a' : '#93c5fd' }} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-sm" style={{ color: menuText }}>Sign In</div>
+                    <div className="text-xs mt-0.5" style={{ color: menuMuted }}>Admin panel access</div>
+                  </div>
+                  <ArrowRight size={16} style={{ color: menuMuted, flexShrink: 0 }} />
+                </Link>
+              </div>
+
+              <div style={{ height: 1, background: menuBorder }} />
+
+              {/* Contact */}
+              <div>
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: menuMuted }}>Get In Touch</p>
+                <div className="space-y-2">
+                  <a href="mailto:info@saleixo.com" onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-4 p-4 rounded-2xl active:opacity-70"
+                    style={{ background: menuCard }}>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 28% 18%)' }}>
+                      <Mail size={18} style={{ color: isLight ? '#0a0a0a' : '#93c5fd' }} />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-sm" style={{ color: menuText }}>Email Us</div>
+                      <div className="text-xs mt-0.5" style={{ color: menuMuted }}>info@saleixo.com</div>
+                    </div>
+                  </a>
+                  <a href="https://wa.me/917011441159" target="_blank" rel="noopener noreferrer"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-4 p-4 rounded-2xl active:opacity-70"
+                    style={{ background: menuCard }}>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: '#25D36622' }}>
+                      <MessageCircle size={18} style={{ color: '#25D366' }} />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-sm" style={{ color: menuText }}>WhatsApp</div>
+                      <div className="text-xs mt-0.5" style={{ color: menuMuted }}>Chat with us directly</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div className="rounded-2xl p-4" style={{ background: menuCard }}>
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: menuMuted }}>Serving Clients In</p>
+                <p className="text-sm font-medium" style={{ color: menuText }}>US · UK · FR · DE · AU · CA · IN</p>
+              </div>
+            </div>
+
+            {/* Sticky bottom: theme toggle + CTA */}
+            <div className="px-5 py-4 border-t space-y-3" style={{ borderColor: menuBorder, background: menuBg }}>
+              {/* Theme row */}
+              <div className="flex items-center justify-between px-4 py-3 rounded-2xl" style={{ background: menuCard }}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: isLight ? 'hsl(48 96% 53% / 0.15)' : 'hsl(220 28% 18%)' }}>
+                    {isLight
+                      ? <Sun size={18} style={{ color: '#f59e0b' }} />
+                      : <Moon size={18} style={{ color: '#93c5fd' }} />}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-sm" style={{ color: menuText }}>{isLight ? 'Light Mode' : 'Dark Mode'}</div>
+                    <div className="text-xs mt-0.5" style={{ color: menuMuted }}>Tap to switch</div>
+                  </div>
+                </div>
+                {/* Pill toggle */}
                 <button
-                  onClick={() => scrollToSection('#contact')}
-                  className="w-full rounded-full py-3 text-sm font-semibold transition-all"
-                  style={{ background: ctaBg, color: ctaColor }}
+                  onClick={toggleTheme}
+                  aria-label="Toggle theme"
+                  className="relative flex-shrink-0 active:scale-95 transition-transform"
+                  style={{
+                    width: 48, height: 28, borderRadius: 999,
+                    background: isLight ? '#f59e0b' : 'hsl(220 28% 22%)',
+                    border: `1px solid ${isLight ? '#d97706' : 'hsl(220 25% 30%)'}`,
+                  }}
                 >
-                  Book Consultation
+                  <motion.span
+                    className="absolute top-[3px] w-5 h-5 rounded-full bg-white"
+                    animate={{ left: isLight ? 24 : 3 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  />
                 </button>
               </div>
-            </nav>
+
+              {/* Book CTA */}
+              <button
+                onClick={() => scrollTo('#contact', true)}
+                className="w-full py-4 rounded-2xl font-bold text-base active:scale-[0.98] transition-transform"
+                style={{ background: ctaBg, color: ctaFg, minHeight: 56 }}
+              >
+                Book Free Strategy Call
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };
 
