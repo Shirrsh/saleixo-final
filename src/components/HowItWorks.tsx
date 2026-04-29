@@ -7,38 +7,28 @@ import {
   useSpring,
   useMotionValueEvent,
 } from 'framer-motion';
-import { FileText, Search, UserCheck, Camera, Rocket, BarChart3 } from 'lucide-react';
+import { MessageSquare, Map, Rocket, BarChart3 } from 'lucide-react';
 
 const steps = [
   {
-    id: 1, label: 'Requirements', Icon: FileText,
-    title: 'Share Your Requirements',
-    description: 'Tell us about your products, target marketplaces, and goals. We map out a custom strategy tailored to your brand.',
+    id: 1, label: 'Consult', Icon: MessageSquare,
+    title: 'Free Discovery Call',
+    description: 'We start with a free 30-minute consultation to understand your goals, audience, and what\'s holding your growth back — zero obligation.',
   },
   {
-    id: 2, label: 'Free Audit', Icon: Search,
-    title: 'Free Brand Audit',
-    description: 'We analyse your current listings, photography, and market position — identifying exactly where revenue is being left on the table.',
+    id: 2, label: 'Strategy', Icon: Map,
+    title: 'Custom Roadmap',
+    description: 'Our team builds a custom growth roadmap with clear milestones, timelines, and expected ROI — so you know exactly what to expect.',
   },
   {
-    id: 3, label: 'Onboarding', Icon: UserCheck,
-    title: 'Seamless Onboarding',
-    description: 'We set up your accounts, collect product samples, and brief our studio team — zero friction, fully managed.',
+    id: 3, label: 'Execution', Icon: Rocket,
+    title: 'Build & Launch',
+    description: 'We build, launch, and manage everything — websites, ads, videos, social media, and automation — on time and on budget.',
   },
   {
-    id: 4, label: 'Photography', Icon: Camera,
-    title: 'Studio Shoot & Design',
-    description: 'Professional product photography, A+ content, and listing design — all crafted to convert browsers into buyers.',
-  },
-  {
-    id: 5, label: 'Launch', Icon: Rocket,
-    title: 'Go Live Across Platforms',
-    description: 'We publish optimised listings across Amazon, Flipkart, Etsy, Shopify and more — simultaneously, in every target market.',
-  },
-  {
-    id: 6, label: 'Growth', Icon: BarChart3,
-    title: 'Scale & Optimise',
-    description: 'Ongoing analytics, ad management, and content refresh keep your sales climbing month after month.',
+    id: 4, label: 'Growth', Icon: BarChart3,
+    title: 'Scale & Optimize',
+    description: 'Track results in real-time with transparent dashboards, optimize what works, and scale your growth every single month.',
   },
 ];
 
@@ -46,6 +36,7 @@ const steps = [
 const HowItWorks = () => {
   const containerRef              = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
+  const touchStartX               = useRef<number | null>(null);
 
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
   const smooth = useSpring(scrollYProgress, { stiffness: 55, damping: 20 });
@@ -61,11 +52,26 @@ const HowItWorks = () => {
 
   const ActiveIcon = steps[activeIdx].Icon;
 
+  // Mobile swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      setActiveIdx(i => Math.max(0, Math.min(steps.length - 1, i + (diff > 0 ? 1 : -1))));
+    }
+    touchStartX.current = null;
+  };
+
   return (
-    <div ref={containerRef} className="relative" style={{ height: '580vh' }}>
+    <div ref={containerRef} className="relative" style={{ height: '420vh' }}>
       <div
         className="sticky top-0 h-screen overflow-hidden"
         style={{ background: '#0A0418' }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Ambient glow */}
         <div
@@ -92,7 +98,7 @@ const HowItWorks = () => {
             How It Works
           </h2>
           <p style={{ color: 'rgba(168,155,201,0.85)', fontSize: '0.95rem' }}>
-            Six steps from first conversation to scaling sales
+            Four steps from first conversation to scaling sales
           </p>
           <motion.div
             animate={{ y: [0, 7, 0] }}
@@ -275,7 +281,7 @@ const HowItWorks = () => {
                 marginBottom: 20,
               }}
             >
-              Step {String(steps[activeIdx].id).padStart(2, '0')} &nbsp;/&nbsp; 06
+              Step {String(steps[activeIdx].id).padStart(2, '0')} &nbsp;/&nbsp; 04
             </p>
 
             {/* Icon */}
@@ -366,6 +372,37 @@ const HowItWorks = () => {
                   transition={{ duration: 0.3 }}
                 />
               ))}
+            </div>
+
+            {/* Mobile tap nav */}
+            <div className="lg:hidden flex items-center gap-3 mt-5">
+              <button
+                onClick={() => setActiveIdx(i => Math.max(0, i - 1))}
+                disabled={activeIdx === 0}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
+                style={{
+                  background: 'rgba(124,58,237,0.15)',
+                  border: '1px solid rgba(124,58,237,0.3)',
+                  color: 'rgba(168,85,247,0.9)',
+                }}
+              >
+                ←
+              </button>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.15em' }}>
+                Swipe or tap
+              </span>
+              <button
+                onClick={() => setActiveIdx(i => Math.min(steps.length - 1, i + 1))}
+                disabled={activeIdx === steps.length - 1}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
+                style={{
+                  background: 'rgba(124,58,237,0.15)',
+                  border: '1px solid rgba(124,58,237,0.3)',
+                  color: 'rgba(168,85,247,0.9)',
+                }}
+              >
+                →
+              </button>
             </div>
           </div>
         </motion.div>

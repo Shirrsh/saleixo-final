@@ -1,239 +1,248 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
-import { ArrowRight, Mail, Phone, CheckCircle2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { ArrowRight, MessageCircle, Check } from 'lucide-react';
+
+const dynamicWords = [
+  { word: 'More Sales',       color: '#d4af37' },
+  { word: 'More Clicks',      color: '#4ade80' },
+  { word: 'More Trust',       color: '#60a5fa' },
+  { word: 'More Conversions', color: '#f472b6' },
+  { word: 'More Revenue',     color: '#fb923c' },
+];
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [wordIdx, setWordIdx] = useState(0);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
+  useEffect(() => {
+    const id = setInterval(() => {
+      setWordIdx(i => (i + 1) % dynamicWords.length);
+    }, 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  const handleBookCall = () => {
+    window.open('https://wa.me/919634355530?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%20strategy%20call', '_blank');
   };
 
-  const validate = () => {
-    const e: Record<string, string> = {};
-    if (!formData.name.trim())  e.name  = 'Required';
-    if (!formData.email.trim()) e.email = 'Required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) e.email = 'Invalid email';
-    if (!formData.phone.trim()) e.phone = 'Required';
-    setErrors(e);
-    return Object.keys(e).length === 0;
+  const handleWhatsApp = () => {
+    window.open('https://wa.me/919634355530', '_blank');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-    setLoading(true);
-    try {
-      await supabase.from('leads' as any).insert({
-        name: formData.name, email: formData.email,
-        phone: formData.phone, message: formData.message,
-        source: 'website_contact_form', status: 'new', priority: 'medium',
-      });
-    } catch {
-      await supabase.from('activity_log').insert({
-        action: JSON.stringify({ type: 'contact_form', ...formData, submitted_at: new Date().toISOString() }),
-        item_type: 'contact_submission', user_email: formData.email,
-      });
-    } finally {
-      setLoading(false);
-      setSubmitted(true);
-      toast({ title: 'Message sent!', description: "We'll get back to you within 24 hours." });
-    }
-  };
+  const current = dynamicWords[wordIdx];
 
   return (
-    <section id="contact" className="py-12 md:py-16 bg-transparent">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+    <section
+      id="contact"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: '#060d0a' }}
+    >
+      {/* Background radial glows */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(26,74,58,0.45) 0%, transparent 70%)',
+        }}
+      />
+      <div
+        className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+      />
+      <div
+        className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(74,222,128,0.06) 0%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+      />
 
+      {/* Subtle grid texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-10 py-20 text-center">
+
+        {/* Top label */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: -16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-3xl overflow-hidden"
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 mb-8"
+        >
+          <div className="h-px w-8" style={{ background: '#d4af37' }} />
+          <span
+            className="text-xs font-bold tracking-[0.3em] uppercase"
+            style={{ color: '#d4af37' }}
+          >
+            Free 30-Min Strategy Call
+          </span>
+          <div className="h-px w-8" style={{ background: '#d4af37' }} />
+        </motion.div>
+
+        {/* Main headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          <h2
+            className="font-extrabold tracking-tight leading-[1.1] mb-4"
+            style={{
+              fontSize: 'clamp(2.4rem, 6vw, 5rem)',
+              color: '#ffffff',
+              fontFamily: '"Inter Tight", Inter, sans-serif',
+            }}
+          >
+            Better Images Drive
+          </h2>
+
+          {/* Animated word */}
+          <div
+            className="relative flex items-center justify-center overflow-hidden mb-4"
+            style={{ height: 'clamp(3rem, 7.5vw, 6.5rem)' }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={wordIdx}
+                initial={{ y: 60, opacity: 0, filter: 'blur(8px)' }}
+                animate={{ y: 0,  opacity: 1, filter: 'blur(0px)' }}
+                exit={{   y: -60, opacity: 0, filter: 'blur(8px)' }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute font-extrabold tracking-tight leading-none"
+                style={{
+                  fontSize: 'clamp(2.4rem, 6vw, 5rem)',
+                  color: current.color,
+                  fontFamily: '"Inter Tight", Inter, sans-serif',
+                  textShadow: `0 0 40px ${current.color}55`,
+                }}
+              >
+                {current.word}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+
+          <h2
+            className="font-extrabold tracking-tight leading-[1.1]"
+            style={{
+              fontSize: 'clamp(2.4rem, 6vw, 5rem)',
+              color: '#ffffff',
+              fontFamily: '"Inter Tight", Inter, sans-serif',
+            }}
+          >
+            for Your Ecommerce Store.
+          </h2>
+        </motion.div>
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mt-8 mb-8 mx-auto leading-relaxed"
           style={{
-            background: 'hsl(var(--surface))',
-            border: '1px solid hsl(var(--border))',
+            fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
+            color: 'rgba(255,255,255,0.55)',
+            maxWidth: '560px',
           }}
         >
-          <div className="grid lg:grid-cols-2">
+          Book a free 30-minute strategy call. We'll audit your current
+          listings and give you a custom action plan to double your sales —
+          absolutely free.
+        </motion.p>
 
-            {/* ── LEFT — headline + info ── */}
+        {/* Benefits row */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-12"
+        >
+          {['No Commitment Required', '100% Free Strategy Call', 'Custom Growth Plan Included'].map((item, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <Check className="w-4 h-4 flex-shrink-0" style={{ color: '#4ade80' }} />
+              <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{item}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          {/* Primary */}
+          <button
+            onClick={handleBookCall}
+            className="group relative flex items-center justify-center gap-2.5 px-9 py-4 rounded-full font-bold text-base transition-all duration-200 active:scale-95 overflow-hidden"
+            style={{
+              background: '#d4af37',
+              color: '#0a0a0a',
+              fontSize: '1rem',
+              minWidth: '240px',
+              boxShadow: '0 0 32px rgba(212,175,55,0.35)',
+            }}
+          >
+            <span className="relative z-10">Book My Free Strategy Call</span>
+            <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
+            {/* Hover shimmer */}
             <div
-              className="p-8 md:p-10 flex flex-col justify-between"
-              style={{ borderRight: '1px solid hsl(var(--border))' }}
-            >
-              <div>
-                <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-4">
-                  Get In Touch
-                </p>
-                <h2
-                  className="font-bold leading-tight tracking-tight mb-4 text-foreground"
-                  style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}
-                >
-                  Let's Build<br />Something Great
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-8 max-w-xs">
-                  Book a free consultation. No commitment — just a conversation about your goals.
-                </p>
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }}
+            />
+          </button>
 
-                {/* What you get */}
-                <div className="space-y-3 mb-8">
-                  {[
-                    'Full listing quality audit',
-                    'Competitor benchmarking',
-                    'Custom growth roadmap',
-                    'No obligation, ever',
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-primary" />
-                      <span className="text-sm text-muted-foreground">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Secondary */}
+          <button
+            onClick={handleWhatsApp}
+            className="group flex items-center justify-center gap-2.5 px-9 py-4 rounded-full font-bold text-base transition-all duration-200 active:scale-95"
+            style={{
+              background: '#25d366',
+              color: '#ffffff',
+              fontSize: '1rem',
+              minWidth: '220px',
+              boxShadow: '0 0 24px rgba(37,211,102,0.3)',
+            }}
+          >
+            <MessageCircle className="w-4 h-4" />
+            WhatsApp Us Directly
+          </button>
+        </motion.div>
 
-              {/* Contact links */}
-              <div className="space-y-3">
-                <a
-                  href="mailto:info@saleixo.com"
-                  className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
-                >
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <Mail className="w-3.5 h-3.5 text-primary" />
-                  </div>
-                  info@saleixo.com
-                </a>
-              </div>
-            </div>
-
-            {/* ── RIGHT — form ── */}
-            <div className="p-8 md:p-10">
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="h-full flex flex-col items-center justify-center text-center py-8"
-                  >
-                    <div className="w-14 h-14 rounded-full bg-primary/15 flex items-center justify-center mb-5">
-                      <CheckCircle2 className="w-7 h-7 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Message Sent!</h3>
-                    <p className="text-sm text-muted-foreground mb-6">We'll get back to you within 24 hours.</p>
-                    <button
-                      onClick={() => { setSubmitted(false); setFormData({ name: '', email: '', phone: '', message: '' }); }}
-                      className="text-xs text-primary hover:underline"
-                    >
-                      Send another message
-                    </button>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    onSubmit={handleSubmit}
-                    className="space-y-4"
-                    noValidate
-                  >
-                    {/* Name + Email row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-medium text-muted-foreground mb-1.5">
-                          Full Name <span className="text-primary">*</span>
-                        </label>
-                        <Input
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="Your name"
-                          className={`h-10 rounded-xl text-sm bg-background border-border focus:border-primary/50 ${errors.name ? 'border-red-500/60' : ''}`}
-                        />
-                        {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-muted-foreground mb-1.5">
-                          Email <span className="text-primary">*</span>
-                        </label>
-                        <Input
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="you@email.com"
-                          className={`h-10 rounded-xl text-sm bg-background border-border focus:border-primary/50 ${errors.email ? 'border-red-500/60' : ''}`}
-                        />
-                        {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
-                      </div>
-                    </div>
-
-                    {/* Phone */}
-                    <div>
-                      <label className="block text-xs font-medium text-muted-foreground mb-1.5">
-                        Phone <span className="text-primary">*</span>
-                      </label>
-                      <Input
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="Your phone number"
-                        className={`h-10 rounded-xl text-sm bg-background border-border focus:border-primary/50 ${errors.phone ? 'border-red-500/60' : ''}`}
-                      />
-                      {errors.phone && <p className="text-xs text-red-400 mt-1">{errors.phone}</p>}
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                      <label className="block text-xs font-medium text-muted-foreground mb-1.5">
-                        Tell us about your project
-                      </label>
-                      <Textarea
-                        name="message"
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Products, marketplaces, goals..."
-                        className="rounded-xl text-sm bg-background border-border focus:border-primary/50 resize-none"
-                      />
-                    </div>
-
-                    {/* Submit */}
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all duration-200 group"
-                      style={{
-                        background: 'hsl(var(--primary))',
-                        color: 'hsl(var(--primary-foreground))',
-                        opacity: loading ? 0.7 : 1,
-                      }}
-                    >
-                      {loading ? 'Sending...' : 'Book Free Consultation'}
-                      {!loading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
-                    </button>
-
-                    <p className="text-center text-xs text-muted-foreground/50">
-                      No spam. No commitment. Response within 24 hours.
-                    </p>
-                  </motion.form>
-                )}
-              </AnimatePresence>
-            </div>
-
-          </div>
+        {/* Word cycle dots indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="flex items-center justify-center gap-2 mt-14"
+        >
+          {dynamicWords.map((w, i) => (
+            <motion.div
+              key={i}
+              animate={{
+                width: i === wordIdx ? 24 : 6,
+                background: i === wordIdx ? w.color : 'rgba(255,255,255,0.15)',
+              }}
+              transition={{ duration: 0.3 }}
+              style={{ height: 6, borderRadius: 999 }}
+            />
+          ))}
         </motion.div>
 
       </div>
