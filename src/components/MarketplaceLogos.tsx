@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const marketplaces = [
@@ -25,16 +26,22 @@ const countries = [
 const marqueeItems = [...marketplaces, ...marketplaces];
 
 const MarketplaceLogos = () => {
+  const [paused, setPaused] = useState(false);
+
   return (
-    <section className="py-10 md:py-14 bg-transparent overflow-hidden">
+    <section className="py-10 md:py-14 bg-transparent overflow-hidden w-full max-w-full">
 
       {/* Heading */}
-      <p className="text-center text-xs font-semibold mb-7 tracking-[0.3em] uppercase text-muted-foreground px-4">
-        Trusted across leading global marketplaces
+      <p className="text-center text-xs font-semibold mb-7 tracking-[0.25em] uppercase text-muted-foreground px-4 leading-relaxed">
+        Selling on these? We've shipped on all of them.
       </p>
 
       {/* ── Infinite horizontal marquee — one line, no wrap ── */}
-      <div className="relative overflow-hidden">
+      <div
+        className="relative overflow-hidden w-full max-w-full"
+        onTouchStart={() => setPaused(true)}
+        onTouchEnd={() => setPaused(false)}
+      >
         {/* Left fade */}
         <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(to right, hsl(var(--background)), transparent)' }} />
@@ -43,9 +50,10 @@ const MarketplaceLogos = () => {
           style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }} />
 
         <div
-          className="flex items-center gap-12 whitespace-nowrap"
+          className="flex items-center gap-8 md:gap-12 whitespace-nowrap"
           style={{
-            animation: 'marquee-x 25s linear infinite',
+            animation: `marquee-x 25s linear infinite`,
+            animationPlayState: paused ? 'paused' : 'running',
             willChange: 'transform',
             width: 'max-content',
           }}
@@ -53,12 +61,12 @@ const MarketplaceLogos = () => {
           {marqueeItems.map((marketplace, i) => (
             <div
               key={i}
-              className="flex items-center justify-center flex-shrink-0 h-10 w-28 cursor-default select-none opacity-40 hover:opacity-90 transition-opacity duration-300"
+              className="flex items-center justify-center flex-shrink-0 h-8 w-20 md:h-10 md:w-28 cursor-default select-none opacity-40 hover:opacity-90 transition-opacity duration-300"
             >
               <img
                 src={marketplace.src}
                 alt={marketplace.name}
-                className="max-h-10 max-w-[7rem] w-auto object-contain"
+                className="max-h-8 md:max-h-10 max-w-[5rem] md:max-w-[7rem] w-auto object-contain"
                 loading="lazy"
               />
             </div>
@@ -76,7 +84,7 @@ const MarketplaceLogos = () => {
           <div className="flex-1 h-px bg-border/40" />
         </div>
 
-        <div className="flex justify-center items-center gap-4 md:gap-6">
+        <div className="flex justify-center items-center flex-wrap gap-3 md:gap-6">
           {countries.map((country, i) => (
             <motion.div
               key={country.code}
@@ -90,7 +98,7 @@ const MarketplaceLogos = () => {
               <img
                 src={`/flags/${country.code}.svg`}
                 alt={country.name}
-                className="w-8 h-6 md:w-10 md:h-7 object-cover rounded-sm shadow-sm"
+                className="w-7 h-5 md:w-10 md:h-7 object-cover rounded-sm shadow-sm"
                 loading="lazy"
               />
               <span className="text-[9px] font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-muted-foreground">

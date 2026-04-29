@@ -1,5 +1,5 @@
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import cat1 from '@/assets/categories/jewelry-earrings.jpg';
@@ -9,178 +9,190 @@ import cat4 from '@/assets/categories/rudraksha-bracelet.jpg';
 import cat5 from '@/assets/categories/aquamarine-bracelet.jpg';
 import cat6 from '@/assets/categories/spiritual-products.jpg';
 
-// ── Bento cells — explicit pixel heights, no auto-rows ──────────────────────
-// Layout (desktop):
-//  [ A: tall 2-col ]  [ B: square ]  [ C: square ]
-//  [ A continues   ]  [ D: wide 2-col             ]
-//  [ E: wide 2-col ]  [ F: square ]  (gap filler)
+// ── Image data ────────────────────────────────────────────────────────────────
+const images = [
+  { src: cat1, alt: 'Diamond Earrings — Studio Photography'    },
+  { src: cat2, alt: 'Necklace Collection — Product Photography' },
+  { src: cat3, alt: 'Incense Packaging — Brand Design'          },
+  { src: cat4, alt: 'Rudraksha Collection — Lifestyle Shoot'    },
+  { src: cat5, alt: 'Aquamarine Bracelet — Product Photography' },
+  { src: cat6, alt: 'Spiritual Products — Full Service'         },
+];
 
-const Card = ({
-  img, title, tag, result, className, height,
-  delay = 0,
+// ── Single image cell ─────────────────────────────────────────────────────────
+const Cell = ({
+  src, alt, className, delay = 0, style,
 }: {
-  img: string; title: string; tag: string; result: string;
-  className?: string; height: number; delay?: number;
+  src: string; alt: string; className?: string; delay?: number; style?: React.CSSProperties;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 24 }}
+    initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.15 }}
-    transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
-    whileHover={{ scale: 1.015, zIndex: 20 }}
-    className={`relative overflow-hidden rounded-2xl cursor-pointer group flex-shrink-0 ${className ?? ''}`}
-    style={{
-      height,
-      border: '1px solid hsl(174 30% 22% / 0.5)',
-    }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    className={`overflow-hidden rounded-2xl ${className ?? ''}`}
+    style={style}
   >
     <img
-      src={img}
-      alt={title}
-      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-      style={{ transition: 'transform 0.7s cubic-bezier(0.22,1,0.36,1)' }}
+      src={src}
+      alt={alt}
+      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
       loading="lazy"
-    />
-
-    {/* Permanent bottom gradient */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-
-    {/* Hover tint */}
-    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-
-    {/* Tag — slides in on hover */}
-    <motion.div
-      className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase"
-      style={{
-        background: 'hsl(174 37% 16% / 0.85)',
-        border: '1px solid hsl(43 65% 52% / 0.4)',
-        color: '#d4af37',
-        backdropFilter: 'blur(10px)',
-      }}
-      initial={{ opacity: 0, y: -6 }}
-      whileInView={{ opacity: 0 }}
-      whileHover={{ opacity: 1, y: 0 }}
-    >
-      {tag}
-    </motion.div>
-
-    {/* Arrow */}
-    <div
-      className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100"
-      style={{ background: 'hsl(0 0% 100% / 0.15)', backdropFilter: 'blur(8px)', border: '1px solid hsl(0 0% 100% / 0.2)' }}
-    >
-      <ArrowUpRight className="w-4 h-4 text-white" />
-    </div>
-
-    {/* Bottom info */}
-    <div className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between">
-      <h3 className="text-white font-medium text-sm leading-tight">{title}</h3>
-      <span
-        className="px-2.5 py-1 rounded-full text-[10px] font-bold ml-3 flex-shrink-0"
-        style={{
-          background: 'hsl(43 65% 52% / 0.15)',
-          border: '1px solid hsl(43 65% 52% / 0.35)',
-          color: '#d4af37',
-          backdropFilter: 'blur(8px)',
-        }}
-      >
-        {result}
-      </span>
-    </div>
-
-    {/* Hover glow border */}
-    <div
-      className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      style={{ boxShadow: 'inset 0 0 0 1px hsl(43 65% 52% / 0.35)' }}
     />
   </motion.div>
 );
 
-const Portfolio = () => (
-  <section id="portfolio" className="py-12 md:py-16 bg-transparent">
-    <div className="container mx-auto px-4 max-w-6xl">
+// ── Mobile swipe carousel ─────────────────────────────────────────────────────
+const MobileCarousel = () => {
+  const [current, setCurrent] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
-      {/* Header */}
+  const go = (dir: 1 | -1) =>
+    setCurrent(c => Math.max(0, Math.min(images.length - 1, c + dir)));
+
+  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd   = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) go(diff > 0 ? 1 : -1);
+    touchStartX.current = null;
+  };
+
+  const item = images[current];
+
+  return (
+    <div className="md:hidden">
+      <div
+        className="relative overflow-hidden rounded-2xl"
+        style={{ height: 340 }}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        <motion.img
+          key={current}
+          src={item.src}
+          alt={item.alt}
+          className="w-full h-full object-cover"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          loading="lazy"
+        />
+        {/* Counter badge */}
+        <div
+          className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-[11px] font-semibold"
+          style={{ background: 'rgba(0,0,0,0.55)', color: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(8px)' }}
+        >
+          {current + 1} / {images.length}
+        </div>
+      </div>
+
+      {/* Dots */}
+      <div className="flex justify-center gap-3 mt-4">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            aria-label={`Go to image ${i + 1}`}
+            style={{
+              width: 14, height: 14,
+              borderRadius: '50%',
+              background: i === current ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground) / 0.25)',
+              transition: 'background 0.3s ease',
+              padding: 0, border: 'none', cursor: 'pointer',
+              flexShrink: 0,
+            }}
+          />
+        ))}
+      </div>
+      <p className="text-center text-[11px] text-muted-foreground mt-2.5 tracking-widest uppercase">Swipe to browse</p>
+    </div>
+  );
+};
+
+// ── Portfolio section ─────────────────────────────────────────────────────────
+const Portfolio = () => (
+  <section id="portfolio" className="py-16 md:py-24 bg-background">
+    <div className="container mx-auto px-4 max-w-5xl">
+
+      {/* Header — centered */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8"
+        className="text-center mb-10 md:mb-14"
       >
-        <div>
-          <p className="text-xs font-bold tracking-[0.3em] uppercase text-accent-violet mb-3">Our Work</p>
-          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-            Products We've<br className="hidden md:block" /> Made Famous
-          </h2>
-        </div>
-        <Link
-          to="/categories"
-          className="flex items-center gap-2 text-sm font-medium text-accent-violet hover:text-white transition-colors group self-start md:self-end"
+        <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-4">Selected Work</p>
+        <h2
+          className="font-bold tracking-tight text-foreground mb-3"
+          style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)' }}
         >
-          View all work
-          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </Link>
+          500+ products. Multiple marketplaces. One studio.
+        </h2>
+        <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto leading-relaxed">
+          A few of the brands we've shot, listed, and grown — across jewelry, apparel, home, beauty, food, and craft categories.
+        </p>
       </motion.div>
 
-      {/* ── Desktop bento (hidden on mobile) ── */}
-      <div className="hidden md:grid grid-cols-3 gap-4">
-
-        {/* Row 1 */}
-        <Card img={cat1} title="Diamond Earrings"     tag="Studio Photography" result="+312% CTR"    height={220} delay={0}    />
-        <Card img={cat2} title="Necklace Collection"  tag="Product Photography" result="Top Seller"  height={220} delay={0.07} />
-        <Card img={cat3} title="Incense Packaging"    tag="Brand Design"        result="3× Sales"    height={220} delay={0.14} />
-
-        {/* Row 2 */}
-        <div className="row-span-1">
-          <Card img={cat4} title="Rudraksha Collection" tag="Lifestyle Shoot"   result="+180% Rev"   height={260} delay={0.21} className="w-full" />
+      {/* ── Desktop grid with bottom fade ── */}
+      <div className="hidden md:block relative">
+        {/*
+          Layout (3 cols):
+            [0: square]  [1: tall — spans 2 rows]  [2: square]
+            [3: square]  [1 continues            ]  [4: square]
+                         [5: wide — spans 2 cols, bottom row]
+        */}
+        <div
+          className="grid gap-3"
+          style={{
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gridTemplateRows: '300px 260px',
+          }}
+        >
+          {/* Top-left */}
+          <Cell src={images[0].src} alt={images[0].alt} delay={0}    />
+          {/* Center tall — spans both rows */}
+          <Cell src={images[1].src} alt={images[1].alt} delay={0.07} style={{ gridRow: '1 / 3' }} />
+          {/* Top-right */}
+          <Cell src={images[2].src} alt={images[2].alt} delay={0.14} />
+          {/* Bottom-left */}
+          <Cell src={images[3].src} alt={images[3].alt} delay={0.21} />
+          {/* Bottom-right */}
+          <Cell src={images[4].src} alt={images[4].alt} delay={0.28} />
         </div>
-        <Card img={cat5} title="Aquamarine Bracelet"  tag="Product Photography" result="5★ Reviews"  height={260} delay={0.28} />
-        <Card img={cat6} title="Spiritual Products"   tag="Full Service"        result="2× Orders"   height={260} delay={0.35} />
 
+        {/* Bottom fade overlay — fades grid into page background */}
+        <div
+          className="absolute bottom-0 left-0 right-0 pointer-events-none"
+          style={{
+            height: '55%',
+            background: 'linear-gradient(to bottom, transparent 0%, hsl(var(--background)) 100%)',
+          }}
+        />
       </div>
 
-      {/* ── Mobile: 2-col simple grid ── */}
-      <div className="md:hidden grid grid-cols-2 gap-3">
-        {[
-          { img: cat1, title: 'Diamond Earrings',    tag: 'Photography',  result: '+312% CTR',  h: 200 },
-          { img: cat2, title: 'Necklace Collection', tag: 'Photography',  result: 'Top Seller', h: 200 },
-          { img: cat3, title: 'Incense Packaging',   tag: 'Brand Design', result: '3× Sales',   h: 200 },
-          { img: cat4, title: 'Rudraksha',           tag: 'Lifestyle',    result: '+180% Rev',  h: 200 },
-          { img: cat5, title: 'Aquamarine Bracelet', tag: 'Photography',  result: '5★ Reviews', h: 200 },
-          { img: cat6, title: 'Spiritual Products',  tag: 'Full Service', result: '2× Orders',  h: 200 },
-        ].map((item, i) => (
-          <Card key={i} img={item.img} title={item.title} tag={item.tag} result={item.result} height={item.h} delay={i * 0.06} />
-        ))}
-      </div>
+      {/* Mobile carousel */}
+      <MobileCarousel />
 
-      {/* Stats strip */}
+      {/* CTA pill */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6"
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="flex justify-center mt-10 md:mt-8"
       >
-        {[
-          { value: '500+', label: 'Products Shot'       },
-          { value: '9',    label: 'Marketplaces'        },
-          { value: '3×',   label: 'Avg Sales Lift'      },
-          { value: '98%',  label: 'Client Satisfaction' },
-        ].map((s, i) => (
-          <div
-            key={i}
-            className="rounded-2xl p-4 text-center"
-            style={{
-              background: 'hsl(174 37% 16% / 0.5)',
-              border: '1px solid hsl(174 30% 22% / 0.4)',
-              backdropFilter: 'blur(12px)',
-            }}
-          >
-            <div className="text-2xl font-light text-white mb-0.5">{s.value}</div>
-            <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{s.label}</div>
-          </div>
-        ))}
+        <Link
+          to="/categories"
+          className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm transition-all duration-200 hover:opacity-85 active:scale-[0.97]"
+          style={{
+            background: 'hsl(var(--foreground))',
+            color: 'hsl(var(--background))',
+          }}
+        >
+          Explore All 500+ Products
+        </Link>
       </motion.div>
 
     </div>

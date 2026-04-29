@@ -11,26 +11,37 @@ import { MessageSquare, Map, Rocket, BarChart3 } from 'lucide-react';
 
 const steps = [
   {
-    id: 1, label: 'Consult', Icon: MessageSquare,
-    title: 'Free Discovery Call',
-    description: 'We start with a free 30-minute consultation to understand your goals, audience, and what\'s holding your growth back — zero obligation.',
+    id: 1, label: 'Audit', Icon: MessageSquare,
+    title: 'Free Audit (30 min)',
+    description: 'Send us your top 3 listings, your ad account, and your sales last quarter. We come back with a written diagnosis: what\'s leaking, what\'s working, what to do first.',
   },
   {
-    id: 2, label: 'Strategy', Icon: Map,
-    title: 'Custom Roadmap',
-    description: 'Our team builds a custom growth roadmap with clear milestones, timelines, and expected ROI — so you know exactly what to expect.',
+    id: 2, label: 'Scope', Icon: Map,
+    title: 'Scope & Quote',
+    description: 'Fixed-price proposal with line-item deliverables and a delivery date. No surprises, no scope creep, no hourly billing.',
   },
   {
-    id: 3, label: 'Execution', Icon: Rocket,
-    title: 'Build & Launch',
-    description: 'We build, launch, and manage everything — websites, ads, videos, social media, and automation — on time and on budget.',
+    id: 3, label: 'Production', Icon: Rocket,
+    title: 'Production',
+    description: 'Shoot, design, write, list. You see proofs at every milestone. Most projects ship in 14–21 days; suppressed-listing fixes ship in 24–72 hours.',
   },
   {
-    id: 4, label: 'Growth', Icon: BarChart3,
-    title: 'Scale & Optimize',
-    description: 'Track results in real-time with transparent dashboards, optimize what works, and scale your growth every single month.',
+    id: 4, label: 'Launch', Icon: BarChart3,
+    title: 'Launch & Optimize',
+    description: 'Listings go live, ads spin up, analytics dashboard activates. We watch the numbers for the first 30 days and tune until conversion stabilizes.',
   },
 ];
+
+// Brand tokens
+const TEAL        = '#1a3a3a';
+const TEAL_LIGHT  = 'rgba(26,58,58,0.08)';
+const TEAL_MID    = 'rgba(26,58,58,0.18)';
+const TEAL_BORDER = 'rgba(26,58,58,0.15)';
+const GOLD        = '#d4af37';
+const GOLD_LIGHT  = 'rgba(212,175,55,0.15)';
+const GOLD_BORDER = 'rgba(212,175,55,0.35)';
+const BG          = '#f5f7fa';
+const BG_CARD     = '#ffffff';
 
 // ─── Main section ─────────────────────────────────────────────────────────────
 const HowItWorks = () => {
@@ -69,50 +80,53 @@ const HowItWorks = () => {
     <div ref={containerRef} className="relative" style={{ height: '420vh' }}>
       <div
         className="sticky top-0 h-screen overflow-hidden"
-        style={{ background: '#0A0418' }}
+        style={{ background: BG }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Ambient glow */}
+        {/* Subtle radial tint */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(124,58,237,0.1), transparent 70%)',
+              'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,175,55,0.06), transparent 70%)',
           }}
         />
 
         {/* ── Intro overlay ── */}
         <motion.div
           style={{ opacity: introOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none"
+          className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none px-6 text-center"
         >
+          <p style={{ color: GOLD, fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+            Process
+          </p>
           <h2
             className="font-light tracking-tight mb-3"
             style={{
               fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              color: '#ffffff',
+              color: TEAL,
               fontFamily: '"Inter Tight", Inter, sans-serif',
             }}
           >
-            How It Works
+            Four steps. Honest pricing. No surprises.
           </h2>
-          <p style={{ color: 'rgba(168,155,201,0.85)', fontSize: '0.95rem' }}>
-            Four steps from first conversation to scaling sales
+          <p style={{ color: 'rgba(26,58,58,0.65)', fontSize: '0.95rem', maxWidth: 520 }}>
+            Most engagements start with the free audit and finish in under 30 days for a single SKU, or run as a 90-day growth retainer for established brands.
           </p>
           <motion.div
             animate={{ y: [0, 7, 0] }}
             transition={{ duration: 1.6, repeat: Infinity }}
             className="flex flex-col items-center gap-1.5 mt-7"
           >
-            <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.2em' }}>
+            <span style={{ fontSize: 9, color: 'rgba(26,58,58,0.35)', letterSpacing: '0.2em' }}>
               SCROLL
             </span>
             <div
               style={{
                 width: 1,
                 height: 28,
-                background: 'linear-gradient(to bottom, rgba(255,255,255,0.2), transparent)',
+                background: `linear-gradient(to bottom, ${TEAL_MID}, transparent)`,
               }}
             />
           </motion.div>
@@ -128,13 +142,13 @@ const HowItWorks = () => {
               width: 290,
               flexShrink: 0,
               padding: '0 36px 0 52px',
-              borderRight: '1px solid rgba(255,255,255,0.05)',
+              borderRight: `1px solid ${TEAL_BORDER}`,
             }}
           >
             <span
               style={{
                 fontSize: 9,
-                color: 'rgba(124,58,237,0.75)',
+                color: GOLD,
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
                 display: 'block',
@@ -166,12 +180,12 @@ const HowItWorks = () => {
                       <motion.div
                         animate={{
                           background: isActive
-                            ? '#7C3AED'
+                            ? GOLD
                             : isDone
-                            ? 'rgba(124,58,237,0.45)'
-                            : 'rgba(255,255,255,0.1)',
+                            ? 'rgba(212,175,55,0.45)'
+                            : TEAL_BORDER,
                           boxShadow: isActive
-                            ? '0 0 12px rgba(124,58,237,0.9)'
+                            ? `0 0 12px rgba(212,175,55,0.7)`
                             : 'none',
                           scale: isActive ? 1.3 : 1,
                         }}
@@ -192,8 +206,8 @@ const HowItWorks = () => {
                             marginTop: 4,
                             background:
                               isDone || isActive
-                                ? 'linear-gradient(to bottom, rgba(124,58,237,0.5), rgba(124,58,237,0.12))'
-                                : 'rgba(255,255,255,0.06)',
+                                ? `linear-gradient(to bottom, rgba(212,175,55,0.5), rgba(212,175,55,0.1))`
+                                : TEAL_BORDER,
                           }}
                         />
                       )}
@@ -201,7 +215,7 @@ const HowItWorks = () => {
 
                     {/* Step label */}
                     <motion.div
-                      animate={{ opacity: isActive ? 1 : isDone ? 0.5 : 0.28 }}
+                      animate={{ opacity: isActive ? 1 : isDone ? 0.55 : 0.35 }}
                       transition={{ duration: 0.4 }}
                       style={{
                         paddingTop: 2,
@@ -213,9 +227,7 @@ const HowItWorks = () => {
                           display: 'block',
                           fontSize: 9,
                           letterSpacing: '0.15em',
-                          color: isActive
-                            ? 'rgba(168,85,247,0.9)'
-                            : 'rgba(255,255,255,0.25)',
+                          color: isActive ? GOLD : 'rgba(26,58,58,0.4)',
                           marginBottom: 2,
                         }}
                       >
@@ -225,8 +237,8 @@ const HowItWorks = () => {
                         style={{
                           display: 'block',
                           fontSize: '0.8125rem',
-                          color: isActive ? '#ffffff' : 'rgba(255,255,255,0.5)',
-                          fontWeight: isActive ? 500 : 400,
+                          color: isActive ? TEAL : 'rgba(26,58,58,0.5)',
+                          fontWeight: isActive ? 600 : 400,
                           lineHeight: 1.3,
                         }}
                       >
@@ -257,7 +269,7 @@ const HowItWorks = () => {
                   fontWeight: 800,
                   fontFamily: '"Inter Tight", Inter, sans-serif',
                   letterSpacing: '-0.05em',
-                  color: 'rgba(124,58,237,0.07)',
+                  color: 'rgba(26,58,58,0.04)',
                   lineHeight: 1,
                   userSelect: 'none',
                 }}
@@ -275,7 +287,7 @@ const HowItWorks = () => {
               className="lg:hidden"
               style={{
                 fontSize: 9,
-                color: 'rgba(124,58,237,0.9)',
+                color: GOLD,
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
                 marginBottom: 20,
@@ -296,9 +308,9 @@ const HowItWorks = () => {
                   width: 52,
                   height: 52,
                   borderRadius: 14,
-                  background: 'rgba(124,58,237,0.15)',
-                  border: '1px solid rgba(124,58,237,0.3)',
-                  boxShadow: '0 0 24px rgba(124,58,237,0.2)',
+                  background: GOLD_LIGHT,
+                  border: `1px solid ${GOLD_BORDER}`,
+                  boxShadow: '0 2px 16px rgba(212,175,55,0.15)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -306,7 +318,7 @@ const HowItWorks = () => {
                 }}
               >
                 <ActiveIcon
-                  style={{ width: 20, height: 20, color: 'rgba(168,85,247,0.9)', strokeWidth: 1.5 }}
+                  style={{ width: 20, height: 20, color: GOLD, strokeWidth: 1.5 }}
                 />
               </motion.div>
             </AnimatePresence>
@@ -322,7 +334,7 @@ const HowItWorks = () => {
                 className="font-light tracking-tight"
                 style={{
                   fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
-                  color: '#ffffff',
+                  color: TEAL,
                   lineHeight: 1.15,
                   letterSpacing: '-0.02em',
                   marginBottom: 20,
@@ -344,7 +356,7 @@ const HowItWorks = () => {
                 transition={{ duration: 0.4, delay: 0.07, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   fontSize: '1.05rem',
-                  color: 'rgba(168,155,201,0.9)',
+                  color: 'rgba(26,58,58,0.7)',
                   lineHeight: 1.75,
                   maxWidth: 430,
                   marginBottom: 36,
@@ -364,10 +376,10 @@ const HowItWorks = () => {
                     width: i === activeIdx ? 32 : 8,
                     background:
                       i === activeIdx
-                        ? '#7C3AED'
+                        ? GOLD
                         : i < activeIdx
-                        ? 'rgba(124,58,237,0.35)'
-                        : 'rgba(255,255,255,0.12)',
+                        ? 'rgba(212,175,55,0.4)'
+                        : TEAL_BORDER,
                   }}
                   transition={{ duration: 0.3 }}
                 />
@@ -381,14 +393,14 @@ const HowItWorks = () => {
                 disabled={activeIdx === 0}
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
                 style={{
-                  background: 'rgba(124,58,237,0.15)',
-                  border: '1px solid rgba(124,58,237,0.3)',
-                  color: 'rgba(168,85,247,0.9)',
+                  background: GOLD_LIGHT,
+                  border: `1px solid ${GOLD_BORDER}`,
+                  color: GOLD,
                 }}
               >
                 ←
               </button>
-              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', letterSpacing: '0.15em' }}>
+              <span style={{ fontSize: 11, color: 'rgba(26,58,58,0.35)', letterSpacing: '0.15em' }}>
                 Swipe or tap
               </span>
               <button
@@ -396,9 +408,9 @@ const HowItWorks = () => {
                 disabled={activeIdx === steps.length - 1}
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
                 style={{
-                  background: 'rgba(124,58,237,0.15)',
-                  border: '1px solid rgba(124,58,237,0.3)',
-                  color: 'rgba(168,85,247,0.9)',
+                  background: TEAL_LIGHT,
+                  border: `1px solid ${TEAL_BORDER}`,
+                  color: TEAL,
                 }}
               >
                 →

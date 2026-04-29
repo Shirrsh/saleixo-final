@@ -11,7 +11,6 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import ScrollProgress from '@/components/ScrollProgress';
-import ThemeToggle from '@/components/ThemeToggle';
 import LoadingScreen from '@/components/LoadingScreen';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import FloatingCTA from '@/components/FloatingCTA';
@@ -21,11 +20,10 @@ const Index = () => {
     <>
       <LoadingScreen />
       <ScrollProgress />
-      <ThemeToggle />
       
       {/* No frame wrapper — clean full-width layout */}
       <Header />
-      <main>
+      <main className="overflow-x-hidden w-full max-w-full">
         <Hero />
         <MarketplaceLogos />
         <FeaturedServices />
@@ -37,7 +35,7 @@ const Index = () => {
       <HowItWorks />
 
       {/* Bottom sections — no frame */}
-      <main>
+      <main className="overflow-x-hidden w-full max-w-full">
         <Testimonials />
         <Contact />
       </main>

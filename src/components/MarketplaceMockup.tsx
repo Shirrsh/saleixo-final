@@ -270,39 +270,25 @@ const chartBars = [40,65,45,80,55,90,70,85,60,95,75,88,50,72,92,68,84,76,91,63,8
 
 // ── Single marketplace dashboard ────────────────────────────────────────────
 const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
-  <div className="bg-[#f3f3f3] text-gray-800 text-xs overflow-hidden" style={{ height: '420px' }}>
+  <div className="bg-[#f3f3f3] text-gray-800 text-xs overflow-hidden" style={{ minHeight: '320px' }}>
     {/* Top nav */}
-    <div className="px-4 py-2 flex items-center justify-between" style={{ background: mp.navBg }}>
-      <div className="flex items-center gap-3">
+    <div className="px-3 py-2 flex items-center justify-between" style={{ background: mp.navBg }}>
+      <div className="flex items-center gap-2">
         {mp.logo}
         <span className="text-[10px]" style={{ color: `${mp.navText}80` }}>{mp.subLabel}</span>
       </div>
-      <div className="hidden md:flex items-center gap-3 text-[10px]" style={{ color: `${mp.navText}99` }}>
-        {mp.navItems.map(item => (
-          <span
-            key={item}
-            className="cursor-pointer"
-            style={{ color: item === mp.activeNav ? mp.accent : `${mp.navText}99`, fontWeight: item === mp.activeNav ? 700 : 400 }}
-          >
-            {item}
-          </span>
-        ))}
-      </div>
-      <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold" style={{ background: mp.accent, color: mp.accentText }}>S</div>
+      <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>S</div>
     </div>
 
-    <div className="p-4 overflow-hidden">
+    <div className="p-3 overflow-hidden">
       {/* Title row */}
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-gray-800">{mp.name} Dashboard</h3>
-        <div className="flex gap-2">
-          <div className="text-[9px] font-bold px-2 py-1 rounded" style={{ background: mp.accent, color: mp.accentText }}>Last 30 Days</div>
-          <div className="bg-white border border-gray-300 text-gray-600 text-[9px] px-2 py-1 rounded">Export</div>
-        </div>
+        <div className="text-[9px] font-bold px-2 py-1 rounded flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>Last 30 Days</div>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-4 gap-2 mb-3">
+      {/* Stats — 2 cols on mobile, 4 on larger */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
         {mp.stats.map((stat, i) => (
           <motion.div
             key={i}
@@ -324,9 +310,9 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
       <div className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm mb-3">
         <div className="flex items-center justify-between mb-2">
           <span className="text-[10px] font-semibold text-gray-700">Sales Performance</span>
-          <span className="text-[9px] text-gray-400">Daily · 30 days</span>
+          <span className="text-[9px] text-gray-400">30 days</span>
         </div>
-        <div className="flex items-end gap-0.5 h-14">
+        <div className="flex items-end gap-0.5 h-12">
           {chartBars.map((h, i) => (
             <motion.div
               key={i}
@@ -340,18 +326,17 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
         </div>
         <div className="flex justify-between mt-1">
           <span className="text-[8px] text-gray-400">Day 1</span>
-          <span className="text-[8px] text-gray-400">Day 15</span>
           <span className="text-[8px] font-semibold" style={{ color: mp.accentChart }}>Day 30</span>
         </div>
       </div>
 
-      {/* Table */}
+      {/* Table — show only 2 rows on mobile */}
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
         <div className="px-3 py-1.5 border-b border-gray-100 flex items-center justify-between">
           <span className="text-[10px] font-semibold text-gray-700">{mp.rowLabel}</span>
           <span className="text-[9px] cursor-pointer" style={{ color: mp.accent }}>View all</span>
         </div>
-        {mp.rows.map((row, i) => (
+        {mp.rows.slice(0, 2).map((row, i) => (
           <div key={i} className={`px-3 py-1.5 flex items-center gap-2 text-[9px] ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
             <div className="w-5 h-5 rounded flex-shrink-0 flex items-center justify-center text-[7px] text-gray-400 bg-gray-100">IMG</div>
             <div className="flex-1 min-w-0">
@@ -359,7 +344,6 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
             </div>
             <div className="text-right flex-shrink-0">
               <div className="font-semibold text-gray-800">{row.sales}</div>
-              <div className="text-gray-400">{row.units} units</div>
             </div>
             <div className="text-[8px] font-bold px-1.5 py-0.5 rounded flex-shrink-0" style={{ background: `${mp.accent}22`, color: mp.accent }}>
               {row.badge}
@@ -398,18 +382,18 @@ const MarketplaceMockup = () => {
   };
 
   return (
-    <div className="relative group">
+    <div className="relative group w-full max-w-full">
       {/* Browser chrome */}
-      <div className="rounded-2xl overflow-hidden shadow-2xl border border-border-glow/30 bg-[#1a1a2e]">
+      <div className="rounded-2xl overflow-hidden shadow-2xl border border-border-glow/30 bg-[#1a1a2e] w-full">
         {/* Browser top bar */}
-        <div className="flex items-center gap-2 px-4 py-3 bg-[#0f0f1a] border-b border-white/10">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
+        <div className="flex items-center gap-2 px-3 py-2.5 bg-[#0f0f1a] border-b border-white/10">
+          <div className="flex gap-1.5 flex-shrink-0">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
           </div>
-          <div className="flex-1 mx-3 bg-white/10 rounded-md px-3 py-1 flex items-center gap-2 overflow-hidden">
-            <span className="text-white/40 text-xs">🔒</span>
+          <div className="flex-1 min-w-0 mx-2 bg-white/10 rounded-md px-2 py-1 flex items-center gap-1.5 overflow-hidden">
+            <span className="text-white/40 text-[10px] flex-shrink-0">🔒</span>
             <AnimatePresence mode="wait">
               <motion.span
                 key={mp.url}
@@ -417,32 +401,16 @@ const MarketplaceMockup = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.2 }}
-                className="text-xs text-white/50 font-mono truncate"
+                className="text-[10px] text-white/50 font-mono truncate"
               >
                 {mp.url}
               </motion.span>
             </AnimatePresence>
           </div>
-          {/* Marketplace tabs */}
-          <div className="hidden lg:flex gap-1">
-            {marketplaces.slice(0, 5).map((m, i) => (
-              <button
-                key={m.id}
-                onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
-                className="text-[9px] px-2 py-0.5 rounded transition-all"
-                style={{
-                  background: i === current ? 'hsl(174 37% 20% / 0.3)' : 'transparent',
-                  color: i === current ? '#fff' : 'rgba(255,255,255,0.4)',
-                }}
-              >
-                {m.name}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Dashboard slide */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden w-full">
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={mp.id}
@@ -451,6 +419,7 @@ const MarketplaceMockup = () => {
               initial="enter"
               animate="center"
               exit="exit"
+              className="w-full"
             >
               <Dashboard mp={mp} />
             </motion.div>
@@ -458,31 +427,38 @@ const MarketplaceMockup = () => {
         </div>
       </div>
 
-      {/* Prev / Next arrows */}
+      {/* Prev / Next arrows — visible on hover (desktop) / always on mobile */}
       <button
         onClick={() => go(-1)}
-        className="absolute left-3 top-1/2 -translate-y-1/2 glass-purple rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-primary/30"
+        className="absolute left-2 top-1/2 -translate-y-1/2 glass-purple rounded-full p-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-10"
       >
         <ChevronLeft className="w-4 h-4 text-white" />
       </button>
       <button
         onClick={() => go(1)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 glass-purple rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-primary/30"
+        className="absolute right-2 top-1/2 -translate-y-1/2 glass-purple rounded-full p-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-10"
       >
         <ChevronRight className="w-4 h-4 text-white" />
       </button>
 
       {/* Dot indicators */}
-      <div className="flex justify-center gap-1.5 mt-4">
+      <div className="flex justify-center items-center gap-1.5 mt-3">
         {marketplaces.map((m, i) => (
           <button
             key={m.id}
             onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
-            className="rounded-full transition-all duration-300"
             style={{
-              width: i === current ? 24 : 6,
-              height: 6,
+              width: i === current ? 20 : 5,
+              height: 5,
+              borderRadius: 999,
               background: i === current ? mp.accent : 'hsl(174 30% 22%)',
+              transition: 'all 0.3s ease',
+              padding: 0,
+              border: 'none',
+              cursor: 'pointer',
+              minHeight: 'unset',
+              minWidth: 'unset',
+              flexShrink: 0,
             }}
           />
         ))}

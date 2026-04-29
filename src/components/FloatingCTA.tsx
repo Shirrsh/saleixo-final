@@ -1,9 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, X } from 'lucide-react';
 
 const FloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Hide when mobile nav menu is open
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setMenuOpen(document.body.style.overflow === 'hidden');
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -11,7 +22,7 @@ const FloatingCTA = () => {
       const heroHeight = window.innerHeight * 0.8;
       const contactSection = document.querySelector('#contact');
       const contactTop = contactSection?.getBoundingClientRect().top || Infinity;
-      
+
       // Show after scrolling past hero, hide when near contact section
       setIsVisible(scrollY > heroHeight && contactTop > 200);
     };
@@ -24,10 +35,10 @@ const FloatingCTA = () => {
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  if (!isVisible) return null;
+  if (!isVisible || isDismissed || menuOpen) return null;
 
   return (
-    <div className="fixed bottom-24 right-6 z-40 animate-fade-in">
+    <div className="fixed bottom-24 right-6 z-40 animate-fade-in flex items-center gap-1">
       <Button
         onClick={scrollToContact}
         size="lg"
@@ -37,6 +48,20 @@ const FloatingCTA = () => {
         <span className="hidden sm:inline">Get a Free Quote</span>
         <span className="sm:hidden">Quote</span>
       </Button>
+
+      {/* Dismiss button */}
+      <button
+        onClick={() => setIsDismissed(true)}
+        aria-label="Dismiss"
+        className="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-150 hover:scale-110 active:scale-95"
+        style={{
+          background: 'hsl(0 0% 20% / 0.7)',
+          border: '1px solid hsl(0 0% 40% / 0.4)',
+          backdropFilter: 'blur(8px)',
+        }}
+      >
+        <X size={12} style={{ color: 'hsl(0 0% 80%)' }} />
+      </button>
     </div>
   );
 };

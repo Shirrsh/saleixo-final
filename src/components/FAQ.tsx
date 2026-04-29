@@ -13,38 +13,53 @@ interface FaqItem {
 const fallbackFaqs: FaqItem[] = [
   {
     id: '1',
-    question: 'What types of products do you photograph?',
-    answer: 'We photograph all types of ecommerce products — jewelry, fashion, home décor, electronics, food & beverage, beauty, spiritual products, and more. If it sells online, we shoot it.',
+    question: 'How long does a full listing setup take?',
+    answer: 'A standard new-SKU launch — photography, listing copy, A+ content, ads setup — takes 14–21 days from kickoff. A multi-SKU brand launch with storefront is 4–6 weeks. Suppressed-listing recovery is 24–72 hours in 90% of cases.',
   },
   {
     id: '2',
-    question: 'How long does a typical project take?',
-    answer: 'Standard product photography is delivered within 24–48 hours. Full listing design and A+ content takes 3–5 business days. End-to-end marketplace setup is typically completed within 2 weeks.',
+    question: 'What does the free audit actually include?',
+    answer: 'A 30-minute call plus a written 1–2 page diagnosis. We review up to 3 of your live listings, your ad account, your last 90 days of sales data, and identify the top 3 conversion bottlenecks. You keep the document whether you hire us or not.',
   },
   {
     id: '3',
-    question: 'Which marketplaces do you support?',
-    answer: 'We support Amazon, Flipkart, Etsy, Shopify, WooCommerce, Walmart, eBay, Meesho, and SHEIN — across US, UK, EU, Australia, Canada, and India markets.',
+    question: 'How much does a product photoshoot cost?',
+    answer: 'Standard catalog shoots start at a flat rate per SKU and scale with set complexity (lifestyle, on-model, video). We quote project-priced, never hourly. Most shoots fall between $40–$120 per SKU depending on category and shot count.',
   },
   {
     id: '4',
-    question: 'Do I need to send my products to your studio?',
-    answer: 'Yes, for physical product photography we require samples to be shipped to our studio. We handle everything from there and return your products after the shoot. For digital design work, no physical samples are needed.',
+    question: 'We sell on Amazon. Will your photos pass Amazon\'s rules?',
+    answer: 'Yes — every main image is shot on RGB 255,255,255, framed to 85% product fill, delivered at 2000px+ for zoom. We\'ve never had a Saleixo-shot main image rejected for compliance.',
   },
   {
     id: '5',
-    question: 'What is included in the Free Brand Audit?',
-    answer: 'Our free audit covers your current listing quality score, photography assessment, SEO keyword gaps, competitor benchmarking, and a prioritised action plan — all at no cost and with no obligation.',
+    question: 'Do you work with Etsy and handcraft sellers?',
+    answer: 'Yes — that\'s actually a meaningful share of our portfolio. Etsy is a different game (lifestyle-first, warm backgrounds, the buyer wants to see the maker). We shoot Etsy sets explicitly for that aesthetic.',
   },
   {
     id: '6',
-    question: 'Can you help with Amazon A+ Content and Brand Storefront?',
-    answer: 'Absolutely. We create full A+ and A++ content modules, brand storefronts, and enhanced brand content that meets Amazon\'s latest guidelines and maximises conversion.',
+    question: 'Can you launch a brand from scratch?',
+    answer: 'Yes. Logo + packaging + photography + listing + storefront on Amazon, Etsy, and Shopify is our most-requested package. Typical timeline: 4–6 weeks from kickoff to first sale.',
   },
   {
     id: '7',
-    question: 'What are your pricing models?',
-    answer: 'We offer per-project pricing, monthly retainer packages, and custom enterprise plans. Pricing depends on product count, service scope, and marketplace targets. Book a free consultation for a tailored quote.',
+    question: 'Do you manage ads, or just create the assets?',
+    answer: 'Both. We run Amazon Sponsored Products / Brands / Display, Google Shopping, Meta Ads, and TikTok Shop ads. Ads management is a separate retainer; you can hire us for assets only and run ads yourself.',
+  },
+  {
+    id: '8',
+    question: 'What if my listing gets suppressed after you fix it?',
+    answer: 'We monitor for the first 30 days post-launch. If a listing is suppressed in that window for any reason within our scope, we fix it free.',
+  },
+  {
+    id: '9',
+    question: 'How do I send you my products?',
+    answer: 'We have a primary studio and partner studios across the US, UK, and India. You ship products to the closest studio; we cover return shipping after the shoot.',
+  },
+  {
+    id: '10',
+    question: 'What does success look like in 90 days?',
+    answer: 'For a stuck listing: typically 2–4× session volume and a 1.5–3× conversion lift, which compounds to 3–6× revenue. For a new launch: profitable PPC by day 60, organic ranking on at least 3 priority keywords by day 90.',
   },
 ];
 
@@ -84,9 +99,9 @@ const FAQ = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-14"
         >
-          <p className="text-xs font-bold tracking-[0.3em] uppercase text-accent-violet mb-4">FAQ</p>
+          <p className="text-xs font-bold tracking-[0.3em] uppercase text-accent-violet mb-4">Questions sellers actually ask</p>
           <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
-            Frequently Asked Questions
+            Real answers, no fluff.
           </h2>
         </motion.div>
 
@@ -121,7 +136,8 @@ const FAQ = () => {
                   {/* Question row */}
                   <button
                     onClick={() => toggle(faq.id)}
-                    className="w-full flex items-center justify-between px-6 py-5 text-left group"
+                    className="w-full flex items-center justify-between px-5 py-5 text-left group"
+                    style={{ minHeight: '60px' }}
                   >
                     <span
                       className="text-base font-medium pr-4 transition-colors duration-200"

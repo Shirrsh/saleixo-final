@@ -67,6 +67,20 @@
   </head>
 
   <body>
+    <!-- Theme init: apply saved theme before React loads to prevent flash -->
+    <script>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var html = document.documentElement;
+        if (saved === 'dark') {
+          html.classList.remove('light');
+          html.classList.add('dark');
+        } else {
+          html.classList.remove('dark');
+          html.classList.add('light');
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -84,7 +84,7 @@ const Contact = () => {
             className="text-xs font-bold tracking-[0.3em] uppercase"
             style={{ color: '#d4af37' }}
           >
-            Free 30-Min Strategy Call
+            Let's find your bottleneck
           </span>
           <div className="h-px w-8" style={{ background: '#d4af37' }} />
         </motion.div>
@@ -104,7 +104,7 @@ const Contact = () => {
               fontFamily: '"Inter Tight", Inter, sans-serif',
             }}
           >
-            Better Images Drive
+            Free audit. Honest answers.
           </h2>
 
           {/* Animated word */}
@@ -140,7 +140,7 @@ const Contact = () => {
               fontFamily: '"Inter Tight", Inter, sans-serif',
             }}
           >
-            for Your Ecommerce Store.
+            Zero pressure.
           </h2>
         </motion.div>
 
@@ -157,9 +157,7 @@ const Contact = () => {
             maxWidth: '560px',
           }}
         >
-          Book a free 30-minute strategy call. We'll audit your current
-          listings and give you a custom action plan to double your sales —
-          absolutely free.
+          Send us your top three listings or your storefront URL. We'll come back inside 48 hours with a written diagnosis — what's leaking, what's working, and what we'd fix first. No deck. No sales call ambush.
         </motion.p>
 
         {/* Benefits row */}
@@ -170,7 +168,7 @@ const Contact = () => {
           transition={{ duration: 0.5, delay: 0.35 }}
           className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-12"
         >
-          {['No Commitment Required', '100% Free Strategy Call', 'Custom Growth Plan Included'].map((item, i) => (
+          {['No commitment required', '48hr written diagnosis', 'Keep the audit doc — free'].map((item, i) => (
             <div key={i} className="flex items-center gap-2">
               <Check className="w-4 h-4 flex-shrink-0" style={{ color: '#4ade80' }} />
               <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{item}</span>
@@ -198,7 +196,7 @@ const Contact = () => {
               boxShadow: '0 0 32px rgba(212,175,55,0.35)',
             }}
           >
-            <span className="relative z-10">Book My Free Strategy Call</span>
+            <span className="relative z-10">Send Me the Audit →</span>
             <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
             {/* Hover shimmer */}
             <div

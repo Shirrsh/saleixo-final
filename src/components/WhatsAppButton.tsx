@@ -1,9 +1,23 @@
+import { useEffect, useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 
 const WhatsAppButton = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Hide when the mobile nav menu is open (Header adds overflow:hidden to body)
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setMenuOpen(document.body.style.overflow === 'hidden');
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+    return () => observer.disconnect();
+  }, []);
+
   const phoneNumber = '917011441159';
   const message = 'Hi! I would like to know more about your services.';
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  if (menuOpen) return null;
 
   return (
     <a

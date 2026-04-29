@@ -8,6 +8,10 @@ import img1Src from '@/assets/hero/showcase-1.jpg';
 import img2Src from '@/assets/hero/showcase-2.jpg';
 import img3Src from '@/assets/hero/showcase-3.jpg';
 import img4Src from '@/assets/hero/showcase-4.jpg';
+import img5Src from '@/assets/hero/showcase-5.jpg';
+import img6Src from '@/assets/hero/showcase-6.jpg';
+import img7Src from '@/assets/hero/showcase-7.jpg';
+import img8Src from '@/assets/hero/showcase-8.jpg';
 
 // ── Auto-scrolling image column ───────────────────────────────────────────────
 const ScrollColumn = ({
@@ -105,14 +109,14 @@ const Hero = () => {
   const col1 = [
     getImageUrl('hero_showcase_1', img1Src),
     getImageUrl('hero_showcase_3', img3Src),
-    getImageUrl('hero_showcase_2', img2Src),
-    getImageUrl('hero_showcase_4', img4Src),
+    getImageUrl('hero_showcase_5', img5Src),
+    getImageUrl('hero_showcase_7', img7Src),
   ];
   const col2 = [
     getImageUrl('hero_showcase_2', img2Src),
     getImageUrl('hero_showcase_4', img4Src),
-    getImageUrl('hero_showcase_1', img1Src),
-    getImageUrl('hero_showcase_3', img3Src),
+    getImageUrl('hero_showcase_6', img6Src),
+    getImageUrl('hero_showcase_8', img8Src),
   ];
 
   const bg = isLight ? '#ffffff' : 'hsl(220 30% 7%)';
@@ -152,19 +156,19 @@ const Hero = () => {
       <div className="relative z-10 hidden lg:flex w-full" style={{ height: '100vh' }}>
 
         {/* LEFT — text */}
-        <div className="flex flex-col justify-center w-1/2 px-12 xl:px-20">
+        <div className="flex flex-col justify-center w-1/2 px-12 xl:px-20" style={{ paddingTop: '56px' }}>
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex self-start px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
+            className="inline-flex self-start px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.15em] uppercase mb-6 whitespace-nowrap"
             style={isLight ? {
               background: 'hsl(0 0% 94%)', border: '1px solid hsl(0 0% 82%)', color: 'hsl(0 0% 20%)',
             } : {
               background: 'hsl(210 85% 55% / 0.15)', border: '1px solid hsl(210 85% 65% / 0.5)', color: '#93c5fd',
             }}
           >
-            ✦ Studio-Grade Photography
+            ✦ Studio · Photography · Design · Marketing
           </motion.span>
 
           <motion.h1
@@ -174,18 +178,10 @@ const Hero = () => {
             className="font-extrabold leading-[1.02] tracking-tight mb-5"
             style={{ fontFamily: '"Inter Tight", Inter, sans-serif', fontSize: 'clamp(2.6rem, 4.5vw, 5rem)' }}
           >
-            <span style={{ color: textPrimary, display: 'block' }}>Transform Your</span>
-            <span style={{ color: textPrimary, display: 'block' }}>Brand Into</span>
-            <span style={{ display: 'block' }}>
-              <span style={{ color: textPrimary }}>Market-</span>
-              <span style={{ color: textAccent, textShadow: isLight ? 'none' : '0 0 40px hsl(210 90% 65% / 0.6)' }}>Winning</span>
-            </span>
-            <span style={{
-              display: 'block',
-              WebkitTextStroke: isLight ? '2px hsl(0 0% 15%)' : '2px hsl(215 60% 55%)',
-              color: 'transparent',
-              opacity: isLight ? 0.18 : 0.55,
-            }}>Brands</span>
+            <span style={{ color: textPrimary, display: 'block' }}>Your products</span>
+            <span style={{ color: textPrimary, display: 'block' }}>are great.</span>
+            <span style={{ color: textAccent, display: 'block', textShadow: isLight ? 'none' : '0 0 40px hsl(210 90% 65% / 0.6)' }}>Your listings are</span>
+            <span style={{ color: textPrimary, display: 'block' }}>killing them.</span>
           </motion.h1>
 
           <motion.p
@@ -195,7 +191,7 @@ const Hero = () => {
             className="text-base lg:text-lg mb-7 max-w-sm leading-relaxed font-medium"
             style={{ color: textMuted }}
           >
-            Studio-grade product photography and ecommerce design — built to convert.
+            Studio-grade product photos, compliant listings, and conversion-tested creative — built by ecommerce operators, not freelancers. We find the problem in your funnel, then fix it.
           </motion.p>
 
           <motion.div
@@ -211,7 +207,7 @@ const Hero = () => {
               onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
               onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
             >
-              Book Free Strategy Call
+              Get a Free Listing Audit
             </button>
             <Link
               to="/categories"
@@ -220,7 +216,7 @@ const Hero = () => {
               onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.color = textPrimary; el.style.background = isLight ? 'hsl(0 0% 94%)' : 'hsl(210 85% 55% / 0.1)'; }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.color = textMuted; el.style.background = 'transparent'; }}
             >
-              View Our Work
+              See How We Fix It
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
           </motion.div>
@@ -235,7 +231,7 @@ const Hero = () => {
             {[
               { value: '500+', label: 'Products Shot' },
               { value: '9', label: 'Marketplaces' },
-              { value: '3×', label: 'Avg Sales Lift' },
+              { value: '48hr', label: 'Photo Turnaround' },
             ].map(s => (
               <div key={s.label}>
                 <div className="text-2xl font-extrabold" style={{ color: textPrimary }}>{s.value}</div>
@@ -273,22 +269,22 @@ const Hero = () => {
       </div>
 
       {/* ── Mobile layout: stacked ── */}
-      <div className="lg:hidden relative z-10 flex flex-col w-full">
+      <div className="lg:hidden relative z-10 flex flex-col w-full max-w-full overflow-hidden">
 
         {/* Text content */}
-        <div className="flex flex-col px-6 pt-24 pb-8">
+        <div className="flex flex-col items-center text-center px-5 pt-24 pb-8 w-full">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex self-start px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase mb-5"
+            className="inline-flex self-center px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.15em] uppercase mb-5 whitespace-nowrap"
             style={isLight ? {
               background: 'hsl(0 0% 94%)', border: '1px solid hsl(0 0% 82%)', color: 'hsl(0 0% 20%)',
             } : {
               background: 'hsl(210 85% 55% / 0.15)', border: '1px solid hsl(210 85% 65% / 0.5)', color: '#93c5fd',
             }}
           >
-            ✦ Studio-Grade Photography
+            ✦ Studio · Photography · Design · Marketing
           </motion.span>
 
           <motion.h1
@@ -298,18 +294,10 @@ const Hero = () => {
             className="font-extrabold leading-[1.02] tracking-tight mb-4"
             style={{ fontFamily: '"Inter Tight", Inter, sans-serif', fontSize: 'clamp(2.4rem, 10vw, 3.5rem)' }}
           >
-            <span style={{ color: textPrimary, display: 'block' }}>Transform Your</span>
-            <span style={{ color: textPrimary, display: 'block' }}>Brand Into</span>
-            <span style={{ display: 'block' }}>
-              <span style={{ color: textPrimary }}>Market-</span>
-              <span style={{ color: textAccent }}>Winning</span>
-            </span>
-            <span style={{
-              display: 'block',
-              WebkitTextStroke: isLight ? '2px hsl(0 0% 15%)' : '2px hsl(215 60% 55%)',
-              color: 'transparent',
-              opacity: isLight ? 0.18 : 0.55,
-            }}>Brands</span>
+            <span style={{ color: textPrimary, display: 'block' }}>Your products</span>
+            <span style={{ color: textPrimary, display: 'block' }}>are great.</span>
+            <span style={{ color: textAccent, display: 'block' }}>Your listings are</span>
+            <span style={{ color: textPrimary, display: 'block' }}>killing them.</span>
           </motion.h1>
 
           <motion.p
@@ -319,7 +307,7 @@ const Hero = () => {
             className="text-sm mb-6 leading-relaxed font-medium"
             style={{ color: textMuted }}
           >
-            Studio-grade product photography and ecommerce design — built to convert.
+            Studio-grade product photos, compliant listings, and conversion-tested creative — built by ecommerce operators, not freelancers.
           </motion.p>
 
           <motion.div
@@ -335,7 +323,7 @@ const Hero = () => {
               onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
               onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
             >
-              Book Free Strategy Call
+              Get a Free Listing Audit
             </button>
             <Link
               to="/categories"
@@ -344,7 +332,7 @@ const Hero = () => {
               onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.color = textPrimary; el.style.borderColor = isLight ? '#0a0a0a' : '#ffffff'; }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.color = textMuted; el.style.borderColor = borderColor; }}
             >
-              View Our Work
+              See How We Fix It
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
           </motion.div>
@@ -353,13 +341,13 @@ const Hero = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.45 }}
-            className="flex gap-8 pt-5"
+            className="flex justify-center gap-8 pt-5 w-full"
             style={{ borderTop: `1px solid ${borderColor}` }}
           >
             {[
               { value: '500+', label: 'Products Shot' },
               { value: '9', label: 'Marketplaces' },
-              { value: '3×', label: 'Avg Sales Lift' },
+              { value: '48hr', label: 'Photo Turnaround' },
             ].map(s => (
               <div key={s.label}>
                 <div className="text-2xl font-extrabold" style={{ color: textPrimary }}>{s.value}</div>

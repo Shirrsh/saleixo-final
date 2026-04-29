@@ -1,20 +1,62 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Menu, X, Camera, ShoppingCart, BookOpen, Grid,
   Mail, MessageCircle, ArrowRight, Star, HelpCircle,
-  Users, LogIn, Sun, Moon,
+  Users, LogIn, Sun, Moon, Palette, Video, TrendingUp, BarChart2, ChevronDown,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import saleixoLogo from '@/assets/saleixo-logo.png';
+import imgPhotography from '@/assets/photography-service.jpg';
 
-// ─── Desktop nav (matches live site exactly) ──────────────────────────────────
+// ─── Mega menu services ───────────────────────────────────────────────────────
+const MEGA_SERVICES = [
+  {
+    icon: Camera, color: '#3b82f6',
+    title: 'Product Photography',
+    desc: 'Studio-grade shoots for every marketplace',
+    href: '/categories',
+  },
+  {
+    icon: ShoppingCart, color: '#10b981',
+    title: 'Ecommerce Design',
+    desc: 'A+ content, listings & brand storefronts',
+    href: '/design',
+  },
+  {
+    icon: BarChart2, color: '#8b5cf6',
+    title: 'Digital Marketing',
+    desc: 'Google & Meta ads with 250% avg. ROI',
+    href: '/services#pricing',
+  },
+  {
+    icon: Palette, color: '#f97316',
+    title: 'Brand Identity',
+    desc: 'Logos, brand kits & packaging design',
+    href: '/services#pricing',
+  },
+  {
+    icon: Video, color: '#ec4899',
+    title: 'Product Videos',
+    desc: 'Short-form reels delivered in 3–5 days',
+    href: '/services#pricing',
+  },
+  {
+    icon: TrendingUp, color: '#d4af37',
+    title: 'Marketplace Strategy',
+    desc: 'Keyword research & rank optimization',
+    href: '/services#pricing',
+  },
+];
+
+// ─── Desktop nav ──────────────────────────────────────────────────────────────
 const desktopNav = [
-  { name: 'Photoshoots', href: '/categories', type: 'route'  as const },
-  { name: 'Ecommerce',   href: '/design',     type: 'route'  as const },
-  { name: 'Blog',        href: '/blog',       type: 'route'  as const },
-  { name: 'Portfolio',   href: '#portfolio',  type: 'scroll' as const },
-  { name: 'Contact',     href: '#contact',    type: 'scroll' as const },
+  { name: 'Photoshoots', href: '/categories', type: 'route'   as const },
+  { name: 'Ecommerce',   href: '/design',     type: 'route'   as const },
+  { name: 'Services',    href: '/services',   type: 'mega'    as const },
+  { name: 'Blog',        href: '/blog',       type: 'route'   as const },
+  { name: 'Portfolio',   href: '#portfolio',  type: 'scroll'  as const },
+  { name: 'Contact',     href: '#contact',    type: 'scroll'  as const },
 ];
 
 // ─── Mobile menu sections ─────────────────────────────────────────────────────
@@ -22,9 +64,9 @@ const menuSections = [
   {
     label: 'Services',
     items: [
-      { icon: Camera,       name: 'Product Photography', desc: 'Studio-grade shoots',    href: '/categories',           type: 'route'  as const },
-      { icon: ShoppingCart, name: 'Ecommerce Design',    desc: 'Listings & A+ content',  href: '/design',               type: 'route'  as const },
-      { icon: Grid,         name: 'All Services',        desc: 'Full service overview',  href: '/services',             type: 'route'  as const },
+      { icon: Camera,       name: 'Product Photography', desc: 'Studio-grade shoots',    href: '/categories',  type: 'route'  as const },
+      { icon: ShoppingCart, name: 'Ecommerce Design',    desc: 'Listings & A+ content',  href: '/design',      type: 'route'  as const },
+      { icon: Grid,         name: 'All Services',        desc: 'Full service overview',  href: '/services',    type: 'route'  as const },
     ],
   },
   {
@@ -38,11 +80,108 @@ const menuSections = [
   },
 ];
 
+// ─── Mega Menu ────────────────────────────────────────────────────────────────
+const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void }) => (
+  <motion.div
+    initial={{ opacity: 0, y: -8 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -8 }}
+    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+    className="fixed left-0 right-0 z-40"
+    style={{ top: '64px' }}
+    onMouseLeave={onClose}
+  >
+    <div
+      className="w-full shadow-2xl border-b"
+      style={{
+        background: isLight ? 'rgba(255,255,255,0.98)' : 'hsl(220 30% 8% / 0.98)',
+        borderColor: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)',
+        backdropFilter: 'blur(24px)',
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-10 py-8">
+        <div className="grid grid-cols-12 gap-8">
+
+          {/* ── Left: service grid ── */}
+          <div className="col-span-8">
+            <p className="text-[10px] font-bold tracking-[0.25em] uppercase mb-5"
+              style={{ color: isLight ? 'hsl(0 0% 50%)' : 'hsl(215 20% 50%)' }}>
+              What We Do
+            </p>
+            <div className="grid grid-cols-3 gap-3">
+              {MEGA_SERVICES.map((svc, i) => {
+                const Icon = svc.icon;
+                return (
+                  <Link key={i} to={svc.href} onClick={onClose}
+                    className="group flex items-start gap-3 p-3.5 rounded-xl transition-all duration-200"
+                    style={{ background: isLight ? 'transparent' : 'transparent' }}
+                    onMouseEnter={e => (e.currentTarget.style.background = isLight ? 'hsl(0 0% 96%)' : 'hsl(220 28% 13%)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                  >
+                    <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: `${svc.color}18`, border: `1px solid ${svc.color}30` }}>
+                      <Icon className="w-4 h-4" style={{ color: svc.color }} />
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold mb-0.5 transition-colors duration-150"
+                        style={{ color: isLight ? '#0a0a0a' : '#fff' }}>
+                        {svc.title}
+                      </div>
+                      <div className="text-xs leading-relaxed"
+                        style={{ color: isLight ? 'hsl(0 0% 45%)' : 'hsl(215 20% 55%)' }}>
+                        {svc.desc}
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* View all link */}
+            <div className="mt-5 pt-4" style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}>
+              <Link to="/services" onClick={onClose}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-150"
+                style={{ color: '#d4af37' }}>
+                View all services & pricing
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* ── Right: featured CTA ── */}
+          <div className="col-span-4">
+            <div className="relative rounded-2xl overflow-hidden h-full min-h-[240px]">
+              <img src={imgPhotography} alt="Saleixo Studio" className="w-full h-full object-cover absolute inset-0" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <div className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: '#d4af37' }}>
+                  Free Consultation
+                </div>
+                <p className="text-white text-sm font-semibold leading-snug mb-4">
+                  Get a free brand audit & custom growth plan
+                </p>
+                <Link to="/services" onClick={onClose}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 hover:opacity-90"
+                  style={{ background: '#d4af37', color: '#000' }}>
+                  Book Free Call <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
 // ─── Header ───────────────────────────────────────────────────────────────────
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled]     = useState(false);
   const [isLight, setIsLight]       = useState(false);
+  const [megaOpen, setMegaOpen]     = useState(false);
+  const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Track theme class on <html>
   useEffect(() => {
@@ -128,19 +267,44 @@ const Header = () => {
 
             {/* ── Desktop center nav ────────────────────────────────────────── */}
             <nav className="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2" aria-label="Main navigation">
-              {desktopNav.map(link =>
-                link.type === 'route' ? (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className="text-sm transition-colors duration-150"
-                    style={{ color: navColorFinal }}
-                    onMouseEnter={e => (e.currentTarget.style.color = navHoverFinal)}
-                    onMouseLeave={e => (e.currentTarget.style.color = navColorFinal)}
-                  >
-                    {link.name}
-                  </Link>
-                ) : (
+              {desktopNav.map(link => {
+                if (link.type === 'mega') {
+                  return (
+                    <div key={link.name} className="relative"
+                      onMouseEnter={() => {
+                        if (megaTimeout.current) clearTimeout(megaTimeout.current);
+                        setMegaOpen(true);
+                      }}
+                      onMouseLeave={() => {
+                        megaTimeout.current = setTimeout(() => setMegaOpen(false), 120);
+                      }}
+                    >
+                      <button
+                        className="flex items-center gap-1 text-sm transition-colors duration-150"
+                        style={{ color: megaOpen ? navHoverFinal : navColorFinal }}
+                      >
+                        {link.name}
+                        <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200"
+                          style={{ transform: megaOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                      </button>
+                    </div>
+                  );
+                }
+                if (link.type === 'route') {
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      className="text-sm transition-colors duration-150"
+                      style={{ color: navColorFinal }}
+                      onMouseEnter={e => (e.currentTarget.style.color = navHoverFinal)}
+                      onMouseLeave={e => (e.currentTarget.style.color = navColorFinal)}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                }
+                return (
                   <button
                     key={link.name}
                     onClick={() => scrollTo(link.href)}
@@ -148,12 +312,11 @@ const Header = () => {
                     style={{ color: navColorFinal }}
                     onMouseEnter={e => (e.currentTarget.style.color = navHoverFinal)}
                     onMouseLeave={e => (e.currentTarget.style.color = navColorFinal)}
-
                   >
                     {link.name}
                   </button>
-                )
-              )}
+                );
+              })}
             </nav>
 
             {/* ── Desktop right: Book Call + theme toggle ───────────────────── */}
@@ -217,6 +380,16 @@ const Header = () => {
           </div>
         </div>
       </header>
+
+      {/* ── Mega menu ────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {megaOpen && (
+          <MegaMenu
+            isLight={isLight}
+            onClose={() => setMegaOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* ── Full-screen mobile menu ───────────────────────────────────────────── */}
       <AnimatePresence>
