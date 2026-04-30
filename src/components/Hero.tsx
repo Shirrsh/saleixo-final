@@ -28,8 +28,8 @@ const ScrollColumn = ({
   isLight: boolean;
 }) => {
   const doubled = [...srcs, ...srcs];
-  const cardH = 260;
-  const gap = 10;
+  const cardH = 320;
+  const gap = 16;
   const totalH = srcs.length * (cardH + gap);
 
   return (
@@ -47,15 +47,15 @@ const ScrollColumn = ({
         {doubled.map((src, i) => (
           <div
             key={i}
-            className="relative overflow-hidden rounded-xl flex-shrink-0"
+            className="relative overflow-hidden rounded-2xl flex-shrink-0"
             style={{
               height: `${cardH}px`,
               border: isLight
                 ? '1px solid hsl(0 0% 88%)'
                 : '1px solid hsl(215 50% 35% / 0.3)',
               boxShadow: isLight
-                ? '0 2px 12px hsl(0 0% 0% / 0.08)'
-                : '0 2px 16px hsl(220 30% 5% / 0.5)',
+                ? '0 4px 20px hsl(0 0% 0% / 0.12)'
+                : '0 4px 24px hsl(220 30% 5% / 0.6)',
             }}
           >
             <img
@@ -64,7 +64,7 @@ const ScrollColumn = ({
               className="w-full h-full object-cover"
               loading="eager"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
           </div>
         ))}
       </div>
@@ -153,10 +153,10 @@ const Hero = () => {
       )}
 
       {/* ── Desktop layout: text left | gallery right ── */}
-      <div className="relative z-10 hidden lg:flex w-full" style={{ height: '100vh' }}>
+      <div className="relative z-10 hidden lg:flex w-full items-center" style={{ minHeight: '100vh', paddingTop: '80px', paddingBottom: '80px' }}>
 
         {/* LEFT — text */}
-        <div className="flex flex-col justify-center w-1/2 px-12 xl:px-20" style={{ paddingTop: '56px' }}>
+        <div className="flex flex-col justify-center w-1/2 px-12 xl:px-20">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -242,25 +242,26 @@ const Hero = () => {
         </div>
 
         {/* RIGHT — scrolling gallery */}
-        <div className="relative w-1/2 h-full" style={{ overflow: 'hidden' }}>
+        <div className="relative w-1/2 flex items-center" style={{ overflow: 'hidden', height: '100vh' }}>
           {/* Left fade */}
           <div className="absolute inset-y-0 left-0 z-20 pointer-events-none"
-            style={{ width: '80px', background: `linear-gradient(to right, ${bg}, transparent)` }} />
-          {/* Right fade */}
+            style={{ width: '120px', background: `linear-gradient(to right, ${bg}, transparent)` }} />
+          {/* Right edge - minimal fade */}
           <div className="absolute inset-y-0 right-0 z-20 pointer-events-none"
-            style={{ width: '60px', background: `linear-gradient(to left, ${bg}, transparent)` }} />
+            style={{ width: '20px', background: `linear-gradient(to left, ${bg} 0%, transparent 100%)` }} />
           {/* Top fade */}
           <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none"
-            style={{ height: '80px', background: `linear-gradient(to bottom, ${bg}, transparent)` }} />
+            style={{ height: '120px', background: `linear-gradient(to bottom, ${bg}, transparent)` }} />
           {/* Bottom fade */}
           <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none"
-            style={{ height: '80px', background: `linear-gradient(to top, ${bg}, transparent)` }} />
+            style={{ height: '120px', background: `linear-gradient(to top, ${bg}, transparent)` }} />
 
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="flex gap-3 h-full px-3"
+            className="flex gap-4 h-full"
+            style={{ paddingLeft: '20px', paddingRight: '0' }}
           >
             <ScrollColumn srcs={col1} direction="up" duration={22} offset={0} isLight={isLight} />
             <ScrollColumn srcs={col2} direction="down" duration={28} offset={-130} isLight={isLight} />

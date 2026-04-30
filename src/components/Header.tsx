@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import saleixoLogo from '@/assets/saleixo-logo.png';
 import imgPhotography from '@/assets/photography-service.jpg';
 
 // ─── Mega menu services ───────────────────────────────────────────────────────
@@ -42,7 +41,7 @@ const MEGA_SERVICES = [
     href: '/services#pricing',
   },
   {
-    icon: TrendingUp, color: '#d4af37',
+    icon: TrendingUp, color: 'hsl(var(--primary))',
     title: 'Marketplace Strategy',
     desc: 'Keyword research & rank optimization',
     href: '/services#pricing',
@@ -141,7 +140,7 @@ const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void 
             <div className="mt-5 pt-4" style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}>
               <Link to="/services" onClick={onClose}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-150"
-                style={{ color: '#d4af37' }}>
+                style={{ color: 'hsl(var(--primary))' }}>
                 View all services & pricing
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -154,7 +153,7 @@ const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void 
               <img src={imgPhotography} alt="Saleixo Studio" className="w-full h-full object-cover absolute inset-0" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-5">
-                <div className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: '#d4af37' }}>
+                <div className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: 'hsl(var(--primary))' }}>
                   Free Consultation
                 </div>
                 <p className="text-white text-sm font-semibold leading-snug mb-4">
@@ -162,7 +161,7 @@ const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void 
                 </p>
                 <Link to="/services" onClick={onClose}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 hover:opacity-90"
-                  style={{ background: '#d4af37', color: '#000' }}>
+                  style={{ background: 'hsl(var(--primary))', color: '#000' }}>
                   Book Free Call <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
@@ -262,7 +261,9 @@ const Header = () => {
               aria-label="Saleixo home"
               onClick={() => setMobileOpen(false)}
             >
-              <img src={saleixoLogo} alt="Saleixo" width={1584} height={672} className="h-6 md:h-7 w-auto" />
+              <span className="font-bold text-xl tracking-tight" style={{ color: isLight ? '#0a0a0a' : '#ffffff' }}>
+                SALEIXO
+              </span>
             </Link>
 
             {/* ── Desktop center nav ────────────────────────────────────────── */}

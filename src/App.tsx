@@ -8,6 +8,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Cookies from "./pages/Cookies";
+import Refund from "./pages/Refund";
+import GetStarted from "./pages/GetStarted";
 
 import Blog from "./pages/Blog";
 import Categories from "./pages/Categories";
@@ -54,6 +57,9 @@ const App = () => (
             <Route path="/custom-pricing" element={<CustomPricing />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
+            <Route path="/refund" element={<Refund />} />
+            <Route path="/get-started" element={<GetStarted />} />
             
             {/* Admin Login - No authentication required */}
             <Route path="/admin/login" element={<AdminLogin />} />

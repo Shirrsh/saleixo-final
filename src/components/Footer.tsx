@@ -56,10 +56,16 @@ const Footer = () => {
     { label: 'About',      href: null, action: () => document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' }) },
     { label: 'Process',    href: null, action: () => document.querySelector('#how-it-works-section')?.scrollIntoView({ behavior: 'smooth' }) },
     { label: 'Portfolio',  href: null, action: () => document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Blog',       href: '/blog',    action: undefined },
+    { label: 'Blog',       href: '/blog',         action: undefined },
+    { label: 'Get Started',href: '/get-started',  action: undefined },
     { label: 'Contact',    href: null, action: () => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Privacy',    href: '/privacy', action: undefined },
-    { label: 'Terms',      href: '/terms',   action: undefined },
+  ];
+
+  const legal = [
+    { label: 'Privacy Policy',           href: '/privacy'  },
+    { label: 'Terms of Service',          href: '/terms'    },
+    { label: 'Cookie Policy',             href: '/cookies'  },
+    { label: 'Cancellation & Refund',     href: '/refund'   },
   ];
 
   const marketplaces = [
@@ -105,7 +111,7 @@ const Footer = () => {
           </div>
 
           {/* Link columns — accordion on mobile, grid on desktop */}
-          <div className="md:grid md:grid-cols-4 md:gap-8 md:pt-8">
+          <div className="md:grid md:grid-cols-5 md:gap-8 md:pt-8">
 
             {/* Services */}
             <FooterAccordion title="Services">
@@ -160,11 +166,28 @@ const Footer = () => {
               </ul>
             </FooterAccordion>
 
+            {/* Legal */}
+            <FooterAccordion title="Legal">
+              <ul className="space-y-3">
+                {legal.map(item => (
+                  <li key={item.label}>
+                    <Link
+                      to={item.href}
+                      className="text-sm text-foreground/70 hover:text-white transition-colors duration-200 flex items-center gap-1 group"
+                    >
+                      {item.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </FooterAccordion>
+
             {/* Contact */}
             <FooterAccordion title="Contact">
               <ul className="space-y-3 mb-5">
                 {[
-                  { icon: <Mail className="w-3.5 h-3.5" />,          label: 'hello@saleixo.com',  href: 'mailto:hello@saleixo.com'    },
+                  { icon: <Mail className="w-3.5 h-3.5" />,          label: 'info@saleixo.com',  href: 'mailto:info@saleixo.com'    },
                   { icon: <MessageCircle className="w-3.5 h-3.5" />, label: 'WhatsApp Us',        href: 'https://wa.me/917011441159' },
                 ].map((item, i) => (
                   <li key={i}>
@@ -209,7 +232,7 @@ const Footer = () => {
 
         {/* ── Bottom bar ── */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 text-xs text-muted-foreground/50">
-          <span>© {currentYear} Saleixo Studio · saleixo.com · hello@saleixo.com</span>
+          <span>© {currentYear} Saleixo Studio · saleixo.com · info@saleixo.com</span>
           <span>Photography · Design · Listings · Marketing</span>
         </div>
 

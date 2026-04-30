@@ -1,40 +1,102 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Link } from 'react-router-dom';
 
-const Privacy = () => {
-  return (
-    <div className="min-h-screen bg-background py-16">
-      <div className="container mx-auto px-4">
-        <Card className="max-w-4xl mx-auto">
-          <CardHeader>
-            <CardTitle className="text-3xl font-bold text-center">Privacy Policy</CardTitle>
-            <p className="text-center text-muted-foreground">Last updated: January 1, 2025</p>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <section>
-              <h2 className="text-xl font-semibold mb-3">Information We Collect</h2>
-              <p className="text-muted-foreground">
-                We collect information you provide directly to us, including name, email, phone number, and project details through our contact forms.
-              </p>
-            </section>
-            
-            <section>
-              <h2 className="text-xl font-semibold mb-3">How We Use Your Information</h2>
-              <p className="text-muted-foreground">
-                We use the information to provide our photography, design, and marketing services, communicate with you about your projects, and improve our services.
-              </p>
-            </section>
+const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
+  <section className="mb-8">
+    <h2 className="text-lg font-semibold text-foreground mb-3 pb-2 border-b border-border">{title}</h2>
+    <div className="space-y-3 text-muted-foreground leading-relaxed">{children}</div>
+  </section>
+);
 
-            <section>
-              <h2 className="text-xl font-semibold mb-3">Contact Us</h2>
-              <p className="text-muted-foreground">
-                If you have any questions about this Privacy Policy, please contact us at info@saleixo.com
-              </p>
-            </section>
-          </CardContent>
-        </Card>
+const Privacy = () => (
+  <>
+    <Header />
+    <main className="min-h-screen bg-background pt-28 pb-20">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8">
+
+        {/* Header */}
+        <div className="mb-10">
+          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">Legal</p>
+          <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2">Privacy Policy</h1>
+          <p className="text-sm text-muted-foreground">Effective date: April 2026 &nbsp;·&nbsp; Last updated: April 2026</p>
+        </div>
+
+        <div className="prose-container text-[15px]">
+          <Section title="Overview">
+            <p>This Privacy Policy explains how Saleixo ("we", "us", "our"), operating at saleixo.com, collects, uses, stores, and protects the personal information of visitors and clients. By using our website or services, you agree to the practices described here.</p>
+          </Section>
+
+          <Section title="1. Information We Collect">
+            <p><strong className="text-foreground">Information you provide directly:</strong></p>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>Name, email address, phone/WhatsApp number</li>
+              <li>Business name, product or service details</li>
+              <li>Payment information - processed securely via our payment provider; we do not store card details</li>
+              <li>Communications sent via forms, email, or messaging apps</li>
+            </ul>
+            <p className="mt-3"><strong className="text-foreground">Information collected automatically:</strong></p>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>IP address, browser type, operating system</li>
+              <li>Pages visited, session duration, referring URLs (via Google Analytics)</li>
+              <li>Cookies and tracking technologies - see our <Link to="/cookies" className="text-primary hover:underline">Cookie Policy</Link></li>
+            </ul>
+          </Section>
+
+          <Section title="2. How We Use Your Information">
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>To provide, manage, and improve our services</li>
+              <li>To respond to inquiries and communicate about your project</li>
+              <li>To send invoices, proposals, and service-related documents</li>
+              <li>To send marketing emails - only with your consent; unsubscribe at any time</li>
+              <li>To analyse website usage and improve user experience</li>
+              <li>To comply with legal obligations</li>
+            </ul>
+          </Section>
+
+          <Section title="3. Sharing Your Information">
+            <p>We do not sell, trade, or rent your personal information. We may share data with trusted third-party service providers (email platforms, payment processors, cloud storage) under strict confidentiality agreements. We may disclose information if required by law.</p>
+          </Section>
+
+          <Section title="4. Data Retention">
+            <p>We retain personal data for as long as necessary to provide services and comply with legal obligations. Client project data is retained for 3 years after the end of an engagement. You may request deletion at any time by emailing <a href="mailto:info@saleixo.com" className="text-primary hover:underline">info@saleixo.com</a>.</p>
+          </Section>
+
+          <Section title="5. Your Rights">
+            <p>Depending on your jurisdiction, you may have the right to:</p>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>Access the personal data we hold about you</li>
+              <li>Request correction of inaccurate data</li>
+              <li>Request deletion of your data</li>
+              <li>Withdraw consent to marketing at any time</li>
+              <li>Lodge a complaint with your local data protection authority</li>
+            </ul>
+          </Section>
+
+          <Section title="6. Cookies">
+            <p>We use cookies to enhance your browsing experience. See our <Link to="/cookies" className="text-primary hover:underline">Cookie Policy</Link> for full details.</p>
+          </Section>
+
+          <Section title="7. Security">
+            <p>We implement industry-standard security measures including SSL encryption, access controls, and regular security reviews. No system is 100% secure - we encourage clients to keep access credentials private.</p>
+          </Section>
+
+          <Section title="8. Contact">
+            <p>For privacy-related questions or requests, contact us at:<br />
+              <a href="mailto:info@saleixo.com" className="text-primary hover:underline">info@saleixo.com</a> &nbsp;·&nbsp; <a href="https://saleixo.com" className="text-primary hover:underline">saleixo.com</a>
+            </p>
+          </Section>
+        </div>
+
+        <div className="mt-10 pt-6 border-t border-border flex gap-6 text-sm">
+          <Link to="/terms" className="text-primary hover:underline">Terms of Service</Link>
+          <Link to="/cookies" className="text-primary hover:underline">Cookie Policy</Link>
+          <Link to="/refund" className="text-primary hover:underline">Cancellation & Refund</Link>
+        </div>
       </div>
-    </div>
-  );
-};
+    </main>
+    <Footer />
+  </>
+);
 
 export default Privacy;
