@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SaleixoLogo from '@/components/SaleixoLogo';
 
 const LoadingScreen = () => {
   const [visible, setVisible] = useState(true);
@@ -21,20 +22,13 @@ const LoadingScreen = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: 'easeInOut' }}
         >
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="font-extrabold tracking-tight select-none"
-            style={{
-              fontFamily: '"Inter Tight", Inter, sans-serif',
-              fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-              color: '#ffffff',
-              letterSpacing: '-0.03em',
-            }}
           >
-            saleixo
-          </motion.span>
+            <SaleixoLogo size="text-5xl md:text-7xl" glow={true} />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

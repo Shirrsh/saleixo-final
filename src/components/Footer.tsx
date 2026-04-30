@@ -1,8 +1,8 @@
 import { Facebook, Instagram, Twitter, Linkedin, Mail, MessageCircle, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import saleixoLogo from '@/assets/saleixo-logo.png';
 import { cn } from '@/lib/utils';
+import SaleixoLogo from '@/components/SaleixoLogo';
 
 // Collapsible section for mobile footer
 const FooterAccordion = ({ title, children }: { title: string; children: React.ReactNode }) => {
@@ -89,7 +89,7 @@ const Footer = () => {
 
           {/* Brand — always visible, full width on mobile */}
           <div className="pb-6 mb-2 border-b border-border/30 md:border-none md:mb-0 md:pb-0">
-            <img src={saleixoLogo} alt="Saleixo" className="h-10 w-auto mb-4" loading="lazy" />
+            <div className="mb-4"><SaleixoLogo size="text-3xl" /></div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-1">
               The diagnostic-first ecommerce studio.
             </p>

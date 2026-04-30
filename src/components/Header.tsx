@@ -7,6 +7,7 @@ import {
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import imgPhotography from '@/assets/photography-service.jpg';
+import SaleixoLogo from '@/components/SaleixoLogo';
 
 // ─── Mega menu services ───────────────────────────────────────────────────────
 const MEGA_SERVICES = [
@@ -257,13 +258,11 @@ const Header = () => {
             {/* ── Logo ─────────────────────────────────────────────────────── */}
             <Link
               to="/"
-              className="flex-shrink-0 hover:opacity-70 transition-opacity duration-200"
+              className="flex-shrink-0 hover:opacity-80 transition-opacity duration-200 flex items-center"
               aria-label="Saleixo home"
               onClick={() => setMobileOpen(false)}
             >
-              <span className="font-bold text-xl tracking-tight" style={{ color: isLight ? '#0a0a0a' : '#ffffff' }}>
-                SALEIXO
-              </span>
+              <SaleixoLogo />
             </Link>
 
             {/* ── Desktop center nav ────────────────────────────────────────── */}
