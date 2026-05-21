@@ -42,6 +42,8 @@ const badges = [
   { icon: UserCheck, label: 'Dedicated Team' },
 ];
 
+const W = 'px-6 md:px-12 lg:px-20 xl:px-28';
+
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   visible: (i = 0) => ({
@@ -53,13 +55,11 @@ const fadeUp = {
 const Enterprise = () => {
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved === 'light';
-    return !window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return !document.documentElement.classList.contains('dark');
   });
 
   useEffect(() => {
-    const sync = () => setIsLight(document.documentElement.classList.contains('light'));
+    const sync = () => setIsLight(!document.documentElement.classList.contains('dark'));
     sync();
     const obs = new MutationObserver(sync);
     obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
@@ -82,7 +82,7 @@ const Enterprise = () => {
       <main className="min-h-screen" style={{ background: bg }}>
 
         {/* ── Hero ── */}
-        <section className="relative pt-32 pb-20 px-4 overflow-hidden">
+        <section className={`relative pt-32 pb-20 ${W} overflow-hidden`}>
           {!isLight && (
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(215 45% 14%) 0%, hsl(220 35% 10%) 40%, hsl(222 30% 9%) 100%)' }} />
@@ -96,7 +96,7 @@ const Enterprise = () => {
             </div>
           )}
 
-          <div className="relative z-10 container mx-auto max-w-4xl text-center">
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -164,8 +164,8 @@ const Enterprise = () => {
         </section>
 
         {/* ── Content ── */}
-        <section className="pb-24 px-4">
-          <div className="container mx-auto max-w-3xl space-y-6">
+        <section className={`pb-24 ${W}`}>
+          <div className="max-w-3xl mx-auto space-y-6">
 
             {/* What You Get */}
             <motion.div

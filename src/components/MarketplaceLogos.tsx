@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const marketplaces = [
+// Platforms with logo images (files in /public/Marketplace logos/)
+const logoMarketplaces = [
   { name: 'Amazon',      src: '/Marketplace%20logos/Amazon.png' },
   { name: 'Shopify',     src: '/Marketplace%20logos/shopify.png' },
   { name: 'Walmart',     src: '/Marketplace%20logos/Walmart.png' },
@@ -12,6 +13,25 @@ const marketplaces = [
   { name: 'SHEIN',       src: '/Marketplace%20logos/Shein.png' },
 ];
 
+// Platforms shown as text badges (no logo file available)
+const textMarketplaces = [
+  'eBay', 'Myntra', 'Nykaa', 'Snapdeal', 'JioMart', 'Tata Cliq',
+  'Ajio', 'IndiaMART', 'Amazon EU', 'Amazon JP', 'Amazon AU',
+  'BigCommerce', 'Wix', 'Squarespace', 'Temu', 'Zalando',
+  'ASOS', 'Poshmark', 'Depop', 'Alibaba', 'Global Sources', 'Faire',
+];
+
+type MarqueeItem =
+  | { type: 'logo'; name: string; src: string }
+  | { type: 'text'; name: string };
+
+// Interleave logos and text badges, then duplicate for seamless loop
+const allItems: MarqueeItem[] = [
+  ...logoMarketplaces.map(m => ({ type: 'logo' as const, ...m })),
+  ...textMarketplaces.map(name => ({ type: 'text' as const, name })),
+];
+const marqueeItems: MarqueeItem[] = [...allItems, ...allItems];
+
 const countries = [
   { code: 'IN', name: 'India' },
   { code: 'US', name: 'United States' },
@@ -21,9 +41,6 @@ const countries = [
   { code: 'AU', name: 'Australia' },
   { code: 'CA', name: 'Canada' },
 ];
-
-// Duplicate for seamless loop
-const marqueeItems = [...marketplaces, ...marketplaces];
 
 const MarketplaceLogos = () => {
   const [paused, setPaused] = useState(false);
@@ -52,24 +69,35 @@ const MarketplaceLogos = () => {
         <div
           className="flex items-center gap-8 md:gap-12 whitespace-nowrap"
           style={{
-            animation: `marquee-x 25s linear infinite`,
+            animation: `marquee-x 60s linear infinite`,
             animationPlayState: paused ? 'paused' : 'running',
             willChange: 'transform',
             width: 'max-content',
           }}
         >
-          {marqueeItems.map((marketplace, i) => (
-            <div
-              key={i}
-              className="flex items-center justify-center flex-shrink-0 h-8 w-20 md:h-10 md:w-28 cursor-default select-none opacity-40 hover:opacity-90 transition-opacity duration-300"
-            >
-              <img
-                src={marketplace.src}
-                alt={marketplace.name}
-                className="max-h-8 md:max-h-10 max-w-[5rem] md:max-w-[7rem] w-auto object-contain"
-                loading="lazy"
-              />
-            </div>
+          {marqueeItems.map((item, i) => (
+            item.type === 'logo' ? (
+              <div
+                key={i}
+                className="flex items-center justify-center flex-shrink-0 h-8 w-20 md:h-10 md:w-28 cursor-default select-none opacity-40 hover:opacity-90 transition-opacity duration-300"
+              >
+                <img
+                  src={item.src}
+                  alt={item.name}
+                  className="max-h-8 md:max-h-10 max-w-[5rem] md:max-w-[7rem] w-auto object-contain"
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <div
+                key={i}
+                className="flex items-center justify-center flex-shrink-0 h-8 cursor-default select-none opacity-40 hover:opacity-90 transition-opacity duration-300"
+              >
+                <span className="text-xs font-semibold text-muted-foreground border border-border/40 rounded-md px-2.5 py-1 whitespace-nowrap">
+                  {item.name}
+                </span>
+              </div>
+            )
           ))}
         </div>
       </div>

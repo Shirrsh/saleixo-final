@@ -21,11 +21,11 @@ const Contact = () => {
   }, []);
 
   const handleBookCall = () => {
-    window.open('https://wa.me/919634355530?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%20strategy%20call', '_blank');
+    window.open('https://wa.me/917011441159?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%20strategy%20call', '_blank');
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/919634355530', '_blank');
+    window.open('https://wa.me/917011441159', '_blank');
   };
 
   const current = dynamicWords[wordIdx];

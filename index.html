@@ -10,6 +10,20 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0A0418" />
     <link rel="canonical" href="https://saleixo.com" />
+    <!-- Theme init: apply saved theme BEFORE any paint to prevent flash -->
+    <script>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var html = document.documentElement;
+        if (saved === 'dark') {
+          html.classList.remove('light');
+          html.classList.add('dark');
+        } else {
+          html.classList.remove('dark');
+          html.classList.add('light');
+        }
+      })();
+    </script>
     <!-- Inter Tight display font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -67,20 +81,6 @@
   </head>
 
   <body>
-    <!-- Theme init: apply saved theme before React loads to prevent flash -->
-    <script>
-      (function() {
-        var saved = localStorage.getItem('theme');
-        var html = document.documentElement;
-        if (saved === 'dark') {
-          html.classList.remove('light');
-          html.classList.add('dark');
-        } else {
-          html.classList.remove('dark');
-          html.classList.add('light');
-        }
-      })();
-    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -343,10 +343,19 @@
 /* ── Gallery scroll keyframes ────────────────────────────────────────────── */
 @keyframes scroll-up {
   0%   { transform: translateY(0); }
-  100% { transform: translateY(var(--scroll-total, -1080px)); }
+  100% { transform: translateY(var(--scroll-total, -1248px)); }
 }
 @keyframes scroll-down {
-  0%   { transform: translateY(var(--scroll-total, -1080px)); }
+  0%   { transform: translateY(var(--scroll-total, -1248px)); }
+  100% { transform: translateY(0); }
+}
+/* Seamless infinite gallery columns */
+@keyframes gallery-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(calc(-1 * var(--one-set, 1248px))); }
+}
+@keyframes gallery-down {
+  0%   { transform: translateY(calc(-1 * var(--one-set, 1248px))); }
   100% { transform: translateY(0); }
 }
 @keyframes mobile-scroll {
@@ -505,4 +514,9 @@
   .cursor-follower, .theme-toggle, .scroll-progress,
   .animate-float, [class*="animate-"] { display: none \!important; }
   body { cursor: auto \!important; }
+}
+
+@keyframes scrollNudge {
+  0%, 100% { transform: translateY(0); opacity: .7; }
+  50%      { transform: translateY(4px); opacity: 1; }
 }

@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Linkedin, Mail, MessageCircle, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { Mail, MessageCircle, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -34,22 +34,17 @@ const FooterAccordion = ({ title, children }: { title: string; children: React.R
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const socials = [
-    { icon: <Instagram className="w-4 h-4" />, href: '#', label: 'Instagram' },
-    { icon: <Facebook className="w-4 h-4" />,  href: '#', label: 'Facebook'  },
-    { icon: <Linkedin className="w-4 h-4" />,  href: '#', label: 'LinkedIn'  },
-    { icon: <Twitter className="w-4 h-4" />,   href: '#', label: 'Twitter'   },
-  ];
+  
 
   const services = [
-    { label: 'Product Photography',    href: '/categories' },
-    { label: 'Lifestyle & On-Model',   href: '/categories' },
-    { label: 'A+ / A++ Content',       href: '/services'   },
-    { label: 'Listing Optimization',   href: '/services'   },
-    { label: 'Marketplace Compliance', href: '/services'   },
-    { label: 'Brand Identity',         href: '/design'     },
-    { label: 'Storefront Design',      href: '/design'     },
-    { label: 'Ads & Analytics',        href: '/services'   },
+    { label: 'Product Photography',    href: '/services/photography'         },
+    { label: 'Amazon Listing & FBA',   href: '/services/amazon'              },
+    { label: 'Ecommerce Management',   href: '/services/ecommerce-management'},
+    { label: 'Shopify Setup & Design', href: '/services/shopify'             },
+    { label: 'Social & Paid Ads',      href: '/services/social-ads'          },
+    { label: 'Ecommerce Design',       href: '/design'                       },
+    { label: 'All Services',           href: '/services'                     },
+    { label: 'Pricing',                href: '/custom-pricing'               },
   ];
 
   const studio = [
@@ -68,10 +63,8 @@ const Footer = () => {
     { label: 'Cancellation & Refund',     href: '/refund'   },
   ];
 
-  const marketplaces = [
-    'Amazon', 'Etsy', 'Shopify', 'Walmart',
-    'eBay', 'WooCommerce', 'Flipkart · Meesho · Shein',
-  ];
+  const openCookieSettings = () =>
+    window.dispatchEvent(new Event('saleixo:open-cookie-settings'));
 
   return (
     <footer className="relative overflow-hidden border-t border-border/40">
@@ -93,25 +86,13 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground leading-relaxed mb-1">
               The diagnostic-first ecommerce studio.
             </p>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+            <p className="text-sm text-muted-foreground leading-relaxed">
               Photography · Design · Listings · Marketing.
             </p>
-            <div className="flex gap-2">
-              {socials.map(s => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 bg-surface border border-border/60 text-muted-foreground hover:border-accent-violet/60 hover:text-foreground"
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Link columns — accordion on mobile, grid on desktop */}
-          <div className="md:grid md:grid-cols-5 md:gap-8 md:pt-8">
+          <div className="md:grid md:grid-cols-4 md:gap-8 md:pt-8">
 
             {/* Services */}
             <FooterAccordion title="Services">
@@ -126,15 +107,6 @@ const Footer = () => {
                       <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
                     </Link>
                   </li>
-                ))}
-              </ul>
-            </FooterAccordion>
-
-            {/* Marketplaces */}
-            <FooterAccordion title="Marketplaces">
-              <ul className="space-y-3">
-                {marketplaces.map(name => (
-                  <li key={name} className="text-sm text-foreground/60">{name}</li>
                 ))}
               </ul>
             </FooterAccordion>
@@ -180,6 +152,15 @@ const Footer = () => {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <button
+                    onClick={openCookieSettings}
+                    className="text-sm text-foreground/70 hover:text-white transition-colors duration-200 flex items-center gap-1 group"
+                  >
+                    Cookie Settings
+                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
+                  </button>
+                </li>
               </ul>
             </FooterAccordion>
 

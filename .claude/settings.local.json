@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(npm run *)",
-      "Bash(bun run *)"
+      "Bash(bun run *)",
+      "PowerShell(head *)",
+      "Bash(del *)",
+      "Bash(powershell -Command \"\\(Get-Content 'src/pages/Services.tsx'\\) -replace [regex]::Escape\\(\\\\\"headline: 'Run your business. We’ll run your ecommerce.'\\\\\"\\), 'headline: \\\\\"Run your business. We’ll run your ecommerce.\\\\\"' | Set-Content 'src/pages/Services.tsx'\")",
+      "Bash(node -e ' *)",
+      "Bash(node)",
+      "Bash(npx eslint *)"
     ]
   }
 }

@@ -101,7 +101,7 @@ const Design = () => {
               style={isLight ? { background: 'hsl(0 0% 94%)', border: '1px solid hsl(0 0% 82%)', color: 'hsl(0 0% 25%)' } : { background: 'hsl(210 85% 55% / 0.15)', border: '1px solid hsl(210 85% 65% / 0.4)', color: '#93c5fd' }}
             >
               <Globe className="w-3 h-3" />
-              25+ Marketplaces · 7 Countries
+              30+ Marketplaces · 7 Countries
             </motion.span>
 
             <motion.h1
@@ -162,7 +162,7 @@ const Design = () => {
             >
               {[
                 { value: '500+', label: 'Artisans Helped' },
-                { value: '25+', label: 'Marketplaces' },
+                { value: '30+', label: 'Marketplaces' },
                 { value: '7', label: 'Countries' },
                 { value: '98%', label: 'Satisfaction Rate' },
               ].map(s => (

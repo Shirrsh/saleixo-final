@@ -16,7 +16,7 @@ Site deployed at `https://saleixo-final.vercel.app/` (canonical: `https://saleix
 - **React Router 6** for routing (`src/App.tsx`)
 - **TanStack Query 5** for server state
 - **react-hook-form + zod** for forms
-- **next-themes** for theme switching — light is canonical, dark is a real variant
+- **next-themes** for theme switching — light is canonical, dark is a real variant. A blocking inline script in `index.html` reads `localStorage.getItem('theme')` and sets the `dark`/`light` class on `<html>` before first paint to prevent flash of unstyled content (FOUC). Do not remove or move this script.
 - **Supabase** for auth + data (`src/integrations/supabase/`)
 - **Vercel Analytics** wired in `App.tsx`
 - **Bun** is the preferred package manager (`bun.lockb` is committed). `npm` also works.
@@ -38,7 +38,7 @@ Always run `npm run build` before declaring any task complete.
 
 ```
 src/
-  App.tsx                       # Router + providers (TanStack, Tooltip, Toaster, Analytics)
+  App.tsx                       # Router + providers (TanStack, CurrencyProvider, Tooltip, Toaster, Analytics)
   main.tsx                      # React mount
   index.css                     # Design system — all tokens live here
   pages/
@@ -62,6 +62,8 @@ src/
     design/                     # Sub-components for the /design page
     admin/                      # AdminLayout, ProtectedRoute, etc.
     ui/                         # shadcn primitives — DO NOT restyle directly
+  context/
+    CurrencyContext.tsx          # Global multi-currency state (15 currencies) — see section below
   hooks/                        # use-mobile, use-toast, useAnimatedCounter,
                                 # useAuth, useIntersectionObserver, useSiteImages
   integrations/supabase/        # client + generated types
@@ -77,6 +79,7 @@ Path alias: `@/*` → `./src/*` (used everywhere — keep using it).
 ## Guardrails
 
 - **Do not change** routes in `App.tsx`, the Supabase client/types, `src/lib/utils.ts`, or any file under `src/integrations/`.
+- **Do not remove the theme-init script** in `index.html` — it prevents a flash of unstyled content on page load by applying the saved theme class before React mounts.
 - **Do not modify shadcn primitives in `src/components/ui/`** as a way to change appearance — change the tokens in `src/index.css` instead. If a primitive needs a structural change, copy it under a new name.
 - **Do not remove** existing components (`FloatingCTA`, `WhatsAppButton`, `ScrollProgress`, `ScrollToTop`, `ThemeToggle`, `WaveDivider`, `LoadingScreen`) — restyle them in place if needed.
 - **Do not invent new image paths.** Reuse files under `src/assets/`. If a new asset is genuinely needed, add it under the right subfolder and import it normally.
@@ -130,13 +133,25 @@ All routes are wired in `src/App.tsx`. Do not remove or rename them.
 | File | Purpose |
 |---|---|
 | `src/components/GradientText.tsx` | Wraps one word in the accent gradient. Use for ONE word per headline — never full sentences. |
-| `src/components/Reveal.tsx` | framer-motion `whileInView` fade-up wrapper. Use on section content blocks for consistent enter animations. |
+| `src/components/Reveal.tsx` | framer-motion fade-up wrapper. Uses `useInView` + `useAnimation` with two safety nets: immediate reveal if the element is already in the viewport at mount, and a 1800ms `setTimeout` fallback so content is never left invisible due to observer misfires. Use on section content blocks for consistent enter animations. |
 
 ### Footer updates
 
 - Added a **Legal** column (5th column, `md:grid-cols-5`) with links to all four policy pages.
 - **Get Started** link added to the Studio column pointing to `/get-started`.
 - Contact email updated to `info@saleixo.com` throughout.
+- **Services column** links to specific service sub-pages (updated May 2026):
+
+| Label | Route |
+|---|---|
+| Product Photography | `/services/photography` |
+| Amazon Listing & FBA | `/services/amazon` |
+| Ecommerce Management | `/services/ecommerce-management` |
+| Shopify Setup & Design | `/services/shopify` |
+| Social & Paid Ads | `/services/social-ads` |
+| Ecommerce Design | `/design` |
+| All Services | `/services` |
+| Pricing | `/custom-pricing` |
 
 ### GetStarted form — wiring instructions
 
@@ -148,6 +163,57 @@ The `onSubmit` handler in `src/pages/GetStarted.tsx` currently has a 1.2s fake d
    ```
 2. **Email (Resend)** — call a Supabase Edge Function or API route that POSTs to `api.resend.com/emails`.
 3. After successful submission the component shows a thank-you screen automatically — no redirect needed.
+
+### CustomPricing page (updated May 2026)
+
+`src/pages/CustomPricing.tsx` was rewritten from a "why we don't show prices" philosophy page into a full transparent pricing page. Key structure:
+
+- **Tier cards** — Starter ($299), Growth ($699), Pro ($1,499), Enterprise (custom). Data lives in the `tiers` array at the top of the file. Prices are shown in both USD and INR.
+- **À-la-carte tables** — Photography, Design, Amazon-Specific, Marketing. Each table is rendered by the `ServiceTable` sub-component defined in the same file.
+- **Add-ons table** — Optional extras (rush delivery, extra revisions, weekend support, additional marketplace).
+- **What's Not Included table** — Transparent list of costs paid directly by the client (ad spend, FBA fees, etc.).
+- **FAQ section** — 7 common pricing questions.
+- **CTA block** — Links to `/get-started` and `mailto:info@saleixo.com`.
+
+All pricing data is defined as plain arrays at the top of the file — edit those arrays to update prices. No external data source. The page uses no shadcn `Card` or `Button` primitives; layout is plain Tailwind + `cn()`.
+
+### Currency context (updated May 2026)
+
+`src/context/CurrencyContext.tsx` provides global multi-currency switching across the entire app. `CurrencyProvider` wraps the app in `App.tsx` (outside `TooltipProvider`, inside `QueryClientProvider`).
+
+**Supported currencies (15 total):** USD, INR, GBP, EUR, AUD, CAD, SGD, AED, SAR, JPY, CNY, MYR, BDT, PKR, LKR. All defined in the exported `CURRENCIES` array with `code`, `symbol`, `label`, `flag`, and `rate` (relative to USD).
+
+**Exported types:**
+- `CURRENCIES` — the full array of currency metadata (use to build dropdowns/selectors)
+- `CurrencyCode` — union type of all 15 currency codes
+
+**What it exposes via `useCurrency()`:**
+
+| Value | Type | Description |
+|---|---|---|
+| `currency` | `CurrencyCode` | Active currency code |
+| `setCurrency` | `(c: CurrencyCode) => void` | Manual override — persisted to `localStorage` under key `saleixo_currency` |
+| `fmt` | `(usd, inr?) => string` | Formats a USD base price in the active currency; for INR uses the hand-crafted `inr` arg if provided, otherwise converts; returns `'Custom'` if `usd` is `null`/`undefined` |
+| `symbol` | `string` | Currency symbol for the active currency (e.g. `'₹'`, `'£'`, `'¥'`) |
+
+**No geo-detection:** The context no longer auto-detects country on first visit. It defaults to `'USD'` unless a valid currency code is already saved in `localStorage`.
+
+**Usage pattern:**
+```tsx
+import { useCurrency, CURRENCIES } from '@/context/CurrencyContext';
+
+const { fmt, currency, setCurrency, symbol } = useCurrency();
+// Render a price (USD base, optional hand-crafted INR):
+<span>{fmt(299, 24999)}</span>
+// Build a selector:
+{CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.flag} {c.label}</option>)}
+```
+
+**Guardrails:**
+- Do not call `useCurrency()` outside of `CurrencyProvider` — it will throw.
+- Do not duplicate currency state elsewhere; always read from this context.
+- The `CurrencyToggle` component (`src/components/CurrencyToggle.tsx`) is the canonical UI for switching — update it if the selector UI needs to change rather than building a new one.
+- JPY and CNY are formatted without decimal places automatically.
 
 ### Legal pages — before publishing
 

@@ -38,7 +38,7 @@ const defaultContent: HomepageContent = {
   badge_1_icon: 'Camera',
   badge_1_text: 'Studio-Grade Photography',
   badge_2_icon: 'ShoppingCart',
-  badge_2_text: '9 Marketplaces | 7 Countries',
+  badge_2_text: '20+ Marketplaces | 7 Countries',
   badge_3_icon: '',
   badge_3_text: '',
   trust_badges: 'Amazon | eBay | Etsy | Shopify | Flipkart | Walmart',

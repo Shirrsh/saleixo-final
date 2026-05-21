@@ -25,7 +25,7 @@ const differentiators = [
   {
     Icon: Globe,
     title: 'We\'ve shipped on multiple marketplaces.',
-    body: 'Amazon, Etsy, eBay, Shopify, WooCommerce, Walmart, Flipkart, Meesho, Shein. Each has a different game. We know all of them.',
+    body: 'Amazon US/UK/EU, Etsy, Shopify, Flipkart, Meesho — each with different image specs, listing rules, and ranking signals. We know all of them. No rejected images. No compliance surprises.',
   },
   {
     Icon: DollarSign,
@@ -61,7 +61,7 @@ const WhySaleixo = () => (
           A studio built by people who actually sell.
         </motion.h2>
         <motion.p variants={fadeUp} custom={2} className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Most agencies hand you assets and walk. We diagnose the funnel, fix the bottleneck, and stay until the numbers move. No retainer hostage-taking, no junior account managers.
+          We've managed listings, ads, and photography for artisan sellers across Amazon, Etsy, and Shopify. We know where the bottleneck is before we sell you a thing — because we've fixed it before.
         </motion.p>
       </motion.div>
 

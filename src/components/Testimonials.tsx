@@ -7,7 +7,6 @@ import { supabase } from '@/integrations/supabase/client';
 import imgEarrings   from '@/assets/categories/jewelry-earrings.jpg';
 import imgNecklace   from '@/assets/categories/jewelry-necklace.jpg';
 import imgIncense    from '@/assets/categories/incense-packaging.jpg';
-import imgRudraksha  from '@/assets/categories/rudraksha-bracelet.jpg';
 import imgAquamarine from '@/assets/categories/aquamarine-bracelet.jpg';
 import imgSpiritual  from '@/assets/categories/spiritual-products.jpg';
 import imgShowcase1  from '@/assets/hero/showcase-1.jpg';
@@ -61,7 +60,7 @@ const COL1: TCard[] = [
     rating: 5, result: '+180% Traffic', initials: 'ER',
   },
   {
-    id: 'c1-4', type: 'video', media: imgPhotography, videoId: 'dQw4w9WgXcQ',
+    id: 'c1-4', type: 'image', media: imgPhotography,
     client_name: 'James Whitfield', role: 'Shopify · Home Décor',
     quote: 'Professional, fast, and the results speak for themselves.',
     rating: 5, result: '+40% AOV', initials: 'JW',
@@ -76,7 +75,7 @@ const COL1: TCard[] = [
 
 const COL2: TCard[] = [
   {
-    id: 'c2-1', type: 'video', media: imgShowcase2, videoId: 'dQw4w9WgXcQ',
+    id: 'c2-1', type: 'image', media: imgShowcase2,
     client_name: 'Rohan Kapoor', role: 'Flipkart · Lifestyle Brand',
     quote: 'The A+ content they built for us is world-class. We went from page 4 to page 1.',
     rating: 5, result: 'Page 4 → Page 1', initials: 'RK',
@@ -121,14 +120,14 @@ const COL3: TCard[] = [
     rating: 4, result: 'ROI in Week 1', initials: 'AN',
   },
   {
-    id: 'c3-3', type: 'video', media: imgDesign, videoId: 'dQw4w9WgXcQ',
-    client_name: 'Sofia Nakamura', role: 'Hotel Operations',
-    quote: 'We swapped our old photos for Saleixo shots. Guests stopped bouncing. Bookings went up.',
-    rating: 5, result: '+35% Bookings', initials: 'SN',
+    id: 'c3-3', type: 'text',
+    client_name: 'Sofia Nakamura', role: 'Amazon · Wellness & Beauty',
+    quote: 'We swapped our old product photos for Saleixo shots. Click-through rate jumped immediately. Our listing finally looks as good as the product.',
+    rating: 5, result: '+35% CTR', initials: 'SN',
   },
   {
-    id: 'c3-4', type: 'image', media: imgRudraksha,
-    client_name: 'Henry Vane', role: 'Co-Founder · Loremipsum Co.',
+    id: 'c3-4', type: 'image', media: imgAquamarine,
+    client_name: 'Henry Vane', role: 'Co-Founder · Heritage Craft Supply',
     quote: 'Best product photography studio we have worked with. The retouching is flawless.',
     rating: 5, result: '+150% CTR', initials: 'HV',
   },
@@ -392,7 +391,7 @@ const Testimonials = () => {
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <section className="py-16 md:py-24 overflow-hidden" style={{ background: 'hsl(var(--background))' }}>
+    <section className="py-16 md:py-24 overflow-hidden hidden" style={{ background: 'hsl(var(--background))' }}>
 
       {/* ── Header ── */}
       <motion.div

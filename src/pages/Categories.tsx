@@ -11,7 +11,6 @@ import jewelryNecklace from '@/assets/categories/jewelry-necklace.jpg';
 import jewelryEarrings from '@/assets/categories/jewelry-earrings.jpg';
 import incensePackaging from '@/assets/categories/incense-packaging.jpg';
 import spiritualProducts from '@/assets/categories/spiritual-products.jpg';
-import rudrakshaB from '@/assets/categories/rudraksha-bracelet.jpg';
 import aquamarineB from '@/assets/categories/aquamarine-bracelet.jpg';
 
 interface Category {
@@ -28,7 +27,6 @@ const fallbackCategories: Category[] = [
   { id: '2', name: 'Pearl & Fine Jewelry', description: 'Stunning pearl earrings and fine jewelry photography that highlights luster, texture, and sophistication. Perfect for luxury brands and boutique collections.', image_url: jewelryEarrings, alt_text: 'Elegant pearl drop earrings on white background professional jewelry photography', slug: 'pearl-fine-jewelry' },
   { id: '3', name: 'Spiritual & Wellness', description: 'Sacred incense, spiritual artifacts, and wellness products photographed with reverence and authenticity. We capture the essence and cultural significance of each item.', image_url: spiritualProducts, alt_text: 'Spiritual wellness products and incense sticks product photography', slug: 'spiritual-wellness' },
   { id: '4', name: 'Premium Incense & Packaging', description: 'Packaging and product photography for premium incense brands. We highlight the heritage, quality, and visual appeal of your spiritual product lines.', image_url: incensePackaging, alt_text: 'Premium incense stick packaging photography with traditional design', slug: 'incense-packaging' },
-  { id: '5', name: 'Rudraksha Accessories', description: 'Sacred rudraksha beads and bracelets captured with respect for tradition and style. Perfect for spiritual jewelry and fashion accessory brands.', image_url: rudrakshaB, alt_text: 'Rudraksha bead bracelet fashion accessory photography', slug: 'rudraksha-accessories' },
   { id: '6', name: 'Gemstone Accessories', description: 'Natural gemstone bracelets and accessories photographed to highlight their unique colors, textures, and healing properties. Ideal for lifestyle and wellness brands.', image_url: aquamarineB, alt_text: 'Aquamarine gemstone bracelet lifestyle photography', slug: 'gemstone-accessories' },
 ];
 
@@ -86,6 +84,7 @@ const CategoryCard = ({ category, index, isLight }: { category: Category; index:
             alt={category.alt_text || category.name}
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            onError={e => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">

@@ -18,7 +18,7 @@ const Terms = () => (
         <div className="mb-10">
           <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">Legal</p>
           <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2">Terms of Service</h1>
-          <p className="text-sm text-muted-foreground">Effective date: April 2026 &nbsp;·&nbsp; Last updated: April 2026</p>
+          <p className="text-sm text-muted-foreground">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 1 May 2026</p>
         </div>
 
         <div className="text-[15px]">

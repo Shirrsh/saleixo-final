@@ -19,7 +19,7 @@ const Privacy = () => (
         <div className="mb-10">
           <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">Legal</p>
           <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2">Privacy Policy</h1>
-          <p className="text-sm text-muted-foreground">Effective date: April 2026 &nbsp;·&nbsp; Last updated: April 2026</p>
+          <p className="text-sm text-muted-foreground">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 12 May 2026</p>
         </div>
 
         <div className="prose-container text-[15px]">
@@ -79,6 +79,49 @@ const Privacy = () => (
 
           <Section title="7. Security">
             <p>We implement industry-standard security measures including SSL encryption, access controls, and regular security reviews. No system is 100% secure - we encourage clients to keep access credentials private.</p>
+          </Section>
+
+          {/* ── Amazon SP-API sections (required for Amazon SPN application) ── */}
+          <Section title="9. Amazon Selling Partner Data">
+            <p>In connection with services provided through the Amazon Solution Provider Network (SPN), Saleixo may access certain data from Amazon's Selling Partner API (SP-API) on behalf of Selling Partners who have explicitly authorised such access. This data may include, but is not limited to: order information, inventory data, shipment details, financial reports, and account performance metrics.</p>
+          </Section>
+
+          <Section title="10. How We Use Amazon SP-API Data">
+            <p>We use data obtained through the Amazon SP-API solely for the purpose of delivering the specific services requested by the authorising Selling Partner. We do not use this data for:</p>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>Building or augmenting independent user profiles</li>
+              <li>Advertising or marketing to third parties</li>
+              <li>Selling, licensing, or sharing with unauthorised parties</li>
+              <li>Any purpose beyond the scope of the authorised service</li>
+            </ul>
+          </Section>
+
+          <Section title="11. Amazon SP-API Data Sharing & Disclosure">
+            <p>We do not sell, rent, or trade Amazon Selling Partner data to third parties. We may share data only with sub-processors or service providers who are contractually bound to handle such data in accordance with Amazon's policies and applicable law. Any such sharing is limited to what is strictly necessary to provide the requested service.</p>
+          </Section>
+
+          <Section title="12. Amazon SP-API Data Retention">
+            <p>Amazon SP-API data is retained only for as long as necessary to fulfil the service for which it was collected, or as required by applicable law. Upon termination of services or upon a Selling Partner's written request, we will securely delete or anonymise all associated Amazon SP-API data within 30 days, unless a longer retention period is required by law.</p>
+            <p className="mt-3"><strong className="text-foreground">Specific retention periods:</strong></p>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>Order &amp; transaction data — 90 days post-service</li>
+              <li>Inventory &amp; catalog data — duration of active service</li>
+              <li>Financial reports — 1 year (legal/audit purposes)</li>
+              <li>Account performance data — 90 days post-service</li>
+            </ul>
+          </Section>
+
+          <Section title="13. Your Rights as a Selling Partner">
+            <p>As an authorised Selling Partner, you may at any time:</p>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>Revoke Saleixo's access to your Amazon data via your Seller Central account</li>
+              <li>Request confirmation of what data we hold on your behalf</li>
+              <li>Request deletion of your data by contacting us at <a href="mailto:info@saleixo.com" className="text-primary hover:underline">info@saleixo.com</a></li>
+            </ul>
+          </Section>
+
+          <Section title="14. Changes to This Policy">
+            <p>We will notify Amazon and update this Privacy Policy within 30 days of any material organisational or operational changes that affect how Amazon SP-API data is handled. Continued use of our services after updates constitutes acceptance of the revised policy.</p>
           </Section>
 
           <Section title="8. Contact">

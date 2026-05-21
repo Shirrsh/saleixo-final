@@ -21,6 +21,7 @@ import {
   TrendingUp,
   Layers,
   Image,
+  Video,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
@@ -52,16 +53,15 @@ const AdminLayout = () => {
         if (error) throw error;
 
         setIsAdmin(profile?.role === 'admin');
-        
-/* TEMP: Skip admin check
-              if (!profile || profile.role !== 'admin') {
+
+        if (!profile || profile.role !== 'admin') {
           toast({
             title: 'Access Denied',
             description: 'You do not have admin privileges',
             variant: 'destructive',
           });
-        navigate('/admin/login');        }
-      */
+          navigate('/admin/login');
+        }
       } catch (error) {
         console.error('Error checking admin role:', error);
         setIsAdmin(false);
@@ -84,6 +84,7 @@ const AdminLayout = () => {
     { name: 'Homepage Editor', path: '/admin/homepage', icon: Home },
     { name: 'Categories', path: '/admin/categories', icon: Layers },
     { name: 'Images', path: '/admin/images', icon: Image },
+    { name: 'Videos', path: '/admin/videos', icon: Video },
     { name: 'Services', path: '/admin/services', icon: Briefcase },
     { name: 'Portfolio', path: '/admin/portfolio', icon: FolderOpen },
     { name: 'Blog Posts', path: '/admin/blog', icon: FileText },

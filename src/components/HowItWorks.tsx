@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   motion,
   AnimatePresence,
@@ -7,52 +7,85 @@ import {
   useSpring,
   useMotionValueEvent,
 } from 'framer-motion';
-import { MessageSquare, Map, Rocket, BarChart3 } from 'lucide-react';
+import { MessageSquare, Map, Rocket, BarChart3, Check, Clock } from 'lucide-react';
 
 const steps = [
   {
     id: 1, label: 'Audit', Icon: MessageSquare,
-    title: 'Free Audit (30 min)',
-    description: 'Send us your top 3 listings, your ad account, and your sales last quarter. We come back with a written diagnosis: what\'s leaking, what\'s working, what to do first.',
+    color: '#3b82f6',
+    title: 'Free Audit',
+    subtitle: '30 min call',
+    description: 'Send us your top 3 listings, your ad account, and last quarter\'s sales. We return a written diagnosis — what\'s leaking, what\'s working, what to fix first.',
+    outcomes: [
+      'Written diagnosis document (PDF)',
+      'Top 3 conversion bottlenecks identified',
+      'Competitor gap snapshot',
+      'No obligation — yours to keep',
+    ],
   },
   {
     id: 2, label: 'Scope', Icon: Map,
+    color: '#10b981',
     title: 'Scope & Quote',
-    description: 'Fixed-price proposal with line-item deliverables and a delivery date. No surprises, no scope creep, no hourly billing.',
+    subtitle: '1–2 business days',
+    description: 'Fixed-price proposal with line-item deliverables and a confirmed delivery date. No surprises, no scope creep, no hourly billing.',
+    outcomes: [
+      'Itemised deliverable list',
+      'Confirmed delivery date',
+      'Fixed price — no hourly billing',
+      'Change-order protection',
+    ],
   },
   {
     id: 3, label: 'Production', Icon: Rocket,
+    color: '#f97316',
     title: 'Production',
-    description: 'Shoot, design, write, list. You see proofs at every milestone. Most projects ship in 14–21 days; suppressed-listing fixes ship in 24–72 hours.',
+    subtitle: '14–21 days',
+    description: 'Shoot, design, write, list. You review proofs at every milestone. Suppressed-listing fixes ship in 24–72 hours. Standard projects in 14–21 days.',
+    outcomes: [
+      'Proof review at every milestone',
+      'Marketplace-compliant assets',
+      'Rush delivery: 24–72hr available',
+      '0 compliance rejections',
+    ],
   },
   {
     id: 4, label: 'Launch', Icon: BarChart3,
-    title: 'Launch & Optimize',
-    description: 'Listings go live, ads spin up, analytics dashboard activates. We watch the numbers for the first 30 days and tune until conversion stabilizes.',
+    color: '#8b5cf6',
+    title: 'Launch & Optimise',
+    subtitle: '30-day watch',
+    description: 'Listings go live, ads spin up, analytics activates. We watch the numbers for 30 days and tune until conversion stabilises.',
+    outcomes: [
+      '30-day analytics monitoring',
+      'Ad spend tuning included',
+      'Monthly performance report',
+      'Ongoing retainer optional',
+    ],
   },
 ];
 
-// Brand tokens
-const TEAL        = '#1a3a3a';
-const TEAL_LIGHT  = 'rgba(26,58,58,0.08)';
-const TEAL_MID    = 'rgba(26,58,58,0.18)';
-const TEAL_BORDER = 'rgba(26,58,58,0.15)';
 const GOLD        = '#d4af37';
-const GOLD_LIGHT  = 'rgba(212,175,55,0.15)';
-const GOLD_BORDER = 'rgba(212,175,55,0.35)';
-const BG          = '#f5f7fa';
-const BG_CARD     = '#ffffff';
+const GOLD_LIGHT  = 'rgba(212,175,55,0.12)';
+const GOLD_BORDER = 'rgba(212,175,55,0.28)';
 
 // ─── Main section ─────────────────────────────────────────────────────────────
 const HowItWorks = () => {
   const containerRef              = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isLight, setIsLight]     = useState(false);
   const touchStartX               = useRef<number | null>(null);
+
+  useEffect(() => {
+    const sync = () => setIsLight(document.documentElement.classList.contains('light'));
+    sync();
+    const obs = new MutationObserver(sync);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => obs.disconnect();
+  }, []);
 
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
   const smooth = useSpring(scrollYProgress, { stiffness: 55, damping: 20 });
 
-  // Steps fill from 12 % → 97 % of total scroll
   const stepRaw = useTransform(smooth, [0.12, 0.97], [0, steps.length - 0.01]);
   useMotionValueEvent(stepRaw, 'change', v =>
     setActiveIdx(Math.min(steps.length - 1, Math.max(0, Math.floor(v))))
@@ -61,35 +94,43 @@ const HowItWorks = () => {
   const introOpacity = useTransform(smooth, [0, 0.06, 0.12], [1, 0.5, 0]);
   const mainOpacity  = useTransform(smooth, [0.08, 0.18], [0, 1]);
 
-  const ActiveIcon = steps[activeIdx].Icon;
+  const step        = steps[activeIdx];
+  const ActiveIcon  = step.Icon;
+  const accentColor = step.color;
 
-  // Mobile swipe handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  // Derived theme tokens
+  const bg         = isLight ? '#f8f9fb' : 'hsl(220 30% 7%)';
+  const cardBg     = isLight ? '#ffffff'  : 'hsl(220 28% 10%)';
+  const borderClr  = isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)';
+  const textPrimary  = isLight ? '#0a0a0a' : '#ffffff';
+  const textMuted    = isLight ? 'hsl(0 0% 42%)' : 'hsl(215 20% 55%)';
+  const sidebarBg    = isLight ? 'rgba(255,255,255,0.7)' : 'rgba(10,14,22,0.7)';
+
+  // Mobile swipe
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd   = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
     const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 40)
       setActiveIdx(i => Math.max(0, Math.min(steps.length - 1, i + (diff > 0 ? 1 : -1))));
-    }
     touchStartX.current = null;
   };
 
   return (
-    <div ref={containerRef} className="relative" style={{ height: '420vh' }}>
+    <div ref={containerRef} id="how-it-works-section" className="relative" style={{ height: '420vh' }}>
       <div
         className="sticky top-0 h-screen overflow-hidden"
-        style={{ background: BG }}
+        style={{ background: bg }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Subtle radial tint */}
-        <div
+        {/* Ambient glow — follows active step color */}
+        <motion.div
           className="absolute inset-0 pointer-events-none"
+          animate={{ opacity: 1 }}
           style={{
-            background:
-              'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,175,55,0.06), transparent 70%)',
+            background: `radial-gradient(ellipse 55% 50% at 65% 50%, ${accentColor}10, transparent 70%)`,
+            transition: 'background 0.6s ease',
           }}
         />
 
@@ -98,163 +139,106 @@ const HowItWorks = () => {
           style={{ opacity: introOpacity }}
           className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none px-6 text-center"
         >
-          <p style={{ color: GOLD, fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-            Process
-          </p>
+          <span
+            className="inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.22em] uppercase mb-5"
+            style={{ background: GOLD_LIGHT, border: `1px solid ${GOLD_BORDER}`, color: GOLD }}
+          >
+            Our Process
+          </span>
           <h2
-            className="font-light tracking-tight mb-3"
+            className="font-bold tracking-tight mb-4"
             style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              color: TEAL,
+              fontSize: 'clamp(2.2rem, 5.5vw, 3.8rem)',
+              color: textPrimary,
               fontFamily: '"Inter Tight", Inter, sans-serif',
+              lineHeight: 1.1,
             }}
           >
-            Four steps. Honest pricing. No surprises.
+            Four steps.<br />
+            <span style={{ color: GOLD }}>Honest pricing.</span> No surprises.
           </h2>
-          <p style={{ color: 'rgba(26,58,58,0.65)', fontSize: '0.95rem', maxWidth: 520 }}>
-            Most engagements start with the free audit and finish in under 30 days for a single SKU, or run as a 90-day growth retainer for established brands.
+          <p style={{ color: textMuted, fontSize: '0.95rem', maxWidth: 500, lineHeight: 1.7 }}>
+            Every engagement starts with a free audit. Most single-SKU projects finish in under 30 days.
           </p>
           <motion.div
             animate={{ y: [0, 7, 0] }}
             transition={{ duration: 1.6, repeat: Infinity }}
-            className="flex flex-col items-center gap-1.5 mt-7"
+            className="flex flex-col items-center gap-1.5 mt-8"
           >
-            <span style={{ fontSize: 9, color: 'rgba(26,58,58,0.35)', letterSpacing: '0.2em' }}>
-              SCROLL
-            </span>
-            <div
-              style={{
-                width: 1,
-                height: 28,
-                background: `linear-gradient(to bottom, ${TEAL_MID}, transparent)`,
-              }}
-            />
+            <span style={{ fontSize: 9, color: textMuted, letterSpacing: '0.2em' }}>SCROLL</span>
+            <div style={{ width: 1, height: 28, background: `linear-gradient(to bottom, ${GOLD_BORDER}, transparent)` }} />
           </motion.div>
         </motion.div>
 
         {/* ── Main layout ── */}
         <motion.div style={{ opacity: mainOpacity }} className="absolute inset-0 flex">
 
-          {/* LEFT — step index (desktop) */}
+          {/* LEFT — step cards (desktop) */}
           <div
-            className="hidden lg:flex flex-col justify-center"
+            className="hidden lg:flex flex-col justify-center gap-2"
             style={{
-              width: 290,
+              width: 260,
               flexShrink: 0,
-              padding: '0 36px 0 52px',
-              borderRight: `1px solid ${TEAL_BORDER}`,
+              padding: '0 20px 0 40px',
+              borderRight: `1px solid ${borderClr}`,
             }}
           >
-            <span
-              style={{
-                fontSize: 9,
-                color: GOLD,
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-                display: 'block',
-                marginBottom: 36,
-              }}
-            >
+            <span style={{ fontSize: 9, color: GOLD, letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 16, display: 'block' }}>
               How It Works
             </span>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {steps.map((step, i) => {
-                const isActive = i === activeIdx;
-                const isDone   = i < activeIdx;
-                return (
-                  <div
-                    key={step.id}
-                    style={{ display: 'flex', alignItems: 'stretch', gap: 14 }}
+            {steps.map((s, i) => {
+              const isActive = i === activeIdx;
+              const isDone   = i < activeIdx;
+              const SIcon    = s.Icon;
+              return (
+                <motion.button
+                  key={s.id}
+                  onClick={() => setActiveIdx(i)}
+                  animate={{
+                    background: isActive ? `${s.color}12` : 'transparent',
+                    borderColor: isActive ? `${s.color}40` : borderClr,
+                    opacity: isDone ? 0.6 : 1,
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="flex items-center gap-3 p-3 rounded-xl text-left w-full"
+                  style={{ border: '1px solid', cursor: 'pointer' }}
+                >
+                  {/* Icon */}
+                  <motion.div
+                    animate={{ background: isActive ? `${s.color}20` : (isLight ? 'hsl(0 0% 94%)' : 'hsl(220 28% 16%)') }}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                    transition={{ duration: 0.3 }}
                   >
-                    {/* Timeline spine */}
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        width: 14,
-                        flexShrink: 0,
-                      }}
-                    >
-                      <motion.div
-                        animate={{
-                          background: isActive
-                            ? GOLD
-                            : isDone
-                            ? 'rgba(212,175,55,0.45)'
-                            : TEAL_BORDER,
-                          boxShadow: isActive
-                            ? `0 0 12px rgba(212,175,55,0.7)`
-                            : 'none',
-                          scale: isActive ? 1.3 : 1,
-                        }}
-                        transition={{ duration: 0.35 }}
-                        style={{
-                          width: 10,
-                          height: 10,
-                          borderRadius: '50%',
-                          flexShrink: 0,
-                          marginTop: 6,
-                        }}
-                      />
-                      {i < steps.length - 1 && (
-                        <div
-                          style={{
-                            flex: 1,
-                            width: 1,
-                            marginTop: 4,
-                            background:
-                              isDone || isActive
-                                ? `linear-gradient(to bottom, rgba(212,175,55,0.5), rgba(212,175,55,0.1))`
-                                : TEAL_BORDER,
-                          }}
-                        />
-                      )}
-                    </div>
+                    <SIcon
+                      className="w-4 h-4"
+                      style={{ color: isActive ? s.color : textMuted, strokeWidth: 1.5 }}
+                    />
+                  </motion.div>
 
-                    {/* Step label */}
-                    <motion.div
-                      animate={{ opacity: isActive ? 1 : isDone ? 0.55 : 0.35 }}
-                      transition={{ duration: 0.4 }}
-                      style={{
-                        paddingTop: 2,
-                        paddingBottom: i < steps.length - 1 ? 20 : 0,
-                      }}
-                    >
-                      <span
-                        style={{
-                          display: 'block',
-                          fontSize: 9,
-                          letterSpacing: '0.15em',
-                          color: isActive ? GOLD : 'rgba(26,58,58,0.4)',
-                          marginBottom: 2,
-                        }}
-                      >
-                        {String(step.id).padStart(2, '0')}
-                      </span>
-                      <span
-                        style={{
-                          display: 'block',
-                          fontSize: '0.8125rem',
-                          color: isActive ? TEAL : 'rgba(26,58,58,0.5)',
-                          fontWeight: isActive ? 600 : 400,
-                          lineHeight: 1.3,
-                        }}
-                      >
-                        {step.label}
-                      </span>
-                    </motion.div>
+                  {/* Label */}
+                  <div className="flex-1 min-w-0">
+                    <div style={{ fontSize: 9, color: isActive ? s.color : textMuted, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 1 }}>
+                      {String(s.id).padStart(2, '0')}
+                    </div>
+                    <div style={{ fontSize: '0.8rem', color: isActive ? textPrimary : textMuted, fontWeight: isActive ? 600 : 400 }}>
+                      {s.label}
+                    </div>
                   </div>
-                );
-              })}
-            </div>
+
+                  {/* Done check */}
+                  {isDone && (
+                    <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: GOLD }} strokeWidth={2.5} />
+                  )}
+                </motion.button>
+              );
+            })}
           </div>
 
           {/* RIGHT — step detail */}
           <div
             className="flex-1 flex flex-col justify-center relative overflow-hidden"
-            style={{ padding: '0 9% 0 7%' }}
+            style={{ padding: '0 8% 0 6%' }}
           >
             {/* Ghost step number */}
             <AnimatePresence mode="wait">
@@ -265,11 +249,11 @@ const HowItWorks = () => {
                   right: '-0.04em',
                   top: '50%',
                   transform: 'translateY(-55%)',
-                  fontSize: 'clamp(9rem, 23vw, 19rem)',
+                  fontSize: 'clamp(9rem, 22vw, 18rem)',
                   fontWeight: 800,
                   fontFamily: '"Inter Tight", Inter, sans-serif',
                   letterSpacing: '-0.05em',
-                  color: 'rgba(26,58,58,0.04)',
+                  color: isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.03)',
                   lineHeight: 1,
                   userSelect: 'none',
                 }}
@@ -278,48 +262,53 @@ const HowItWorks = () => {
                 exit={{ opacity: 0, x: -25 }}
                 transition={{ duration: 0.5 }}
               >
-                {String(steps[activeIdx].id).padStart(2, '0')}
+                {String(step.id).padStart(2, '0')}
               </motion.span>
             </AnimatePresence>
 
             {/* Mobile step counter */}
-            <p
-              className="lg:hidden"
-              style={{
-                fontSize: 9,
-                color: GOLD,
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-                marginBottom: 20,
-              }}
-            >
-              Step {String(steps[activeIdx].id).padStart(2, '0')} &nbsp;/&nbsp; 04
+            <p className="lg:hidden" style={{ fontSize: 9, color: GOLD, letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 20 }}>
+              Step {String(step.id).padStart(2, '0')} &nbsp;/&nbsp; 04
             </p>
 
-            {/* Icon */}
+            {/* Icon + duration badge */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={`icon-${activeIdx}`}
-                initial={{ opacity: 0, scale: 0.6 }}
+                initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.6 }}
-                transition={{ duration: 0.35 }}
-                style={{
-                  width: 52,
-                  height: 52,
-                  borderRadius: 14,
-                  background: GOLD_LIGHT,
-                  border: `1px solid ${GOLD_BORDER}`,
-                  boxShadow: '0 2px 16px rgba(212,175,55,0.15)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: 24,
-                }}
+                exit={{ opacity: 0, scale: 0.7 }}
+                transition={{ duration: 0.3 }}
+                className="flex items-center gap-3 mb-5"
               >
-                <ActiveIcon
-                  style={{ width: 20, height: 20, color: GOLD, strokeWidth: 1.5 }}
-                />
+                <div
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 14,
+                    background: `${accentColor}18`,
+                    border: `1px solid ${accentColor}35`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: `0 4px 20px ${accentColor}20`,
+                  }}
+                >
+                  <ActiveIcon style={{ width: 20, height: 20, color: accentColor, strokeWidth: 1.5 }} />
+                </div>
+
+                {/* Duration badge */}
+                <span
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold"
+                  style={{
+                    background: isLight ? 'hsl(0 0% 94%)' : 'hsl(220 28% 14%)',
+                    border: `1px solid ${borderClr}`,
+                    color: textMuted,
+                  }}
+                >
+                  <Clock style={{ width: 10, height: 10, color: accentColor }} strokeWidth={2} />
+                  {step.subtitle}
+                </span>
               </motion.div>
             </AnimatePresence>
 
@@ -327,22 +316,21 @@ const HowItWorks = () => {
             <AnimatePresence mode="wait">
               <motion.h3
                 key={`t-${activeIdx}`}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="font-light tracking-tight"
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 style={{
-                  fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
-                  color: TEAL,
-                  lineHeight: 1.15,
-                  letterSpacing: '-0.02em',
-                  marginBottom: 20,
+                  fontSize: 'clamp(2rem, 4vw, 3.2rem)',
+                  color: textPrimary,
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.025em',
+                  marginBottom: 12,
                   fontFamily: '"Inter Tight", Inter, sans-serif',
-                  maxWidth: '14ch',
+                  fontWeight: 700,
                 }}
               >
-                {steps[activeIdx].title}
+                {step.title}
               </motion.h3>
             </AnimatePresence>
 
@@ -350,36 +338,60 @@ const HowItWorks = () => {
             <AnimatePresence mode="wait">
               <motion.p
                 key={`d-${activeIdx}`}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, delay: 0.07, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  fontSize: '1.05rem',
-                  color: 'rgba(26,58,58,0.7)',
-                  lineHeight: 1.75,
-                  maxWidth: 430,
-                  marginBottom: 36,
-                }}
+                transition={{ duration: 0.35, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+                style={{ fontSize: '1rem', color: textMuted, lineHeight: 1.75, maxWidth: 400, marginBottom: 24 }}
               >
-                {steps[activeIdx].description}
+                {step.description}
               </motion.p>
             </AnimatePresence>
 
+            {/* What you get */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`o-${activeIdx}`}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35, delay: 0.12 }}
+                className="flex flex-col gap-2 mb-8"
+                style={{ maxWidth: 380 }}
+              >
+                <p style={{ fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: accentColor, marginBottom: 4, fontWeight: 700 }}>
+                  What you get
+                </p>
+                {step.outcomes.map((item, i) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.15 + i * 0.06 }}
+                    className="flex items-start gap-2.5"
+                  >
+                    <div
+                      className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: `${accentColor}18`, border: `1px solid ${accentColor}30` }}
+                    >
+                      <Check style={{ width: 9, height: 9, color: accentColor, strokeWidth: 2.5 }} />
+                    </div>
+                    <span style={{ fontSize: '0.85rem', color: textMuted, lineHeight: 1.5 }}>{item}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+
             {/* Progress pills */}
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              {steps.map((_, i) => (
-                <motion.div
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+              {steps.map((s, i) => (
+                <motion.button
                   key={i}
-                  style={{ borderRadius: 999, height: 6 }}
+                  onClick={() => setActiveIdx(i)}
+                  style={{ borderRadius: 999, height: 5, cursor: 'pointer', border: 'none', padding: 0 }}
                   animate={{
-                    width: i === activeIdx ? 32 : 8,
-                    background:
-                      i === activeIdx
-                        ? GOLD
-                        : i < activeIdx
-                        ? 'rgba(212,175,55,0.4)'
-                        : TEAL_BORDER,
+                    width: i === activeIdx ? 28 : 6,
+                    background: i === activeIdx ? s.color : i < activeIdx ? `${s.color}50` : borderClr,
                   }}
                   transition={{ duration: 0.3 }}
                 />
@@ -391,27 +403,17 @@ const HowItWorks = () => {
               <button
                 onClick={() => setActiveIdx(i => Math.max(0, i - 1))}
                 disabled={activeIdx === 0}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
-                style={{
-                  background: GOLD_LIGHT,
-                  border: `1px solid ${GOLD_BORDER}`,
-                  color: GOLD,
-                }}
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
+                style={{ background: GOLD_LIGHT, border: `1px solid ${GOLD_BORDER}`, color: GOLD }}
               >
                 ←
               </button>
-              <span style={{ fontSize: 11, color: 'rgba(26,58,58,0.35)', letterSpacing: '0.15em' }}>
-                Swipe or tap
-              </span>
+              <span style={{ fontSize: 11, color: textMuted, letterSpacing: '0.15em' }}>Swipe or tap</span>
               <button
                 onClick={() => setActiveIdx(i => Math.min(steps.length - 1, i + 1))}
                 disabled={activeIdx === steps.length - 1}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
-                style={{
-                  background: TEAL_LIGHT,
-                  border: `1px solid ${TEAL_BORDER}`,
-                  color: TEAL,
-                }}
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
+                style={{ background: `${accentColor}15`, border: `1px solid ${accentColor}30`, color: accentColor }}
               >
                 →
               </button>

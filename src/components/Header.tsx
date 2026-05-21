@@ -9,54 +9,54 @@ import { motion, AnimatePresence } from 'framer-motion';
 import imgPhotography from '@/assets/photography-service.jpg';
 import SaleixoLogo from '@/components/SaleixoLogo';
 
+const BAR_H = 40;
+
 // ─── Mega menu services ───────────────────────────────────────────────────────
 const MEGA_SERVICES = [
   {
     icon: Camera, color: '#3b82f6',
     title: 'Product Photography',
     desc: 'Studio-grade shoots for every marketplace',
-    href: '/categories',
+    href: '/services/photography',
   },
   {
     icon: ShoppingCart, color: '#10b981',
-    title: 'Ecommerce Design',
-    desc: 'A+ content, listings & brand storefronts',
-    href: '/design',
+    title: 'Ecommerce Management',
+    desc: 'Full store operations & account management',
+    href: '/services/ecommerce-management',
   },
   {
     icon: BarChart2, color: '#8b5cf6',
-    title: 'Digital Marketing',
+    title: 'Social Ads',
     desc: 'Google & Meta ads with 250% avg. ROI',
-    href: '/services#pricing',
+    href: '/services/social-ads',
   },
   {
     icon: Palette, color: '#f97316',
-    title: 'Brand Identity',
-    desc: 'Logos, brand kits & packaging design',
-    href: '/services#pricing',
+    title: 'Amazon Selling',
+    desc: 'Listings, A+ content & account management',
+    href: '/services/amazon',
   },
   {
     icon: Video, color: '#ec4899',
-    title: 'Product Videos',
-    desc: 'Short-form reels delivered in 3–5 days',
-    href: '/services#pricing',
+    title: 'Shopify Stores',
+    desc: 'Custom stores, products & promotions',
+    href: '/services/shopify',
   },
   {
     icon: TrendingUp, color: 'hsl(var(--primary))',
-    title: 'Marketplace Strategy',
-    desc: 'Keyword research & rank optimization',
-    href: '/services#pricing',
+    title: 'Ecommerce Design',
+    desc: 'Brand identity, listings & storefronts',
+    href: '/design',
   },
 ];
 
 // ─── Desktop nav ──────────────────────────────────────────────────────────────
 const desktopNav = [
-  { name: 'Photoshoots', href: '/categories', type: 'route'   as const },
-  { name: 'Ecommerce',   href: '/design',     type: 'route'   as const },
-  { name: 'Services',    href: '/services',   type: 'mega'    as const },
-  { name: 'Blog',        href: '/blog',       type: 'route'   as const },
-  { name: 'Portfolio',   href: '#portfolio',  type: 'scroll'  as const },
-  { name: 'Contact',     href: '#contact',    type: 'scroll'  as const },
+  { name: 'Services',    href: '/services',        type: 'mega'    as const },
+  { name: 'Pricing',     href: '/custom-pricing',  type: 'route'   as const },
+  { name: 'Blog',        href: '/blog',            type: 'route'   as const },
+  { name: 'Contact',     href: '#contact',         type: 'scroll'  as const },
 ];
 
 // ─── Mobile menu sections ─────────────────────────────────────────────────────
@@ -64,9 +64,12 @@ const menuSections = [
   {
     label: 'Services',
     items: [
-      { icon: Camera,       name: 'Product Photography', desc: 'Studio-grade shoots',    href: '/categories',  type: 'route'  as const },
-      { icon: ShoppingCart, name: 'Ecommerce Design',    desc: 'Listings & A+ content',  href: '/design',      type: 'route'  as const },
-      { icon: Grid,         name: 'All Services',        desc: 'Full service overview',  href: '/services',    type: 'route'  as const },
+      { icon: Camera,       name: 'Product Photography',   desc: 'Studio-grade shoots',       href: '/services/photography',          type: 'route'  as const },
+      { icon: ShoppingCart, name: 'Ecommerce Management',  desc: 'Full store operations',      href: '/services/ecommerce-management', type: 'route'  as const },
+      { icon: BarChart2,    name: 'Social Ads',            desc: 'Google & Meta campaigns',    href: '/services/social-ads',           type: 'route'  as const },
+      { icon: Palette,      name: 'Amazon Selling',        desc: 'Listings & A+ content',      href: '/services/amazon',              type: 'route'  as const },
+      { icon: Video,        name: 'Shopify Stores',        desc: 'Custom store management',    href: '/services/shopify',             type: 'route'  as const },
+      { icon: Grid,         name: 'All Services',          desc: 'Full service overview',      href: '/services',                     type: 'route'  as const },
     ],
   },
   {
@@ -74,22 +77,74 @@ const menuSections = [
     items: [
       { icon: Star,       name: 'Portfolio',    desc: 'Our work & results', href: '#portfolio',            type: 'scroll' as const },
       { icon: BookOpen,   name: 'Blog',         desc: 'Tips & insights',    href: '/blog',                 type: 'route'  as const },
-      { icon: HelpCircle, name: 'FAQ',          desc: 'Common questions',   href: '#faq',                  type: 'scroll' as const },
+      { icon: HelpCircle, name: 'Pricing',      desc: 'Transparent plans',  href: '/custom-pricing',       type: 'route'  as const },
       { icon: Users,      name: 'How It Works', desc: '6-step process',     href: '#how-it-works-section', type: 'scroll' as const },
     ],
   },
 ];
 
+// ─── Announcement Bar ─────────────────────────────────────────────────────────
+const BAR_TEXT = (
+  <>
+    Free brand audit for ecommerce sellers — tell us about your store.{' '}
+    <Link to="/get-started" className="underline underline-offset-2 hover:opacity-75 transition-opacity">
+      Get started →
+    </Link>
+    <span className="mx-12 opacity-50">✦</span>
+  </>
+);
+
+const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
+  <motion.div
+    initial={{ y: -BAR_H }}
+    animate={{ y: 0 }}
+    exit={{ y: -BAR_H }}
+    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+    className="fixed top-0 left-0 right-0 z-[60] flex items-center overflow-hidden"
+    style={{ height: BAR_H, background: '#dc2626' }}
+  >
+    {/* Scrolling ticker */}
+    <motion.div
+      animate={{ x: ['0%', '-50%'] }}
+      transition={{ duration: 22, ease: 'linear', repeat: Infinity }}
+      className="flex items-center whitespace-nowrap text-[11px] font-bold tracking-wide flex-shrink-0"
+      style={{ color: '#ffffff' }}
+    >
+      <span className="flex items-center">{BAR_TEXT}</span>
+      <span className="flex items-center">{BAR_TEXT}</span>
+      <span className="flex items-center">{BAR_TEXT}</span>
+      <span className="flex items-center">{BAR_TEXT}</span>
+    </motion.div>
+
+    {/* Dismiss button — fixed on right */}
+    <button
+      onClick={onDismiss}
+      aria-label="Dismiss announcement"
+      className="absolute right-3 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity z-10 flex-shrink-0"
+      style={{ background: 'rgba(0,0,0,0.2)', borderRadius: '50%', width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
+      <X size={11} strokeWidth={2.5} style={{ color: '#ffffff' }} />
+    </button>
+  </motion.div>
+);
+
 // ─── Mega Menu ────────────────────────────────────────────────────────────────
-const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void }) => (
+const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
+  isLight: boolean;
+  onClose: () => void;
+  onEnter: () => void;
+  onLeave: () => void;
+  topOffset: number;
+}) => (
   <motion.div
     initial={{ opacity: 0, y: -8 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -8 }}
     transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
     className="fixed left-0 right-0 z-40"
-    style={{ top: '64px' }}
-    onMouseLeave={onClose}
+    style={{ top: topOffset }}
+    onMouseEnter={onEnter}
+    onMouseLeave={onLeave}
   >
     <div
       className="w-full shadow-2xl border-b"
@@ -114,7 +169,7 @@ const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void 
                 return (
                   <Link key={i} to={svc.href} onClick={onClose}
                     className="group flex items-start gap-3 p-3.5 rounded-xl transition-all duration-200"
-                    style={{ background: isLight ? 'transparent' : 'transparent' }}
+                    style={{ background: 'transparent' }}
                     onMouseEnter={e => (e.currentTarget.style.background = isLight ? 'hsl(0 0% 96%)' : 'hsl(220 28% 13%)')}
                     onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                   >
@@ -123,7 +178,7 @@ const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void 
                       <Icon className="w-4 h-4" style={{ color: svc.color }} />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold mb-0.5 transition-colors duration-150"
+                      <div className="text-sm font-semibold mb-0.5"
                         style={{ color: isLight ? '#0a0a0a' : '#fff' }}>
                         {svc.title}
                       </div>
@@ -137,8 +192,27 @@ const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void 
               })}
             </div>
 
+            {/* Stats strip */}
+            <div className="mt-5 pt-4 grid grid-cols-3 gap-4"
+              style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}>
+              {[
+                { value: '3.1×', label: 'Avg. ROAS' },
+                { value: '+187%', label: 'Avg. CTR Lift' },
+                { value: '0', label: 'Compliance Rejections' },
+              ].map(stat => (
+                <div key={stat.label} className="text-center">
+                  <div className="text-base font-extrabold" style={{ color: 'hsl(var(--primary))' }}>{stat.value}</div>
+                  <div className="text-[10px] font-medium mt-0.5"
+                    style={{ color: isLight ? 'hsl(0 0% 50%)' : 'hsl(215 20% 50%)' }}>
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
             {/* View all link */}
-            <div className="mt-5 pt-4" style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}>
+            <div className="mt-4 pt-3"
+              style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}>
               <Link to="/services" onClick={onClose}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-150"
                 style={{ color: 'hsl(var(--primary))' }}>
@@ -160,11 +234,19 @@ const MegaMenu = ({ isLight, onClose }: { isLight: boolean; onClose: () => void 
                 <p className="text-white text-sm font-semibold leading-snug mb-4">
                   Get a free brand audit & custom growth plan
                 </p>
-                <Link to="/services" onClick={onClose}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 hover:opacity-90"
-                  style={{ background: 'hsl(var(--primary))', color: '#000' }}>
-                  Book Free Call <ArrowRight className="w-3 h-3" />
-                </Link>
+                <div className="flex flex-col gap-2">
+                  <Link to="/get-started" onClick={onClose}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 hover:opacity-90"
+                    style={{ background: 'hsl(var(--primary))', color: '#000' }}>
+                    Get Started Free <ArrowRight className="w-3 h-3" />
+                  </Link>
+                  <a href="https://wa.me/917011441159" target="_blank" rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 hover:opacity-90"
+                    style={{ background: '#25D366', color: '#fff' }}>
+                    <MessageCircle className="w-3 h-3" strokeWidth={2} /> WhatsApp Us
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -181,7 +263,19 @@ const Header = () => {
   const [scrolled, setScrolled]     = useState(false);
   const [isLight, setIsLight]       = useState(false);
   const [megaOpen, setMegaOpen]     = useState(false);
+  const [showBar, setShowBar]       = useState(() => {
+    try { return localStorage.getItem('saleixo_bar_dismissed') !== '1'; }
+    catch { return true; }
+  });
   const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const dismissBar = () => {
+    setShowBar(false);
+    try { localStorage.setItem('saleixo_bar_dismissed', '1'); } catch {} // eslint-disable-line no-empty
+  };
+
+  const headerTop = showBar ? BAR_H : 0;
+  const megaTop   = headerTop + 64;
 
   // Track theme class on <html>
   useEffect(() => {
@@ -236,24 +330,28 @@ const Header = () => {
     ? (isLight ? '1px solid hsl(0 0% 90%)' : '1px solid hsl(220 25% 16% / 0.6)')
     : '1px solid transparent';
 
-  // Nav text needs to be readable over the hero in both themes
-  const navColorFinal   = scrolled ? navColor   : (isLight ? 'hsl(0 0% 20%)' : 'hsl(215 15% 80%)');
-  const navHoverFinal   = scrolled ? navHover   : (isLight ? '#000' : '#fff');
+  const navColorFinal = scrolled ? navColor : (isLight ? 'hsl(0 0% 20%)' : 'hsl(215 15% 80%)');
+  const navHoverFinal = scrolled ? navHover : (isLight ? '#000' : '#fff');
 
   return (
     <>
+      {/* ── Announcement bar ─────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {showBar && <AnnouncementBar onDismiss={dismissBar} />}
+      </AnimatePresence>
+
       {/* ── Fixed bar ──────────────────────────────────────────────────────── */}
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        className="fixed left-0 right-0 z-50 transition-all duration-500"
         style={{
+          top: headerTop,
           background: glassBg,
           borderBottom: glassBorder,
           backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
         }}
       >
-        <div className="max-w-7xl mx-auto px-5 lg:px-10">
-          <div className="flex items-center justify-between h-16">
+        <div style={{ width: '100%', padding: '0 clamp(24px, 7vw, 140px)', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
             {/* ── Logo ─────────────────────────────────────────────────────── */}
             <Link
@@ -319,16 +417,19 @@ const Header = () => {
               })}
             </nav>
 
-            {/* ── Desktop right: Book Call + theme toggle ───────────────────── */}
-            <div className="hidden md:flex items-center gap-3">
-              <button
-                onClick={() => scrollTo('#contact')}
-                className="px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 hover:opacity-80 active:scale-95"
+            {/* ── Desktop right ─────────────────────────────────────────────── */}
+            <div className="hidden md:flex items-center gap-2">
+
+              {/* Get Started CTA */}
+              <Link
+                to="/get-started"
+                className="px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 hover:opacity-80 active:scale-95 whitespace-nowrap"
                 style={{ background: ctaBg, color: ctaFg }}
               >
-                Book Call
-              </button>
+                Get Started Free
+              </Link>
 
+              {/* Theme toggle */}
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
@@ -377,7 +478,6 @@ const Header = () => {
               </AnimatePresence>
             </button>
 
-          </div>
         </div>
       </header>
 
@@ -386,7 +486,14 @@ const Header = () => {
         {megaOpen && (
           <MegaMenu
             isLight={isLight}
+            topOffset={megaTop}
             onClose={() => setMegaOpen(false)}
+            onEnter={() => {
+              if (megaTimeout.current) clearTimeout(megaTimeout.current);
+            }}
+            onLeave={() => {
+              megaTimeout.current = setTimeout(() => setMegaOpen(false), 120);
+            }}
           />
         )}
       </AnimatePresence>
@@ -400,7 +507,7 @@ const Header = () => {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 md:hidden flex flex-col"
-            style={{ background: menuBg, paddingTop: '64px' }}
+            style={{ background: menuBg, paddingTop: headerTop + 64 }}
           >
             {/* Scrollable body */}
             <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-6 space-y-6">
@@ -521,7 +628,6 @@ const Header = () => {
                     <div className="text-xs mt-0.5" style={{ color: menuMuted }}>Tap to switch</div>
                   </div>
                 </div>
-                {/* Pill toggle */}
                 <button
                   onClick={toggleTheme}
                   aria-label="Toggle theme"
@@ -540,14 +646,15 @@ const Header = () => {
                 </button>
               </div>
 
-              {/* Book CTA */}
-              <button
-                onClick={() => scrollTo('#contact', true)}
-                className="w-full py-4 rounded-2xl font-bold text-base active:scale-[0.98] transition-transform"
+              {/* Get Started CTA */}
+              <Link
+                to="/get-started"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center w-full py-4 rounded-2xl font-bold text-base active:scale-[0.98] transition-transform"
                 style={{ background: ctaBg, color: ctaFg, minHeight: 56 }}
               >
-                Book Free Strategy Call
-              </button>
+                Get Started Free
+              </Link>
             </div>
           </motion.div>
         )}
