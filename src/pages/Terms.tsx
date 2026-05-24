@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,12 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
   </section>
 );
 
-const Terms = () => (
+const Terms = () => {
+  usePageMeta({
+    title: 'Terms of Service — Saleixo',
+    description: 'Terms governing your use of Saleixo services — scope, payment, IP, liability, and more.',
+  });
+  return (
   <>
     <Header />
     <main className="min-h-screen bg-background pt-28 pb-20">
@@ -91,6 +97,7 @@ const Terms = () => (
     </main>
     <Footer />
   </>
-);
+  );
+};
 
 export default Terms;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -47,6 +48,10 @@ const fadeUp = {
 };
 
 const Design = () => {
+  usePageMeta({
+    title: 'Ecommerce Design Services — Saleixo',
+    description: 'Brand identity, listing design, and storefront design for ecommerce sellers. Built for Amazon, Shopify, and all major marketplaces.',
+  });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;
     const saved = localStorage.getItem('theme');

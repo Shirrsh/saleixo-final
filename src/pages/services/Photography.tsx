@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Camera, Clock, Star, Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -57,7 +58,12 @@ const fadeUp = {
 // Shared wide-padding shorthand
 const W = 'px-6 md:px-12 lg:px-20 xl:px-28';
 
-const Photography = () => (
+const Photography = () => {
+  usePageMeta({
+    title: 'Product Photography Services — Saleixo',
+    description: 'Studio-grade product photography for Amazon, Shopify, and all major marketplaces. White-background, lifestyle, 360°, and infographic shots.',
+  });
+  return (
   <>
     <Header />
     <main className="min-h-screen" style={{ background: 'hsl(var(--background))' }}>
@@ -325,6 +331,7 @@ const Photography = () => (
     <Footer />
     <ScrollToTop />
   </>
-);
+  );
+};
 
 export default Photography;

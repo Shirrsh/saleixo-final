@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { supabase } from '@/integrations/supabase/client';
@@ -304,6 +305,10 @@ const WideCard = ({ post, idx, delay = 0 }: { post: BlogPost; idx: number; delay
 
 // ── Main page ─────────────────────────────────────────────────────────────────
 export default function Blog() {
+  usePageMeta({
+    title: 'Blog — Saleixo',
+    description: 'Amazon tips, Shopify growth guides, ecommerce marketing strategies, and product photography insights from the Saleixo team.',
+  });
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');

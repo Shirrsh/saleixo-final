@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Camera } from 'lucide-react';
 import Header from '@/components/Header';
@@ -117,6 +118,10 @@ const CategoryCard = ({ category, index, isLight }: { category: Category; index:
 };
 
 const Categories = () => {
+  usePageMeta({
+    title: 'Product Categories — Saleixo',
+    description: 'Browse Saleixo ecommerce services by product category — jewelry, home goods, fashion, leather, incense, and more.',
+  });
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [isLight, setIsLight] = useState(() => {

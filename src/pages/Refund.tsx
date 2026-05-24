@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,12 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
   </section>
 );
 
-const Refund = () => (
+const Refund = () => {
+  usePageMeta({
+    title: 'Cancellation & Refund Policy — Saleixo',
+    description: "Saleixo's cancellation, refund, and service guarantee terms. Understand your rights before you buy.",
+  });
+  return (
   <>
     <Header />
     <main className="min-h-screen bg-background pt-28 pb-20">
@@ -78,6 +84,7 @@ const Refund = () => (
     </main>
     <Footer />
   </>
-);
+  );
+};
 
 export default Refund;

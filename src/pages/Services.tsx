@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import {
   ArrowRight, Check, Camera, ShoppingCart, BarChart2, Globe,
@@ -159,6 +160,10 @@ const WHY = [
 ];
 
 export default function Services() {
+  usePageMeta({
+    title: 'Our Services — Saleixo',
+    description: 'Product photography, Amazon listing optimisation, Shopify store design, social ads, and ecommerce management for online sellers.',
+  });
   const { fmt } = useCurrency();
   return (
     <>

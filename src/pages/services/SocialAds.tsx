@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, BarChart2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -50,7 +51,12 @@ const fadeUp = {
 
 const W = 'px-6 md:px-12 lg:px-20 xl:px-28';
 
-const SocialAds = () => (
+const SocialAds = () => {
+  usePageMeta({
+    title: 'Social & Paid Ads — Saleixo',
+    description: 'Google & Meta ad campaigns with 3.1× average ROAS. Full creative, targeting, optimisation, and reporting for ecommerce sellers.',
+  });
+  return (
   <>
     <Header />
     <main className="min-h-screen" style={{ background: 'hsl(var(--background))' }}>
@@ -235,6 +241,7 @@ const SocialAds = () => (
     <Footer />
     <ScrollToTop />
   </>
-);
+  );
+};
 
 export default SocialAds;

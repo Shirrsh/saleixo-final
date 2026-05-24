@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
@@ -16,7 +17,12 @@ const cookieTypes = [
   { type: 'Preferences', purpose: 'Remember your settings between visits', examples: 'Theme preference, cookie consent status', required: false },
 ];
 
-const Cookies = () => (
+const Cookies = () => {
+  usePageMeta({
+    title: 'Cookie Policy — Saleixo',
+    description: 'How Saleixo uses cookies and tracking technologies on saleixo.com.',
+  });
+  return (
   <>
     <Header />
     <main className="min-h-screen bg-background pt-28 pb-20">
@@ -97,6 +103,7 @@ const Cookies = () => (
     </main>
     <Footer />
   </>
-);
+  );
+};
 
 export default Cookies;

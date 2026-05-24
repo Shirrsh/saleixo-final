@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Globe, Zap, BarChart2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -43,7 +44,12 @@ const fadeUp = {
 
 const W = 'px-6 md:px-12 lg:px-20 xl:px-28';
 
-const Shopify = () => (
+const Shopify = () => {
+  usePageMeta({
+    title: 'Shopify Store Design & Setup — Saleixo',
+    description: 'Custom Shopify stores built for conversion. Products, promotions, brand identity, and ongoing management included.',
+  });
+  return (
   <>
     <Header />
     <main className="min-h-screen" style={{ background: 'hsl(var(--background))' }}>
@@ -232,6 +238,7 @@ const Shopify = () => (
     <Footer />
     <ScrollToTop />
   </>
-);
+  );
+};
 
 export default Shopify;

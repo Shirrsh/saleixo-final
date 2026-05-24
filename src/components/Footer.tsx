@@ -53,7 +53,7 @@ const Footer = () => {
     { label: 'Portfolio',  href: null, action: () => document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' }) },
     { label: 'Blog',       href: '/blog',         action: undefined },
     { label: 'Get Started',href: '/get-started',  action: undefined },
-    { label: 'Contact',    href: null, action: () => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Contact',    href: '/contact', action: undefined },
   ];
 
   const legal = [
@@ -190,12 +190,12 @@ const Footer = () => {
                 <ul className="space-y-2">
                   {['Free Listing Audit', 'Amazon Image Checklist', 'Multi-Marketplace Spec Sheet'].map(r => (
                     <li key={r}>
-                      <button
-                        onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                      <Link
+                        to="/contact"
                         className="text-xs text-foreground/50 hover:text-white transition-colors duration-200"
                       >
                         {r}
-                      </button>
+                      </Link>
                     </li>
                   ))}
                 </ul>

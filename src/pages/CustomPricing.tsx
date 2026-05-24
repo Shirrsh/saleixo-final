@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { Check, ArrowRight, Star, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -205,6 +206,10 @@ const ServiceTable = ({ title, rows }: { title: string; rows: { name: string; us
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 const CustomPricing = () => {
+  usePageMeta({
+    title: 'Transparent Pricing — Saleixo',
+    description: 'Starter at $299, Growth at $699, Pro at $1,499. Full à-la-carte pricing for photography, design, Amazon, Shopify, and marketing.',
+  });
   const { fmt } = useCurrency();
 
   const localAddOns = [

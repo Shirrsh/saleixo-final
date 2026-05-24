@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import MarketplaceLogos from '@/components/MarketplaceLogos';
@@ -16,6 +17,11 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import FloatingCTA from '@/components/FloatingCTA';
 
 const Index = () => {
+  usePageMeta({
+    title: 'Saleixo — Product Photography, Amazon & Shopify for Artisans',
+    description: 'Studio-grade product photos, compliant Amazon listings, and conversion-tested Shopify stores. 500+ artisans helped. 98% satisfaction rate.',
+    canonical: 'https://saleixo.com/',
+  });
   return (
     <>
       <LoadingScreen />

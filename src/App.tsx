@@ -12,6 +12,7 @@ import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import Refund from "./pages/Refund";
 import GetStarted from "./pages/GetStarted";
+import Contact from "./pages/Contact";
 
 import Blog from "./pages/Blog";
 import Categories from "./pages/Categories";
@@ -84,6 +85,7 @@ const App = () => (
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/refund" element={<Refund />} />
             <Route path="/get-started" element={<GetStarted />} />
+            <Route path="/contact" element={<Contact />} />
             
             {/* Admin Login - No authentication required */}
             <Route path="/admin/login" element={<AdminLogin />} />

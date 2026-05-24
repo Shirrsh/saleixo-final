@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Plus, Minus, ShoppingCart, TrendingUp, Shield, BarChart2, Package, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -126,6 +127,10 @@ const FaqItem = ({ q, a, index }: { q: string; a: string; index: number }) => {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 const EcommerceManagement = () => {
+  usePageMeta({
+    title: 'Ecommerce Management — Saleixo',
+    description: 'Full-service ecommerce operations — inventory, orders, listings, and account health across 20+ marketplaces. Let us run your store.',
+  });
   const scrollToContact = () =>
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
 

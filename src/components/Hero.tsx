@@ -322,7 +322,7 @@ const Hero = () => {
             {[
               { value: '3.1×', label: 'Avg. ROAS' },
               { value: '+187%', label: 'Avg. CTR Lift' },
-              { value: '0', label: 'Compliance Rejections' },
+              { value: '20+', label: 'Marketplaces' },
             ].map(s => (
               <div key={s.label}>
                 <div className="text-2xl font-extrabold" style={{ color: textPrimary }}>{s.value}</div>
@@ -444,7 +444,7 @@ const Hero = () => {
             {[
               { value: '3.1×', label: 'Avg. ROAS' },
               { value: '+187%', label: 'Avg. CTR Lift' },
-              { value: '0', label: 'Compliance Rejections' },
+              { value: '20+', label: 'Marketplaces' },
             ].map(s => (
               <div key={s.label}>
                 <div className="text-2xl font-extrabold" style={{ color: textPrimary }}>{s.value}</div>

@@ -198,7 +198,7 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
               {[
                 { value: '3.1×', label: 'Avg. ROAS' },
                 { value: '+187%', label: 'Avg. CTR Lift' },
-                { value: '0', label: 'Compliance Rejections' },
+                { value: '20+', label: 'Marketplaces' },
               ].map(stat => (
                 <div key={stat.label} className="text-center">
                   <div className="text-base font-extrabold" style={{ color: 'hsl(var(--primary))' }}>{stat.value}</div>
@@ -358,7 +358,7 @@ const Header = () => {
               to="/"
               className="flex-shrink-0 hover:opacity-80 transition-opacity duration-200 flex items-center"
               aria-label="Saleixo home"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             >
               <SaleixoLogo />
             </Link>

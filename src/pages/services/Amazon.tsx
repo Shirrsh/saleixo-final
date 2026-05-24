@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -49,7 +50,12 @@ const fadeUp = {
 
 const W = 'px-6 md:px-12 lg:px-20 xl:px-28';
 
-const Amazon = () => (
+const Amazon = () => {
+  usePageMeta({
+    title: 'Amazon Listing & FBA Services — Saleixo',
+    description: 'Full Amazon seller support — keyword-optimised listings, A+ content, FBA setup, and account management. 0 compliance rejections.',
+  });
+  return (
   <>
     <Header />
     <main className="min-h-screen" style={{ background: 'hsl(var(--background))' }}>
@@ -235,6 +241,7 @@ const Amazon = () => (
     <Footer />
     <ScrollToTop />
   </>
-);
+  );
+};
 
 export default Amazon;

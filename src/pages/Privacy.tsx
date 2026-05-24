@@ -1,3 +1,4 @@
+import { usePageMeta } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,12 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
   </section>
 );
 
-const Privacy = () => (
+const Privacy = () => {
+  usePageMeta({
+    title: 'Privacy Policy — Saleixo',
+    description: 'How Saleixo collects, uses, stores, and protects your personal information. Full privacy policy for saleixo.com.',
+  });
+  return (
   <>
     <Header />
     <main className="min-h-screen bg-background pt-28 pb-20">
@@ -140,6 +146,7 @@ const Privacy = () => (
     </main>
     <Footer />
   </>
-);
+  );
+};
 
 export default Privacy;
