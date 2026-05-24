@@ -1,0 +1,482 @@
+[
+  {
+    "id": "hero_banner",
+    "prompt": "Cinematic wide-angle editorial photograph of a professional photography studio. A photographer in a dark linen apron leans in to adjust a gold jewelry pendant on a small acrylic riser. Studio strobe lights visible in background, softbox casting directional light. Neutral cream cyclorama sweep backdrop. Shallow depth of field, foreground props include a tethered laptop showing a product image. Warm charcoal and cream tones. No text. Photorealistic, high detail.",
+    "aspectRatio": "21:9"
+  },
+  {
+    "id": "stat_500_products",
+    "prompt": "Overhead flat-lay photograph on cream linen. A perfectly arranged 4x3 grid of 12 diverse artisan products: small jewelry pieces, incense boxes, leather pouches, brass diyas. Each item placed with even spacing. Soft diffused natural light from top. Warm cream background, no shadows. Editorial, clean, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "stat_9_marketplaces",
+    "prompt": "Product mockup photograph. Nine smartphones fanned out in a wide arc on a charcoal surface, each screen showing a different ecommerce marketplace homepage (abstract, no real logos — just colorful storefront UI). Phones angled at 45 degrees. Depth of field blurs outer phones. No text. Studio lit, top-down slightly angled perspective.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "stat_48hr_turnaround",
+    "prompt": "Close-up flat-lay on warm cream surface. A large mechanical desk timer reading 48:00 placed next to a small gold jewelry piece — a pendant necklace coiled beside it. Soft side lighting casts gentle shadow. Minimal composition. No text. Film-inspired warm tones.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "marketplace_bg_plate",
+    "prompt": "Ultra-subtle cream textured background. Handmade paper or fine cotton canvas texture, photographed flat. Very light warm ivory tone, barely perceptible fiber detail. No logos, no text, no objects. Even lighting, no shadows or vignette.",
+    "aspectRatio": "21:6"
+  },
+  {
+    "id": "country_trust_strip",
+    "prompt": "Abstract graphic image. Faint topographic-style outlines of recognizable country silhouettes — India, USA, UK, UAE, Australia — rendered as very subtle hairline engravings on a deep charcoal background. Outlines are extremely light, almost invisible, like embossing. No labels, no text, no color fills. Minimal and elegant.",
+    "aspectRatio": "21:5"
+  },
+  {
+    "id": "service_photography_hero",
+    "prompt": "Editorial product photography scene. A pair of gloved hands — cream cotton gloves — carefully placing a delicate gold pendant on a clear acrylic riser on a cream sweep backdrop. Camera angle is eye-level, close-up on the hands and product. Bokeh background reveals softbox lights. Studio professional feel. Warm whites, soft gold tones. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_ecommerce_mockup",
+    "prompt": "Screen mockup of a Seller Hub dashboard UI on a laptop screen. The dashboard shows abstract analytics — bar charts, a donut chart, listing health score. Dark UI with gold accent colors. Product thumbnail cards visible. The laptop sits on a clean desk with soft ambient light. No real platform branding. No text except abstract data labels.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "service_compliance_grid",
+    "prompt": "Flat-lay product photography. Five distinct framed mockups of the same gold jewelry piece — a pendant — each framed to match different ecommerce marketplace image specifications: white background square, lifestyle crop, infographic overlay, 360 spin frame, zoom-in macro. Frames arranged in a clean grid on cream surface with thin gold borders. Editorial, clean. No logos. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "why_1_diagnose",
+    "prompt": "Minimal icon-style illustration on cream background. A large magnifying glass centered over an upward-trending sparkline graph. Gold and charcoal tones. Clean vector-like rendering but with subtle paper texture. No text. Single focal element.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "why_2_compliance",
+    "prompt": "Minimal icon-style illustration on cream background. A dieline box template frame with a large gold checkmark overlaid at center. Charcoal hairline borders. Subtle shadow depth. No text. Clean, professional.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "why_3_turnaround",
+    "prompt": "Minimal icon-style illustration on cream background. A stopwatch or countdown timer centered, clock face reading 48:00. Gold minute hand, charcoal body. Clean, bold. No text. Paper texture background.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "why_4_one_team",
+    "prompt": "Minimal illustration on cream background. A single ribbon or thread weaving through five circular medallions arranged in a horizontal line. Each medallion represents a service (abstract icons: camera, palette, chart, box, megaphone). Gold ribbon, charcoal medallions. No text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "why_5_marketplaces",
+    "prompt": "Minimal illustration on cream background. A 3x3 dot grid, all dots charcoal except the center dot which is gold and slightly larger. Perfectly centered composition. No text. Clean geometric.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "why_6_pricing",
+    "prompt": "Minimal illustration on cream background. A signed proposal cover — a document folder with a signature line at bottom and a gold checkmark stamp at top right. Charcoal and cream tones. No readable text. Clean editorial.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "hero_showcase_1",
+    "prompt": "Professional product photography. Diamond stud earrings placed on rich black velvet fabric, centered. Studio lighting with one directional soft light creating gentle sparkle. Extreme close-up, macro feel. Black background with very subtle texture. No text. Photorealistic.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "hero_showcase_2",
+    "prompt": "Professional product photography. A delicate gold chain necklace coiled loosely on cream linen fabric. Diffused natural window light from the left. Shallow depth of field. Warm ivory tones. Minimal composition. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "hero_showcase_3",
+    "prompt": "Professional product and packaging photography. Premium incense sticks in elegant matte packaging box, placed on a cedar wood surface. Side lighting casts a warm golden shadow. Earthy tones — cedar brown, matte black box with gold foil text (abstract, not readable). Lifestyle editorial feel. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "hero_showcase_4",
+    "prompt": "Product lifestyle photography. A rudraksha bead bracelet coiled next to a small brass oil diya lamp. Placed on a stone or marble surface. Warm candlelight glow from the diya. Earthy, spiritual, premium. Close-up composition. No text. Photorealistic.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "hero_showcase_5",
+    "prompt": "Product photography. An aquamarine gemstone bracelet draped across a textured charcoal slate surface. Studio lit with a cool highlight catching the stones. Minimal composition, generous negative space. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "hero_showcase_6",
+    "prompt": "Product photography. A slim leather bifold wallet placed on hammered concrete surface. Dark charcoal wallet, concrete texture background. Dramatic top-down side lighting. Masculine, premium. Close crop. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "hero_showcase_7",
+    "prompt": "Product lifestyle photography. Handcrafted ceramic mug on a worn oak table, steam rising. Warm morning light, linen napkin beside it. Artisan ecommerce aesthetic. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "hero_showcase_8",
+    "prompt": "Product photography. A copper ring dish with a delicate gold ring resting inside it, on a cream terrazzo surface. Overhead angle. Soft diffused light. Minimal, editorial. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "cta_audit_scene",
+    "prompt": "Lifestyle editorial photograph. Two people sit across a desk reviewing printed papers — a listing audit report with highlighted text visible (abstract, not readable). One person points to a chart. Clean home office or co-working space setting. Warm ambient light. Neutral cream and wood tones. Authentic feel, not stock-photo staged. No text visible. Photorealistic.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "about_team",
+    "prompt": "Group portrait photograph. Five young creative professionals standing in a relaxed arrangement inside a photography studio — some smiling, some serious. Diverse: mix of South Asian, East Asian, Western individuals. Casual professional dress — dark linen, cream shirts. Softbox lighting, neutral backdrop. Authentic team energy. No text.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "about_methodology",
+    "prompt": "Lifestyle close-up photograph. Two pairs of hands over a printed listing audit report on a desk — one hand points to a highlighted section, the other holds a pen making notes. Collaborative, focused. Warm desk light. No readable text on paper.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "about_stats_banner",
+    "prompt": "Graphic image. Deep charcoal banner with three large stat blocks centered horizontally: 500+ then 9 then 4.9 star. Each number in large white sans-serif, sub-label in smaller cream text below. Clean grid layout. Gold hairline dividers between blocks. No other elements.",
+    "aspectRatio": "21:5"
+  },
+  {
+    "id": "get_started_form",
+    "prompt": "Flat-lay photograph on cream surface. A thick cream notepad with three handwritten lines visible (abstract, not readable) — like a short form being filled out. A smartphone beside it, screen showing abstract UI. A pen resting diagonally across the notepad. Warm side light. Actionable, welcoming. No readable text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "og_share_card",
+    "prompt": "Open Graph share card design. Dark charcoal background. Centered large white sans-serif headline: A studio built by people who actually sell. Below it, smaller cream subtext: Saleixo — Product Photography, Design, Ecommerce. Top-left: abstract small logo mark. Clean, bold, minimal. No gradients. Professional brand card.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "partner_badge_plate",
+    "prompt": "Clean background plate. Cream surface with a single fine gold hairline border framing the plate edge. For overlaying partner logos. Even lighting, no texture, no shadows. Flat and neutral.",
+    "aspectRatio": "21:6"
+  },
+  {
+    "id": "payment_strip",
+    "prompt": "Clean background plate. Pure white surface with a single thin charcoal hairline border at top and bottom edges. For overlaying payment method icons. Perfectly flat, even light, no texture or gradient.",
+    "aspectRatio": "21:4"
+  },
+  {
+    "id": "404_illustration",
+    "prompt": "Editorial illustration. An empty photography studio — cream cyclorama sweep floor, no subject on set. A single paper luggage tag hanging from the ceiling on a thin string, with NOTHING ON SET YET written on it in handwritten style. Warm studio ambient light, softboxes off. Lonely but charming atmosphere.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "blog_cat_amazon",
+    "prompt": "Graphic banner. Charcoal dark background, centered large white headline text Amazon Tips and Strategies in clean sans-serif. Subtle gold underline accent below headline. No other elements. Clean editorial.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "blog_cat_shopify",
+    "prompt": "Graphic banner. Charcoal dark background, centered large white headline text Shopify Growth Guides in clean sans-serif. Subtle gold underline accent below headline. No other elements. Clean editorial.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "blog_cat_marketing",
+    "prompt": "Graphic banner. Charcoal dark background, centered large white headline text Ecommerce Marketing in clean sans-serif. Subtle gold underline accent below headline. No other elements. Clean editorial.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "blog_cat_photography",
+    "prompt": "Graphic banner. Charcoal dark background, centered large white headline text Product Photography in clean sans-serif. Subtle gold underline accent below headline. No other elements. Clean editorial.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "blog_cat_agency",
+    "prompt": "Graphic banner. Charcoal dark background, centered large white headline text Agency Insights in clean sans-serif. Subtle gold underline accent below headline. No other elements. Clean editorial.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "service_amazon_hero",
+    "prompt": "UI mockup photograph. A laptop screen showing an abstract search results page — a top listing card highlighted with a gold spotlight glow and a Number 1 Best Seller badge (abstract, no real branding). Dark background with gold accent. Laptop on a clean desk, shallow focus. Editorial. No real logos.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "service_amazon_problem",
+    "prompt": "Lifestyle photograph. A laptop screen showing a product listing page with poor performance indicators — low review count, bad images visible as grey thumbnails, red annotation arrows drawn on the screen overlay (abstract handdrawn style). Person's hands on keyboard, frustrated expression implied. Charcoal desk. No real branding.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "service_amazon_before_after",
+    "prompt": "Side-by-side product listing card comparison. Left half: a poorly shot product image in a worn-out listing card (grey tones, small, blurry). Right half: the same product in a premium studio listing card (white background, sharp, well-lit, larger). Dividing line down center. No real platform branding. No text. Clean editorial.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "service_amazon_segment_1",
+    "prompt": "Lifestyle photograph. A young South Asian woman sitting cross-legged on a living room floor surrounded by FBA inventory boxes and poly mailers. Laptop open in front of her. Excited, entrepreneurial energy. Warm home lighting. Candid feel. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_amazon_segment_2",
+    "prompt": "Lifestyle photograph. A Western man in his 40s sitting at a home desk, frowning at a laptop showing a downward sales chart. Frustrated but thinking expression. Neutral home office, dark tones. No text. Authentic feel.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_amazon_segment_3",
+    "prompt": "Lifestyle photograph. A small artisan storefront window — handmade goods visible inside, a paper sign on the window reading Shop Online Now in handwritten style, partially visible. Warm interior light. Brick exterior. No brand names.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_amazon_segment_4",
+    "prompt": "Interior photography. A white studio wall with 12 framed product shots mounted in a 3x4 grid — each frame showing a different artisan product: jewelry, ceramics, textiles, leather. Clean gallery feel. White walls, natural light. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "process_amazon_1",
+    "prompt": "Minimal illustration. A large magnifying glass hovering over a clipboard with a printed listing audit checklist — some items ticked, some flagged. Cream background, charcoal and gold tones. No readable text. Clean editorial.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "process_amazon_2",
+    "prompt": "Minimal illustration. A stack of index cards with keyword words highlighted in gold marker strokes. A few cards spread on cream surface. Charcoal type (abstract, not readable). Research feel. No text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "process_amazon_3",
+    "prompt": "Minimal lifestyle photograph. A fountain pen resting on paper beside a small product mockup card — a square white card showing an abstract product image. Cream desk surface. Warm light. Writing and copywriting feel. No readable text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "process_amazon_4",
+    "prompt": "Minimal icon illustration on cream. Two overlapping speech bubbles with a checkmark inside the overlapping area. Charcoal outlines, gold checkmark. Approval and collaboration concept. No text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "process_amazon_5",
+    "prompt": "Minimal illustration on cream. An upward-trending sparkline graph with a gold pin marker at the peak. Clean, single focal element. Charcoal line, gold pin. No text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "service_shopify_hero",
+    "prompt": "Device mockup photograph. Three device mockups — iMac desktop, iPad tablet, iPhone — arranged in a clean hero layout showing the same ecommerce storefront. Abstract premium jewelry brand store UI visible on screens. Cream background. Slight shadow depth. No real branding.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "service_shopify_problem",
+    "prompt": "Close-up lifestyle photograph. A hand holding a smartphone mid-checkout — the screen shows a checkout form with a loading spinner visible. Slight blur on hand, sharp on phone screen. Frustrated UX moment. Neutral background. No real branding. No text.",
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "service_shopify_checklist",
+    "prompt": "Flat-lay photograph on cream paper surface. A hand-drawn sitemap diagram on cream paper — boxes and arrows showing page hierarchy (abstract, not labeled). A pencil beside it. Architectural planning feel. Warm light. No readable text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "process_shopify_1",
+    "prompt": "Minimal illustration on cream. Two speech bubbles above a small notepad. Discovery and briefing concept. Charcoal and gold tones. Clean, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "process_shopify_2",
+    "prompt": "Minimal illustration on cream. A wireframe sketch of a website layout with a yellow sticky note on the corner. Design planning concept. Charcoal, gold accent. No readable text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "process_shopify_3",
+    "prompt": "Minimal illustration on cream. Three stacked browser windows showing code, with a building block icon overlapping the front one. Development and build concept. Charcoal tones, gold highlight. No readable text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "process_shopify_4",
+    "prompt": "Minimal illustration on cream. A checklist with three ticked boxes — gold checkmarks. QA and review concept. Clean vertical list. No text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "process_shopify_5",
+    "prompt": "Minimal illustration on cream. A bold upward arrow with a gold location pin marker at the top. Launch and go-live concept. Charcoal arrow, gold pin. No text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "service_shopify_portfolio_1",
+    "prompt": "UI screenshot mockup. A dark editorial Shopify storefront homepage for a premium jewelry brand — hero image of jewelry on black, gold typography, elegant navigation. High-end fashion feel. On a MacBook mockup or as a framed screenshot. No real brand names. Abstract.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_shopify_portfolio_2",
+    "prompt": "UI screenshot mockup. A warm cream Shopify storefront homepage for a candle brand — soft lifestyle imagery, warm serif font, pastel accents. Cozy premium feel. On a MacBook mockup or framed screenshot. No real brand names.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_shopify_portfolio_3",
+    "prompt": "UI screenshot mockup. An earth-tone Shopify storefront for a leather goods brand — tan and brown palette, rugged editorial hero image, clean sans-serif font. Premium and masculine. On a MacBook mockup or framed screenshot. No real brand names.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_ads_hero",
+    "prompt": "Product photograph. A vertical smartphone showing a paused Instagram Reels ad for a jewelry brand — abstract creative with jewelry box being opened. A small ROAS metrics chip overlay floats beside the phone showing abstract numbers. Clean desk background. No real Instagram UI, abstract only.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "service_ads_ugc",
+    "prompt": "Lifestyle photograph. A young woman, late 20s, recording a smartphone UGC video — phone mounted on a small ring light tripod, she holds a ring up close to camera, smiling. Home living room setting. Casual, authentic. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_ads_dashboard",
+    "prompt": "UI mockup photograph. A dark-mode analytics dashboard on a widescreen monitor — four KPI cards visible: Ad Spend, Revenue, ROAS, CTR. Abstract numbers, colorful charts. Gold accent color. No real platform branding. Clean editorial photography.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "service_ads_calendar",
+    "prompt": "Flat-lay photograph. A printed monthly content calendar on cream paper — grid layout with colored sticker dots on some dates indicating content types. A gold pen beside it. Flat-lay on wooden desk. Organizational feel. No readable text on calendar.",
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "service_photography_hero_wide",
+    "prompt": "Cinematic editorial composite. A wide horizontal strip showing five distinct photography shot types side by side: white-background product shot, lifestyle on linen, model close-up, 360-spin frame, infographic overlay frame. All using the same gold pendant as subject. Cream cyclorama background. No text. Photorealistic.",
+    "aspectRatio": "21:9"
+  },
+  {
+    "id": "service_photography_studio",
+    "prompt": "Editorial photography. Wide shot inside a professional photo studio. A stylist leans over a product table, using fine tweezers to adjust a jewelry piece on a cream surface. Background shows softboxes, reflectors, tethered laptop. Two crew members in background. Authentic, professional. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_photography_compliance",
+    "prompt": "Technical diagram photograph. A printed compliance specification diagram on cream paper — three concentric rectangles showing different aspect ratio crops (square, 4:5, 16:9) for the same product image, with thin hairline borders and small dimension labels (abstract numbers). Flat-lay on desk. No readable text.",
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "shot_type_1_white_bg",
+    "prompt": "Product photography. A single gold pendant necklace on a pure white background — ecommerce white background main image. Perfect studio lighting, no shadows, centered. Photorealistic.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "shot_type_2_lifestyle",
+    "prompt": "Lifestyle product photography. Gold pendant necklace draped on cream linen fabric with soft natural light. Minimal props — a dried flower stem beside it. Warm editorial feel.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "shot_type_3_on_model",
+    "prompt": "Model close-up product photography. Extreme close-up of a woman's collarbone wearing a gold pendant necklace. Soft skin tones, neutral background. Fashion editorial style.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "shot_type_4_360",
+    "prompt": "360-degree spin reference illustration. A 4x4 grid of the same product — gold pendant — photographed from 16 angles in equal degree increments, like a filmstrip contact sheet. White background each. Abstract reference grid. No text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "shot_type_5_ghost",
+    "prompt": "Ghost-mannequin product photography. A fabric textile garment photographed on an invisible mannequin — showing 3D body shape without the mannequin visible. White studio background. Professional ecommerce style.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "shot_type_6_flatlay",
+    "prompt": "Lifestyle flat-lay product photography. Gold pendant necklace coiled on cream linen, a small lit pillar candle and an olive or eucalyptus sprig arranged beside it. Overhead shot, warm natural light. Styled editorial.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "shot_type_7_macro",
+    "prompt": "Extreme macro product photography. Ultra close-up of the clasp and chain links of a gold necklace — each link and surface texture visible in sharp detail. Dark background, directional light. Jewelry macro specialization.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "shot_type_8_infographic",
+    "prompt": "Product infographic photography. White-background product image with 4 thin hairline callout lines pointing to specific product features — each ending at a small text label (abstract, not readable). Clean ecommerce infographic style. No real text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "service_mgmt_hero",
+    "prompt": "Editorial office photograph. A modern operations bay — three operators seated at standing desks with large monitors showing abstract seller dashboards. Charts, order grids, inventory heat maps visible on screens. Warm charcoal tones, accent lighting. Professional team feel. No real platform branding.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "service_mgmt_dashboards",
+    "prompt": "UI mockup photograph. A 2x2 grid of four floating seller dashboard cards — each showing a different metric: inventory levels, order volume, revenue chart, listing health score. Dark-mode cards, gold and teal accents. Abstract data. No real branding.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "service_mgmt_segment_1",
+    "prompt": "Lifestyle photograph. A Western woman, late 30s, sitting at a home office desk surrounded by shipping envelopes and poly mailers. She types on a laptop. Organized small business feel. Warm home lighting. Candid and authentic. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_mgmt_segment_2",
+    "prompt": "Lifestyle photograph. A South Asian man, early 40s, standing at a height-adjustable desk reviewing a printed SKU inventory sheet. He holds a pen, focused. Clean home office background. Professional, determined. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "service_mgmt_segment_3",
+    "prompt": "Lifestyle photograph. Two co-founders — one man, one woman, mid-30s — sitting together reviewing a sales chart on an iPad. Smiling, collaborative energy. Startup office or co-working space. Natural light. No text.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "case_studies_hero",
+    "prompt": "Editorial composite. Three floating product listing cards arranged on a charcoal background — each card shows a before (grey, low quality) on the left and after (bright, professional) on the right. Cards overlapping slightly. Gold accent borders. Premium presentation. No text.",
+    "aspectRatio": "21:9"
+  },
+  {
+    "id": "case_arjun_card",
+    "prompt": "Split composition photograph. Left half: an elegant diamond earring on black velvet — hero product shot. Right half: a conversion rate chart showing a line climbing sharply from left to right with gold highlight at peak. Clean dividing line down center. Charcoal background. No text.",
+    "aspectRatio": "4:3"
+  },
+  {
+    "id": "case_suppression_timeline",
+    "prompt": "Infographic illustration on charcoal background. A clean horizontal timeline with three labeled nodes: Hour 0 (red warning icon), Hour 18 (amber process in progress icon), Hour 36 (green checkmark restored). Connecting horizontal line in gold. Abstract labels only, no readable text. Elegant and minimal.",
+    "aspectRatio": "16:9"
+  },
+  {
+    "id": "case_brand_launch_flatlay",
+    "prompt": "Styled flat-lay photograph on cream surface. A brand identity launch spread: a logo stamp, premium packaging box, printed listing screenshots, and a small handwritten card reading 47 orders in Week 1 (abstract stylized, not clearly readable). Warm editorial light. Aspirational brand launch aesthetic. No specific brand names.",
+    "aspectRatio": "4:5"
+  },
+  {
+    "id": "avatar_arjun_mehta",
+    "prompt": "Professional portrait photograph. South Asian Indian man, late 20s, friendly smile, dark kurta, neutral grey studio backdrop, soft studio light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_priya_sharma",
+    "prompt": "Professional portrait photograph. South Asian Indian woman, late 20s, warm smile, simple gold earrings, cream studio backdrop, soft front light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_sarah_mitchell",
+    "prompt": "Professional portrait photograph. White British woman, mid 30s, professional blazer, warm studio light, neutral backdrop, confident expression. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_david_chen",
+    "prompt": "Professional portrait photograph. East Asian man, early 30s, smart casual shirt, neutral studio backdrop, confident expression, soft front light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_neha_gupta",
+    "prompt": "Professional portrait photograph. South Asian woman, 30s, traditional gold earrings, warm smile, neutral cream studio backdrop, soft light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_james_whitfield",
+    "prompt": "Professional portrait photograph. White British man, late 30s, navy button-down shirt, studio neutral backdrop, relaxed confident expression, soft Rembrandt light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_rohan_kapoor",
+    "prompt": "Professional portrait photograph. South Asian man, early 30s, light grey casual shirt, open friendly expression, neutral studio backdrop, soft front light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_sofia_nakamura",
+    "prompt": "Professional portrait photograph. Japanese-American woman, late 20s, cream turtleneck, minimal jewelry, calm confident expression, soft white studio backdrop, diffused front light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_marcus_reed",
+    "prompt": "Professional portrait photograph. Black American man, mid 30s, casual shirt, warm smile, neutral studio backdrop, soft front light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_kavya_reddy",
+    "prompt": "Professional portrait photograph. South Indian woman, late 20s, modern and polished look, warm studio tones, neutral backdrop, confident warm expression. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_tom_bradley",
+    "prompt": "Professional portrait photograph. White Australian man, 40s, casual open-collar shirt, warm friendly expression, neutral studio backdrop, soft natural light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  },
+  {
+    "id": "avatar_aisha_nkosi",
+    "prompt": "Professional portrait photograph. Black African woman, 30s, natural hair, gold earrings, confident warm expression, neutral cream studio backdrop, soft front light. Shoulders-up framing. Photorealistic, no text.",
+    "aspectRatio": "1:1"
+  }
+]

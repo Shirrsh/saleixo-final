@@ -11,6 +11,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 // ── Schema ────────────────────────────────────────────────────────────────────
 const schema = z.object({
@@ -149,7 +150,7 @@ const GetStarted = () => {
     setLoading(true);
     try {
       const { error } = await supabase
-        .from('leads' as any)
+        .from('leads')
         .insert([{
           name:         data.name,
           email:        data.email,
@@ -176,11 +177,10 @@ const GetStarted = () => {
       });
 
       setSubmitted(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
       console.error('Lead submission error:', err);
-      // Still show success to the user — don't expose DB errors
-      // But log it so we can debug
-      setSubmitted(true);
+      toast.error('Submission failed', { description: message });
     } finally {
       setLoading(false);
     }

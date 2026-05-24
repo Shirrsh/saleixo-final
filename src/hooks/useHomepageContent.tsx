@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
 export interface HomepageContent {
@@ -29,7 +29,8 @@ interface ValueProposition {
 
 const defaultContent: HomepageContent = {
   hero_title: 'Transform Your Brand Into Market-Winning Brands',
-  hero_subtitle: 'Professional product photography and ecommerce solutions for Amazon, Flipkart, Etsy, Shopify and more across US, UK, EU, and India.',
+  hero_subtitle:
+    'Professional product photography and ecommerce solutions for Amazon, Flipkart, Etsy, Shopify and more across US, UK, EU, and India.',
   hero_cta_text: 'Book Free Strategy Call',
   hero_cta_link: '#contact',
   hero_image_url: '',
@@ -44,117 +45,135 @@ const defaultContent: HomepageContent = {
   trust_badges: 'Amazon | eBay | Etsy | Shopify | Flipkart | Walmart',
 };
 
+const mergeWithDefaults = (data: Record<string, string | null>): HomepageContent => ({
+  hero_title: data.hero_title || defaultContent.hero_title,
+  hero_subtitle: data.hero_subtitle || defaultContent.hero_subtitle,
+  hero_cta_text: data.hero_cta_text || defaultContent.hero_cta_text,
+  hero_cta_link: data.hero_cta_link || defaultContent.hero_cta_link,
+  hero_image_url: data.hero_image_url || defaultContent.hero_image_url,
+  meta_title: data.meta_title || defaultContent.meta_title,
+  meta_description: data.meta_description || defaultContent.meta_description,
+  badge_1_icon: data.badge_1_icon || defaultContent.badge_1_icon,
+  badge_1_text: data.badge_1_text || defaultContent.badge_1_text,
+  badge_2_icon: data.badge_2_icon || defaultContent.badge_2_icon,
+  badge_2_text: data.badge_2_text || defaultContent.badge_2_text,
+  badge_3_icon: data.badge_3_icon || defaultContent.badge_3_icon,
+  badge_3_text: data.badge_3_text || defaultContent.badge_3_text,
+  trust_badges: data.trust_badges || defaultContent.trust_badges,
+});
+
 export const useHomepageContent = () => {
   const [content, setContent] = useState<HomepageContent>(defaultContent);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('homepage_content')
-          .select('*')
-          .limit(1)
-          .maybeSingle();
+  const fetchContent = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('homepage_content')
+        .select('*')
+        .limit(1)
+        .maybeSingle();
 
-        if (error) throw error;
-
-        if (data) {
-          setContent({
-            hero_title: data.hero_title || defaultContent.hero_title,
-            hero_subtitle: data.hero_subtitle || defaultContent.hero_subtitle,
-            hero_cta_text: data.hero_cta_text || defaultContent.hero_cta_text,
-            hero_cta_link: data.hero_cta_link || defaultContent.hero_cta_link,
-            hero_image_url: data.hero_image_url || defaultContent.hero_image_url,
-            meta_title: data.meta_title || defaultContent.meta_title,
-            meta_description: data.meta_description || defaultContent.meta_description,
-            badge_1_icon: data.badge_1_icon || defaultContent.badge_1_icon,
-            badge_1_text: data.badge_1_text || defaultContent.badge_1_text,
-            badge_2_icon: data.badge_2_icon || defaultContent.badge_2_icon,
-            badge_2_text: data.badge_2_text || defaultContent.badge_2_text,
-            badge_3_icon: data.badge_3_icon || defaultContent.badge_3_icon,
-            badge_3_text: data.badge_3_text || defaultContent.badge_3_text,
-            trust_badges: data.trust_badges || defaultContent.trust_badges,
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching homepage content:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchContent();
+      if (error) throw error;
+      if (data) setContent(mergeWithDefaults(data as Record<string, string | null>));
+    } catch (error) {
+      console.error('Error fetching homepage content:', error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchContent();
+
+    const channel = supabase
+      .channel('homepage_content:realtime')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'homepage_content' }, () => {
+        fetchContent();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [fetchContent]);
 
   return { content, loading };
 };
 
+// ── Value Propositions ────────────────────────────────────────────────────────
+
+const defaultValueProps: ValueProposition[] = [
+  {
+    id: '1',
+    title: 'Studio-Grade Quality, Exceptional Value',
+    description:
+      'Professional results that drive real business growth. Quality that competes with the best, with solutions customized to your goals.',
+    icon: 'CheckCircle',
+    display_order: 0,
+    is_active: true,
+  },
+  {
+    id: '2',
+    title: 'Fast Turnaround, Zero Hassle',
+    description:
+      'From brief to delivery in 24-48 hours. Streamlined processes that respect your timeline and budget.',
+    icon: 'Clock',
+    display_order: 1,
+    is_active: true,
+  },
+  {
+    id: '3',
+    title: 'Creativity That Converts',
+    description:
+      'Beautiful visuals designed with sales in mind. Every image, every design element is crafted to drive engagement and conversions.',
+    icon: 'Zap',
+    display_order: 2,
+    is_active: true,
+  },
+  {
+    id: '4',
+    title: 'Trusted by Modern Brands',
+    description:
+      "From startups to established brands, we've helped 500+ businesses elevate their visual presence and boost sales.",
+    icon: 'Users',
+    display_order: 3,
+    is_active: true,
+  },
+];
+
 export const useValuePropositions = () => {
-  const [valueProps, setValueProps] = useState<ValueProposition[]>([]);
+  const [valueProps, setValueProps] = useState<ValueProposition[]>(defaultValueProps);
   const [loading, setLoading] = useState(true);
 
-  const defaultValueProps: ValueProposition[] = [
-    {
-      id: '1',
-      title: 'Studio-Grade Quality, Exceptional Value',
-      description: 'Professional results that drive real business growth. Quality that competes with the best, with solutions customized to your goals.',
-      icon: 'CheckCircle',
-      display_order: 0,
-      is_active: true,
-    },
-    {
-      id: '2',
-      title: 'Fast Turnaround, Zero Hassle',
-      description: 'From brief to delivery in 24-48 hours. Streamlined processes that respect your timeline and budget.',
-      icon: 'Clock',
-      display_order: 1,
-      is_active: true,
-    },
-    {
-      id: '3',
-      title: 'Creativity That Converts',
-      description: 'Beautiful visuals designed with sales in mind. Every image, every design element is crafted to drive engagement and conversions.',
-      icon: 'Zap',
-      display_order: 2,
-      is_active: true,
-    },
-    {
-      id: '4',
-      title: 'Trusted by Modern Brands',
-      description: 'From startups to established brands, we\'ve helped 500+ businesses elevate their visual presence and boost sales.',
-      icon: 'Users',
-      display_order: 3,
-      is_active: true,
-    },
-  ];
+  const fetchValueProps = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('value_propositions')
+        .select('*')
+        .eq('is_active', true)
+        .order('display_order');
+
+      if (error) throw error;
+      setValueProps(data && data.length > 0 ? data : defaultValueProps);
+    } catch (error) {
+      console.error('Error fetching value propositions:', error);
+      setValueProps(defaultValueProps);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchValueProps = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('value_propositions')
-          .select('*')
-          .eq('is_active', true)
-          .order('display_order');
-
-        if (error) throw error;
-
-        if (data && data.length > 0) {
-          setValueProps(data);
-        } else {
-          setValueProps(defaultValueProps);
-        }
-      } catch (error) {
-        console.error('Error fetching value propositions:', error);
-        setValueProps(defaultValueProps);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchValueProps();
-  }, []);
+
+    const channel = supabase
+      .channel('value_propositions:realtime')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'value_propositions' }, () => {
+        fetchValueProps();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [fetchValueProps]);
 
   return { valueProps, loading };
 };
