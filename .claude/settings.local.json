@@ -8,7 +8,12 @@
       "Bash(powershell -Command \"\\(Get-Content 'src/pages/Services.tsx'\\) -replace [regex]::Escape\\(\\\\\"headline: 'Run your business. We’ll run your ecommerce.'\\\\\"\\), 'headline: \\\\\"Run your business. We’ll run your ecommerce.\\\\\"' | Set-Content 'src/pages/Services.tsx'\")",
       "Bash(node -e ' *)",
       "Bash(node)",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(dir C:\\\\SALEIXO\\\\alvaio-digital-studio\\\\src\\\\assets *)",
+      "WebFetch(domain:saleixo.com)",
+      "mcp__claude_ai_Vercel__list_teams",
+      "mcp__claude_ai_Vercel__list_projects",
+      "mcp__claude_ai_Vercel__list_deployments"
     ]
   }
 }

@@ -212,7 +212,7 @@ const { fmt, currency, setCurrency, symbol } = useCurrency();
 **Guardrails:**
 - Do not call `useCurrency()` outside of `CurrencyProvider` — it will throw.
 - Do not duplicate currency state elsewhere; always read from this context.
-- The `CurrencyToggle` component (`src/components/CurrencyToggle.tsx`) is the canonical UI for switching — update it if the selector UI needs to change rather than building a new one.
+- The `CurrencyToggle` component (`src/components/CurrencyToggle.tsx`) is the canonical UI for switching — update it if the selector UI needs to change rather than building a new one. It is a **custom accessible dropdown** (not shadcn `Select`) with outside-click and Escape-key dismissal; style it via Tailwind/tokens directly, not via shadcn primitives.
 - JPY and CNY are formatted without decimal places automatically.
 
 ### Legal pages — before publishing
