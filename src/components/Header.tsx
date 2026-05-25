@@ -351,7 +351,7 @@ const Header = () => {
           WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
         }}
       >
-        <div style={{ width: '100%', padding: '0 clamp(24px, 7vw, 140px)', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ width: '100%', padding: '0 clamp(24px, 7vw, 140px)', height: '64px', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center' }}>
 
             {/* ── Logo ─────────────────────────────────────────────────────── */}
             <Link
@@ -364,7 +364,7 @@ const Header = () => {
             </Link>
 
             {/* ── Desktop center nav ────────────────────────────────────────── */}
-            <nav className="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2" aria-label="Main navigation">
+            <nav className="hidden md:flex items-center gap-7 justify-self-center" aria-label="Main navigation">
               {desktopNav.map(link => {
                 if (link.type === 'mega') {
                   return (
@@ -418,7 +418,7 @@ const Header = () => {
             </nav>
 
             {/* ── Desktop right ─────────────────────────────────────────────── */}
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-2 justify-self-end">
 
               {/* Get Started CTA */}
               <Link
@@ -456,7 +456,7 @@ const Header = () => {
 
             {/* ── Mobile hamburger ─────────────────────────────────────────── */}
             <button
-              className="md:hidden flex items-center justify-center rounded-xl transition-all duration-200 active:scale-95"
+              className="md:hidden flex items-center justify-center rounded-xl transition-all duration-200 active:scale-95 justify-self-end"
               style={{
                 width: 44, height: 44,
                 color: isLight ? '#111' : (scrolled ? 'hsl(215 20% 70%)' : '#ffffff'),

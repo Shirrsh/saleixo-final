@@ -43,99 +43,99 @@ interface TCard {
 const COL1: TCard[] = [
   {
     id: 'c1-1', type: 'image', media: imgShowcase1,
-    client_name: 'Arjun Mehta', role: 'Amazon Seller · Jewelry',
+    client_name: 'Jewelry Brand', role: 'Amazon India · Jewelry',
     quote: 'Saleixo transformed our listings completely. Conversion rate tripled in the first month.',
-    rating: 5, result: '+312% Conversion', initials: 'AM',
+    rating: 5, result: '+312% Conversion', initials: 'JB',
   },
   {
     id: 'c1-2', type: 'text',
-    client_name: 'Priya Sharma', role: 'Etsy Store · Handcrafted Jewelry',
+    client_name: 'Handcraft Studio', role: 'Etsy · Handcrafted Jewelry',
     quote: 'We tried three photographers before Saleixo. The difference isn\'t the camera — it\'s that they understand which shot Amazon needs vs. which shot Etsy needs. Same product, different sets, both compliant.',
-    rating: 5, result: '2× Sales', initials: 'PS',
+    rating: 5, result: '2× Sales', initials: 'HS',
   },
   {
     id: 'c1-3', type: 'image', media: imgEarrings,
-    client_name: 'Elena R.', role: 'Amazon Seller · Jewelry',
+    client_name: 'D2C Jeweller', role: 'Amazon · Jewelry',
     quote: 'The photography and guidance they provided made my brand look more consistent and polished.',
-    rating: 5, result: '+180% Traffic', initials: 'ER',
+    rating: 5, result: '+180% Traffic', initials: 'DJ',
   },
   {
     id: 'c1-4', type: 'image', media: imgPhotography,
-    client_name: 'James Whitfield', role: 'Shopify · Home Décor',
+    client_name: 'Home Décor Brand', role: 'Shopify · Home Décor',
     quote: 'Professional, fast, and the results speak for themselves.',
-    rating: 5, result: '+40% AOV', initials: 'JW',
+    rating: 5, result: '+40% AOV', initials: 'HD',
   },
   {
     id: 'c1-5', type: 'text',
-    client_name: 'Neha Gupta', role: 'Meesho · Fashion',
+    client_name: 'Fashion Reseller', role: 'Meesho · Fashion',
     quote: 'I used to spend Sunday night fixing listing errors. Now I don\'t even check — Saleixo\'s team flags and fixes before I see the email.',
-    rating: 5, result: '3× Revenue', initials: 'NG',
+    rating: 5, result: '3× Revenue', initials: 'FR',
   },
 ];
 
 const COL2: TCard[] = [
   {
     id: 'c2-1', type: 'image', media: imgShowcase2,
-    client_name: 'Rohan Kapoor', role: 'Flipkart · Lifestyle Brand',
+    client_name: 'Lifestyle Brand', role: 'Flipkart · Lifestyle',
     quote: 'The A+ content they built for us is world-class. We went from page 4 to page 1.',
-    rating: 5, result: 'Page 4 → Page 1', initials: 'RK',
+    rating: 5, result: 'Page 4 → Page 1', initials: 'LB',
   },
   {
     id: 'c2-2', type: 'text',
-    client_name: 'Sarah M.', role: 'Amazon · Multi-marketplace',
+    client_name: 'Multi-channel Seller', role: 'Amazon · Multi-marketplace',
     quote: 'Our Amazon listing was suppressed for 11 days before we found Saleixo. They had it back live in 36 hours and our daily sessions tripled within two weeks.',
-    rating: 4, result: 'Sessions 3×', initials: 'SM',
+    rating: 4, result: 'Sessions 3×', initials: 'MC',
   },
   {
     id: 'c2-3', type: 'image', media: imgNecklace,
-    client_name: 'David Chen', role: 'Walmart · Electronics',
+    client_name: 'Electronics Brand', role: 'Walmart · Electronics',
     quote: 'The team understood exactly what I wanted. Turnaround was fast and quality exceeded expectations.',
-    rating: 5, result: '+55% CTR', initials: 'DC',
+    rating: 5, result: '+55% CTR', initials: 'EB',
   },
   {
     id: 'c2-4', type: 'text',
-    client_name: 'Marcus Reid', role: 'Shopify · Lifestyle',
+    client_name: 'Lifestyle Store', role: 'Shopify · Lifestyle',
     quote: 'Clean, professional, and delivered on time. The whole process was smooth and collaborative from start to finish.',
-    rating: 5, result: '2× Sales', initials: 'MR',
+    rating: 5, result: '2× Sales', initials: 'LS',
   },
   {
     id: 'c2-5', type: 'image', media: imgIncense,
-    client_name: 'Kavya Reddy', role: 'Amazon · Beauty',
+    client_name: 'Beauty & Wellness Brand', role: 'Amazon · Beauty',
     quote: 'Our brand finally looks premium. The photography elevated everything — packaging, listings, social media.',
-    rating: 5, result: '+220% Revenue', initials: 'KR',
+    rating: 5, result: '+220% Revenue', initials: 'BW',
   },
 ];
 
 const COL3: TCard[] = [
   {
     id: 'c3-1', type: 'text',
-    client_name: 'Tom Bradley', role: 'Amazon · Shopify · Brand Founder',
+    client_name: 'D2C Brand Launch', role: 'Amazon · Shopify · D2C',
     quote: 'We launched a brand from scratch in 21 days. Logo, packaging, photography, Amazon listing, Etsy shop, and a Shopify storefront. Did 47 orders in week one.',
-    rating: 5, result: '47 orders wk 1', initials: 'TB',
+    rating: 5, result: '47 orders wk 1', initials: 'DL',
   },
   {
     id: 'c3-2', type: 'image', media: imgShowcase3,
-    client_name: 'Aisha Nair', role: 'Meesho · Fashion',
+    client_name: 'Fashion Seller', role: 'Meesho · Fashion',
     quote: 'I was skeptical at first, but the ROI was visible within the first week.',
-    rating: 4, result: 'ROI in Week 1', initials: 'AN',
+    rating: 4, result: 'ROI in Week 1', initials: 'FS',
   },
   {
     id: 'c3-3', type: 'text',
-    client_name: 'Sofia Nakamura', role: 'Amazon · Wellness & Beauty',
+    client_name: 'Wellness Brand', role: 'Amazon · Wellness & Beauty',
     quote: 'We swapped our old product photos for Saleixo shots. Click-through rate jumped immediately. Our listing finally looks as good as the product.',
-    rating: 5, result: '+35% CTR', initials: 'SN',
+    rating: 5, result: '+35% CTR', initials: 'WB',
   },
   {
     id: 'c3-4', type: 'image', media: imgAquamarine,
-    client_name: 'Henry Vane', role: 'Co-Founder · Heritage Craft Supply',
+    client_name: 'Heritage Craft Co.', role: 'Amazon · Craft & Artisan',
     quote: 'Best product photography studio we have worked with. The retouching is flawless.',
-    rating: 5, result: '+150% CTR', initials: 'HV',
+    rating: 5, result: '+150% CTR', initials: 'HC',
   },
   {
     id: 'c3-5', type: 'text',
-    client_name: 'Linda Shaw', role: 'Event Producer',
+    client_name: 'Artisan Collective', role: 'Amazon · Handmade',
     quote: 'Set up and struck in under 10 minutes at a trade show. The photography was a game changer for live events.',
-    rating: 5, result: 'Best ROI', initials: 'LS',
+    rating: 5, result: 'Best ROI', initials: 'AC',
   },
 ];
 
@@ -406,7 +406,7 @@ const Testimonials = () => {
           style={{ background: 'hsl(43 65% 52% / 0.1)', border: '1px solid hsl(43 65% 52% / 0.3)', color: '#b8922a' }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]" />
-          Sellers we've worked with
+          Results across industries
         </div>
         <h2 className="text-4xl md:text-6xl font-bold text-foreground tracking-tight mb-4">
           Real numbers.{' '}

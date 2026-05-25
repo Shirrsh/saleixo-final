@@ -67,7 +67,7 @@ const pillars = [
 ];
 
 const results = [
-  { value: '9', suffix: '+', label: 'Marketplaces managed', sub: 'Amazon, Flipkart, Etsy, Shopify, Walmart, eBay, Meesho, WooCommerce, SHEIN' },
+  { value: '20', suffix: '+', label: 'Marketplaces managed', sub: 'Amazon, Flipkart, Meesho, Shopify, Etsy, Walmart, eBay, Myntra, Nykaa & more' },
   { value: '48', suffix: 'hr', label: 'Avg. suppression recovery', sub: 'Most cases resolved within 24–72 hours' },
   { value: '200', suffix: '+', label: 'Suppressed listings fixed', sub: 'Across categories, geographies, and account types' },
   { value: '7', suffix: '', label: 'Countries served', sub: 'US · UK · FR · DE · AU · CA · IN' },
@@ -76,14 +76,18 @@ const results = [
 const faqs = [
   { q: 'What does ecommerce management actually include?', a: 'Everything from daily listing health monitoring and suppression fixes to inventory planning, FBA prep, A+ content, PPC management, and monthly performance reviews. You get a dedicated account manager who acts as your in-house ecommerce team.' },
   { q: 'How quickly can you get started?', a: 'Onboarding takes 5–7 business days. We audit your account, document your workflows, gain platform access, and resolve any active issues in the first two weeks. Most clients are fully stabilised within 14 days.' },
-  { q: 'Do you manage multiple marketplaces simultaneously?', a: 'Yes. We manage accounts across Amazon, Flipkart, Etsy, Shopify, Walmart, eBay, Meesho, WooCommerce, and SHEIN. You get one point of contact for all platforms.' },
+  { q: 'Do you manage multiple marketplaces simultaneously?', a: 'Yes. We manage accounts across 20+ platforms including Amazon, Flipkart, Meesho, Shopify, Etsy, Walmart, eBay, Myntra, Nykaa, WooCommerce, JioMart, IndiaMART, and more. You get one point of contact for all platforms.' },
   { q: 'How do you handle suppressed listings?', a: 'We monitor listing health daily. When a suppression is detected, we diagnose the root cause and submit the fix within hours. Our average recovery time is 48 hours, with 90% of cases resolved within 72 hours.' },
   { q: 'What does reporting look like?', a: 'Weekly WhatsApp or Slack updates on key metrics. Monthly performance review with a full breakdown of traffic, conversion, ad spend, unit economics, and the priority actions for the next month.' },
   { q: 'What is your pricing structure?', a: 'Engagements start at a flat monthly retainer based on the number of platforms and SKUs managed, with an optional performance incentive tied to revenue growth. Book a call and we\'ll scope it honestly for your situation.' },
 ];
 
 const marketplaceLogos = [
-  'Amazon', 'Flipkart', 'Etsy', 'Shopify', 'Walmart', 'eBay', 'Meesho', 'WooCommerce', 'SHEIN',
+  'Amazon', 'Flipkart', 'Meesho', 'Shopify', 'Myntra', 'Nykaa',
+  'eBay', 'Walmart', 'Etsy', 'WooCommerce', 'Snapdeal', 'JioMart',
+  'Tata Cliq', 'Ajio', 'IndiaMART', 'Amazon EU', 'Amazon JP', 'Amazon AU',
+  'BigCommerce', 'Wix', 'Zalando', 'ASOS', 'SHEIN', 'Poshmark',
+  'Alibaba', 'Global Sources',
 ];
 
 // ── FAQ Item ──────────────────────────────────────────────────────────────────
@@ -149,8 +153,10 @@ const EcommerceManagement = () => {
               </div>
             ))}
           </div>
-          {/* Dark overlay — heavier at bottom for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/55 to-black/90" />
+          {/* Dark overlay — heavier at top (behind header) and bottom (for text) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90" />
+          {/* Extra header-area darkening */}
+          <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
 
           {/* Content */}
           <div className={`relative z-10 ${W} pb-16 pt-36`}>
@@ -178,7 +184,7 @@ const EcommerceManagement = () => {
               transition={{ duration: 0.6, delay: 0.18 }}
               className="text-base md:text-lg text-white/65 max-w-xl leading-relaxed mb-10"
             >
-              Saleixo acts as your dedicated ecommerce operations team across 9 marketplaces and 7 countries — so you can focus on building your brand while we handle the day-to-day.
+              Saleixo acts as your dedicated ecommerce operations team across 20+ marketplaces and 7 countries — so you can focus on building your brand while we handle the day-to-day.
             </motion.p>
 
             <motion.div
@@ -362,8 +368,8 @@ const EcommerceManagement = () => {
                 <img src={portfolioImg} alt="Client" className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="text-left">
-                <p className="text-sm font-bold text-foreground">Arjun Mehta</p>
-                <p className="text-xs text-muted-foreground">Founder, Artisan Collective India</p>
+                <p className="text-sm font-bold text-foreground">Jewelry Brand</p>
+                <p className="text-xs text-muted-foreground">Amazon India · Artisan Seller</p>
               </div>
             </div>
           </motion.div>

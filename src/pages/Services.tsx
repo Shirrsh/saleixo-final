@@ -155,7 +155,7 @@ const WHY = [
   { icon: Clock, title: 'Fast Turnaround', desc: 'Photography in 24–48 hrs. Listings in 3–5 days. Ad campaigns live in 5 days.' },
   { icon: TrendingUp, title: 'Results-Focused', desc: 'We track sales lift, CTR, and ROAS — not vanity metrics.' },
   { icon: Users, title: 'Dedicated Manager', desc: 'Your own account manager on WhatsApp. 2-hour response guarantee.' },
-  { icon: Star, title: 'Studio-Grade Quality', desc: '20+ years experience. Worked with Pottery Barn, FNP, and Pepperfry.' },
+  { icon: Star, title: 'Studio-Grade Quality', desc: 'Studio-grade output across jewelry, fashion, home décor, beauty, and electronics categories.' },
   { icon: Zap, title: 'Transparent Pricing', desc: 'No hidden fees. No lock-in contracts. Cancel anytime.' },
 ];
 
