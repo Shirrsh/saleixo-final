@@ -13,6 +13,7 @@ import Cookies from "./pages/Cookies";
 import Refund from "./pages/Refund";
 import GetStarted from "./pages/GetStarted";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
 
 import Blog from "./pages/Blog";
 import Categories from "./pages/Categories";
@@ -67,6 +68,7 @@ const App = () => (
         <ScrollToTopOnNavigate />
         <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/design" element={<Design />} />
                         <Route path="/blog" element={<Blog />} />

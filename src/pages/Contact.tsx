@@ -257,6 +257,12 @@ const Contact = () => {
                 >
                   Get Directions <ExternalLink className="w-3 h-3" />
                 </a>
+                <div className="mt-4 pt-4 border-t border-border/40">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold"
+                    style={{ background: 'hsl(var(--surface-elevated))', border: '1px solid hsl(var(--border))' , color: 'hsl(var(--muted-foreground))' }}>
+                    🏛️ MSME Registered &nbsp;·&nbsp; Udyam No: UDYAM-BR-06-0036869
+                  </span>
+                </div>
               </div>
 
               {/* Free audit CTA */}

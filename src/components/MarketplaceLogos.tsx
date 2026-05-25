@@ -1,36 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Platforms with logo images (files in /public/Marketplace logos/)
-const logoMarketplaces = [
-  { name: 'Amazon',      src: '/Marketplace%20logos/Amazon.png' },
-  { name: 'Shopify',     src: '/Marketplace%20logos/shopify.png' },
-  { name: 'Walmart',     src: '/Marketplace%20logos/Walmart.png' },
-  { name: 'Etsy',        src: '/Marketplace%20logos/etsy.png' },
-  { name: 'WooCommerce', src: '/Marketplace%20logos/Woocommerce.png' },
-  { name: 'Flipkart',    src: '/Marketplace%20logos/flipkart.png' },
-  { name: 'Meesho',      src: '/Marketplace%20logos/Meesho.avif' },
-  { name: 'SHEIN',       src: '/Marketplace%20logos/Shein.png' },
-];
-
-// Platforms shown as text badges (no logo file available)
-const textMarketplaces = [
-  'eBay', 'Myntra', 'Nykaa', 'Snapdeal', 'JioMart', 'Tata Cliq',
-  'Ajio', 'IndiaMART', 'Amazon EU', 'Amazon JP', 'Amazon AU',
+const allMarketplaces = [
+  'Amazon', 'Flipkart', 'Meesho', 'Shopify', 'Myntra', 'Nykaa',
+  'eBay', 'Walmart', 'Etsy', 'WooCommerce', 'Snapdeal', 'JioMart',
+  'Tata Cliq', 'Ajio', 'IndiaMART', 'Amazon EU', 'Amazon JP', 'Amazon AU',
   'BigCommerce', 'Wix', 'Squarespace', 'Temu', 'Zalando',
-  'ASOS', 'Poshmark', 'Depop', 'Alibaba', 'Global Sources', 'Faire',
+  'ASOS', 'SHEIN', 'Poshmark', 'Depop', 'Alibaba', 'Global Sources', 'Faire',
 ];
 
-type MarqueeItem =
-  | { type: 'logo'; name: string; src: string }
-  | { type: 'text'; name: string };
-
-// Interleave logos and text badges, then duplicate for seamless loop
-const allItems: MarqueeItem[] = [
-  ...logoMarketplaces.map(m => ({ type: 'logo' as const, ...m })),
-  ...textMarketplaces.map(name => ({ type: 'text' as const, name })),
-];
-const marqueeItems: MarqueeItem[] = [...allItems, ...allItems];
+const marqueeItems = [...allMarketplaces, ...allMarketplaces];
 
 const countries = [
   { code: 'IN', name: 'India' },
@@ -67,7 +46,7 @@ const MarketplaceLogos = () => {
           style={{ background: 'linear-gradient(to left, hsl(var(--background)), transparent)' }} />
 
         <div
-          className="flex items-center gap-8 md:gap-12 whitespace-nowrap"
+          className="flex items-center gap-4 md:gap-6 whitespace-nowrap"
           style={{
             animation: `marquee-x 60s linear infinite`,
             animationPlayState: paused ? 'paused' : 'running',
@@ -75,29 +54,15 @@ const MarketplaceLogos = () => {
             width: 'max-content',
           }}
         >
-          {marqueeItems.map((item, i) => (
-            item.type === 'logo' ? (
-              <div
-                key={i}
-                className="flex items-center justify-center flex-shrink-0 h-8 w-20 md:h-10 md:w-28 cursor-default select-none opacity-40 hover:opacity-90 transition-opacity duration-300"
-              >
-                <img
-                  src={item.src}
-                  alt={item.name}
-                  className="max-h-8 md:max-h-10 max-w-[5rem] md:max-w-[7rem] w-auto object-contain"
-                  loading="lazy"
-                />
-              </div>
-            ) : (
-              <div
-                key={i}
-                className="flex items-center justify-center flex-shrink-0 h-8 cursor-default select-none opacity-40 hover:opacity-90 transition-opacity duration-300"
-              >
-                <span className="text-xs font-semibold text-muted-foreground border border-border/40 rounded-md px-2.5 py-1 whitespace-nowrap">
-                  {item.name}
-                </span>
-              </div>
-            )
+          {marqueeItems.map((name, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 cursor-default select-none opacity-50 hover:opacity-100 transition-opacity duration-300"
+            >
+              <span className="text-xs font-semibold text-muted-foreground border border-border/40 rounded-md px-2.5 py-1 whitespace-nowrap">
+                {name}
+              </span>
+            </div>
           ))}
         </div>
       </div>

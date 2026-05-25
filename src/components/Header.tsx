@@ -14,22 +14,10 @@ const BAR_H = 40;
 // ─── Mega menu services ───────────────────────────────────────────────────────
 const MEGA_SERVICES = [
   {
-    icon: Camera, color: '#3b82f6',
-    title: 'Product Photography',
-    desc: 'Studio-grade shoots for every marketplace',
-    href: '/services/photography',
-  },
-  {
     icon: ShoppingCart, color: '#10b981',
     title: 'Ecommerce Management',
     desc: 'Full store operations & account management',
     href: '/services/ecommerce-management',
-  },
-  {
-    icon: BarChart2, color: '#8b5cf6',
-    title: 'Social Ads',
-    desc: 'Google & Meta ads with 250% avg. ROI',
-    href: '/services/social-ads',
   },
   {
     icon: Palette, color: '#f97316',
@@ -42,6 +30,18 @@ const MEGA_SERVICES = [
     title: 'Shopify Stores',
     desc: 'Custom stores, products & promotions',
     href: '/services/shopify',
+  },
+  {
+    icon: Camera, color: '#3b82f6',
+    title: 'Product Photography',
+    desc: 'Studio-grade shoots for every marketplace',
+    href: '/services/photography',
+  },
+  {
+    icon: BarChart2, color: '#8b5cf6',
+    title: 'Social Ads',
+    desc: 'Google & Meta ads with 250% avg. ROI',
+    href: '/services/social-ads',
   },
   {
     icon: TrendingUp, color: 'hsl(var(--primary))',

@@ -37,10 +37,10 @@ const Footer = () => {
   
 
   const services = [
-    { label: 'Product Photography',    href: '/services/photography'         },
-    { label: 'Amazon Listing & FBA',   href: '/services/amazon'              },
     { label: 'Ecommerce Management',   href: '/services/ecommerce-management'},
+    { label: 'Amazon Listing & FBA',   href: '/services/amazon'              },
     { label: 'Shopify Setup & Design', href: '/services/shopify'             },
+    { label: 'Product Photography',    href: '/services/photography'         },
     { label: 'Social & Paid Ads',      href: '/services/social-ads'          },
     { label: 'Ecommerce Design',       href: '/design'                       },
     { label: 'All Services',           href: '/services'                     },
@@ -48,12 +48,12 @@ const Footer = () => {
   ];
 
   const studio = [
-    { label: 'About',      href: null, action: () => document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Process',    href: null, action: () => document.querySelector('#how-it-works-section')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Portfolio',  href: null, action: () => document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Blog',       href: '/blog',         action: undefined },
-    { label: 'Get Started',href: '/get-started',  action: undefined },
-    { label: 'Contact',    href: '/contact', action: undefined },
+    { label: 'About',       href: '/about'                },
+    { label: 'Process',     href: '/#how-it-works-section'},
+    { label: 'Portfolio',   href: '/#portfolio'           },
+    { label: 'Blog',        href: '/blog'                 },
+    { label: 'Get Started', href: '/get-started'          },
+    { label: 'Contact',     href: '/contact'              },
   ];
 
   const legal = [
@@ -101,7 +101,7 @@ const Footer = () => {
                   <li key={item.label}>
                     <Link
                       to={item.href}
-                      className="text-sm text-foreground/70 hover:text-white transition-colors duration-200 flex items-center gap-1 group"
+                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
                     >
                       {item.label}
                       <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
@@ -116,23 +116,13 @@ const Footer = () => {
               <ul className="space-y-3">
                 {studio.map(item => (
                   <li key={item.label}>
-                    {item.href ? (
-                      <Link
-                        to={item.href}
-                        className="text-sm text-foreground/70 hover:text-white transition-colors duration-200 flex items-center gap-1 group"
-                      >
-                        {item.label}
-                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
-                      </Link>
-                    ) : (
-                      <button
-                        onClick={item.action}
-                        className="text-sm text-foreground/70 hover:text-white transition-colors duration-200 flex items-center gap-1 group"
-                      >
-                        {item.label}
-                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
-                      </button>
-                    )}
+                    <Link
+                      to={item.href}
+                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
+                    >
+                      {item.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -145,7 +135,7 @@ const Footer = () => {
                   <li key={item.label}>
                     <Link
                       to={item.href}
-                      className="text-sm text-foreground/70 hover:text-white transition-colors duration-200 flex items-center gap-1 group"
+                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
                     >
                       {item.label}
                       <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
@@ -155,7 +145,7 @@ const Footer = () => {
                 <li>
                   <button
                     onClick={openCookieSettings}
-                    className="text-sm text-foreground/70 hover:text-white transition-colors duration-200 flex items-center gap-1 group"
+                    className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
                   >
                     Cookie Settings
                     <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
@@ -176,7 +166,7 @@ const Footer = () => {
                       href={item.href}
                       target={item.href.startsWith('http') ? '_blank' : undefined}
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-white transition-colors duration-200 group"
+                      className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 group"
                     >
                       <span className="text-muted-foreground">{item.icon}</span>
                       {item.label}
@@ -192,7 +182,7 @@ const Footer = () => {
                     <li key={r}>
                       <Link
                         to="/contact"
-                        className="text-xs text-foreground/50 hover:text-white transition-colors duration-200"
+                        className="text-xs text-foreground/50 hover:text-foreground transition-colors duration-200"
                       >
                         {r}
                       </Link>
@@ -214,7 +204,9 @@ const Footer = () => {
         {/* ── Bottom bar ── */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 text-xs text-muted-foreground/50">
           <span>© {currentYear} Saleixo Studio · saleixo.com · info@saleixo.com</span>
-          <span>Photography · Design · Listings · Marketing</span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/40 text-muted-foreground/60">
+            🏛️ MSME Registered &nbsp;·&nbsp; Udyam No: UDYAM-BR-06-0036869
+          </span>
         </div>
 
       </div>

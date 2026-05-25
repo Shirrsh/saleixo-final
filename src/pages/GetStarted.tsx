@@ -11,6 +11,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
+import { usePageMeta } from '@/hooks/usePageMeta';
 
 // ── Schema ────────────────────────────────────────────────────────────────────
 const schema = z.object({

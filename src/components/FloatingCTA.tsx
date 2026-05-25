@@ -38,7 +38,7 @@ const FloatingCTA = () => {
   if (!isVisible || isDismissed || menuOpen) return null;
 
   return (
-    <div className="fixed bottom-[72px] right-4 sm:right-6 z-40 animate-fade-in flex items-center gap-1.5">
+    <div className="fixed bottom-[100px] right-4 sm:right-6 z-40 animate-fade-in flex items-center gap-1.5">
       <Button
         onClick={scrollToContact}
         size="sm"

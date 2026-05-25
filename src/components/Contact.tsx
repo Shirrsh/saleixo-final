@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, MessageCircle, Check } from 'lucide-react';
 
@@ -12,6 +13,7 @@ const dynamicWords = [
 
 const Contact = () => {
   const [wordIdx, setWordIdx] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -21,7 +23,7 @@ const Contact = () => {
   }, []);
 
   const handleBookCall = () => {
-    window.open('https://wa.me/917011441159?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%20strategy%20call', '_blank');
+    navigate('/get-started');
   };
 
   const handleWhatsApp = () => {
