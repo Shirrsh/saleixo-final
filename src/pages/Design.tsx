@@ -6,31 +6,30 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import WhatsAppButton from '@/components/WhatsAppButton';
 
-import { Globe, Phone, Users, Camera, Search, BarChart3, Megaphone, Target, Headphones, Shield, CheckCircle2, TrendingUp, Film, UserCheck, Palette, Store, Star, ArrowRight } from 'lucide-react';
+import { Globe, Phone, Users, Camera, Search, BarChart3, Target, Headphones, Shield, CheckCircle2, TrendingUp, Film, UserCheck, Palette, Store, Star, ArrowRight } from 'lucide-react';
 
 import CoreServices from '@/components/design/CoreServices';
 import StrategySection from '@/components/design/StrategySection';
 import WhyChooseUs from '@/components/design/WhyChooseUs';
-import SocialMediaMarketing from '@/components/design/SocialMediaMarketing';
 import FreeAuditCTA from '@/components/design/FreeAuditCTA';
 import PlatformsTabs from '@/components/design/PlatformsTabs';
 
 const processSteps = [
-  { icon: Phone, title: 'Onboarding Call', bullets: ['Understand your products & brand vision', 'Market research & competitor analysis', 'Define target platforms & pricing strategy'] },
-  { icon: Camera, title: 'Product Photography', bullets: ['Studio-grade catalog shots', 'Lifestyle & contextual imagery', 'Short-form video content for listings'] },
-  { icon: Search, title: 'Listing Creation & Optimization', bullets: ['SEO-optimized titles & descriptions', 'A+ / A++ content for Amazon & Flipkart', 'Backend keyword optimization'] },
-  { icon: Store, title: 'Store Setup & Launch', bullets: ['Multi-platform account setup', 'Brand storefront design', 'Payment & shipping configuration'] },
-  { icon: Megaphone, title: 'Marketing & Ads', bullets: ['PPC campaign management', 'Social media promotions', 'Deal & coupon strategy'] },
-  { icon: BarChart3, title: 'Growth & Reporting', bullets: ['Weekly sales analytics dashboard', 'Inventory & pricing optimization', 'Ongoing listing improvements'] },
+  { icon: Phone, title: 'Discovery Call', bullets: ['Brand vision, product category & target audience', 'Competitor visual audit', 'Platform priorities & creative brief'] },
+  { icon: Palette, title: 'Brand Strategy', bullets: ['Moodboard & visual direction', 'Colour palette, typography & logo system', 'Packaging & label concepts'] },
+  { icon: Camera, title: 'Listing Creative', bullets: ['A+ / A++ content for Amazon & Flipkart', 'Infographics, comparison charts & lifestyle composites', 'Marketplace-compliant main images'] },
+  { icon: Store, title: 'Storefront Design', bullets: ['Shopify theme customisation & brand alignment', 'Marketplace brand storefronts (Amazon, Flipkart)', 'Mobile-first layout & UX review'] },
+  { icon: Search, title: 'Copy & SEO Layer', bullets: ['Conversion-focused titles & bullet points', 'Backend keyword integration', 'A/B headline variants for top SKUs'] },
+  { icon: BarChart3, title: 'Launch & Handoff', bullets: ['Final brand guide & asset library', 'Marketplace compliance sign-off', 'Revision rounds until approved'] },
 ];
 
 const teamRoles = [
-  { icon: Camera, title: 'Product Photographers', desc: 'Studio-grade product & lifestyle photography that sells.' },
-  { icon: Film, title: 'Photo & Video Editors', desc: 'Professional retouching, infographics & short-form video.' },
-  { icon: Search, title: 'Listing & SEO Specialists', desc: 'Keyword research, A+ content & conversion-focused copy.' },
-  { icon: Target, title: 'PPC & Marketing Managers', desc: 'Ad campaigns, social media & promotional strategy.' },
-  { icon: Palette, title: 'Brand Designers', desc: 'Logos, packaging, storefronts & marketing collateral.' },
-  { icon: UserCheck, title: 'Dedicated Account Managers', desc: 'Single point of contact for seamless communication.' },
+  { icon: Palette, title: 'Brand Designers', desc: 'Logos, colour systems, typography, packaging & brand guides.' },
+  { icon: Film, title: 'Photo & Video Editors', desc: 'Professional retouching, infographic compositing & short-form video.' },
+  { icon: Store, title: 'Storefront Designers', desc: 'Shopify theme builds, marketplace brand stores & mobile UX.' },
+  { icon: Search, title: 'A+ Content Specialists', desc: 'Amazon A+/A++ modules, Flipkart rich content & comparison charts.' },
+  { icon: Target, title: 'Creative Directors', desc: 'Visual concepting, campaign art direction & style-guide ownership.' },
+  { icon: UserCheck, title: 'Dedicated Account Managers', desc: 'Single point of contact — from brief to final delivery.' },
 ];
 
 const resultsColumns = [
@@ -54,13 +53,11 @@ const Design = () => {
   });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved === 'light';
-    return !window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return !document.documentElement.classList.contains('dark');
   });
 
   useEffect(() => {
-    const sync = () => setIsLight(document.documentElement.classList.contains('light'));
+    const sync = () => setIsLight(!document.documentElement.classList.contains('dark'));
     sync();
     const obs = new MutationObserver(sync);
     obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
@@ -70,12 +67,13 @@ const Design = () => {
   const bg = isLight ? '#ffffff' : 'hsl(220 30% 7%)';
   const textPrimary = isLight ? '#0a0a0a' : '#ffffff';
   const textMuted = isLight ? 'hsl(0 0% 38%)' : 'hsl(215 20% 62%)';
-  const accentBlue = isLight ? 'hsl(210 85% 45%)' : '#60a5fa';
+  const accentColor = 'hsl(var(--primary))';
   const borderColor = isLight ? 'hsl(0 0% 88%)' : 'hsl(215 40% 24% / 0.6)';
   const cardBg = isLight ? 'hsl(0 0% 97%)' : 'hsl(220 28% 11%)';
   const cardBorder = isLight ? 'hsl(0 0% 88%)' : 'hsl(215 40% 22% / 0.6)';
 
-  const scrollToContact = () => { window.location.href = '/#contact'; };
+  const scrollToContact = () =>
+    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <>
@@ -83,7 +81,7 @@ const Design = () => {
       <main className="min-h-screen" style={{ background: bg }}>
 
         {/* ── Hero ── */}
-        <section className="relative pt-32 pb-20 px-4 overflow-hidden">
+        <section className="relative pt-32 pb-20 overflow-hidden">
           {!isLight && (
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(215 45% 14%) 0%, hsl(220 35% 10%) 40%, hsl(222 30% 9%) 100%)' }} />
@@ -106,7 +104,7 @@ const Design = () => {
               style={isLight ? { background: 'hsl(0 0% 94%)', border: '1px solid hsl(0 0% 82%)', color: 'hsl(0 0% 25%)' } : { background: 'hsl(210 85% 55% / 0.15)', border: '1px solid hsl(210 85% 65% / 0.4)', color: '#93c5fd' }}
             >
               <Globe className="w-3 h-3" />
-              30+ Marketplaces · 7 Countries
+              20+ Marketplaces · 7 Countries
             </motion.span>
 
             <motion.h1
@@ -117,7 +115,7 @@ const Design = () => {
               style={{ fontFamily: '"Inter Tight", Inter, sans-serif', fontSize: 'clamp(2.4rem, 5.5vw, 4.5rem)', color: textPrimary }}
             >
               Your Products. Our Expertise.{' '}
-              <span style={{ color: accentBlue }}>Global Sales.</span>
+              <span style={{ color: accentColor }}>Global Sales.</span>
             </motion.h1>
 
             <motion.p
@@ -127,7 +125,7 @@ const Design = () => {
               className="text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
               style={{ color: textMuted }}
             >
-              End-to-end ecommerce management — from product photography to marketplace ads — so you can focus on your craft while we drive revenue.
+              Studio-grade brand identity, marketplace-ready listing creative, and storefront design — built to convert across every major platform.
             </motion.p>
 
             <motion.div
@@ -138,20 +136,16 @@ const Design = () => {
             >
               <button
                 onClick={scrollToContact}
-                className="px-6 py-3 rounded-xl font-semibold text-sm transition-opacity duration-200"
+                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
                 style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
-                onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
-                onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
               >
                 Get Started
                 <ArrowRight className="inline ml-2 w-4 h-4" />
               </button>
               <button
                 onClick={() => document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+                className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
                 style={{ color: textMuted, border: `1.5px solid ${borderColor}` }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = textPrimary; el.style.borderColor = isLight ? '#0a0a0a' : '#ffffff'; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = textMuted; el.style.borderColor = borderColor; }}
               >
                 See Our Process
               </button>
@@ -167,7 +161,7 @@ const Design = () => {
             >
               {[
                 { value: '500+', label: 'Artisans Helped' },
-                { value: '30+', label: 'Marketplaces' },
+                { value: '20+', label: 'Marketplaces' },
                 { value: '7', label: 'Countries' },
                 { value: '98%', label: 'Satisfaction Rate' },
               ].map(s => (
@@ -184,8 +178,8 @@ const Design = () => {
         <CoreServices />
 
         {/* ── How It Works ── */}
-        <section id="process" className="py-20 px-4" style={{ background: isLight ? 'hsl(0 0% 97%)' : 'hsl(220 28% 9%)' }}>
-          <div className="container mx-auto max-w-5xl">
+        <section id="process" className="py-20 px-6 md:px-12 lg:px-20 xl:px-28" style={{ background: isLight ? 'hsl(0 0% 97%)' : 'hsl(220 28% 9%)' }}>
+          <div className="max-w-5xl mx-auto">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -239,21 +233,21 @@ const Design = () => {
                             </div>
                             <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
                               style={isLight ? { background: 'hsl(0 0% 92%)' } : { background: 'hsl(210 85% 55% / 0.12)', border: '1px solid hsl(210 85% 55% / 0.2)' }}>
-                              <Icon className="w-4 h-4" style={{ color: accentBlue }} strokeWidth={1.5} />
+                              <Icon className="w-4 h-4" style={{ color: accentColor }} strokeWidth={1.5} />
                             </div>
                             <h3 className="font-bold text-base" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>{step.title}</h3>
                           </div>
                           <div className={`hidden md:flex mb-3 ${isLeft ? 'justify-end' : 'justify-start'}`}>
                             <div className="w-9 h-9 rounded-xl flex items-center justify-center"
                               style={isLight ? { background: 'hsl(0 0% 92%)' } : { background: 'hsl(210 85% 55% / 0.12)', border: '1px solid hsl(210 85% 55% / 0.2)' }}>
-                              <Icon className="w-4 h-4" style={{ color: accentBlue }} strokeWidth={1.5} />
+                              <Icon className="w-4 h-4" style={{ color: accentColor }} strokeWidth={1.5} />
                             </div>
                           </div>
                           <h3 className="hidden md:block font-bold text-base mb-2" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>{step.title}</h3>
                           <ul className={`space-y-1.5 ${isLeft ? 'md:text-right' : ''}`}>
                             {step.bullets.map((b, j) => (
                               <li key={j} className={`flex items-start gap-2 text-xs ${isLeft ? 'md:flex-row-reverse' : ''}`} style={{ color: textMuted }}>
-                                <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: accentBlue }} strokeWidth={1.5} />
+                                <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: accentColor }} strokeWidth={1.5} />
                                 <span>{b}</span>
                               </li>
                             ))}
@@ -272,8 +266,8 @@ const Design = () => {
         <StrategySection />
 
         {/* ── Expert Team ── */}
-        <section className="py-20 px-4">
-          <div className="container mx-auto max-w-6xl">
+        <section className="py-20 px-6 md:px-12 lg:px-20 xl:px-28">
+          <div className="max-w-6xl mx-auto">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -288,7 +282,7 @@ const Design = () => {
                 The Team
               </span>
               <h2 className="text-3xl md:text-4xl font-extrabold mt-3 mb-3" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>
-                Our <span style={{ color: accentBlue }}>Expert Team</span>
+                Our <span style={{ color: accentColor }}>Expert Team</span>
               </h2>
               <p className="text-base max-w-xl mx-auto" style={{ color: textMuted }}>
                 Every client gets a dedicated team of specialists — not a single freelancer.
@@ -321,7 +315,7 @@ const Design = () => {
                   >
                     <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110"
                       style={isLight ? { background: 'hsl(0 0% 92%)' } : { background: 'hsl(210 85% 55% / 0.12)', border: '1px solid hsl(210 85% 55% / 0.2)' }}>
-                      <Icon className="w-7 h-7" style={{ color: accentBlue }} strokeWidth={1.5} />
+                      <Icon className="w-7 h-7" style={{ color: accentColor }} strokeWidth={1.5} />
                     </div>
                     <h3 className="font-bold text-base mb-1.5" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>{role.title}</h3>
                     <p className="text-xs leading-relaxed" style={{ color: textMuted }}>{role.desc}</p>
@@ -337,7 +331,7 @@ const Design = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               className="mt-8 flex items-center justify-center gap-2 font-semibold text-sm"
-              style={{ color: accentBlue }}
+              style={{ color: accentColor }}
             >
               <Users className="w-4 h-4" />
               Dedicated team assigned from Day 1
@@ -351,12 +345,9 @@ const Design = () => {
         {/* ── Why Choose Us ── */}
         <WhyChooseUs />
 
-        {/* ── Social Media Marketing ── */}
-        <SocialMediaMarketing />
-
         {/* ── What You Get ── */}
-        <section className="py-20 px-4">
-          <div className="container mx-auto max-w-6xl">
+        <section className="py-20 px-6 md:px-12 lg:px-20 xl:px-28">
+          <div className="max-w-6xl mx-auto">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -371,7 +362,7 @@ const Design = () => {
                 Deliverables
               </span>
               <h2 className="text-3xl md:text-4xl font-extrabold mt-3 mb-3" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>
-                What You <span style={{ color: accentBlue }}>Get</span>
+                What You <span style={{ color: accentColor }}>Get</span>
               </h2>
               <p className="text-base max-w-xl mx-auto" style={{ color: textMuted }}>
                 Measurable results backed by a satisfaction guarantee.
@@ -396,13 +387,13 @@ const Design = () => {
                   >
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                       style={isLight ? { background: 'hsl(0 0% 92%)' } : { background: 'hsl(210 85% 55% / 0.12)', border: '1px solid hsl(210 85% 55% / 0.2)' }}>
-                      <Icon className="w-6 h-6" style={{ color: accentBlue }} strokeWidth={1.5} />
+                      <Icon className="w-6 h-6" style={{ color: accentColor }} strokeWidth={1.5} />
                     </div>
                     <h3 className="font-bold text-lg mb-3" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>{col.title}</h3>
                     <ul className="space-y-2.5">
                       {col.points.map((pt, j) => (
                         <li key={j} className="flex items-start gap-2.5 text-xs" style={{ color: textMuted }}>
-                          <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: accentBlue }} strokeWidth={1.5} />
+                          <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: accentColor }} strokeWidth={1.5} />
                           <span>{pt}</span>
                         </li>
                       ))}
@@ -433,7 +424,7 @@ const Design = () => {
                 const Icon = badge.icon;
                 return (
                   <div key={i} className="flex items-center gap-2 font-semibold text-sm" style={{ color: textPrimary }}>
-                    <Icon className="w-4 h-4" style={{ color: accentBlue }} strokeWidth={1.5} />
+                    <Icon className="w-4 h-4" style={{ color: accentColor }} strokeWidth={1.5} />
                     {badge.label}
                   </div>
                 );
@@ -446,8 +437,8 @@ const Design = () => {
         <FreeAuditCTA />
 
         {/* ── Final CTA ── */}
-        <section className="py-24 px-4">
-          <div className="container mx-auto max-w-4xl">
+        <section className="py-24 px-6 md:px-12 lg:px-20 xl:px-28">
+          <div className="max-w-4xl mx-auto">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -474,17 +465,15 @@ const Design = () => {
                   className="font-extrabold tracking-tight mb-4"
                   style={{ fontFamily: '"Inter Tight", Inter, sans-serif', fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: textPrimary }}
                 >
-                  Ready to Sell <span style={{ color: accentBlue }}>Globally?</span>
+                  Ready to Sell <span style={{ color: accentColor }}>Globally?</span>
                 </h2>
                 <p className="text-base max-w-2xl mx-auto mb-8 leading-relaxed" style={{ color: textMuted }}>
                   Book a free consultation and let our team build your ecommerce success story.
                 </p>
                 <button
                   onClick={scrollToContact}
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm transition-opacity duration-200"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200"
                   style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
-                  onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
                 >
                   Book Free Consultation
                   <ArrowRight className="w-4 h-4" />

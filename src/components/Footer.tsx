@@ -48,12 +48,12 @@ const Footer = () => {
   ];
 
   const studio = [
-    { label: 'About',       href: '/about'                },
-    { label: 'Process',     href: '/#how-it-works-section'},
-    { label: 'Portfolio',   href: '/#portfolio'           },
-    { label: 'Blog',        href: '/blog'                 },
-    { label: 'Get Started', href: '/get-started'          },
-    { label: 'Contact',     href: '/contact'              },
+    { label: 'About',       href: '/about',        action: undefined },
+    { label: 'Process',     href: null,            action: () => document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Portfolio',   href: null,            action: () => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Blog',        href: '/blog',         action: undefined },
+    { label: 'Get Started', href: '/get-started',  action: undefined },
+    { label: 'Contact',     href: '/contact',      action: undefined },
   ];
 
   const legal = [
@@ -116,13 +116,23 @@ const Footer = () => {
               <ul className="space-y-3">
                 {studio.map(item => (
                   <li key={item.label}>
-                    <Link
-                      to={item.href}
-                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
-                    >
-                      {item.label}
-                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
-                    </Link>
+                    {item.action ? (
+                      <button
+                        onClick={item.action}
+                        className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
+                      >
+                        {item.label}
+                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
+                      </button>
+                    ) : (
+                      <Link
+                        to={item.href!}
+                        className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
+                      >
+                        {item.label}
+                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

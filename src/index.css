@@ -340,6 +340,24 @@
   box-shadow: 0 0 32px hsl(258 90% 66% / 0.45);
 }
 
+/* ── Global button hover: solid black pill ───────────────────────────────── */
+/* Targets padded CTA buttons (have px-* class) — skips icon-only controls   */
+/* (p-2 square) and plain text nav links (no px-* class).                    */
+button[class*="px-"]:not([disabled]):hover,
+a[class*="px-"][class*="rounded"]:not([disabled]):hover {
+  background: hsl(0 0% 6%) !important;
+  color: hsl(0 0% 100%) !important;
+  border-color: transparent !important;
+  border-radius: 9999px !important;
+}
+.dark button[class*="px-"]:not([disabled]):hover,
+.dark a[class*="px-"][class*="rounded"]:not([disabled]):hover {
+  background: hsl(0 0% 94%) !important;
+  color: hsl(0 0% 6%) !important;
+  border-color: transparent !important;
+  border-radius: 9999px !important;
+}
+
 /* ── Gallery scroll keyframes ────────────────────────────────────────────── */
 @keyframes scroll-up {
   0%   { transform: translateY(0); }

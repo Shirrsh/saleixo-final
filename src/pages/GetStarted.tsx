@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -95,6 +95,28 @@ const TIMELINE_OPTIONS = [
   'Within 1–3 months',
   'Just exploring for now',
 ];
+
+// ── Calendly inline embed ─────────────────────────────────────────────────────
+const CalendlyEmbed = ({ url }: { url: string }) => {
+  useEffect(() => {
+    const id = 'calendly-widget-script';
+    if (!document.getElementById(id)) {
+      const script = document.createElement('script');
+      script.id = id;
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  return (
+    <div
+      className="calendly-inline-widget w-full rounded-2xl overflow-hidden"
+      data-url={url}
+      style={{ minWidth: '320px', height: '700px' }}
+    />
+  );
+};
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const inputCls = (err: boolean) => cn(
@@ -202,30 +224,41 @@ const GetStarted = () => {
     return (
       <>
         <Header />
-        <main className="min-h-screen flex items-center justify-center px-6 pt-28 pb-20" style={{ background: 'hsl(var(--background))' }}>
+        <main className="min-h-screen px-6 pt-28 pb-20" style={{ background: 'hsl(var(--background))' }}>
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center max-w-md"
+            className="max-w-2xl mx-auto"
           >
-            <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-              style={{ background: 'hsl(var(--primary)/0.12)', border: '2px solid hsl(var(--primary)/0.3)' }}>
-              <CheckCircle2 className="w-10 h-10 text-primary" strokeWidth={1.5} />
+            {/* Confirmation */}
+            <div className="text-center mb-10">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+                style={{ background: 'hsl(var(--primary)/0.12)', border: '2px solid hsl(var(--primary)/0.3)' }}>
+                <CheckCircle2 className="w-10 h-10 text-primary" strokeWidth={1.5} />
+              </div>
+              <h1 className="text-3xl font-bold text-foreground mb-3">You're in!</h1>
+              <p className="text-muted-foreground mb-2 leading-relaxed">
+                We've received your details. A member of our team will be in touch within{' '}
+                <strong className="text-foreground">24 hours</strong> to schedule your free discovery call.
+              </p>
+              <p className="text-sm text-muted-foreground mb-6">Check your inbox — a confirmation is on its way.</p>
+              <a
+                href="/"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
+                style={{ background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))' }}
+              >
+                Back to Home <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
+              </a>
             </div>
-            <h1 className="text-3xl font-bold text-foreground mb-3">You're in!</h1>
-            <p className="text-muted-foreground mb-2 leading-relaxed">
-              We've received your details. A member of our team will be in touch within{' '}
-              <strong className="text-foreground">24 hours</strong> to schedule your free discovery call.
-            </p>
-            <p className="text-sm text-muted-foreground mb-8">Check your inbox — a confirmation is on its way.</p>
-            <a
-              href="/"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
-              style={{ background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))' }}
-            >
-              Back to Home <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
-            </a>
+
+            {/* Calendly booking */}
+            <div className="relative flex items-center gap-4 mb-8">
+              <div className="flex-1 h-px" style={{ background: 'hsl(var(--border))' }} />
+              <span className="text-sm text-muted-foreground font-medium whitespace-nowrap">or book a discovery call now</span>
+              <div className="flex-1 h-px" style={{ background: 'hsl(var(--border))' }} />
+            </div>
+            <CalendlyEmbed url="https://calendly.com/sshirrsh/new-meeting" />
           </motion.div>
         </main>
         <Footer />
