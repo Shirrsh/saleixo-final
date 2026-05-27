@@ -25,7 +25,9 @@
       "Bash(Select-String \"gzip\")",
       "Bash(Select-Object -Last 20)",
       "WebFetch(domain:www.googleapis.com)",
-      "WebFetch(domain:pagespeed.web.dev)"
+      "WebFetch(domain:pagespeed.web.dev)",
+      "Bash(git log *)",
+      "Bash(git diff *)"
     ]
   }
 }
