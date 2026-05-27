@@ -13,7 +13,19 @@
       "WebFetch(domain:saleixo.com)",
       "mcp__claude_ai_Vercel__list_teams",
       "mcp__claude_ai_Vercel__list_projects",
-      "mcp__claude_ai_Vercel__list_deployments"
+      "mcp__claude_ai_Vercel__list_deployments",
+      "mcp__claude_ai_Vercel__web_fetch_vercel_url",
+      "Bash(Select-Object Name)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell(& \"C:\\\\Users\\\\91822\\\\Downloads\\\\flow-videos\\\\rename-files.ps1\")",
+      "Bash(git restore *)",
+      "Bash(git checkout *)",
+      "Bash(sort -t'|' -k2 -rn)",
+      "Bash(Select-String \"\\\\.js\")",
+      "Bash(Select-String \"gzip\")",
+      "Bash(Select-Object -Last 20)",
+      "WebFetch(domain:www.googleapis.com)",
+      "WebFetch(domain:pagespeed.web.dev)"
     ]
   }
 }

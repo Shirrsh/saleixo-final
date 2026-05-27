@@ -6,8 +6,14 @@ const LoadingScreen = () => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Exit after 700ms — just enough to feel intentional, not slow
-    const t = setTimeout(() => setVisible(false), 700);
+    // Skip entirely on return visits within the same session
+    if (sessionStorage.getItem('slx_v')) {
+      setVisible(false);
+      return;
+    }
+    sessionStorage.setItem('slx_v', '1');
+    // 250ms on first visit only — enough to mask the React hydration flash
+    const t = setTimeout(() => setVisible(false), 250);
     return () => clearTimeout(t);
   }, []);
 

@@ -66,7 +66,8 @@ const ScrollColumn = ({
                 src={src}
                 alt="Portfolio showcase"
                 className="w-full h-full object-cover"
-                loading="eager"
+                loading="lazy"
+                fetchPriority={i === 0 ? 'high' : 'auto'}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
             </div>
@@ -474,7 +475,7 @@ const Hero = () => {
                   boxShadow: isLight ? '0 4px 16px hsl(0 0% 0% / 0.08)' : '0 4px 16px hsl(220 30% 5% / 0.4)',
                 }}
               >
-                <img src={src} alt="Portfolio" className="w-full h-full object-cover" loading="eager" />
+                <img src={src} alt="Portfolio" className="w-full h-full object-cover" loading="lazy" />
               </div>
             ))}
           </div>

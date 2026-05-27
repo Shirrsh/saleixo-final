@@ -14,9 +14,9 @@ const FooterAccordion = ({ title, children }: { title: string; children: React.R
         className="flex items-center justify-between w-full py-4 md:py-0 md:cursor-default"
         aria-expanded={open}
       >
-        <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground md:mb-5">
+        <span className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground md:mb-5">
           {title}
-        </h4>
+        </span>
         <ChevronDown
           className={cn(
             'w-4 h-4 text-muted-foreground transition-transform duration-200 md:hidden',

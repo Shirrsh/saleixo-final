@@ -430,22 +430,27 @@ const MarketplaceMockup = () => {
       {/* Prev / Next arrows — visible on hover (desktop) / always on mobile */}
       <button
         onClick={() => go(-1)}
+        aria-label="Previous marketplace"
         className="absolute left-2 top-1/2 -translate-y-1/2 glass-purple rounded-full p-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-10"
       >
         <ChevronLeft className="w-4 h-4 text-white" />
       </button>
       <button
         onClick={() => go(1)}
+        aria-label="Next marketplace"
         className="absolute right-2 top-1/2 -translate-y-1/2 glass-purple rounded-full p-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-10"
       >
         <ChevronRight className="w-4 h-4 text-white" />
       </button>
 
       {/* Dot indicators */}
-      <div className="flex justify-center items-center gap-1.5 mt-3">
+      <div className="flex justify-center items-center gap-1.5 mt-3" role="tablist" aria-label="Marketplace slides">
         {marketplaces.map((m, i) => (
           <button
             key={m.id}
+            aria-label={`Show ${m.name}`}
+            aria-selected={i === current}
+            role="tab"
             onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
             style={{
               width: i === current ? 20 : 5,

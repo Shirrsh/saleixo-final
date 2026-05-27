@@ -42,7 +42,10 @@ export const useSiteImages = (section?: string) => {
   useEffect(() => {
     fetchImages();
 
-    // Realtime subscription — re-fetch on any change to site_images
+    // Only subscribe to realtime on admin routes — public pages don't need
+    // live updates and the WebSocket attempts cause measurable main-thread delay.
+    if (!window.location.pathname.startsWith('/admin')) return;
+
     const channel = supabase
       .channel(`site_images:${section ?? 'all'}`)
       .on(

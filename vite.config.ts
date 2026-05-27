@@ -2,13 +2,30 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react(),
+    mode === "development" && componentTagger(),
+    ViteImageOptimizer({
+      // JPEG: compress heavily — portfolio-2 (1.6MB) → ~120KB
+      jpg: { quality: 72 },
+      jpeg: { quality: 72 },
+      // PNG: compress — marketplace logos etc.
+      png: { quality: 75 },
+      // WebP: generate alongside originals
+      webp: { lossless: false, quality: 75 },
+      // SVG: skip (svgo not installed, SVGs are already tiny)
+      svg: undefined,
+      // Log savings in build output
+      logStats: true,
+    }),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -32,6 +32,12 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" /></noscript>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate icon" href="/favicon.svg" />
+    <!-- Preconnect to Vercel edge for faster asset delivery -->
+    <link rel="preconnect" href="https://saleixo-final.vercel.app" crossorigin />
+    <!-- Preconnect to Supabase to reduce API/auth latency -->
+    <link rel="preconnect" href="https://syoungrummuurrptckbt.supabase.co" crossorigin />
+    <!-- Critical: tell browser to prioritize LCP image fetch -->
+    <link rel="preload" as="image" href="/assets/showcase-1.jpg" type="image/jpeg" fetchpriority="high" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -59,13 +65,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="format-detection" content="telephone=no" />
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VVSMGZR7ZV"></script>
+    <!-- Google Analytics — deferred so it never blocks first paint -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VVSMGZR7ZV');
+      window.addEventListener('load', function() {
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VVSMGZR7ZV';
+        s.async = true;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VVSMGZR7ZV', { send_page_view: true });
+      });
     </script>
     
     <!-- Meta Pixel Placeholder -->

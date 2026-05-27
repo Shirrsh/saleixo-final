@@ -90,7 +90,7 @@ const BAR_TEXT = (
     <Link to="/get-started" className="underline underline-offset-2 hover:opacity-75 transition-opacity">
       Get started →
     </Link>
-    <span className="mx-12 opacity-50">✦</span>
+    <span className="mx-6 opacity-50">✦</span>
   </>
 );
 
@@ -106,9 +106,9 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
     {/* Scrolling ticker */}
     <motion.div
       animate={{ x: ['0%', '-50%'] }}
-      transition={{ duration: 22, ease: 'linear', repeat: Infinity }}
+      transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
       className="flex items-center whitespace-nowrap text-[11px] font-bold tracking-wide flex-shrink-0"
-      style={{ color: '#ffffff' }}
+      style={{ color: '#ffffff', willChange: 'transform' }}
     >
       <span className="flex items-center">{BAR_TEXT}</span>
       <span className="flex items-center">{BAR_TEXT}</span>
@@ -116,12 +116,21 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
       <span className="flex items-center">{BAR_TEXT}</span>
     </motion.div>
 
-    {/* Dismiss button — fixed on right */}
+    {/* Right fade — hides text sliding under dismiss button */}
+    <div
+      className="absolute right-0 top-0 bottom-0 pointer-events-none"
+      style={{
+        width: 56,
+        background: 'linear-gradient(to right, transparent, #dc2626 60%)',
+      }}
+    />
+
+    {/* Dismiss button */}
     <button
       onClick={onDismiss}
       aria-label="Dismiss announcement"
-      className="absolute right-3 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity z-10 flex-shrink-0"
-      style={{ background: 'rgba(0,0,0,0.2)', borderRadius: '50%', width: 20, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      className="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 flex-shrink-0 flex items-center justify-center transition-opacity duration-150 hover:opacity-100 opacity-80 active:scale-95"
+      style={{ background: 'rgba(0,0,0,0.25)', borderRadius: '50%', width: 22, height: 22 }}
     >
       <X size={11} strokeWidth={2.5} style={{ color: '#ffffff' }} />
     </button>
@@ -459,6 +468,7 @@ const Header = () => {
               className="md:hidden flex items-center justify-center rounded-xl transition-all duration-200 active:scale-95 justify-self-end"
               style={{
                 width: 44, height: 44,
+                gridColumn: 3,
                 color: isLight ? '#111' : (scrolled ? 'hsl(215 20% 70%)' : '#ffffff'),
                 background: mobileOpen ? (isLight ? 'hsl(0 0% 94%)' : 'hsl(220 28% 14%)') : 'transparent',
               }}
@@ -614,33 +624,31 @@ const Header = () => {
 
             {/* Sticky bottom: theme toggle + CTA */}
             <div className="px-5 py-4 border-t space-y-3" style={{ borderColor: menuBorder, background: menuBg }}>
-              {/* Theme row */}
+              {/* Theme row — "Dark Mode" toggle: ON = dark, OFF = light */}
               <div className="flex items-center justify-between px-4 py-3 rounded-2xl" style={{ background: menuCard }}>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: isLight ? 'hsl(48 96% 53% / 0.15)' : 'hsl(220 28% 18%)' }}>
-                    {isLight
-                      ? <Sun size={18} style={{ color: '#f59e0b' }} />
-                      : <Moon size={18} style={{ color: '#93c5fd' }} />}
+                    style={{ background: isLight ? 'hsl(220 28% 14% / 0.10)' : 'hsl(220 28% 18%)' }}>
+                    <Moon size={18} style={{ color: isLight ? 'hsl(220 30% 40%)' : '#93c5fd' }} />
                   </div>
                   <div>
-                    <div className="font-semibold text-sm" style={{ color: menuText }}>{isLight ? 'Light Mode' : 'Dark Mode'}</div>
-                    <div className="text-xs mt-0.5" style={{ color: menuMuted }}>Tap to switch</div>
+                    <div className="font-semibold text-sm" style={{ color: menuText }}>Dark Mode</div>
+                    <div className="text-xs mt-0.5" style={{ color: menuMuted }}>{isLight ? 'Tap to enable' : 'Tap to disable'}</div>
                   </div>
                 </div>
                 <button
                   onClick={toggleTheme}
-                  aria-label="Toggle theme"
+                  aria-label="Toggle dark mode"
                   className="relative flex-shrink-0 active:scale-95 transition-transform"
                   style={{
                     width: 48, height: 28, borderRadius: 999,
-                    background: isLight ? '#f59e0b' : 'hsl(220 28% 22%)',
-                    border: `1px solid ${isLight ? '#d97706' : 'hsl(220 25% 30%)'}`,
+                    background: isLight ? 'hsl(220 15% 80%)' : '#7c3aed',
+                    border: `1px solid ${isLight ? 'hsl(220 15% 70%)' : '#6d28d9'}`,
                   }}
                 >
                   <motion.span
                     className="absolute top-[3px] w-5 h-5 rounded-full bg-white"
-                    animate={{ left: isLight ? 24 : 3 }}
+                    animate={{ left: isLight ? 3 : 24 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   />
                 </button>
