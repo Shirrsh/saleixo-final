@@ -7,17 +7,19 @@ import { useSiteImages } from '@/hooks/useSiteImages';
 import cat1 from '@/assets/categories/jewelry-earrings.jpg';
 import cat2 from '@/assets/categories/jewelry-necklace.jpg';
 import cat3 from '@/assets/categories/incense-packaging.jpg';
-import cat5 from '@/assets/categories/aquamarine-bracelet.jpg';
-import cat6 from '@/assets/categories/spiritual-products.jpg';
+import cat4 from '@/assets/categories/rudraksha-bracelet.jpg';
+import port1 from '@/assets/portfolio-1.jpg';
+import port2 from '@/assets/portfolio-2.jpg';
+import port3 from '@/assets/portfolio-3.jpg';
 
-// ── Image key → fallback mapping ──────────────────────────────────────────────
+// ── Image key → fallback mapping (all 6 must be visually distinct) ─────────────
 const PORTFOLIO_SLOTS = [
-  { key: 'portfolio_1', fallback: cat1, alt: 'Diamond Earrings — Studio Photography'    },
-  { key: 'portfolio_2', fallback: cat2, alt: 'Necklace Collection — Product Photography' },
-  { key: 'portfolio_3', fallback: cat3, alt: 'Incense Packaging — Brand Design'          },
-  { key: 'portfolio_4', fallback: cat5, alt: 'Aquamarine Bracelet — Product Photography' },
-  { key: 'portfolio_5', fallback: cat6, alt: 'Spiritual Products — Full Service'         },
-  { key: 'portfolio_6', fallback: cat6, alt: 'Spiritual Products — Full Service'         },
+  { key: 'portfolio_1', fallback: cat1,  alt: 'Diamond Earrings — Studio Photography'     },
+  { key: 'portfolio_2', fallback: cat2,  alt: 'Necklace Collection — Product Photography' },
+  { key: 'portfolio_3', fallback: cat3,  alt: 'Incense Packaging — Brand Design'           },
+  { key: 'portfolio_4', fallback: cat4,  alt: 'Rudraksha Bracelet — Spiritual Products'    },
+  { key: 'portfolio_5', fallback: port1, alt: 'Product Shoot — Studio Photography'         },
+  { key: 'portfolio_6', fallback: port2, alt: 'Lifestyle Photography — Full Service'        },
 ];
 
 // ── Single image cell ─────────────────────────────────────────────────────────
