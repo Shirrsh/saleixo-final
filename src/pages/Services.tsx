@@ -16,7 +16,7 @@ import imgPhotography from '@/assets/photography-service.jpg';
 import imgDesign from '@/assets/design-service.jpg';
 import imgMarketing from '@/assets/marketing-service.jpg';
 import imgPortfolio1 from '@/assets/portfolio-1.jpg';
-import imgPortfolio3 from '@/assets/portfolio-3.jpg';
+import imgPortfolio3 from '@/assets/portfolio-3.jpeg';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },

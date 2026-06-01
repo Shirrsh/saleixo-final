@@ -30,7 +30,7 @@ const FloatingCTA = () => {
 
   return (
     <div
-      className="fixed bottom-24 right-5 sm:right-6 z-40"
+      className="fixed bottom-36 right-5 sm:right-6 z-40"
       style={{ animation: 'fadeIn 0.25s ease' }}
     >
       <div className="relative flex items-center gap-2 pl-4 pr-2 py-2 rounded-full"

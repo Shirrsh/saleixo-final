@@ -11,7 +11,7 @@ import MarketplaceMockup from '@/components/MarketplaceMockup';
 import img1 from '@/assets/hero/showcase-1.jpg';
 import img2 from '@/assets/hero/showcase-2.jpg';
 import img3 from '@/assets/hero/showcase-3.jpg';
-import img4 from '@/assets/hero/showcase-4.jpg';
+import img4 from '@/assets/hero/showcase-4.jpeg';
 import portfolioImg from '@/assets/portfolio-1.jpg';
 
 // ── Motion ────────────────────────────────────────────────────────────────────

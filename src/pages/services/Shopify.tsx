@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
-import imgHero from '@/assets/portfolio-3.jpg';
+import imgHero from '@/assets/portfolio-3.jpeg';
 
 const whatWeDo = [
   'Custom Shopify theme setup or full development from scratch',
