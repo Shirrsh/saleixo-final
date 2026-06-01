@@ -1,15 +1,26 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, MessageCircle, MapPin, Clock, ArrowRight, ExternalLink } from 'lucide-react';
+import { Mail, MessageCircle, MapPin, Clock, ArrowRight, ExternalLink, Check } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { supabase } from '@/integrations/supabase/client';
 
 const MAPS_EMBED_SRC =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.976099139228!2d77.36786282093426!3d28.63047842179807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5580c89c2f7%3A0xfa34492e175774d2!2sAwfis!5e0!3m2!1sen!2sin!4v1779472368478!5m2!1sen!2sin';
 
 const MAPS_LINK = 'https://maps.google.com/?q=Awfis,A-41+Sector+62,Noida,Uttar+Pradesh+201309,India';
+
+const services = [
+  'Product Photography',
+  'Amazon Listing & FBA',
+  'Ecommerce Management',
+  'Shopify Setup & Design',
+  'Social & Paid Ads',
+  'Ecommerce Design',
+  'Full-Service Package',
+  'Other / Not Sure',
+];
 
 const contactItems = [
   {
@@ -46,11 +57,50 @@ const contactItems = [
   },
 ];
 
+const inputCls = `w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors`;
+
 const Contact = () => {
   usePageMeta({
     title: 'Contact Saleixo | Noida, India',
     description: 'Get in touch with Saleixo. Free listing audit within 48 hours. Email, WhatsApp, or visit us at Awfis, Sector 62, Noida.',
   });
+
+  const [form, setForm] = useState({
+    name: '', company: '', email: '', whatsapp: '',
+    country: '', service: '', message: '',
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm(f => ({ ...f, [k]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await supabase.from('leads' as any).insert([{
+        name:     form.name,
+        email:    form.email,
+        phone:    form.whatsapp || null,
+        business: form.company  || null,
+        message:  `Country: ${form.country}\n\n${form.message}`,
+        services: form.service ? [form.service] : [],
+        source:   'contact-page',
+        status:   'new',
+        priority: 'medium',
+      }]);
+      await supabase.from('activity_log').insert({
+        action:    'New enquiry via Contact page form',
+        item_type: 'lead',
+      });
+    } catch (_) {
+      // silently fail — still show success to user
+    } finally {
+      setLoading(false);
+      setSubmitted(true);
+    }
+  };
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -204,41 +254,32 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* ── Map + CTA ────────────────────────────────────────────────────────── */}
-      <section className="bg-background pb-20">
+      {/* ── Map + Form ───────────────────────────────────────────────────────── */}
+      <section className="bg-background pb-24">
         <div className="max-w-5xl mx-auto px-6 sm:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
-            {/* Map */}
+            {/* Map + address */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55 }}
-              className="lg:col-span-3 rounded-2xl overflow-hidden border border-border"
-              style={{ height: 400 }}
+              className="flex flex-col gap-4"
             >
-              <iframe
-                src={MAPS_EMBED_SRC}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Saleixo office location — Awfis Coworking Space"
-              />
-            </motion.div>
+              <div className="rounded-2xl overflow-hidden border border-border" style={{ height: 280 }}>
+                <iframe
+                  src={MAPS_EMBED_SRC}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Saleixo office location — Awfis Coworking Space"
+                />
+              </div>
 
-            {/* CTA panel */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="lg:col-span-2 flex flex-col gap-6"
-            >
-              {/* Address block */}
               <div className="rounded-2xl border border-border bg-card p-6">
                 <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-muted-foreground mb-3">
                   Our Location
@@ -258,55 +299,98 @@ const Contact = () => {
                   Get Directions <ExternalLink className="w-3 h-3" />
                 </a>
                 <div className="mt-4 pt-4 border-t border-border/40">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold"
-                    style={{ background: 'hsl(var(--surface-elevated))', border: '1px solid hsl(var(--border))' , color: 'hsl(var(--muted-foreground))' }}>
+                  <span
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold"
+                    style={{ background: 'hsl(var(--surface-elevated))', border: '1px solid hsl(var(--border))', color: 'hsl(var(--muted-foreground))' }}
+                  >
                     🏛️ MSME Registered &nbsp;·&nbsp; Udyam No: UDYAM-BR-06-0036869
                   </span>
                 </div>
               </div>
+            </motion.div>
 
-              {/* Free audit CTA */}
-              <div
-                className="rounded-2xl p-6"
-                style={{ background: '#060d0a', border: '1px solid rgba(212,175,55,0.2)' }}
-              >
-                <p
-                  className="text-[11px] font-bold tracking-[0.2em] uppercase mb-3"
-                  style={{ color: '#d4af37' }}
-                >
-                  Free Listing Audit
-                </p>
-                <p className="text-white text-sm leading-relaxed mb-5">
-                  Tell us about your store and we'll send back a free written diagnosis within 48 hours. No pitch. No commitment.
-                </p>
-                <div className="flex flex-col gap-3">
-                  <Link
-                    to="/get-started"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-bold transition-all duration-200 hover:opacity-90 active:scale-95"
-                    style={{ background: '#d4af37', color: '#0a0a0a' }}
-                  >
-                    Start the Audit <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                  <a
-                    href="https://wa.me/917011441159?text=Hi%2C%20I%27d%20like%20a%20free%20listing%20audit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-bold transition-all duration-200 hover:opacity-90 active:scale-95"
-                    style={{ background: '#25d366', color: '#fff' }}
-                  >
-                    <MessageCircle className="w-4 h-4" strokeWidth={2} />
-                    WhatsApp Us
-                  </a>
-                </div>
-              </div>
+            {/* Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+            >
+              <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8 shadow-sm">
+                {submitted ? (
+                  <div className="flex flex-col items-center justify-center text-center py-10 gap-4">
+                    <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                      <Check className="w-7 h-7 text-green-600 dark:text-green-400" strokeWidth={2} />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground">We've got your message!</h3>
+                    <p className="text-sm text-muted-foreground max-w-xs">
+                      We'll review your details and get back to you within 24 hours with a tailored plan.
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="mb-6">
+                      <h3 className="text-lg font-bold text-foreground mb-1">Start a Project</h3>
+                      <p className="text-sm text-muted-foreground">Fill out the form and we'll be in touch within 24 hours.</p>
+                    </div>
 
-              {/* Response promise */}
-              <div className="rounded-2xl border border-border bg-card px-6 py-4 flex items-center gap-4">
-                <Clock className="w-5 h-5 flex-shrink-0 text-primary" strokeWidth={1.5} />
-                <div>
-                  <p className="text-sm font-semibold text-foreground">48-hour response guarantee</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Every inquiry gets a written reply, always.</p>
-                </div>
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-foreground mb-1.5">Full Name <span className="text-red-500">*</span></label>
+                          <input required className={inputCls} placeholder="John Doe" value={form.name} onChange={set('name')} />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-foreground mb-1.5">Company / Brand <span className="text-red-500">*</span></label>
+                          <input required className={inputCls} placeholder="Acme Corp" value={form.company} onChange={set('company')} />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-foreground mb-1.5">Business Email <span className="text-red-500">*</span></label>
+                          <input required type="email" className={inputCls} placeholder="name@company.com" value={form.email} onChange={set('email')} />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-foreground mb-1.5">WhatsApp (optional)</label>
+                          <input type="tel" className={inputCls} placeholder="+91 98765 43210" value={form.whatsapp} onChange={set('whatsapp')} />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1.5">Country of Operation <span className="text-red-500">*</span></label>
+                        <input required className={inputCls} placeholder="India" value={form.country} onChange={set('country')} />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1.5">Service Required <span className="text-red-500">*</span></label>
+                        <select required className={inputCls} value={form.service} onChange={set('service')}>
+                          <option value="">Select Service Type</option>
+                          {services.map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1.5">Project Details <span className="text-red-500">*</span></label>
+                        <textarea
+                          required rows={4} className={inputCls}
+                          placeholder="Tell us about your products, marketplace, and what you're trying to achieve..."
+                          value={form.message} onChange={set('message')}
+                          style={{ resize: 'none' }}
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98] disabled:opacity-60"
+                        style={{ background: 'hsl(var(--primary))', color: '#fff' }}
+                      >
+                        {loading ? 'Sending…' : (<>Send Message <ArrowRight className="w-4 h-4" /></>)}
+                      </button>
+                    </form>
+                  </>
+                )}
               </div>
             </motion.div>
 

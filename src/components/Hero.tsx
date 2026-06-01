@@ -7,11 +7,13 @@ import { Link } from 'react-router-dom';
 import img1Src from '@/assets/hero/showcase-1.jpg';
 import img2Src from '@/assets/hero/showcase-2.jpg';
 import img3Src from '@/assets/hero/showcase-3.jpg';
-import img4Src from '@/assets/hero/showcase-4.jpg';
+import img4Src from '@/assets/hero/showcase-4.jpeg';
 import img5Src from '@/assets/hero/showcase-5.jpg';
 import img6Src from '@/assets/hero/showcase-6.jpg';
 import img7Src from '@/assets/hero/showcase-7.jpg';
 import img8Src from '@/assets/hero/showcase-8.jpg';
+import img9Src from '@/assets/hero/showcase-9.jpeg';
+import img12Src from '@/assets/hero/showcase-12.jpeg';
 
 // ── Auto-scrolling image column ───────────────────────────────────────────────
 const ScrollColumn = ({
@@ -113,16 +115,18 @@ const Hero = () => {
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
 
   const col1 = [
-    getImageUrl('hero_showcase_1', img1Src),
-    getImageUrl('hero_showcase_3', img3Src),
-    getImageUrl('hero_showcase_5', img5Src),
-    getImageUrl('hero_showcase_7', img7Src),
+    getImageUrl('hero_showcase_1',  img1Src),
+    getImageUrl('hero_showcase_3',  img3Src),
+    getImageUrl('hero_showcase_5',  img5Src),
+    getImageUrl('hero_showcase_7',  img7Src),
+    getImageUrl('hero_showcase_9',  img9Src),
   ];
   const col2 = [
-    getImageUrl('hero_showcase_2', img2Src),
-    getImageUrl('hero_showcase_4', img4Src),
-    getImageUrl('hero_showcase_6', img6Src),
-    getImageUrl('hero_showcase_8', img8Src),
+    getImageUrl('hero_showcase_2',  img2Src),
+    getImageUrl('hero_showcase_4',  img4Src),
+    getImageUrl('hero_showcase_6',  img6Src),
+    getImageUrl('hero_showcase_8',  img8Src),
+    getImageUrl('hero_showcase_12', img12Src),
   ];
 
   const bg = isLight ? '#ffffff' : 'hsl(220 30% 7%)';

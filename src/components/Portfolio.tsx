@@ -3,23 +3,24 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useSiteImages } from '@/hooks/useSiteImages';
 
-// Local fallbacks — used when Supabase has no entry for a key yet
-import cat1 from '@/assets/categories/jewelry-earrings.jpg';
-import cat2 from '@/assets/categories/jewelry-necklace.jpg';
-import cat3 from '@/assets/categories/incense-packaging.jpg';
-import cat4 from '@/assets/categories/rudraksha-bracelet.jpg';
+// Portfolio images
 import port1 from '@/assets/portfolio-1.jpg';
 import port2 from '@/assets/portfolio-2.jpg';
-import port3 from '@/assets/portfolio-3.jpg';
+import port3 from '@/assets/portfolio-3.jpeg';
+import port4 from '@/assets/portfolio-4.jpeg';
+// Hero showcase images
+import hero4  from '@/assets/hero/showcase-4.jpeg';
+import hero5  from '@/assets/hero/showcase-5.jpg';
+import hero9  from '@/assets/hero/showcase-9.jpeg';
 
-// ── Image key → fallback mapping (all 6 must be visually distinct) ─────────────
+// ── Image key → fallback mapping ─────────────────────────────────────────────
 const PORTFOLIO_SLOTS = [
-  { key: 'portfolio_1', fallback: cat1,  alt: 'Diamond Earrings — Studio Photography'     },
-  { key: 'portfolio_2', fallback: cat2,  alt: 'Necklace Collection — Product Photography' },
-  { key: 'portfolio_3', fallback: cat3,  alt: 'Incense Packaging — Brand Design'           },
-  { key: 'portfolio_4', fallback: cat4,  alt: 'Rudraksha Bracelet — Spiritual Products'    },
-  { key: 'portfolio_5', fallback: port1, alt: 'Product Shoot — Studio Photography'         },
-  { key: 'portfolio_6', fallback: port2, alt: 'Lifestyle Photography — Full Service'        },
+  { key: 'portfolio_1', fallback: port1, alt: 'Product Studio Shoot — Saleixo'         },
+  { key: 'portfolio_2', fallback: hero4, alt: 'Jewelry Studio Shoot — Saleixo'         },
+  { key: 'portfolio_3', fallback: port3, alt: 'Studio Photography — Saleixo'           },
+  { key: 'portfolio_4', fallback: port4, alt: 'Ecommerce Shoot — Full Service'         },
+  { key: 'portfolio_5', fallback: hero5, alt: 'Product Collection — Saleixo Studio'    },
+  { key: 'portfolio_6', fallback: port2, alt: 'Brand Design — The Weave Studio'        },
 ];
 
 // ── Single image cell ─────────────────────────────────────────────────────────
@@ -144,38 +145,47 @@ const Portfolio = () => {
           </p>
         </motion.div>
 
-        {/* ── Desktop: 3-col asymmetric grid (all 6 images, fits one screen) ── */}
-        <div className="hidden md:grid gap-2.5" style={{
-          gridTemplateColumns: '1fr 1.15fr 1fr',
-          gridTemplateRows: '220px 200px',
-        }}>
-          {/* Row 1 */}
-          <Cell src={images[0].src} alt={images[0].alt} fallback={images[0].fallback} delay={0}    />
-          <Cell src={images[1].src} alt={images[1].alt} fallback={images[1].fallback} delay={0.06} style={{ gridRow: '1 / 3' }} />
-          <Cell src={images[2].src} alt={images[2].alt} fallback={images[2].fallback} delay={0.12} />
-          {/* Row 2 */}
-          <Cell src={images[3].src} alt={images[3].alt} fallback={images[3].fallback} delay={0.18} />
-          {/* images[1] spans here */}
-          <Cell src={images[4].src} alt={images[4].alt} fallback={images[4].fallback} delay={0.24} />
-        </div>
+        {/* ── Desktop: grid + banner wrapped for bottom fade ── */}
+        <div className="relative hidden md:block">
+          {/* 3-col asymmetric grid */}
+          <div className="grid gap-2.5" style={{
+            gridTemplateColumns: '1fr 1.15fr 1fr',
+            gridTemplateRows: '220px 200px',
+          }}>
+            {/* Row 1 */}
+            <Cell src={images[0].src} alt={images[0].alt} fallback={images[0].fallback} delay={0}    />
+            <Cell src={images[1].src} alt={images[1].alt} fallback={images[1].fallback} delay={0.06} style={{ gridRow: '1 / 3' }} />
+            <Cell src={images[2].src} alt={images[2].alt} fallback={images[2].fallback} delay={0.12} />
+            {/* Row 2 */}
+            <Cell src={images[3].src} alt={images[3].alt} fallback={images[3].fallback} delay={0.18} />
+            {/* images[1] spans here */}
+            <Cell src={images[4].src} alt={images[4].alt} fallback={images[4].fallback} delay={0.24} />
+          </div>
 
-        {/* ── Desktop: 6th image as a wide banner below ── */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:block mt-2.5 overflow-hidden rounded-xl"
-          style={{ height: 130 }}
-        >
-          <img
-            src={images[5].src}
-            alt={images[5].alt}
-            className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
-            loading="lazy"
-            onError={(e) => { (e.currentTarget as HTMLImageElement).src = images[5].fallback; }}
+          {/* 6th image as a wide banner below */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-2.5 overflow-hidden rounded-xl"
+            style={{ height: 130 }}
+          >
+            <img
+              src={images[5].src}
+              alt={images[5].alt}
+              className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+              loading="lazy"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = images[5].fallback; }}
+            />
+          </motion.div>
+
+          {/* Bottom fade overlay */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, transparent, hsl(var(--background)))' }}
           />
-        </motion.div>
+        </div>
 
         {/* Mobile carousel */}
         <MobileCarousel images={images} />

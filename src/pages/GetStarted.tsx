@@ -1,17 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from 'next-themes';
 import {
   ArrowRight, ArrowLeft, CheckCircle2, Loader2,
-  User, ShoppingBag, Sparkles, Target,
+  User, ShoppingBag, Sparkles, Target, MessageCircle, Check,
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { usePageMeta } from '@/hooks/usePageMeta';
+
+const ROTATING_PHRASES = [
+  'More Conversions',
+  'Higher Rankings',
+  'More Sales',
+  'Better Reviews',
+  'Faster Growth',
+  '5× More Clicks',
+  'Less Ad Spend',
+];
 
 // ── Schema ────────────────────────────────────────────────────────────────────
 const schema = z.object({
@@ -126,6 +137,111 @@ const inputCls = (err: boolean) => cn(
 
 const labelCls = 'block text-sm font-medium text-foreground mb-1.5';
 
+// ── Small contact form (quick enquiry) ───────────────────────────────────────
+const quickServices = [
+  'Product Photography',
+  'Amazon Listing & FBA',
+  'Ecommerce Management',
+  'Shopify Setup & Design',
+  'Social & Paid Ads',
+  'Ecommerce Design',
+  'Full-Service Package',
+  'Other / Not Sure',
+];
+
+const quickInputCls = `w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors`;
+
+const QuickContactForm = () => {
+  const [form, setForm] = useState({ name: '', email: '', whatsapp: '', service: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm(f => ({ ...f, [k]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await supabase.from('leads' as any).insert([{
+        name:     form.name,
+        email:    form.email,
+        phone:    form.whatsapp || null,
+        services: form.service ? [form.service] : [],
+        message:  form.message,
+        source:   'get-started-quick-form',
+        status:   'new',
+        priority: 'medium',
+      }]);
+      await supabase.from('activity_log').insert({
+        action: 'New quick enquiry via Get Started page', item_type: 'lead',
+      });
+    } catch (_) { /* silent */ } finally {
+      setLoading(false);
+      setSubmitted(true);
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="flex flex-col items-center justify-center text-center py-10 gap-4">
+        <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+          <Check className="w-7 h-7 text-green-600 dark:text-green-400" strokeWidth={2} />
+        </div>
+        <h3 className="text-xl font-bold text-foreground">We've got your message!</h3>
+        <p className="text-sm text-muted-foreground max-w-xs">
+          We'll review your details and get back to you within 24 hours with a tailored plan.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-semibold text-foreground mb-1.5">Full Name <span className="text-red-500">*</span></label>
+          <input required className={quickInputCls} placeholder="John Doe" value={form.name} onChange={set('name')} />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-foreground mb-1.5">Business Email <span className="text-red-500">*</span></label>
+          <input required type="email" className={quickInputCls} placeholder="name@company.com" value={form.email} onChange={set('email')} />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-semibold text-foreground mb-1.5">WhatsApp (optional)</label>
+          <input type="tel" className={quickInputCls} placeholder="+91 98765 43210" value={form.whatsapp} onChange={set('whatsapp')} />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-foreground mb-1.5">Service Required <span className="text-red-500">*</span></label>
+          <select required className={quickInputCls} value={form.service} onChange={set('service')}>
+            <option value="">Select Service</option>
+            {quickServices.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+        </div>
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-foreground mb-1.5">Tell us about your project <span className="text-red-500">*</span></label>
+        <textarea
+          required rows={3} className={quickInputCls}
+          placeholder="What are you selling, where, and what do you need help with?"
+          value={form.message} onChange={set('message')}
+          style={{ resize: 'none' }}
+        />
+      </div>
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98] disabled:opacity-60"
+        style={{ background: 'hsl(var(--primary))', color: '#fff' }}
+      >
+        {loading ? 'Sending…' : (<>Send Message <ArrowRight className="w-4 h-4" /></>)}
+      </button>
+    </form>
+  );
+};
+
 // ── Main component ────────────────────────────────────────────────────────────
 const GetStarted = () => {
   usePageMeta({
@@ -136,6 +252,16 @@ const GetStarted = () => {
   const [direction, setDirection] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [loading,   setLoading]   = useState(false);
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [mounted,   setMounted]   = useState(false);
+  const { resolvedTheme } = useTheme();
+  const isDark = mounted && resolvedTheme === 'dark';
+
+  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    const t = setInterval(() => setPhraseIdx(i => (i + 1) % ROTATING_PHRASES.length), 2800);
+    return () => clearInterval(t);
+  }, []);
 
   const {
     register, handleSubmit, setValue, watch, trigger,
@@ -270,8 +396,154 @@ const GetStarted = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-28 pb-20 px-4" style={{ background: 'hsl(var(--background))' }}>
+
+      {/* ── Hero ── */}
+      <section
+        className="relative overflow-hidden pt-36 pb-24 text-center transition-colors duration-300"
+        style={{
+          background: isDark
+            ? '#060d0a'
+            : 'linear-gradient(160deg, #ffffff 0%, #f8f4ff 50%, #fff0f6 100%)',
+        }}
+      >
+        {/* Background glow — adapts to theme */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: isDark
+              ? 'radial-gradient(ellipse 65% 60% at 50% 65%, rgba(26,74,58,0.55) 0%, transparent 70%)'
+              : 'radial-gradient(ellipse 65% 60% at 50% 65%, rgba(236,72,153,0.06) 0%, transparent 70%)',
+          }}
+        />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="font-extrabold tracking-tight leading-[1.1]"
+            style={{ fontSize: 'clamp(2.6rem, 7vw, 5rem)', fontFamily: '"Inter Tight", Inter, sans-serif' }}
+          >
+            <span style={{ color: isDark ? '#ffffff' : '#0a0a0a' }}>
+              Free audit. Honest answers.
+            </span>
+            <br />
+
+            {/* ── Dynamic rotating phrase ── */}
+            <span
+              className="inline-block relative"
+              style={{
+                minWidth: '1ch',
+                minHeight: '1.15em',
+                verticalAlign: 'top',
+              }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={phraseIdx}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -18 }}
+                  transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-block"
+                  style={{
+                    background: 'linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {ROTATING_PHRASES[phraseIdx]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+
+            <br />
+            <span style={{ color: isDark ? '#ffffff' : '#0a0a0a' }}>Zero pressure.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.18 }}
+            className="mt-6 mx-auto leading-relaxed"
+            style={{
+              fontSize: '1.05rem',
+              color: isDark ? 'rgba(255,255,255,0.52)' : 'rgba(10,10,10,0.55)',
+              maxWidth: '480px',
+            }}
+          >
+            Send us your top three listings or your storefront URL. We'll come back inside 48 hours with a written diagnosis — what's leaking, what's working, and what we'd fix first. No deck. No sales call ambush.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-7"
+          >
+            {['No commitment required', '48hr written diagnosis', 'Keep the audit doc — free'].map(item => (
+              <span
+                key={item}
+                className="flex items-center gap-1.5 text-sm"
+                style={{ color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(10,10,10,0.55)' }}
+              >
+                <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#22c55e' }} strokeWidth={2.5} />
+                {item}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-3 mt-8"
+          >
+            <a
+              href="#audit-wizard"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-200 hover:opacity-90 active:scale-95"
+              style={{ background: '#d4af37', color: '#0a0a0a' }}
+            >
+              Send Me the Audit <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
+            </a>
+            <a
+              href="https://wa.me/917011441159?text=Hi%2C%20I%27d%20like%20a%20free%20listing%20audit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-200 hover:opacity-90 active:scale-95"
+              style={{ background: '#25d366', color: '#fff' }}
+            >
+              <MessageCircle className="w-4 h-4" strokeWidth={2} />
+              WhatsApp Us Directly
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Quick contact form ── */}
+      <section className="bg-background py-14 px-4 border-b border-border">
         <div className="max-w-xl mx-auto">
+          <div className="mb-6">
+            <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-2">Quick Enquiry</p>
+            <h2 className="text-2xl font-bold text-foreground mb-1">Have a question? Just ask.</h2>
+            <p className="text-sm text-muted-foreground">Drop us a message and we'll reply within 24 hours.</p>
+          </div>
+          <QuickContactForm />
+        </div>
+      </section>
+
+      <main id="audit-wizard" className="min-h-screen pt-14 pb-20 px-4" style={{ background: 'hsl(var(--background))' }}>
+        <div className="max-w-xl mx-auto">
+
+          {/* ── Section label ── */}
+          <div className="mb-8 pb-6 border-b border-border">
+            <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-1">Free Listing Audit</p>
+            <h2 className="text-2xl font-bold text-foreground mb-1">Send Me the Audit</h2>
+            <p className="text-sm text-muted-foreground">
+              Tell us about your store in detail — we'll come back with a written diagnosis within 48 hours.
+            </p>
+          </div>
 
           {/* ── Progress ── */}
           <div className="mb-8">

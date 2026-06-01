@@ -1,250 +1,215 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, MessageCircle, Check } from 'lucide-react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, ArrowRight, Check } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
-const dynamicWords = [
-  { word: 'More Sales',       color: '#d4af37' },
-  { word: 'More Clicks',      color: '#4ade80' },
-  { word: 'More Trust',       color: '#60a5fa' },
-  { word: 'More Conversions', color: '#f472b6' },
-  { word: 'More Revenue',     color: '#fb923c' },
+const services = [
+  'Product Photography',
+  'Amazon Listing & FBA',
+  'Ecommerce Management',
+  'Shopify Setup & Design',
+  'Social & Paid Ads',
+  'Ecommerce Design',
+  'Full-Service Package',
+  'Other / Not Sure',
 ];
 
 const Contact = () => {
-  const [wordIdx, setWordIdx] = useState(0);
-  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    name: '', company: '', email: '', whatsapp: '',
+    country: '', service: '', message: '',
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setWordIdx(i => (i + 1) % dynamicWords.length);
-    }, 2200);
-    return () => clearInterval(id);
-  }, []);
+  const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm(f => ({ ...f, [k]: e.target.value }));
 
-  const handleBookCall = () => {
-    navigate('/get-started');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await supabase.from('leads' as any).insert([{
+        name:     form.name,
+        email:    form.email,
+        phone:    form.whatsapp || null,
+        business: form.company  || null,
+        country:  form.country  || null,
+        message:  form.message  || null,
+        services: form.service ? [form.service] : [],
+        source:   'contact-section',
+        status:   'new',
+        priority: 'medium',
+      }]);
+      await supabase.from('activity_log').insert({
+        action:    'New enquiry via homepage Contact form',
+        item_type: 'lead',
+      });
+    } catch (_) {
+      // silently fail — still show success to user
+    } finally {
+      setLoading(false);
+      setSubmitted(true);
+    }
   };
 
-  const handleWhatsApp = () => {
-    window.open('https://wa.me/917011441159', '_blank');
-  };
-
-  const current = dynamicWords[wordIdx];
+  const inputCls = `w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors`;
 
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: '#060d0a' }}
+      className="relative py-20 md:py-28 overflow-hidden bg-background"
     >
-      {/* Background radial glows */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(26,74,58,0.45) 0%, transparent 70%)',
-        }}
-      />
-      <div
-        className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-        }}
-      />
-      <div
-        className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(74,222,128,0.06) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-        }}
+      {/* Subtle background accent */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 100%, hsl(var(--primary) / 0.04) 0%, transparent 70%)' }}
       />
 
-      {/* Subtle grid texture */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-10 py-20 text-center">
-
-        {/* Top label */}
-        <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 mb-8"
-        >
-          <div className="h-px w-8" style={{ background: '#d4af37' }} />
-          <span
-            className="text-xs font-bold tracking-[0.3em] uppercase"
-            style={{ color: '#d4af37' }}
+          {/* ── LEFT ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            Let's find your bottleneck
-          </span>
-          <div className="h-px w-8" style={{ background: '#d4af37' }} />
-        </motion.div>
+            <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-4">Get in Touch</p>
+            <h2
+              className="font-extrabold tracking-tight leading-[1.05] text-foreground mb-5"
+              style={{ fontSize: 'clamp(2.2rem, 5vw, 3.6rem)', fontFamily: '"Inter Tight", Inter, sans-serif' }}
+            >
+              Let's grow<br />your brand.
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-8 max-w-sm" style={{ fontSize: '1rem' }}>
+              Tell us what you sell and where. We'll come back within 24 hours with a clear plan — what to fix first and how we'd do it.
+            </p>
 
-        {/* Main headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          <h2
-            className="font-extrabold tracking-tight leading-[1.1] mb-4"
-            style={{
-              fontSize: 'clamp(2.4rem, 6vw, 5rem)',
-              color: '#ffffff',
-              fontFamily: '"Inter Tight", Inter, sans-serif',
-            }}
-          >
-            Free audit. Honest answers.
-          </h2>
-
-          {/* Animated word */}
-          <div
-            className="relative flex items-center justify-center overflow-hidden mb-4"
-            style={{ height: 'clamp(3rem, 7.5vw, 6.5rem)' }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={wordIdx}
-                initial={{ y: 60, opacity: 0, filter: 'blur(8px)' }}
-                animate={{ y: 0,  opacity: 1, filter: 'blur(0px)' }}
-                exit={{   y: -60, opacity: 0, filter: 'blur(8px)' }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute font-extrabold tracking-tight leading-none"
-                style={{
-                  fontSize: 'clamp(2.4rem, 6vw, 5rem)',
-                  color: current.color,
-                  fontFamily: '"Inter Tight", Inter, sans-serif',
-                  textShadow: `0 0 40px ${current.color}55`,
-                }}
-              >
-                {current.word}
-              </motion.span>
-            </AnimatePresence>
-          </div>
-
-          <h2
-            className="font-extrabold tracking-tight leading-[1.1]"
-            style={{
-              fontSize: 'clamp(2.4rem, 6vw, 5rem)',
-              color: '#ffffff',
-              fontFamily: '"Inter Tight", Inter, sans-serif',
-            }}
-          >
-            Zero pressure.
-          </h2>
-        </motion.div>
-
-        {/* Subtext */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="mt-8 mb-8 mx-auto leading-relaxed"
-          style={{
-            fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
-            color: 'rgba(255,255,255,0.55)',
-            maxWidth: '560px',
-          }}
-        >
-          Send us your top three listings or your storefront URL. We'll come back inside 48 hours with a written diagnosis — what's leaking, what's working, and what we'd fix first. No deck. No sales call ambush.
-        </motion.p>
-
-        {/* Benefits row */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-12"
-        >
-          {['No commitment required', '48hr written diagnosis', 'Keep the audit doc — free'].map((item, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <Check className="w-4 h-4 flex-shrink-0" style={{ color: '#4ade80' }} />
-              <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{item}</span>
+            {/* Proof points */}
+            <div className="flex flex-col gap-3 mb-10">
+              {[
+                'Free listing audit — no commitment',
+                'Response within 24 hours',
+                'Serving 20+ global marketplaces',
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2.5">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 text-primary" strokeWidth={2.5} />
+                  </div>
+                  <span className="text-sm text-muted-foreground">{item}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </motion.div>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.45 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          {/* Primary */}
-          <button
-            onClick={handleBookCall}
-            className="group relative flex items-center justify-center gap-2.5 px-9 py-4 rounded-full font-bold text-base transition-all duration-200 active:scale-95 overflow-hidden"
-            style={{
-              background: '#d4af37',
-              color: '#0a0a0a',
-              fontSize: '1rem',
-              minWidth: '240px',
-              boxShadow: '0 0 32px rgba(212,175,55,0.35)',
-            }}
+            {/* Contact info */}
+            <div className="flex flex-col gap-3">
+              <div className="flex items-start gap-4 p-4 rounded-xl border border-border bg-surface">
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-4 h-4 text-primary" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-foreground mb-0.5">Direct Enquiry</p>
+                  <a href="mailto:info@saleixo.com" className="text-sm text-primary hover:underline">
+                    info@saleixo.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ── RIGHT — Form ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="relative z-10">Send Me the Audit →</span>
-            <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
-            {/* Hover shimmer */}
-            <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }}
-            />
-          </button>
+            <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8 shadow-sm">
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center text-center py-10 gap-4">
+                  <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                    <Check className="w-7 h-7 text-green-600 dark:text-green-400" strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">We've got your message!</h3>
+                  <p className="text-sm text-muted-foreground max-w-xs">
+                    We'll review your details and get back to you within 24 hours with a tailored plan.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-foreground mb-1">Start a Project</h3>
+                    <p className="text-sm text-muted-foreground">Fill out the form and we'll be in touch within 24 hours.</p>
+                  </div>
 
-          {/* Secondary */}
-          <button
-            onClick={handleWhatsApp}
-            className="group flex items-center justify-center gap-2.5 px-9 py-4 rounded-full font-bold text-base transition-all duration-200 active:scale-95"
-            style={{
-              background: '#25d366',
-              color: '#ffffff',
-              fontSize: '1rem',
-              minWidth: '220px',
-              boxShadow: '0 0 24px rgba(37,211,102,0.3)',
-            }}
-          >
-            <MessageCircle className="w-4 h-4" />
-            WhatsApp Us Directly
-          </button>
-        </motion.div>
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    {/* Row 1 */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1.5">Full Name <span className="text-red-500">*</span></label>
+                        <input required className={inputCls} placeholder="John Doe" value={form.name} onChange={set('name')} />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1.5">Company / Brand <span className="text-red-500">*</span></label>
+                        <input required className={inputCls} placeholder="Acme Corp" value={form.company} onChange={set('company')} />
+                      </div>
+                    </div>
 
-        {/* Word cycle dots indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-          className="flex items-center justify-center gap-2 mt-14"
-        >
-          {dynamicWords.map((w, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                width: i === wordIdx ? 24 : 6,
-                background: i === wordIdx ? w.color : 'rgba(255,255,255,0.15)',
-              }}
-              transition={{ duration: 0.3 }}
-              style={{ height: 6, borderRadius: 999 }}
-            />
-          ))}
-        </motion.div>
+                    {/* Row 2 */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1.5">Business Email <span className="text-red-500">*</span></label>
+                        <input required type="email" className={inputCls} placeholder="name@company.com" value={form.email} onChange={set('email')} />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-foreground mb-1.5">WhatsApp (optional)</label>
+                        <input type="tel" className={inputCls} placeholder="+91 98765 43210" value={form.whatsapp} onChange={set('whatsapp')} />
+                      </div>
+                    </div>
 
+                    {/* Country */}
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1.5">Country of Operation <span className="text-red-500">*</span></label>
+                      <input required className={inputCls} placeholder="India" value={form.country} onChange={set('country')} />
+                    </div>
+
+                    {/* Service */}
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1.5">Service Required <span className="text-red-500">*</span></label>
+                      <select required className={inputCls} value={form.service} onChange={set('service')}>
+                        <option value="">Select Service Type</option>
+                        {services.map(s => <option key={s} value={s}>{s}</option>)}
+                      </select>
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <label className="block text-xs font-semibold text-foreground mb-1.5">Project Details <span className="text-red-500">*</span></label>
+                      <textarea
+                        required rows={4} className={inputCls}
+                        placeholder="Tell us about your products, marketplace, and what you're trying to achieve..."
+                        value={form.message} onChange={set('message')}
+                        style={{ resize: 'none' }}
+                      />
+                    </div>
+
+                    {/* Submit */}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:opacity-90 active:scale-[0.98] disabled:opacity-60"
+                      style={{ background: 'hsl(var(--primary))', color: '#fff' }}
+                    >
+                      {loading ? 'Sending…' : (<>Send Message <ArrowRight className="w-4 h-4" /></>)}
+                    </button>
+                  </form>
+                </>
+              )}
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
