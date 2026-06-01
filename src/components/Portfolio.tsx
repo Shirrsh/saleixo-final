@@ -16,7 +16,7 @@ import hero9  from '@/assets/hero/showcase-9.jpeg';
 // ── Image key → fallback mapping ─────────────────────────────────────────────
 const PORTFOLIO_SLOTS = [
   { key: 'portfolio_1', fallback: port1, alt: 'Product Studio Shoot — Saleixo'         },
-  { key: 'portfolio_2', fallback: hero4, alt: 'Jewelry Studio Shoot — Saleixo'         },
+  { key: 'portfolio_hero_4', fallback: hero4, alt: 'Jewelry Studio Shoot — Saleixo'     },
   { key: 'portfolio_3', fallback: port3, alt: 'Studio Photography — Saleixo'           },
   { key: 'portfolio_4', fallback: port4, alt: 'Ecommerce Shoot — Full Service'         },
   { key: 'portfolio_5', fallback: hero5, alt: 'Product Collection — Saleixo Studio'    },
