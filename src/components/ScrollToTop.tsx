@@ -1,44 +1,32 @@
 import { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    const onScroll = () => setIsVisible(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
-  if (!isVisible) {
-    return null;
-  }
+  if (!isVisible) return null;
 
   return (
-    <Button
-      onClick={scrollToTop}
-      size="icon"
-      className="fixed bottom-[6.5rem] right-6 z-40 glass-purple border-border-glow/40 hover:border-primary/60 hover:shadow-[0_0_20px_hsl(43_65%_52%/0.5)] transition-all duration-300 rounded-full text-muted-foreground hover:text-foreground"
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Scroll to top"
+      className="fixed bottom-[62px] right-5 sm:right-6 z-40 flex items-center justify-center rounded-full transition-all duration-200 hover:scale-105 active:scale-95"
+      style={{
+        width: 36,
+        height: 36,
+        background: 'hsl(var(--surface-elevated))',
+        border: '1px solid hsl(var(--border))',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.12)',
+      }}
     >
-      <ChevronUp className="h-6 w-6" />
-    </Button>
+      <ChevronUp className="w-4 h-4 text-muted-foreground" strokeWidth={2} />
+    </button>
   );
 };
 

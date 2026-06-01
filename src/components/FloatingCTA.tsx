@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { MessageCircle, X } from 'lucide-react';
+import { ArrowRight, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const FloatingCTA = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible]   = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen]     = useState(false);
 
-  // Hide when mobile nav menu is open
   useEffect(() => {
     const observer = new MutationObserver(() => {
       setMenuOpen(document.body.style.overflow === 'hidden');
@@ -20,48 +19,44 @@ const FloatingCTA = () => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const heroHeight = window.innerHeight * 0.8;
-      const contactSection = document.querySelector('#contact');
-      const contactTop = contactSection?.getBoundingClientRect().top || Infinity;
-
-      // Show after scrolling past hero, hide when near contact section
+      const contactTop = document.querySelector('#contact')?.getBoundingClientRect().top ?? Infinity;
       setIsVisible(scrollY > heroHeight && contactTop > 200);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToContact = () => {
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   if (!isVisible || isDismissed || menuOpen) return null;
 
   return (
-    <div className="fixed bottom-[100px] right-4 sm:right-6 z-40 animate-fade-in flex items-center gap-1.5">
-      <Button
-        onClick={scrollToContact}
-        size="sm"
-        className="glass-purple rounded-full px-4 sm:px-6 py-2 gap-2 border-border-glow/40 hover:border-primary/60 hover:shadow-[0_0_32px_hsl(43_65%_52%/0.5)] transition-all duration-300 text-foreground text-sm font-semibold"
-      >
-        <MessageCircle className="w-4 h-4 text-accent-violet flex-shrink-0" />
-        <span className="hidden sm:inline">Get a Free Quote</span>
-        <span className="sm:hidden">Free Quote</span>
-      </Button>
-
-      {/* Dismiss button */}
-      <button
-        onClick={() => setIsDismissed(true)}
-        aria-label="Dismiss"
-        className="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-150 hover:scale-110 active:scale-95 flex-shrink-0"
+    <div
+      className="fixed bottom-24 right-5 sm:right-6 z-40"
+      style={{ animation: 'fadeIn 0.25s ease' }}
+    >
+      <div className="relative flex items-center gap-2 pl-4 pr-2 py-2 rounded-full"
         style={{
-          background: 'hsl(0 0% 20% / 0.7)',
-          border: '1px solid hsl(0 0% 40% / 0.4)',
-          backdropFilter: 'blur(8px)',
+          background: 'hsl(var(--foreground))',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
         }}
       >
-        <X size={12} style={{ color: 'hsl(0 0% 80%)' }} />
-      </button>
+        <Link
+          to="/get-started"
+          className="flex items-center gap-2 text-sm font-semibold whitespace-nowrap"
+          style={{ color: 'hsl(var(--background))' }}
+        >
+          Get a Free Quote
+          <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+        </Link>
+
+        <button
+          onClick={() => setIsDismissed(true)}
+          aria-label="Dismiss"
+          className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-opacity duration-150 hover:opacity-70"
+          style={{ background: 'hsl(var(--background) / 0.15)' }}
+        >
+          <X size={10} style={{ color: 'hsl(var(--background))' }} strokeWidth={2.5} />
+        </button>
+      </div>
     </div>
   );
 };

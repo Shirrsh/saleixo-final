@@ -352,11 +352,6 @@ const PhotographyVisual = ({ stat }: { stat: Service['stat'] }) => {
         )}
       </AnimatePresence>
 
-      {/* Camera hint icon */}
-      <div className="absolute top-4 right-4 glass-purple rounded-full p-2 opacity-60 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
-        <Camera className="w-4 h-4 text-white" aria-hidden />
-      </div>
-
       {/* Stat chip */}
       <div
         className="absolute bottom-4 left-4 flex items-baseline gap-1.5 rounded-xl px-3 py-2 pointer-events-none"
