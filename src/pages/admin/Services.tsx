@@ -153,7 +153,7 @@ const AdminServices = () => {
           <h1 className="text-3xl font-bold text-[#2c3e50]">Services Manager</h1>
           <p className="text-[#7f8c8d] mt-2">Manage your service offerings</p>
         </div>
-        <Button onClick={openNewServiceDialog} className="bg-[#d4af37] hover:bg-[#c19d2f]">
+        <Button onClick={openNewServiceDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Add Service
         </Button>
@@ -269,7 +269,7 @@ const AdminServices = () => {
                 </Button>
                 <Button
                   onClick={handleSaveService}
-                  className="bg-[#d4af37] hover:bg-[#c19d2f]"
+                  className="bg-gold hover:bg-gold-hover text-[#1a3a3a]"
                 >
                   <Save className="w-4 h-4 mr-2" />
                   Save Service

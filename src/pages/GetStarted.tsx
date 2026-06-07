@@ -503,7 +503,7 @@ const GetStarted = () => {
             <a
               href="#audit-wizard"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-200 hover:opacity-90 active:scale-95"
-              style={{ background: '#d4af37', color: '#0a0a0a' }}
+              style={{ background: '#d4af37', color: '#0a0a0a', minHeight: '48px' }}
             >
               Send Me the Audit <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
             </a>
@@ -512,7 +512,7 @@ const GetStarted = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-200 hover:opacity-90 active:scale-95"
-              style={{ background: '#25d366', color: '#fff' }}
+              style={{ background: '#25d366', color: '#fff', minHeight: '48px' }}
             >
               <MessageCircle className="w-4 h-4" strokeWidth={2} />
               WhatsApp Us Directly

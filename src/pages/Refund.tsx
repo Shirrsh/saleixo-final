@@ -71,7 +71,7 @@ const Refund = () => {
           <div className="mb-10">
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">Legal</p>
             <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2">Refund &amp; Service Policy</h1>
-            <p className="text-sm text-muted-foreground">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 1 May 2026 &nbsp;·&nbsp; Governed by the laws of India</p>
+            <p className="text-sm text-muted-foreground">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 7 June 2026 &nbsp;·&nbsp; Governed by the laws of India</p>
           </div>
 
           {/* ── Trust callout ── */}

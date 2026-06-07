@@ -10,7 +10,7 @@ interface PageMeta {
 }
 
 const BASE_URL = 'https://saleixo.com';
-const DEFAULT_IMAGE = `${BASE_URL}/og-image.jpg`;
+const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
 
 const setMeta = (selector: string, attr: string, value: string) => {
   let el = document.querySelector<HTMLMetaElement>(selector);

@@ -4,25 +4,25 @@
   <!-- Core -->
   <url>
     <loc>https://saleixo.com/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://saleixo.com/about</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saleixo.com/get-started</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://saleixo.com/contact</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -30,61 +30,61 @@
   <!-- Services -->
   <url>
     <loc>https://saleixo.com/services</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://saleixo.com/services/photography</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saleixo.com/services/amazon</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saleixo.com/services/shopify</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saleixo.com/services/social-ads</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saleixo.com/services/ecommerce-management</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saleixo.com/services/visibility</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://saleixo.com/services/professional</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://saleixo.com/services/enterprise</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://saleixo.com/custom-pricing</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -92,19 +92,19 @@
   <!-- Content -->
   <url>
     <loc>https://saleixo.com/design</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://saleixo.com/blog</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://saleixo.com/categories</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -112,25 +112,25 @@
   <!-- Legal -->
   <url>
     <loc>https://saleixo.com/privacy</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://saleixo.com/terms</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://saleixo.com/cookies</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://saleixo.com/refund</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

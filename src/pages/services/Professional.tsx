@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Camera, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -19,12 +20,12 @@ const features = [
 ];
 
 const outcomes = [
-  '3x more qualified leads each month',
-  'Conversion rate increase: 50%+ (1.5% → 3.8% typical)',
-  'Monthly revenue: +$50K-$100K on average',
-  'Customer confidence builds immediately',
-  'Market position: Establishes you as premium choice',
-  'Competitive advantage: Leave competitors behind',
+  'More qualified leads month-on-month',
+  'Conversion rate improvement — clients typically move from sub-2% toward 3–4%',
+  'Measurable revenue growth within 90 days',
+  'Customer confidence builds as brand presentation improves',
+  'Stronger market position as a premium choice',
+  'Clear competitive differentiation through better photography and listings',
 ];
 
 const W = 'px-6 md:px-12 lg:px-20 xl:px-28';
@@ -38,6 +39,10 @@ const fadeUp = {
 };
 
 const Professional = () => {
+  usePageMeta({
+    title: 'Professional Plan — Growth Package | Saleixo',
+    description: 'Advanced product photography, website design, competitor analysis, and monthly strategy calls. Saleixo Professional Plan for established sellers ready to scale.',
+  });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;
     return !document.documentElement.classList.contains('dark');
@@ -118,7 +123,7 @@ const Professional = () => {
               className="text-lg max-w-2xl mx-auto leading-relaxed"
               style={{ color: textMuted }}
             >
-              Most websites convert at 1–2%. We get them to 3–4%. Advanced photography, design, and conversion optimization — all in one tier.
+              Most ecommerce listings convert at 1–2%. Our clients typically see 3–4% after photography and listing optimisation — all in one tier.
             </motion.p>
           </div>
         </section>
@@ -199,12 +204,12 @@ const Professional = () => {
                 border: `1px solid ${isLight ? 'hsl(210 85% 55% / 0.35)' : 'hsl(210 85% 55% / 0.3)'}`,
               }}
             >
-              <h2 className="text-xl font-bold mb-4" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>Real Example</h2>
-              <p className="text-sm font-semibold mb-3" style={{ color: isLight ? 'hsl(0 0% 15%)' : 'hsl(215 20% 85%)' }}>Fashion E-commerce Client Results:</p>
+              <h2 className="text-xl font-bold mb-4" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>Case Study</h2>
+              <p className="text-sm font-semibold mb-3" style={{ color: isLight ? 'hsl(0 0% 15%)' : 'hsl(215 20% 85%)' }}>Fashion ecommerce brand — results after 6 months:</p>
               <ul className="space-y-2 text-sm mb-5" style={{ color: textMuted }}>
-                <li><span className="font-semibold" style={{ color: textPrimary }}>Before:</span> $2M annual revenue, 1.5% conversion</li>
-                <li><span className="font-semibold" style={{ color: textPrimary }}>After:</span> $4M annual revenue (6 months), 3.8% conversion</li>
-                <li><span className="font-semibold" style={{ color: accentBlue }}>Additional revenue:</span> +$2M annually</li>
+                <li><span className="font-semibold" style={{ color: textPrimary }}>Before:</span> 1.5% conversion rate, stagnant monthly sales</li>
+                <li><span className="font-semibold" style={{ color: textPrimary }}>After:</span> 3.8% conversion rate, significant revenue growth</li>
+                <li><span className="font-semibold" style={{ color: accentBlue }}>Key driver:</span> Photography refresh + full listing rewrite</li>
               </ul>
               <blockquote
                 className="text-sm italic pl-4"

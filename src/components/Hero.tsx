@@ -258,7 +258,7 @@ const Hero = () => {
               }),
             }}
           >
-            ✦ The studio built for artisans & independent sellers
+            ✦ The studio built for Amazon sellers & ecommerce brands
           </motion.span>
 
           <motion.h1
@@ -325,8 +325,8 @@ const Hero = () => {
             style={{ borderTop: `1px solid ${borderColor}` }}
           >
             {[
-              { value: '3.1×', label: 'Avg. ROAS' },
-              { value: '+187%', label: 'Avg. CTR Lift' },
+              { value: '500+', label: 'Projects completed' },
+              { value: '48 hr', label: 'Avg. delivery' },
               { value: '20+', label: 'Marketplaces' },
             ].map(s => (
               <div key={s.label}>
@@ -386,7 +386,7 @@ const Hero = () => {
               background: 'hsl(210 85% 55% / 0.15)', border: '1px solid hsl(210 85% 65% / 0.5)', color: '#93c5fd',
             }}
           >
-            ✦ Built for artisans · Amazon · Etsy · Shopify
+            ✦ Amazon sellers · Etsy · Shopify · eCommerce
           </motion.span>
 
           <motion.h1
@@ -447,8 +447,8 @@ const Hero = () => {
             style={{ borderTop: `1px solid ${borderColor}` }}
           >
             {[
-              { value: '3.1×', label: 'Avg. ROAS' },
-              { value: '+187%', label: 'Avg. CTR Lift' },
+              { value: '500+', label: 'Projects completed' },
+              { value: '48 hr', label: 'Avg. delivery' },
               { value: '20+', label: 'Marketplaces' },
             ].map(s => (
               <div key={s.label}>

@@ -63,6 +63,11 @@ export default {
           foreground: "hsl(var(--success-foreground))",
           hover:      "hsl(var(--success-hover))",
         },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          hover:   "hsl(var(--gold-hover))",
+          dark:    "hsl(var(--gold-dark))",
+        },
         popover: {
           DEFAULT:    "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",

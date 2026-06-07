@@ -154,7 +154,7 @@ const AdminSettings = () => {
         <Button
           onClick={handleSave}
           disabled={saving}
-          className="bg-[#d4af37] hover:bg-[#c19d2f]"
+          className="bg-gold hover:bg-gold-hover text-[#1a3a3a]"
         >
           <Save className="w-4 h-4 mr-2" />
           {saving ? 'Saving...' : 'Save Settings'}

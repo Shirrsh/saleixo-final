@@ -127,7 +127,7 @@ const AdminTeam = () => {
           <h1 className="text-3xl font-bold text-[#2c3e50]">Team Members</h1>
           <p className="text-[#7f8c8d] mt-2">Manage your team</p>
         </div>
-        <Button onClick={openNewMemberDialog} className="bg-[#d4af37] hover:bg-[#c19d2f]">
+        <Button onClick={openNewMemberDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Add Member
         </Button>
@@ -145,7 +145,7 @@ const AdminTeam = () => {
             )}
             <div className="p-4">
               <h3 className="font-semibold text-[#2c3e50] mb-1">{member.name}</h3>
-              <p className="text-sm text-[#d4af37] mb-2">{member.role}</p>
+              <p className="text-sm text-gold mb-2">{member.role}</p>
               <p className="text-sm text-[#7f8c8d] mb-4 line-clamp-3">{member.bio}</p>
               <div className="flex gap-2">
                 <Button
@@ -230,7 +230,7 @@ const AdminTeam = () => {
                 </Button>
                 <Button
                   onClick={handleSaveMember}
-                  className="bg-[#d4af37] hover:bg-[#c19d2f]"
+                  className="bg-gold hover:bg-gold-hover text-[#1a3a3a]"
                 >
                   <Save className="w-4 h-4 mr-2" />
                   Save Member

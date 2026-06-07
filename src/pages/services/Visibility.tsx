@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -34,6 +35,10 @@ const fadeUp = {
 };
 
 const Visibility = () => {
+  usePageMeta({
+    title: 'Visibility Plan — Starter Package | Saleixo',
+    description: 'Launch your online presence with professional product photography, SEO optimisation, and social media assets. Saleixo Visibility Plan for artisans starting out.',
+  });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;
     return !document.documentElement.classList.contains('dark');

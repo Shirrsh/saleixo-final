@@ -131,7 +131,7 @@ const services: Service[] = [
       'Conversion-tested ad creative & A/B testing',
       'Weekly reporting on spend, ROAS, and rank',
     ],
-    stat: { value: '250%', label: 'avg. ROAS' },
+    stat: { value: '5 days', label: 'to first campaign' },
     cta: 'Plan a Campaign',
   },
 ];

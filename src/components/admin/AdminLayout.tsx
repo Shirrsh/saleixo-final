@@ -117,7 +117,7 @@ const AdminLayout = () => {
     <div className="flex flex-col h-full">
       <div className="p-6 border-b border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#d4af37] rounded-lg flex items-center justify-center">
+          <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center">
             <Shield className="w-6 h-6 text-[#1a3a3a]" />
           </div>
           <div>
@@ -141,7 +141,7 @@ const AdminLayout = () => {
                 className={cn(
                   'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
                   isActive
-                    ? 'bg-[#d4af37] text-[#1a3a3a] font-medium'
+                    ? 'bg-gold text-[#1a3a3a] font-medium'
                     : 'text-white hover:bg-white/10'
                 )}
               >

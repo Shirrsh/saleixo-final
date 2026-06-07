@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Crown, Shield, Star, UserCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -20,24 +21,24 @@ const features = [
 ];
 
 const outcomes = [
-  '3-5x revenue growth within 12 months (typical)',
+  'Sustained revenue growth across your catalog',
   'Market leader positioning in your category',
-  'Customers see you as the ONLY choice',
-  'Scalable systems that run themselves',
-  'Team of specialists working just for you',
-  'Quarterly strategy adjustment — always improving',
+  'Brand equity that makes customers choose you first',
+  'Scalable systems that reduce your operational load',
+  'Team of specialists dedicated to your account',
+  'Quarterly strategy reviews — always improving',
 ];
 
 const successMetrics = [
-  'Revenue multiplied (3-5x typical)',
-  'Team expanded (you need more people to handle demand)',
-  'Brand recognized (customers seek YOU, not competitors)',
-  'Systems in place (runs without CEO involvement)',
-  'Valuation increased (10x business value increase common)',
+  'Revenue growth visible within the first quarter',
+  'Operational capacity to handle increased demand',
+  'Brand recognized as a premium choice in your category',
+  'Systems in place that reduce CEO-level involvement',
+  'Stronger brand equity and repeat customer rate',
 ];
 
 const badges = [
-  { icon: Shield, label: '3x Revenue Guarantee' },
+  { icon: Shield, label: 'Performance-Based Terms' },
   { icon: Star, label: 'Unlimited Revisions' },
   { icon: UserCheck, label: 'Dedicated Team' },
 ];
@@ -53,6 +54,10 @@ const fadeUp = {
 };
 
 const Enterprise = () => {
+  usePageMeta({
+    title: 'Enterprise Plan — Full-Service Brand Partner | Saleixo',
+    description: 'Dedicated account manager, 200+ product images, video content, CRM automation, and performance-based engagement terms. Saleixo Enterprise for serious ecommerce brands.',
+  });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;
     return !document.documentElement.classList.contains('dark');
@@ -133,7 +138,7 @@ const Enterprise = () => {
               className="text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
               style={{ color: textMuted }}
             >
-              Reserved for brands serious about market domination. A dedicated team, unlimited scope, and a 3x revenue guarantee.
+              Reserved for brands serious about market domination. A dedicated team, unlimited scope, and performance-based engagement terms.
             </motion.p>
 
             {/* Badges row */}
@@ -238,7 +243,7 @@ const Enterprise = () => {
                 <h2 className="text-xl font-bold" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>Our Guarantee</h2>
               </div>
               <p className="text-sm leading-relaxed" style={{ color: textMuted }}>
-                If we don't achieve 3x improvement in qualified leads within 12 months, we'll continue working with you at no additional cost until we do.
+                We stay engaged until we hit the targets we agree on together. If agreed milestones are not met by month 12, we continue working at no additional cost until they are.
               </p>
             </motion.div>
 

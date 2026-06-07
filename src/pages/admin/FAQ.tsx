@@ -152,7 +152,7 @@ const AdminFAQ = () => {
           <h1 className="text-3xl font-bold text-[#2c3e50]">FAQ Manager</h1>
           <p className="text-[#7f8c8d] mt-2">Manage frequently asked questions</p>
         </div>
-        <Button onClick={openNewFaqDialog} className="bg-[#d4af37] hover:bg-[#c19d2f]">
+        <Button onClick={openNewFaqDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Add FAQ
         </Button>
@@ -264,9 +264,9 @@ const AdminFAQ = () => {
                 <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
                   Cancel
                 </Button>
-                <Button
+                 <Button
                   onClick={handleSaveFaq}
-                  className="bg-[#d4af37] hover:bg-[#c19d2f]"
+                  className="bg-gold hover:bg-gold-hover text-[#1a3a3a]"
                 >
                   <Save className="w-4 h-4 mr-2" />
                   Save FAQ

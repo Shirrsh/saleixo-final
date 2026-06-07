@@ -179,7 +179,7 @@ const ServiceTable = ({ title, rows }: { title: string; rows: { name: string; us
   return (
     <div>
       <h3 className="text-base font-bold text-foreground mb-3 uppercase tracking-wider">{title}</h3>
-      <div className="rounded-xl border border-border overflow-hidden">
+      <div className="rounded-xl border border-border overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-muted/50">
@@ -358,7 +358,7 @@ const CustomPricing = () => {
             <h2 className="text-3xl font-bold text-foreground">Add-Ons</h2>
             <p className="text-muted-foreground mt-2">Optional extras that attach to any plan or service.</p>
           </div>
-          <div className="rounded-2xl border border-border overflow-hidden">
+          <div className="rounded-2xl border border-border overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-muted/50">
@@ -387,7 +387,7 @@ const CustomPricing = () => {
               These costs are paid directly by you to the relevant provider — not billed through Saleixo.
             </p>
           </div>
-          <div className="rounded-2xl border border-border overflow-hidden">
+          <div className="rounded-2xl border border-border overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-muted/50">

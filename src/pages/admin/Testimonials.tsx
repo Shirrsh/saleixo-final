@@ -152,7 +152,7 @@ const AdminTestimonials = () => {
           <h1 className="text-3xl font-bold text-[#2c3e50]">Testimonials</h1>
           <p className="text-[#7f8c8d] mt-2">Manage client testimonials</p>
         </div>
-        <Button onClick={openNewTestimonialDialog} className="bg-[#d4af37] hover:bg-[#c19d2f]">
+        <Button onClick={openNewTestimonialDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Add Testimonial
         </Button>
@@ -180,7 +180,7 @@ const AdminTestimonials = () => {
                       <Star
                         key={i}
                         className={`w-4 h-4 ${
-                          i < testimonial.rating ? 'fill-[#d4af37] text-[#d4af37]' : 'text-gray-300'
+                          i < testimonial.rating ? 'fill-gold text-gold' : 'text-gray-300'
                         }`}
                       />
                     ))}
@@ -281,7 +281,7 @@ const AdminTestimonials = () => {
                 </Button>
                 <Button
                   onClick={handleSaveTestimonial}
-                  className="bg-[#d4af37] hover:bg-[#c19d2f]"
+                  className="bg-gold hover:bg-gold-hover text-[#1a3a3a]"
                 >
                   <Save className="w-4 h-4 mr-2" />
                   Save Testimonial

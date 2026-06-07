@@ -537,7 +537,7 @@ const AdminHomepage = () => {
       <Button
         onClick={handleSave}
         disabled={saving}
-        className="bg-[#d4af37] hover:bg-[#c49d2f] text-[#1a3a3a]"
+        className="bg-gold hover:bg-gold-hover text-[#1a3a3a]"
       >
         <Save className="w-4 h-4 mr-2" />
         {saving ? 'Saving...' : 'Save All Changes'}

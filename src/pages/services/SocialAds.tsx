@@ -36,9 +36,9 @@ const whoFor = [
 ];
 
 const stats = [
-  { value: '250%', label: 'Avg. campaign ROI' },
   { value: '5 days', label: 'First campaign live' },
   { value: '4 platforms', label: 'Managed simultaneously' },
+  { value: '20+', label: 'Marketplaces covered' },
 ];
 
 const fadeUp = {
@@ -54,7 +54,7 @@ const W = 'px-6 md:px-12 lg:px-20 xl:px-28';
 const SocialAds = () => {
   usePageMeta({
     title: 'Social & Paid Ads — Saleixo',
-    description: 'Google & Meta ad campaigns with 3.1× average ROAS. Full creative, targeting, optimisation, and reporting for ecommerce sellers.',
+    description: 'Google, Meta, TikTok & Amazon ad campaigns for ecommerce sellers. Full creative, targeting, optimisation, and monthly reporting. First campaign live in 5 days.',
   });
   return (
   <>

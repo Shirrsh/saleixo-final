@@ -234,7 +234,7 @@ const Categories = () => {
                 className="text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
                 style={{ color: textMuted }}
               >
-                Specialized product photography for artisans and ecommerce sellers — from fine jewelry to spiritual accessories, every category handled with precision.
+                Specialized product photography for ecommerce sellers and brands — from fine jewelry to spiritual accessories, every category handled with precision.
               </motion.p>
 
               {/* CTAs */}

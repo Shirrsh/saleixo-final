@@ -18,8 +18,8 @@ import FloatingCTA from '@/components/FloatingCTA';
 
 const Index = () => {
   usePageMeta({
-    title: 'Saleixo — Product Photography, Amazon & Shopify for Artisans',
-    description: 'Studio-grade product photos, compliant Amazon listings, and conversion-tested Shopify stores. 500+ artisans helped. 98% satisfaction rate.',
+    title: 'Saleixo — Product Photography, Amazon Listings & Shopify Stores',
+    description: 'Amazon Imaging, Cataloging, A+ Content, and conversion-tested Shopify stores. 500+ ecommerce sellers helped. 98% satisfaction rate.',
     canonical: 'https://saleixo.com/',
   });
   return (
@@ -27,23 +27,24 @@ const Index = () => {
       <LoadingScreen />
       <ScrollProgress />
       
-      {/* No frame wrapper — clean full-width layout */}
       <Header />
-      <main className="overflow-x-hidden w-full max-w-full">
-        <Hero />
-        <MarketplaceLogos />
-        <FeaturedServices />
-        <WhySaleixo />
-        <Portfolio />
-      </main>
+      <main>
+        <div className="overflow-x-hidden w-full max-w-full">
+          <Hero />
+          <MarketplaceLogos />
+          <FeaturedServices />
+          <WhySaleixo />
+          <Portfolio />
+        </div>
 
-      {/* HowItWorks — outside overflow-hidden so sticky scroll works */}
-      <HowItWorks />
+        {/* HowItWorks — outside overflow-hidden so sticky scroll works */}
+        <HowItWorks />
 
-      {/* Bottom sections — no frame */}
-      <main className="overflow-x-hidden w-full max-w-full">
-        <Testimonials />
-        <Contact />
+        {/* Bottom sections — no frame */}
+        <div className="overflow-x-hidden w-full max-w-full">
+          <Testimonials />
+          <Contact />
+        </div>
       </main>
       <Footer />
       

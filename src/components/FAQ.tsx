@@ -29,7 +29,7 @@ const fallbackFaqs: FaqItem[] = [
   {
     id: '4',
     question: 'We sell on Amazon. Will your photos pass Amazon\'s rules?',
-    answer: 'Yes — every main image is shot on RGB 255,255,255, framed to 85% product fill, delivered at 2000px+ for zoom. We\'ve never had a Saleixo-shot main image rejected for compliance.',
+    answer: 'Yes — every main image is shot on RGB 255,255,255, framed to 85% product fill, delivered at 2000px+ for zoom. Each shoot is checked against Amazon\'s current image requirements before delivery.',
   },
   {
     id: '5',
@@ -59,7 +59,7 @@ const fallbackFaqs: FaqItem[] = [
   {
     id: '10',
     question: 'What does success look like in 90 days?',
-    answer: 'For a stuck listing: typically 2–4× session volume and a 1.5–3× conversion lift, which compounds to 3–6× revenue. For a new launch: profitable PPC by day 60, organic ranking on at least 3 priority keywords by day 90.',
+    answer: 'For a stuck listing: clients typically see meaningful gains in session volume and conversion rate within 90 days — the exact lift depends on category, competition, and how far off the listing was at the start. For a new launch: our target is profitable PPC by day 60 and organic ranking on priority keywords by day 90.',
   },
 ];
 
@@ -125,10 +125,10 @@ const FAQ = () => {
                       ? 'hsl(174 37% 16% / 0.8)'
                       : 'hsl(174 37% 16% / 0.4)',
                     borderColor: isOpen
-                      ? 'hsl(43 65% 52% / 0.35)'
+                      ? 'hsl(var(--gold) / 0.35)'
                       : 'hsl(174 30% 22% / 0.5)',
                     boxShadow: isOpen
-                      ? '0 0 30px hsl(43 65% 52% / 0.08)'
+                      ? '0 0 30px hsl(var(--gold) / 0.08)'
                       : 'none',
                     backdropFilter: 'blur(20px)',
                   }}
@@ -151,9 +151,9 @@ const FAQ = () => {
                       className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200"
                       style={{
                         background: isOpen
-                          ? 'hsl(43 65% 52% / 0.15)'
+                          ? 'hsl(var(--gold) / 0.15)'
                           : 'hsl(174 30% 22% / 0.6)',
-                        border: `1px solid ${isOpen ? 'hsl(43 65% 52% / 0.4)' : 'hsl(174 30% 22%)'}`,
+                        border: `1px solid ${isOpen ? 'hsl(var(--gold) / 0.4)' : 'hsl(174 30% 22%)'}`,
                       }}
                     >
                       {isOpen
@@ -175,7 +175,7 @@ const FAQ = () => {
                         <div className="px-6 pb-6">
                           <div
                             className="w-full h-px mb-4"
-                            style={{ background: 'hsl(43 65% 52% / 0.15)' }}
+                            style={{ background: 'hsl(var(--gold) / 0.15)' }}
                           />
                           <p className="text-muted-foreground leading-relaxed">
                             {faq.answer}

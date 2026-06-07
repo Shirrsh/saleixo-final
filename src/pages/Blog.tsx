@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -139,7 +140,7 @@ const FeaturedCard = ({ post }: { post: BlogPost }) => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     className="relative rounded-3xl overflow-hidden group cursor-pointer"
-    style={{ height: '520px' }}
+    style={{ height: 'clamp(300px, 55vw, 520px)' }}
   >
     <img
       src={getCover(post, 0)}
@@ -309,9 +310,12 @@ export default function Blog() {
     title: 'Blog — Saleixo',
     description: 'Amazon tips, Shopify growth guides, ecommerce marketing strategies, and product photography insights from the Saleixo team.',
   });
+  const [email, setEmail] = useState('');
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [page, setPage] = useState(1);
+  const POSTS_PER_PAGE = 8;
 
   useEffect(() => {
     supabase
@@ -333,9 +337,12 @@ export default function Blog() {
     ? posts
     : posts.filter(p => p.category === activeCategory);
 
-  const featured = displayed[0];
-  const grid     = displayed.slice(1, 4);
-  const rest     = displayed.slice(4);
+  const totalPages = Math.ceil(displayed.length / POSTS_PER_PAGE);
+  const paginated = displayed.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
+
+  const featured = paginated[0];
+  const grid     = paginated.slice(1, 4);
+  const rest     = paginated.slice(4);
 
   return (
     <div className="min-h-screen" style={{ background: 'hsl(var(--background))' }}>
@@ -377,7 +384,8 @@ export default function Blog() {
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                type="button"
+                onClick={() => { setActiveCategory(cat); setPage(1); }}
                 className="px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200"
                 style={activeCategory === cat
                   ? { background: 'hsl(var(--foreground))', color: 'hsl(var(--background))' }
@@ -457,6 +465,32 @@ export default function Blog() {
                   </div>
                 </>
               )}
+
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-4 mt-12">
+                  <button
+                    type="button"
+                    onClick={() => { setPage(p => p - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    disabled={page === 1}
+                    className="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                    style={{ background: 'hsl(var(--card))', color: 'hsl(var(--foreground))', border: '1px solid hsl(var(--border))' }}
+                  >
+                    ← Previous
+                  </button>
+                  <span className="text-sm text-muted-foreground">
+                    Page {page} of {totalPages}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => { setPage(p => p + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    disabled={page === totalPages}
+                    className="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                    style={{ background: 'hsl(var(--card))', color: 'hsl(var(--foreground))', border: '1px solid hsl(var(--border))' }}
+                  >
+                    Next →
+                  </button>
+                </div>
+              )}
             </>
           )}
         </div>
@@ -497,6 +531,8 @@ export default function Blog() {
               <input
                 type="email"
                 placeholder="your@email.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 className="flex-1 px-5 py-3 rounded-xl text-sm outline-none"
                 style={{
                   background: 'hsl(220 28% 14%)',
@@ -505,6 +541,12 @@ export default function Blog() {
                 }}
               />
               <button
+                type="button"
+                onClick={() => {
+                  if (!email || !email.includes('@')) return;
+                  setEmail('');
+                  toast.success('You\'re subscribed! We\'ll be in touch soon.');
+                }}
                 className="px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90 whitespace-nowrap"
                 style={{ background: '#d4af37', color: '#000' }}
               >

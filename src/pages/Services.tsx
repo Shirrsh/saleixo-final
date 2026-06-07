@@ -31,6 +31,7 @@ const SERVICES = [
     icon: Camera,
     color: '#3b82f6',
     badge: 'Photography',
+    spnCategory: 'SPN: Imaging',
     title: 'Product Photography',
     headline: 'Studio-grade images that stop the scroll and sell.',
     desc: 'Professional product photography optimised for Amazon, Flipkart, Shopify, and social — white background, lifestyle, and on-model shoots delivered in 24–48 hours.',
@@ -47,6 +48,7 @@ const SERVICES = [
     icon: ShoppingCart,
     color: '#10b981',
     badge: 'Amazon',
+    spnCategory: 'SPN: Cataloging · A+ Content',
     title: 'Amazon FBA & Listing Optimisation',
     headline: 'Rank higher, win the Buy Box, dominate search.',
     desc: 'End-to-end Amazon listing management — keyword research, A+ content, brand storefront, suppression recovery, and ongoing listing health monitoring.',
@@ -63,6 +65,7 @@ const SERVICES = [
     icon: Globe,
     color: '#8b5cf6',
     badge: 'Shopify',
+    spnCategory: 'SPN: Storefront Design',
     title: 'Shopify Setup & Design',
     headline: 'Your dream store — live, fast, and built to convert.',
     desc: 'From blank canvas to fully operational Shopify store. Mobile-first design, conversion-optimised layouts, app integrations, and full launch support — in 14 days.',
@@ -79,6 +82,7 @@ const SERVICES = [
     icon: BarChart2,
     color: '#ec4899',
     badge: 'Social & Ads',
+    spnCategory: 'SPN: Advertising Optimization',
     title: 'Social Media & Paid Ads',
     headline: 'Turn scrollers into buyers with ads that work.',
     desc: 'Meta, TikTok, and Google campaigns built for ecommerce — combining creative strategy, precise targeting, and constant optimisation for profitable, scalable growth.',
@@ -93,8 +97,9 @@ const SERVICES = [
   },
   {
     icon: Users,
-    color: '#d4af37',
+    color: 'hsl(var(--gold))',
     badge: 'Management',
+    spnCategory: 'SPN: Account Management',
     title: 'Ecommerce Management',
     headline: "Run your business. We'll run your ecommerce.",
     desc: 'Fully managed ecommerce operations — listings, inventory planning, order management, competitor monitoring, and monthly performance reviews across every marketplace.',
@@ -137,16 +142,16 @@ const TIERS = [
     priceUSD: null,
     priceINR: null,
     unit: 'tailored pricing',
-    color: '#d4af37',
+    color: 'hsl(var(--gold))',
     href: '/services/enterprise',
     features: ['Unlimited photography & design', 'Full ads management', 'Dedicated account manager'],
   },
 ];
 
 const STATS = [
-  { value: '500+', label: 'Products Shot' },
-  { value: '3×', label: 'Avg. Sales Lift' },
-  { value: '30+', label: 'Marketplaces' },
+  { value: '500+', label: 'Projects completed' },
+  { value: '48 hr', label: 'Avg. delivery' },
+  { value: '20+', label: 'Marketplaces' },
   { value: '98%', label: 'Client Retention' },
 ];
 
@@ -161,8 +166,8 @@ const WHY = [
 
 export default function Services() {
   usePageMeta({
-    title: 'Our Services — Saleixo',
-    description: 'Product photography, Amazon listing optimisation, Shopify store design, social ads, and ecommerce management for online sellers.',
+    title: 'Amazon Imaging, Cataloging & Advertising Services | Saleixo',
+    description: 'Amazon Imaging (product photography), Cataloging (A+ Content & listings), Advertising Optimization, and Account Management for Amazon sellers and ecommerce brands.',
   });
   const { fmt } = useCurrency();
   return (
@@ -175,7 +180,7 @@ export default function Services() {
           <div className="absolute inset-0 pointer-events-none hidden dark:block">
             <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(215 45% 14%) 0%, hsl(220 35% 10%) 40%, hsl(222 30% 9%) 100%)' }} />
             <div className="absolute rounded-full" style={{ top: '-10%', right: '-5%', width: '600px', height: '600px', background: 'radial-gradient(circle, hsl(210 85% 55% / 0.22) 0%, transparent 70%)', filter: 'blur(70px)' }} />
-            <div className="absolute rounded-full" style={{ bottom: '-10%', left: '-5%', width: '500px', height: '500px', background: 'radial-gradient(circle, hsl(43 65% 52% / 0.1) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+            <div className="absolute rounded-full" style={{ bottom: '-10%', left: '-5%', width: '500px', height: '500px', background: 'radial-gradient(circle, hsl(var(--gold) / 0.1) 0%, transparent 70%)', filter: 'blur(60px)' }} />
           </div>
           <div className="absolute inset-0 pointer-events-none dark:hidden">
             <div className="absolute rounded-full" style={{ top: '-10%', right: '-5%', width: '500px', height: '500px', background: 'radial-gradient(circle, hsl(210 85% 55% / 0.07) 0%, transparent 65%)', filter: 'blur(50px)' }} />
@@ -184,8 +189,8 @@ export default function Services() {
           <div className="relative z-10 container mx-auto max-w-5xl text-center">
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6"
-                style={{ background: 'hsl(43 65% 52% / 0.12)', border: '1px solid hsl(43 65% 52% / 0.35)', color: '#d4af37' }}>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]" />
+                style={{ background: 'hsl(var(--gold) / 0.12)', border: '1px solid hsl(var(--gold) / 0.35)', color: 'hsl(var(--gold))' }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-gold" />
                 Our Services
               </span>
             </motion.div>
@@ -206,7 +211,7 @@ export default function Services() {
               className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
               {['No Long-Term Contracts', 'Dedicated Account Manager', '30+ Marketplaces Covered', '500+ Products Shot'].map(t => (
                 <span key={t} className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-[#d4af37]" />{t}
+                  <Check className="w-3.5 h-3.5 text-gold" />{t}
                 </span>
               ))}
             </motion.div>
@@ -278,6 +283,10 @@ export default function Services() {
                         <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2 tracking-tight">
                           {svc.title}
                         </h2>
+                        <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold tracking-[0.15em] uppercase mb-3"
+                          style={{ background: `${svc.color}18`, color: svc.color, border: `1px solid ${svc.color}40` }}>
+                          {svc.spnCategory}
+                        </span>
                         <p className="text-base font-semibold mb-3" style={{ color: svc.color }}>
                           {svc.headline}
                         </p>
@@ -398,7 +407,7 @@ export default function Services() {
               <Link
                 to="/custom-pricing"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 hover:opacity-90"
-                style={{ background: '#d4af37', color: '#000' }}>
+                style={{ background: 'hsl(var(--gold))', color: '#000' }}>
                 View Custom Pricing <ArrowRight className="w-4 h-4" />
               </Link>
               <p className="text-xs text-muted-foreground mt-3">All prices exclude GST. Ad spend paid directly to the platform.</p>
@@ -427,8 +436,8 @@ export default function Services() {
                     className="p-6 rounded-2xl"
                     style={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}>
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                      style={{ background: 'hsl(43 65% 52% / 0.12)', border: '1px solid hsl(43 65% 52% / 0.25)' }}>
-                      <Icon className="w-5 h-5" style={{ color: '#d4af37' }} strokeWidth={1.5} />
+                      style={{ background: 'hsl(var(--gold) / 0.12)', border: '1px solid hsl(var(--gold) / 0.25)' }}>
+                      <Icon className="w-5 h-5 text-gold" strokeWidth={1.5} />
                     </div>
                     <h3 className="font-bold text-foreground mb-2">{w.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{w.desc}</p>
@@ -446,8 +455,8 @@ export default function Services() {
               className="rounded-3xl p-10 md:p-16 text-center relative overflow-hidden"
               style={{ background: 'linear-gradient(135deg, hsl(174 37% 13%) 0%, hsl(220 30% 10%) 100%)', border: '1px solid hsl(174 30% 22% / 0.5)' }}>
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 pointer-events-none"
-                style={{ background: 'radial-gradient(ellipse, hsl(43 65% 52% / 0.15), transparent 70%)' }} />
-              <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4 relative z-10" style={{ color: '#d4af37' }}>FREE 30-MIN STRATEGY CALL</p>
+                style={{ background: 'radial-gradient(ellipse, hsl(var(--gold) / 0.15), transparent 70%)' }} />
+              <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4 relative z-10 text-gold">FREE 30-MIN STRATEGY CALL</p>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 relative z-10">
                 Not sure which service is right?<br />Talk to us — it's free.
               </h2>
@@ -457,7 +466,7 @@ export default function Services() {
               <div className="flex flex-col sm:flex-row gap-3 justify-center relative z-10">
                 <Link to="/get-started"
                   className="px-8 py-4 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90"
-                  style={{ background: '#d4af37', color: '#000' }}>
+                  style={{ background: 'hsl(var(--gold))', color: '#000' }}>
                   Book My Free Call
                 </Link>
                 <a href="https://wa.me/917011441159" target="_blank" rel="noopener noreferrer"

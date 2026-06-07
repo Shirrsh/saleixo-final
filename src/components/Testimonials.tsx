@@ -391,7 +391,7 @@ const Testimonials = () => {
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <section className="py-16 md:py-24 overflow-hidden hidden" style={{ background: 'hsl(var(--background))' }}>
+    <section className="py-16 md:py-24 overflow-hidden" style={{ background: 'hsl(var(--background))' }}>
 
       {/* ── Header ── */}
       <motion.div

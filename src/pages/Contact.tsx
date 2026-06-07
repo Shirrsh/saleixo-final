@@ -53,7 +53,7 @@ const contactItems = [
     value: '24 / 7',
     sub: 'Written reply within 48 hrs',
     href: null,
-    color: '#d4af37',
+    color: 'hsl(var(--gold))',
   },
 ];
 
@@ -160,8 +160,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-xs font-bold tracking-[0.3em] uppercase mb-5"
-            style={{ color: '#d4af37' }}
+            className="text-xs font-bold tracking-[0.3em] uppercase mb-5 text-gold"
           >
             Get In Touch
           </motion.p>

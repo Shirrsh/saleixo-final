@@ -73,7 +73,7 @@ const AdminLogin = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#1a3a3a] to-[#0d1f1f] flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-white">Loading...</p>
         </div>
       </div>
@@ -86,7 +86,7 @@ const AdminLogin = () => {
         <div className="bg-white rounded-lg shadow-2xl p-8">
           <div className="flex flex-col items-center mb-8">
             <div className="w-16 h-16 bg-[#1a3a3a] rounded-full flex items-center justify-center mb-4">
-              <Shield className="w-8 h-8 text-[#d4af37]" />
+              <Shield className="w-8 h-8 text-gold" />
             </div>
             <h1 className="text-2xl font-bold text-[#2c3e50]">Saleixo Admin</h1>
             <p className="text-[#7f8c8d] mt-2">Sign in to manage your content</p>

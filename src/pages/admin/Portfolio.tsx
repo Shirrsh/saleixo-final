@@ -127,7 +127,7 @@ const AdminPortfolio = () => {
           <h1 className="text-3xl font-bold text-[#2c3e50]">Portfolio Gallery</h1>
           <p className="text-[#7f8c8d] mt-2">Manage your portfolio projects</p>
         </div>
-        <Button onClick={openNewProjectDialog} className="bg-[#d4af37] hover:bg-[#c19d2f]">
+        <Button onClick={openNewProjectDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Add Project
         </Button>
@@ -234,7 +234,7 @@ const AdminPortfolio = () => {
                 </Button>
                 <Button
                   onClick={handleSaveProject}
-                  className="bg-[#d4af37] hover:bg-[#c19d2f]"
+                  className="bg-gold hover:bg-gold-hover text-[#1a3a3a]"
                 >
                   <Save className="w-4 h-4 mr-2" />
                   Save Project

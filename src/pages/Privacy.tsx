@@ -25,7 +25,7 @@ const Privacy = () => {
         <div className="mb-10">
           <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary mb-3">Legal</p>
           <h1 className="text-4xl font-bold tracking-tight text-foreground mb-2">Privacy Policy</h1>
-          <p className="text-sm text-muted-foreground">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 12 May 2026</p>
+          <p className="text-sm text-muted-foreground">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 7 June 2026</p>
         </div>
 
         <div className="prose-container text-[15px]">

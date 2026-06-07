@@ -130,7 +130,7 @@ const AdminBlog = () => {
           <h1 className="text-3xl font-bold text-[#2c3e50]">Blog Posts</h1>
           <p className="text-[#7f8c8d] mt-2">Manage your blog content</p>
         </div>
-        <Button onClick={openNewPostDialog} className="bg-[#d4af37] hover:bg-[#c19d2f]">
+        <Button onClick={openNewPostDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Create Post
         </Button>
@@ -242,7 +242,7 @@ const AdminBlog = () => {
                 </Button>
                 <Button
                   onClick={handleSavePost}
-                  className="bg-[#d4af37] hover:bg-[#c19d2f]"
+                  className="bg-gold hover:bg-gold-hover text-[#1a3a3a]"
                 >
                   <Save className="w-4 h-4 mr-2" />
                   {editingPost.status === 'published' ? 'Publish' : 'Save Draft'}

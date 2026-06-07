@@ -200,6 +200,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: none;
+    overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
     transition: background-color 0.3s ease, color 0.3s ease;
   }

@@ -401,18 +401,20 @@ const HowItWorks = () => {
             {/* Mobile tap nav */}
             <div className="lg:hidden flex items-center gap-3 mt-5">
               <button
+                type="button"
                 onClick={() => setActiveIdx(i => Math.max(0, i - 1))}
                 disabled={activeIdx === 0}
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-40"
                 style={{ background: GOLD_LIGHT, border: `1px solid ${GOLD_BORDER}`, color: GOLD }}
               >
                 ←
               </button>
               <span style={{ fontSize: 11, color: textMuted, letterSpacing: '0.15em' }}>Swipe or tap</span>
               <button
+                type="button"
                 onClick={() => setActiveIdx(i => Math.min(steps.length - 1, i + 1))}
                 disabled={activeIdx === steps.length - 1}
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-30"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all active:scale-90 disabled:opacity-40"
                 style={{ background: `${accentColor}15`, border: `1px solid ${accentColor}30`, color: accentColor }}
               >
                 →

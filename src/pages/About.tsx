@@ -18,8 +18,8 @@ const fadeUp = {
 };
 
 const stats = [
-  { value: '500+', label: 'Sellers helped' },
-  { value: '98%',  label: 'Satisfaction rate' },
+  { value: '500+', label: 'Projects completed' },
+  { value: '98%',  label: 'Client retention' },
   { value: '20+',  label: 'Marketplaces' },
   { value: '48 hr', label: 'Avg. delivery' },
 ];
@@ -73,7 +73,7 @@ const values = [
 const About = () => {
   usePageMeta({
     title: 'About Saleixo — The Diagnostic-First Ecommerce Studio',
-    description: 'Saleixo is a full-stack ecommerce studio based in Noida, India. We help artisans and D2C sellers with photography, design, listings, and marketing across 20+ global marketplaces.',
+    description: 'Saleixo is a full-stack ecommerce studio based in Noida, India. We help D2C brands and Amazon sellers with photography, design, listings, and marketing across 20+ global marketplaces.',
     canonical: 'https://saleixo.com/about',
   });
 
@@ -112,7 +112,7 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg leading-relaxed text-muted-foreground max-w-2xl"
             >
-              Saleixo is a full-stack ecommerce studio based in Noida, India. We help artisans, D2C brands, and online sellers look professional, list correctly, and market effectively — across every major marketplace.
+              Saleixo is a full-stack ecommerce studio based in Noida, India. We help D2C brands, Amazon sellers, and ecommerce businesses look professional, list correctly, and market effectively — across every major marketplace.
             </motion.p>
           </div>
 
@@ -142,7 +142,7 @@ const About = () => {
                 Great products were<br />failing online.
               </h2>
               <p className="text-base text-muted-foreground leading-relaxed mb-4">
-                We kept seeing the same pattern — talented artisans and independent brands with genuinely excellent products, losing to inferior competitors because of poor photography, non-compliant listings, and scattered marketing.
+                We kept seeing the same pattern — independent brands and ecommerce sellers with genuinely excellent products, losing to inferior competitors because of poor photography, non-compliant listings, and scattered marketing.
               </p>
               <p className="text-base text-muted-foreground leading-relaxed mb-4">
                 The problem wasn't the products. It was that the tools to present them professionally were fragmented across dozens of freelancers, agencies, and self-service platforms — each with their own scope gaps, hidden costs, and no accountability for results.
@@ -157,7 +157,7 @@ const About = () => {
               {[
                 { icon: MapPin, label: 'Headquartered in Noida, UP, India', sub: 'Awfis, A-41, Sector 62, Noida 201309' },
                 { icon: Award, label: 'MSME Registered', sub: 'Udyam No: UDYAM-BR-06-0036869' },
-                { icon: Star,  label: '98% client satisfaction rate', sub: 'Across 500+ completed projects' },
+                { icon: Star,  label: '98% client retention rate', sub: 'Across 500+ completed projects' },
                 { icon: Clock, label: '48-hour average delivery', sub: 'For standard photography & listing packages' },
               ].map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="flex items-start gap-4 rounded-xl p-4"

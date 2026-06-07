@@ -61,7 +61,7 @@ const WhySaleixo = () => (
           A studio built by people who actually sell.
         </motion.h2>
         <motion.p variants={fadeUp} custom={2} className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          We've managed listings, ads, and photography for artisan sellers across Amazon, Etsy, and Shopify. We know where the bottleneck is before we sell you a thing — because we've fixed it before.
+          We've managed listings, ads, and photography for ecommerce brands across Amazon, Etsy, and Shopify. We know where the bottleneck is before we sell you a thing — because we've fixed it before.
         </motion.p>
       </motion.div>
 
