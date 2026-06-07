@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Plus, Edit, Trash2, Save, Star } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Star, Search } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 
 const AdminTestimonials = () => {
@@ -15,6 +15,7 @@ const AdminTestimonials = () => {
   const [loading, setLoading] = useState(true);
   const [editingTestimonial, setEditingTestimonial] = useState<any>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetchTestimonials();
@@ -132,6 +133,10 @@ const AdminTestimonials = () => {
       client_name: '',
       rating: 5,
       is_active: true,
+      client_role: '',
+      company: '',
+      platform: '',
+      avatar_url: '',
     });
     setIsDialogOpen(true);
   };
@@ -150,12 +155,26 @@ const AdminTestimonials = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-[#2c3e50]">Testimonials</h1>
-          <p className="text-[#7f8c8d] mt-2">Manage client testimonials</p>
+          <p className="text-[#7f8c8d] mt-2">
+            {testimonials.filter(t => t.is_active).length} active / {testimonials.length} total testimonials
+          </p>
         </div>
         <Button onClick={openNewTestimonialDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Add Testimonial
         </Button>
+      </div>
+
+      <div className="flex flex-wrap gap-3 items-center">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7f8c8d]" />
+          <Input
+            placeholder="Search by client name or quote..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9"
+          />
+        </div>
       </div>
 
       <div className="bg-white rounded-lg border border-[#ecf0f1]">
@@ -164,16 +183,28 @@ const AdminTestimonials = () => {
             <TableRow>
               <TableHead>Quote</TableHead>
               <TableHead>Client</TableHead>
+              <TableHead>Role / Company</TableHead>
+              <TableHead>Platform</TableHead>
               <TableHead>Rating</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {testimonials.map((testimonial) => (
+            {testimonials
+              .filter(t =>
+                search === '' ||
+                t.client_name?.toLowerCase().includes(search.toLowerCase()) ||
+                t.quote?.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((testimonial) => (
               <TableRow key={testimonial.id}>
                 <TableCell className="max-w-md truncate">{testimonial.quote}</TableCell>
                 <TableCell>{testimonial.client_name}</TableCell>
+                <TableCell className="text-sm text-[#7f8c8d]">
+                  {[testimonial.client_role, testimonial.company].filter(Boolean).join(' · ') || '—'}
+                </TableCell>
+                <TableCell>{testimonial.platform || '—'}</TableCell>
                 <TableCell>
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (
@@ -217,6 +248,13 @@ const AdminTestimonials = () => {
                 </TableCell>
               </TableRow>
             ))}
+            {testimonials.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={7} className="py-12 text-center text-[#7f8c8d]">
+                  No testimonials yet — add your first client review.
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>
@@ -253,18 +291,75 @@ const AdminTestimonials = () => {
                   className="mt-1"
                 />
               </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium text-[#2c3e50]">Client Role / Title</label>
+                  <Input
+                    value={editingTestimonial.client_role || ''}
+                    onChange={(e) => setEditingTestimonial({ ...editingTestimonial, client_role: e.target.value })}
+                    placeholder="e.g., Amazon Seller"
+                    className="mt-1"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-[#2c3e50]">Company / Store</label>
+                  <Input
+                    value={editingTestimonial.company || ''}
+                    onChange={(e) => setEditingTestimonial({ ...editingTestimonial, company: e.target.value })}
+                    placeholder="e.g., Artisan Crafts Co."
+                    className="mt-1"
+                  />
+                </div>
+              </div>
               <div>
-                <label className="text-sm font-medium text-[#2c3e50]">Rating (1-5)</label>
-                <Input
-                  type="number"
-                  min="1"
-                  max="5"
-                  value={editingTestimonial.rating || 5}
-                  onChange={(e) =>
-                    setEditingTestimonial({ ...editingTestimonial, rating: parseInt(e.target.value) })
-                  }
-                  className="mt-1"
-                />
+                <label className="text-sm font-medium text-[#2c3e50]">Rating</label>
+                <div className="flex gap-1 mt-2">
+                  {[1, 2, 3, 4, 5].map(n => (
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => setEditingTestimonial({ ...editingTestimonial, rating: n })}
+                      className="p-0.5 focus:outline-none"
+                    >
+                      <Star
+                        className={`w-6 h-6 transition-colors ${
+                          n <= (editingTestimonial.rating || 5)
+                            ? 'fill-gold text-gold'
+                            : 'text-gray-300 hover:text-gold'
+                        }`}
+                      />
+                    </button>
+                  ))}
+                  <span className="ml-2 text-sm text-[#7f8c8d] self-center">
+                    {editingTestimonial.rating || 5} / 5
+                  </span>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium text-[#2c3e50]">Platform</label>
+                  <select
+                    value={editingTestimonial.platform || ''}
+                    onChange={(e) => setEditingTestimonial({ ...editingTestimonial, platform: e.target.value })}
+                    className="mt-1 w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                  >
+                    <option value="">No platform</option>
+                    <option value="Google">Google</option>
+                    <option value="Amazon">Amazon</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Email">Email</option>
+                    <option value="Trustpilot">Trustpilot</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-[#2c3e50]">Avatar URL</label>
+                  <Input
+                    value={editingTestimonial.avatar_url || ''}
+                    onChange={(e) => setEditingTestimonial({ ...editingTestimonial, avatar_url: e.target.value })}
+                    placeholder="https://..."
+                    className="mt-1"
+                  />
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <Switch

@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Plus, Edit, Trash2, Save } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Search } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 
 const AdminServices = () => {
@@ -16,6 +16,8 @@ const AdminServices = () => {
   const [loading, setLoading] = useState(true);
   const [editingService, setEditingService] = useState<any>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
 
   useEffect(() => {
     fetchServices();
@@ -133,6 +135,10 @@ const AdminServices = () => {
       description: '',
       image_url: '',
       is_active: true,
+      category: '',
+      slug: '',
+      price_from: '',
+      featured: false,
     });
     setIsDialogOpen(true);
   };
@@ -151,12 +157,38 @@ const AdminServices = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-[#2c3e50]">Services Manager</h1>
-          <p className="text-[#7f8c8d] mt-2">Manage your service offerings</p>
+          <p className="text-[#7f8c8d] mt-2">
+            {services.filter(s => s.is_active).length} active / {services.length} total services
+          </p>
         </div>
         <Button onClick={openNewServiceDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Add Service
         </Button>
+      </div>
+
+      <div className="flex flex-wrap gap-3 items-center">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7f8c8d]" />
+          <Input
+            placeholder="Search services..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9"
+          />
+        </div>
+        <select
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          className="h-10 px-3 rounded-md border border-input bg-background text-sm"
+        >
+          <option value="all">All Categories</option>
+          <option value="Photography">Photography</option>
+          <option value="Ecommerce">Ecommerce</option>
+          <option value="Design">Design</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Amazon">Amazon</option>
+        </select>
       </div>
 
       <Card className="bg-white border-[#ecf0f1]">
@@ -165,15 +197,22 @@ const AdminServices = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Title</TableHead>
+                <TableHead>Category</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {services.map((service) => (
+              {services
+                .filter(s =>
+                  (categoryFilter === 'all' || s.category === categoryFilter) &&
+                  (search === '' || s.title?.toLowerCase().includes(search.toLowerCase()))
+                )
+                .map((service) => (
                 <TableRow key={service.id}>
                   <TableCell className="font-medium">{service.title}</TableCell>
+                  <TableCell>{service.category || '—'}</TableCell>
                   <TableCell className="max-w-md truncate">{service.description}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
@@ -206,6 +245,13 @@ const AdminServices = () => {
                   </TableCell>
                 </TableRow>
               ))}
+              {services.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="py-12 text-center text-[#7f8c8d]">
+                    No services yet — click "Add Service" to add your first.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </CardContent>
@@ -243,6 +289,60 @@ const AdminServices = () => {
                   className="mt-1"
                 />
               </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium text-[#2c3e50]">Category</label>
+                  <select
+                    value={editingService.category || ''}
+                    onChange={(e) => setEditingService({ ...editingService, category: e.target.value })}
+                    className="mt-1 w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                  >
+                    <option value="">No category</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Ecommerce">Ecommerce</option>
+                    <option value="Design">Design</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Amazon">Amazon</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-[#2c3e50]">Price From (USD)</label>
+                  <Input
+                    type="number"
+                    min="0"
+                    value={editingService.price_from || ''}
+                    onChange={(e) => setEditingService({ ...editingService, price_from: e.target.value })}
+                    placeholder="e.g., 299"
+                    className="mt-1"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-[#2c3e50]">
+                  Slug
+                  <span className="ml-2 text-xs font-normal text-[#7f8c8d]">(URL path)</span>
+                </label>
+                <div className="flex gap-2 mt-1">
+                  <Input
+                    value={editingService.slug || ''}
+                    onChange={(e) => setEditingService({ ...editingService, slug: e.target.value })}
+                    placeholder="photography-service"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      const slug = (editingService.title || '')
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/(^-|-$)/g, '');
+                      setEditingService({ ...editingService, slug });
+                    }}
+                  >
+                    Generate
+                  </Button>
+                </div>
+              </div>
               <div>
                 <label className="text-sm font-medium text-[#2c3e50]">Image URL</label>
                 <Input
@@ -253,6 +353,26 @@ const AdminServices = () => {
                   placeholder="https://..."
                   className="mt-1"
                 />
+                {editingService.image_url && (
+                  <div className="mt-2 rounded-lg overflow-hidden border border-[#ecf0f1] h-36">
+                    <img
+                      src={editingService.image_url}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="service-featured"
+                  checked={editingService.featured || false}
+                  onChange={(e) => setEditingService({ ...editingService, featured: e.target.checked })}
+                  className="w-4 h-4 rounded"
+                />
+                <label htmlFor="service-featured" className="text-sm text-[#2c3e50]">Featured service</label>
               </div>
               <div className="flex items-center gap-2">
                 <Switch

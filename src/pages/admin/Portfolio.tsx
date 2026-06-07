@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Plus, Edit, Trash2, Save } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Search } from 'lucide-react';
 
 const AdminPortfolio = () => {
   const { toast } = useToast();
@@ -13,6 +13,8 @@ const AdminPortfolio = () => {
   const [loading, setLoading] = useState(true);
   const [editingProject, setEditingProject] = useState<any>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
 
   useEffect(() => {
     fetchProjects();
@@ -107,6 +109,7 @@ const AdminPortfolio = () => {
       description: '',
       image_url: '',
       category: '',
+      featured: false,
     });
     setIsDialogOpen(true);
   };
@@ -125,7 +128,9 @@ const AdminPortfolio = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-[#2c3e50]">Portfolio Gallery</h1>
-          <p className="text-[#7f8c8d] mt-2">Manage your portfolio projects</p>
+          <p className="text-[#7f8c8d] mt-2">
+            {projects.length} project{projects.length !== 1 ? 's' : ''} in your gallery
+          </p>
         </div>
         <Button onClick={openNewProjectDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
@@ -133,8 +138,43 @@ const AdminPortfolio = () => {
         </Button>
       </div>
 
+      <div className="flex flex-wrap gap-3 items-center">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7f8c8d]" />
+          <Input
+            placeholder="Search projects..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9"
+          />
+        </div>
+        <select
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          className="h-10 px-3 rounded-md border border-input bg-background text-sm"
+        >
+          <option value="all">All Categories</option>
+          <option value="Photography">Photography</option>
+          <option value="Ecommerce">Ecommerce</option>
+          <option value="Design">Design</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Amazon">Amazon</option>
+        </select>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
+        {projects.length === 0 && (
+          <div className="col-span-3 py-16 text-center text-[#7f8c8d]">
+            <p className="text-lg font-medium mb-1">No portfolio projects yet</p>
+            <p className="text-sm">Click "Add Project" to showcase your first client result.</p>
+          </div>
+        )}
+        {projects
+          .filter(p =>
+            (categoryFilter === 'all' || p.category === categoryFilter) &&
+            (search === '' || p.title?.toLowerCase().includes(search.toLowerCase()))
+          )
+          .map((project) => (
           <div key={project.id} className="bg-white rounded-lg border border-[#ecf0f1] overflow-hidden">
             {project.image_url && (
               <img
@@ -216,17 +256,43 @@ const AdminPortfolio = () => {
                   placeholder="https://..."
                   className="mt-1"
                 />
+                {editingProject.image_url && (
+                  <div className="mt-2 rounded-lg overflow-hidden border border-[#ecf0f1] h-40">
+                    <img
+                      src={editingProject.image_url}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                    />
+                  </div>
+                )}
               </div>
               <div>
                 <label className="text-sm font-medium text-[#2c3e50]">Category</label>
-                <Input
+                <select
                   value={editingProject.category || ''}
-                  onChange={(e) =>
-                    setEditingProject({ ...editingProject, category: e.target.value })
-                  }
-                  placeholder="e.g., Photography, Design, Marketing"
-                  className="mt-1"
+                  onChange={(e) => setEditingProject({ ...editingProject, category: e.target.value })}
+                  className="mt-1 w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                >
+                  <option value="">No category</option>
+                  <option value="Photography">Photography</option>
+                  <option value="Ecommerce">Ecommerce</option>
+                  <option value="Design">Design</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Amazon">Amazon</option>
+                </select>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="featured-toggle"
+                  checked={editingProject.featured || false}
+                  onChange={(e) => setEditingProject({ ...editingProject, featured: e.target.checked })}
+                  className="w-4 h-4 rounded"
                 />
+                <label htmlFor="featured-toggle" className="text-sm text-[#2c3e50]">
+                  Featured (shown prominently on homepage)
+                </label>
               </div>
               <div className="flex justify-end gap-2 pt-4">
                 <Button variant="outline" onClick={() => setIsDialogOpen(false)}>

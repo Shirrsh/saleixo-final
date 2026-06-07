@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Plus, Edit, Trash2, Save } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, Search } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 
 const AdminFAQ = () => {
@@ -15,6 +15,8 @@ const AdminFAQ = () => {
   const [loading, setLoading] = useState(true);
   const [editingFaq, setEditingFaq] = useState<any>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
 
   useEffect(() => {
     fetchFaqs();
@@ -132,6 +134,7 @@ const AdminFAQ = () => {
       answer: '',
       category: '',
       is_active: true,
+      sort_order: 0,
     });
     setIsDialogOpen(true);
   };
@@ -150,12 +153,39 @@ const AdminFAQ = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-[#2c3e50]">FAQ Manager</h1>
-          <p className="text-[#7f8c8d] mt-2">Manage frequently asked questions</p>
+          <p className="text-[#7f8c8d] mt-2">
+            {faqs.filter(f => f.is_active).length} active / {faqs.length} total FAQs
+          </p>
         </div>
         <Button onClick={openNewFaqDialog} className="bg-gold hover:bg-gold-hover text-[#1a3a3a]">
           <Plus className="w-4 h-4 mr-2" />
           Add FAQ
         </Button>
+      </div>
+
+      <div className="flex flex-wrap gap-3 items-center">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7f8c8d]" />
+          <Input
+            placeholder="Search questions..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9"
+          />
+        </div>
+        <select
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          className="h-10 px-3 rounded-md border border-input bg-background text-sm"
+        >
+          <option value="all">All Categories</option>
+          <option value="General">General</option>
+          <option value="Services">Services</option>
+          <option value="Pricing">Pricing</option>
+          <option value="Ecommerce">Ecommerce</option>
+          <option value="Photography">Photography</option>
+          <option value="Getting Started">Getting Started</option>
+        </select>
       </div>
 
       <div className="bg-white rounded-lg border border-[#ecf0f1]">
@@ -169,7 +199,12 @@ const AdminFAQ = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {faqs.map((faq) => (
+            {faqs
+              .filter(f =>
+                (categoryFilter === 'all' || f.category === categoryFilter) &&
+                (search === '' || f.question?.toLowerCase().includes(search.toLowerCase()))
+              )
+              .map((faq) => (
               <TableRow key={faq.id}>
                 <TableCell className="max-w-md font-medium">{faq.question}</TableCell>
                 <TableCell>{faq.category || 'General'}</TableCell>
@@ -204,6 +239,13 @@ const AdminFAQ = () => {
                 </TableCell>
               </TableRow>
             ))}
+            {faqs.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={4} className="py-12 text-center text-[#7f8c8d]">
+                  No FAQs yet — click "Add FAQ" to create your first.
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>
@@ -242,12 +284,30 @@ const AdminFAQ = () => {
               </div>
               <div>
                 <label className="text-sm font-medium text-[#2c3e50]">Category</label>
-                <Input
+                <select
                   value={editingFaq.category || ''}
-                  onChange={(e) =>
-                    setEditingFaq({ ...editingFaq, category: e.target.value })
-                  }
-                  placeholder="e.g., General, Services, Pricing"
+                  onChange={(e) => setEditingFaq({ ...editingFaq, category: e.target.value })}
+                  className="mt-1 w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
+                >
+                  <option value="">No category</option>
+                  <option value="General">General</option>
+                  <option value="Services">Services</option>
+                  <option value="Pricing">Pricing</option>
+                  <option value="Ecommerce">Ecommerce</option>
+                  <option value="Photography">Photography</option>
+                  <option value="Getting Started">Getting Started</option>
+                </select>
+              </div>
+              <div>
+                <label className="text-sm font-medium text-[#2c3e50]">
+                  Display Order
+                  <span className="ml-2 text-xs font-normal text-[#7f8c8d]">(lower = shown first)</span>
+                </label>
+                <Input
+                  type="number"
+                  min="0"
+                  value={editingFaq.sort_order ?? 0}
+                  onChange={(e) => setEditingFaq({ ...editingFaq, sort_order: parseInt(e.target.value) || 0 })}
                   className="mt-1"
                 />
               </div>

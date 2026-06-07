@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, FolderOpen, Briefcase, Plus, Clock } from 'lucide-react';
+import { FileText, FolderOpen, Briefcase, Plus, Clock, Users, AlertCircle, TrendingUp } from 'lucide-react';
 import { format } from 'date-fns';
 
 const AdminDashboard = () => {
@@ -11,12 +12,22 @@ const AdminDashboard = () => {
     blogPosts: 0,
     portfolioItems: 0,
     activeServices: 0,
+    totalLeads: 0,
+    newLeads: 0,
   });
   const [recentActivity, setRecentActivity] = useState<Array<{
     id: string;
     action: string | null;
     item_type: string | null;
     user_email: string | null;
+    created_at: string;
+  }>>([]);
+  const [recentLeads, setRecentLeads] = useState<Array<{
+    id: string;
+    name: string;
+    email: string;
+    services: string[] | null;
+    status: string;
     created_at: string;
   }>>([]);
   const [loading, setLoading] = useState(true);
@@ -29,7 +40,7 @@ const AdminDashboard = () => {
 
     const fetchStats = async () => {
       try {
-        const [blogCount, portfolioCount, servicesCount, activityData] = await Promise.all([
+        const [blogCount, portfolioCount, servicesCount, activityData, totalLeads, newLeads] = await Promise.all([
           supabase.from('blog_posts').select('*', { count: 'exact', head: true }),
           supabase.from('portfolio_projects').select('*', { count: 'exact', head: true }),
           supabase.from('services').select('*', { count: 'exact', head: true }),
@@ -38,15 +49,27 @@ const AdminDashboard = () => {
             .select('id, action, item_type, user_email, created_at')
             .order('created_at', { ascending: false })
             .limit(10),
+          supabase.from('leads').select('*', { count: 'exact', head: true }),
+          supabase.from('leads').select('*', { count: 'exact', head: true }).eq('status', 'new'),
         ]);
 
         setStats({
           blogPosts: blogCount.count || 0,
           portfolioItems: portfolioCount.count || 0,
           activeServices: servicesCount.count || 0,
+          totalLeads: totalLeads.count || 0,
+          newLeads: newLeads.count || 0,
         });
 
         setRecentActivity(activityData.data || []);
+
+        const { data: leadsData } = await supabase
+          .from('leads')
+          .select('id, name, email, services, status, created_at')
+          .order('created_at', { ascending: false })
+          .limit(5);
+        setRecentLeads((leadsData as any) || []);
+
         clearTimeout(forceLoadTimeout);
         setLoading(false);
       } catch (error) {
@@ -69,7 +92,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
         <Card className="bg-white border-[#ecf0f1]">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-[#7f8c8d]">
@@ -111,6 +134,36 @@ const AdminDashboard = () => {
             </div>
           </CardContent>
         </Card>
+
+        <Card className="bg-white border-[#ecf0f1]">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-[#7f8c8d]">
+              Total Leads
+            </CardTitle>
+            <Users className="w-5 h-5 text-[#1a3a3a]" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-[#2c3e50]">
+              {loading ? '...' : stats.totalLeads}
+            </div>
+            <p className="text-xs text-[#7f8c8d] mt-1">all time</p>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-white border-[#ecf0f1]">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-[#7f8c8d]">
+              New Leads
+            </CardTitle>
+            <AlertCircle className="w-5 h-5 text-amber-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-amber-600">
+              {loading ? '...' : stats.newLeads}
+            </div>
+            <p className="text-xs text-[#7f8c8d] mt-1">awaiting response</p>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Quick Actions */}
@@ -137,6 +190,51 @@ const AdminDashboard = () => {
               Add Portfolio
             </Button>
           </Link>
+          <Link to="/admin/leads">
+            <Button variant="outline">
+              <Users className="w-4 h-4 mr-2" />
+              View Leads
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
+
+      {/* Recent Leads */}
+      <Card className="bg-white border-[#ecf0f1]">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-[#2c3e50]">Recent Leads</CardTitle>
+          <Link to="/admin/leads">
+            <Button variant="outline" size="sm">View All</Button>
+          </Link>
+        </CardHeader>
+        <CardContent>
+          {loading ? (
+            <p className="text-[#7f8c8d]">Loading leads...</p>
+          ) : recentLeads.length === 0 ? (
+            <p className="text-[#7f8c8d]">No leads yet — share your Get Started page!</p>
+          ) : (
+            <div className="space-y-3">
+              {recentLeads.map(lead => (
+                <div key={lead.id} className="flex items-center justify-between py-2 border-b border-[#ecf0f1] last:border-0">
+                  <div>
+                    <p className="font-medium text-[#2c3e50] text-sm">{lead.name}</p>
+                    <p className="text-xs text-[#7f8c8d]">{lead.email} · {lead.services?.[0] || 'General'}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Badge
+                      variant={lead.status === 'new' ? 'default' : 'secondary'}
+                      className={lead.status === 'new' ? 'bg-amber-100 text-amber-700 border-amber-200' : ''}
+                    >
+                      {lead.status}
+                    </Badge>
+                    <span className="text-xs text-[#7f8c8d]">
+                      {format(new Date(lead.created_at), 'MMM d')}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
 
