@@ -176,6 +176,12 @@ const QuickContactForm = () => {
       await supabase.from('activity_log').insert({
         action: 'New quick enquiry via Get Started page', item_type: 'lead',
       });
+      // Fire-and-forget email notification
+      supabase.functions.invoke('notify-lead', {
+        body: { name: form.name, email: form.email, phone: form.whatsapp || null,
+                services: form.service ? [form.service] : [], message: form.message,
+                source: 'get-started-quick-form' },
+      }).catch(() => {});
     } catch (_) { /* silent */ } finally {
       setLoading(false);
       setSubmitted(true);
@@ -327,6 +333,17 @@ const GetStarted = () => {
         action:    'New lead submitted via Get Started form',
         item_type: 'lead',
       });
+
+      // Fire-and-forget email notification
+      supabase.functions.invoke('notify-lead', {
+        body: {
+          name: data.name, email: data.email, phone: data.phone,
+          business: data.business, product: data.product,
+          services: data.services, marketplaces: data.marketplaces,
+          budget_range: data.budget, timeline: data.timeline,
+          message: data.challenge, source: 'get-started-form',
+        },
+      }).catch(() => {});
 
       setSubmitted(true);
     } catch (err: any) {
