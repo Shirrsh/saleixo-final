@@ -103,11 +103,23 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
     className="fixed top-0 left-0 right-0 z-[60] flex items-center overflow-hidden"
     style={{ height: BAR_H, background: '#dc2626' }}
   >
-    {/* Scrolling ticker */}
+    {/* Mobile: single clean centered line — no ticker jank */}
+    <div className="md:hidden flex-1 flex items-center justify-center px-10">
+      <Link
+        to="/get-started"
+        onClick={onDismiss}
+        className="text-[11px] font-bold tracking-[0.08em] text-white text-center whitespace-nowrap"
+        style={{ letterSpacing: '0.06em' }}
+      >
+        ✦ Free brand audit — <span className="underline underline-offset-2">Get started →</span>
+      </Link>
+    </div>
+
+    {/* Desktop: scrolling ticker */}
     <motion.div
       animate={{ x: ['0%', '-50%'] }}
       transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
-      className="flex items-center whitespace-nowrap text-[11px] font-bold tracking-wide flex-shrink-0"
+      className="hidden md:flex items-center whitespace-nowrap text-[11px] font-bold tracking-wide flex-shrink-0"
       style={{ color: '#ffffff', willChange: 'transform' }}
     >
       <span className="flex items-center">{BAR_TEXT}</span>
@@ -116,9 +128,9 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
       <span className="flex items-center">{BAR_TEXT}</span>
     </motion.div>
 
-    {/* Right fade — hides text sliding under dismiss button */}
+    {/* Right fade — desktop only (hides text sliding under dismiss button) */}
     <div
-      className="absolute right-0 top-0 bottom-0 pointer-events-none"
+      className="hidden md:block absolute right-0 top-0 bottom-0 pointer-events-none"
       style={{
         width: 56,
         background: 'linear-gradient(to right, transparent, #dc2626 60%)',

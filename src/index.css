@@ -575,6 +575,10 @@ a[class*="px-"][class*="rounded"]:not([disabled]):hover {
   }
 }
 
+/* Scrollbar-hide utility — for touch-scroll containers where the bar is visual noise */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+
 /* Print */
 @media print {
   .cursor-follower, .theme-toggle, .scroll-progress,

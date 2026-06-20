@@ -464,21 +464,35 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Mobile image strip */}
-        <div className="relative overflow-hidden w-full" style={{ height: 'clamp(230px, 58vw, 300px)' }}>
+        {/* Mobile image strip — native horizontal scroll with snap */}
+        <div
+          className="relative w-full"
+          style={{ height: 'clamp(230px, 58vw, 300px)' }}
+        >
+          {/* Edge fades */}
           <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
-            style={{ width: '48px', background: `linear-gradient(to right, ${bgSolid}, ${bgT0})` }} />
+            style={{ width: '36px', background: `linear-gradient(to right, ${bgSolid}, ${bgT0})` }} />
           <div className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
-            style={{ width: '48px', background: `linear-gradient(to left, ${bgSolid}, ${bgT0})` }} />
+            style={{ width: '36px', background: `linear-gradient(to left, ${bgSolid}, ${bgT0})` }} />
+
           <div
-            className="flex gap-3 h-full items-center"
-            style={{ animation: 'mobile-scroll 22s linear infinite', willChange: 'transform', width: 'max-content', paddingLeft: '20px' }}
+            className="scrollbar-hide flex gap-3 h-full items-center"
+            style={{
+              overflowX: 'auto',
+              overflowY: 'hidden',
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              overscrollBehaviorX: 'contain',
+              paddingLeft: '20px',
+              paddingRight: '20px',
+            }}
           >
-            {[...col1, ...col2, ...col1].map((src, i) => (
+            {[...col1, ...col2].map((src, i) => (
               <div
                 key={i}
-                className="relative overflow-hidden rounded-2xl flex-shrink-0"
+                className="relative overflow-hidden rounded-2xl flex-shrink-0 active:scale-[0.97] transition-transform duration-200"
                 style={{
+                  scrollSnapAlign: 'start',
                   width: 'clamp(148px, 40vw, 180px)',
                   height: 'clamp(196px, 52vw, 240px)',
                   border: `1px solid ${borderColor}`,
@@ -491,7 +505,10 @@ const Hero = () => {
           </div>
         </div>
 
-        <div style={{ height: '32px' }} />
+        {/* Swipe hint */}
+        <p className="text-center text-[10px] font-medium mt-1.5 mb-6" style={{ color: isLight ? 'hsl(0 0% 55%)' : '#64748b', letterSpacing: '0.06em' }}>
+          ← swipe to explore →
+        </p>
       </div>
     </section>
   );
