@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // ── Per-marketplace config ──────────────────────────────────────────────────
@@ -359,18 +359,38 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
 const MarketplaceMockup = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setDirection(1);
       setCurrent(c => (c + 1) % marketplaces.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   const go = (dir: number) => {
     setDirection(dir);
     setCurrent(c => (c + dir + marketplaces.length) % marketplaces.length);
+    setIsPaused(true);
+    // Resume auto-play after manual nav
+    setTimeout(() => setIsPaused(false), 8000);
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = touchStartX.current - e.changedTouches[0].clientX;
+    const dy = Math.abs((touchStartY.current ?? 0) - e.changedTouches[0].clientY);
+    if (Math.abs(dx) > 48 && Math.abs(dx) > dy) go(dx > 0 ? 1 : -1);
+    touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   const mp = marketplaces[current];
@@ -381,10 +401,22 @@ const MarketplaceMockup = () => {
     exit: (d: number) => ({ x: d > 0 ? -60 : 60, opacity: 0, transition: { duration: 0.25 } }),
   };
 
+  // Arrow button style — always visible, works in both light & dark mode
+  const arrowStyle: React.CSSProperties = {
+    background: 'rgba(0,0,0,0.62)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    border: '1px solid rgba(255,255,255,0.18)',
+  };
+
   return (
     <div className="relative group w-full max-w-full">
       {/* Browser chrome */}
-      <div className="rounded-2xl overflow-hidden shadow-2xl border border-border-glow/30 bg-[#1a1a2e] w-full">
+      <div
+        className="rounded-2xl overflow-hidden shadow-2xl border border-border-glow/30 bg-[#1a1a2e] w-full"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         {/* Browser top bar */}
         <div className="flex items-center gap-2 px-3 py-2.5 bg-[#0f0f1a] border-b border-white/10">
           <div className="flex gap-1.5 flex-shrink-0">
@@ -424,50 +456,59 @@ const MarketplaceMockup = () => {
               <Dashboard mp={mp} />
             </motion.div>
           </AnimatePresence>
+
+          {/* Prev arrow — overlaid inside the dashboard frame */}
+          <button
+            onClick={() => go(-1)}
+            aria-label="Previous marketplace"
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center z-20 active:scale-90 transition-transform lg:opacity-0 lg:group-hover:opacity-100 lg:transition-opacity"
+            style={arrowStyle}
+          >
+            <ChevronLeft className="w-4 h-4 text-white" strokeWidth={2.5} />
+          </button>
+
+          {/* Next arrow */}
+          <button
+            onClick={() => go(1)}
+            aria-label="Next marketplace"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center z-20 active:scale-90 transition-transform lg:opacity-0 lg:group-hover:opacity-100 lg:transition-opacity"
+            style={arrowStyle}
+          >
+            <ChevronRight className="w-4 h-4 text-white" strokeWidth={2.5} />
+          </button>
         </div>
       </div>
 
-      {/* Prev / Next arrows — visible on hover (desktop) / always on mobile */}
-      <button
-        onClick={() => go(-1)}
-        aria-label="Previous marketplace"
-        className="absolute left-2 top-1/2 -translate-y-1/2 glass-purple rounded-full p-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-10"
-      >
-        <ChevronLeft className="w-4 h-4 text-white" />
-      </button>
-      <button
-        onClick={() => go(1)}
-        aria-label="Next marketplace"
-        className="absolute right-2 top-1/2 -translate-y-1/2 glass-purple rounded-full p-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity z-10"
-      >
-        <ChevronRight className="w-4 h-4 text-white" />
-      </button>
-
-      {/* Dot indicators */}
-      <div className="flex justify-center items-center gap-1.5 mt-3" role="tablist" aria-label="Marketplace slides">
+      {/* Dot indicators — 32px tap area each */}
+      <div className="flex justify-center items-center gap-0.5 mt-3" role="tablist" aria-label="Marketplace slides">
         {marketplaces.map((m, i) => (
           <button
             key={m.id}
             aria-label={`Show ${m.name}`}
             aria-selected={i === current}
             role="tab"
-            onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); }}
-            style={{
-              width: i === current ? 20 : 5,
-              height: 5,
-              borderRadius: 999,
-              background: i === current ? mp.accent : 'hsl(174 30% 22%)',
-              transition: 'all 0.3s ease',
-              padding: 0,
-              border: 'none',
-              cursor: 'pointer',
-              minHeight: 'unset',
-              minWidth: 'unset',
-              flexShrink: 0,
-            }}
-          />
+            onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); setIsPaused(true); setTimeout(() => setIsPaused(false), 8000); }}
+            className="flex items-center justify-center"
+            style={{ width: 28, height: 28, background: 'transparent', border: 'none', cursor: 'pointer', flexShrink: 0 }}
+          >
+            <span
+              style={{
+                display: 'block',
+                width: i === current ? 18 : 5,
+                height: 5,
+                borderRadius: 999,
+                background: i === current ? mp.accent : 'hsl(var(--muted-foreground) / 0.25)',
+                transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+              }}
+            />
+          </button>
         ))}
       </div>
+
+      {/* Marketplace label */}
+      <p className="text-center text-[11px] text-muted-foreground/60 font-medium tracking-wide -mt-1">
+        {mp.name} · swipe to explore
+      </p>
 
       {/* Glow under mockup */}
       <div
