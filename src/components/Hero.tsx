@@ -110,6 +110,11 @@ const Hero = () => {
     offset: ['start start', 'end start'],
   });
   const bgOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  // Parallax: text drifts down + fades slightly as you scroll past the hero
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.25]);
+  // Gallery drifts up slightly slower than scroll for depth
+  const galleryY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   const scrollToContact = () =>
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -242,7 +247,7 @@ const Hero = () => {
         }}>
 
         {/* LEFT — text */}
-        <div className="flex flex-col justify-center" style={{ width: 'min(720px, 52%)', paddingRight: 32 }}>
+        <motion.div className="flex flex-col justify-center" style={{ width: 'min(720px, 52%)', paddingRight: 32, y: textY, opacity: textOpacity }}>
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -335,7 +340,7 @@ const Hero = () => {
               </div>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* RIGHT — spacer so gallery has room */}
         <div style={{ flex: 1 }} />
@@ -343,7 +348,7 @@ const Hero = () => {
         </div>{/* end viewport-padded frame */}
 
         {/* RIGHT — scrolling gallery — full height, absolutely positioned */}
-        <div className="absolute right-0 top-0 bottom-0" style={{ width: '48%', overflow: 'hidden' }}>
+        <motion.div className="absolute right-0 top-0 bottom-0" style={{ width: '48%', overflow: 'hidden', y: galleryY }}>
           {/* Left fade */}
           <div className="absolute inset-y-0 left-0 z-20 pointer-events-none"
             style={{ width: '140px', background: `linear-gradient(to right, ${bgSolid}, ${bgT0})` }} />
@@ -367,7 +372,7 @@ const Hero = () => {
             <ScrollColumn srcs={col1} direction="up" duration={25} startOffset={0} isLight={isLight} />
             <ScrollColumn srcs={col2} direction="up" duration={32} startOffset={-156} isLight={isLight} />
           </motion.div>
-        </div>
+        </motion.div>
       </div>
 
       {/* ── Mobile layout: stacked ── */}
@@ -460,23 +465,24 @@ const Hero = () => {
         </div>
 
         {/* Mobile image strip */}
-        <div className="relative overflow-hidden w-full" style={{ height: '200px' }}>
+        <div className="relative overflow-hidden w-full" style={{ height: 'clamp(230px, 58vw, 300px)' }}>
           <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
-            style={{ width: '40px', background: `linear-gradient(to right, ${bgSolid}, ${bgT0})` }} />
+            style={{ width: '48px', background: `linear-gradient(to right, ${bgSolid}, ${bgT0})` }} />
           <div className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
-            style={{ width: '40px', background: `linear-gradient(to left, ${bgSolid}, ${bgT0})` }} />
+            style={{ width: '48px', background: `linear-gradient(to left, ${bgSolid}, ${bgT0})` }} />
           <div
             className="flex gap-3 h-full items-center"
-            style={{ animation: 'mobile-scroll 20s linear infinite', willChange: 'transform', width: 'max-content', paddingLeft: '16px' }}
+            style={{ animation: 'mobile-scroll 22s linear infinite', willChange: 'transform', width: 'max-content', paddingLeft: '20px' }}
           >
             {[...col1, ...col2, ...col1].map((src, i) => (
               <div
                 key={i}
                 className="relative overflow-hidden rounded-2xl flex-shrink-0"
                 style={{
-                  width: '150px', height: '180px',
+                  width: 'clamp(148px, 40vw, 180px)',
+                  height: 'clamp(196px, 52vw, 240px)',
                   border: `1px solid ${borderColor}`,
-                  boxShadow: isLight ? '0 4px 16px hsl(0 0% 0% / 0.08)' : '0 4px 16px hsl(220 30% 5% / 0.4)',
+                  boxShadow: isLight ? '0 6px 24px hsl(0 0% 0% / 0.10)' : '0 6px 24px hsl(220 30% 5% / 0.45)',
                 }}
               >
                 <img src={src} alt="Portfolio" className="w-full h-full object-cover" loading="lazy" />

@@ -1,7 +1,9 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useSiteImages } from '@/hooks/useSiteImages';
+import Parallax, { ParallaxBlob } from '@/components/Parallax';
 
 // Portfolio images
 import port1 from '@/assets/portfolio-1.jpg';
@@ -51,25 +53,34 @@ const Cell = ({
 const MobileCarousel = ({ images }: { images: { src: string; alt: string }[] }) => {
   const [current, setCurrent] = useState(0);
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   const go = (dir: 1 | -1) =>
     setCurrent(c => Math.max(0, Math.min(images.length - 1, c + dir)));
 
-  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
-  const onTouchEnd   = (e: React.TouchEvent) => {
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) go(diff > 0 ? 1 : -1);
+    const dx = touchStartX.current - e.changedTouches[0].clientX;
+    const dy = Math.abs((touchStartY.current ?? 0) - e.changedTouches[0].clientY);
+    if (Math.abs(dx) > 44 && Math.abs(dx) > dy) go(dx > 0 ? 1 : -1);
     touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   const item = images[current];
+  const canPrev = current > 0;
+  const canNext = current < images.length - 1;
 
   return (
     <div className="md:hidden">
+      {/* Image frame */}
       <div
-        className="relative overflow-hidden rounded-xl"
-        style={{ height: 280 }}
+        className="relative overflow-hidden rounded-2xl"
+        style={{ height: 'clamp(260px, 72vw, 380px)' }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
@@ -78,33 +89,68 @@ const MobileCarousel = ({ images }: { images: { src: string; alt: string }[] }) 
           src={item.src}
           alt={item.alt}
           className="w-full h-full object-cover"
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
           loading="lazy"
         />
+
+        {/* Counter badge */}
         <div
           className="absolute top-3 right-3 px-3 py-1 rounded-full text-[11px] font-semibold"
-          style={{ background: 'rgba(0,0,0,0.55)', color: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(8px)' }}
+          style={{ background: 'rgba(0,0,0,0.52)', color: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(10px)' }}
         >
           {current + 1} / {images.length}
         </div>
+
+        {/* Prev arrow */}
+        {canPrev && (
+          <button
+            onClick={() => go(-1)}
+            aria-label="Previous image"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform"
+            style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(10px)' }}
+          >
+            <ChevronLeft className="w-5 h-5 text-white" strokeWidth={2} />
+          </button>
+        )}
+
+        {/* Next arrow */}
+        {canNext && (
+          <button
+            onClick={() => go(1)}
+            aria-label="Next image"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform"
+            style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(10px)' }}
+          >
+            <ChevronRight className="w-5 h-5 text-white" strokeWidth={2} />
+          </button>
+        )}
       </div>
-      <div className="flex justify-center gap-2.5 mt-3">
+
+      {/* Dot indicators — 32px tap area each, pill-shaped active */}
+      <div className="flex justify-center items-center gap-0.5 mt-4">
         {images.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
             aria-label={`Go to image ${i + 1}`}
-            style={{
-              width: 8, height: 8,
-              borderRadius: '50%',
-              background: i === current ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground) / 0.25)',
-              transition: 'background 0.3s ease',
-              padding: 0, border: 'none', cursor: 'pointer',
-              flexShrink: 0,
-            }}
-          />
+            className="flex items-center justify-center"
+            style={{ width: 32, height: 32 }}
+          >
+            <span
+              style={{
+                display: 'block',
+                width: i === current ? 22 : 7,
+                height: 7,
+                borderRadius: 999,
+                background: i === current
+                  ? 'hsl(var(--foreground))'
+                  : 'hsl(var(--muted-foreground) / 0.22)',
+                transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+              }}
+            />
+          </button>
         ))}
       </div>
     </div>
@@ -122,10 +168,12 @@ const Portfolio = () => {
   }));
 
   return (
-    <section id="portfolio" className="py-12 md:py-16 bg-background">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <section id="portfolio" className="relative overflow-hidden py-12 md:py-16 bg-background">
+      <ParallaxBlob hue="258 90% 66%" opacity={0.05} size={560} speed={0.4} style={{ top: '-12%', right: '-10%' }} />
+      <div className="container relative z-10 mx-auto px-4 max-w-5xl">
 
         {/* Header */}
+        <Parallax speed={-0.07}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -144,6 +192,7 @@ const Portfolio = () => {
             Jewelry, apparel, home, beauty, food, and craft — shot, listed, and grown.
           </p>
         </motion.div>
+        </Parallax>
 
         {/* ── Desktop: grid + banner wrapped for bottom fade ── */}
         <div className="relative hidden md:block">
@@ -162,7 +211,8 @@ const Portfolio = () => {
             <Cell src={images[4].src} alt={images[4].alt} fallback={images[4].fallback} delay={0.24} />
           </div>
 
-          {/* 6th image as a wide banner below */}
+          {/* 6th image as a wide banner below — slight parallax drift */}
+          <Parallax speed={0.1}>
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -179,6 +229,7 @@ const Portfolio = () => {
               onError={(e) => { (e.currentTarget as HTMLImageElement).src = images[5].fallback; }}
             />
           </motion.div>
+          </Parallax>
 
           {/* Bottom fade overlay */}
           <div

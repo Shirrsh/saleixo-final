@@ -19,17 +19,19 @@ const WhatsAppButton = () => {
 
   return (
     <div className="fixed bottom-6 right-5 sm:right-6 z-50">
-      {/* Dismiss */}
+      {/* Dismiss — 32px tap area, visually small */}
       <button
         onClick={() => setDismissed(true)}
         aria-label="Dismiss WhatsApp button"
-        className="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center z-10 transition-opacity hover:opacity-80"
-        style={{
-          background: 'hsl(0 0% 15%)',
-          border: '1px solid hsl(0 0% 35%)',
-        }}
+        className="absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center z-10 transition-opacity hover:opacity-80 active:scale-90"
+        style={{ background: 'transparent' }}
       >
-        <X size={8} style={{ color: 'hsl(0 0% 80%)' }} strokeWidth={2.5} />
+        <span
+          className="w-5 h-5 rounded-full flex items-center justify-center"
+          style={{ background: 'hsl(0 0% 15%)', border: '1px solid hsl(0 0% 35%)' }}
+        >
+          <X size={9} style={{ color: 'hsl(0 0% 80%)' }} strokeWidth={2.5} />
+        </span>
       </button>
 
       <a

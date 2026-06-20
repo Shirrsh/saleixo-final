@@ -1,5 +1,8 @@
-import { motion } from 'framer-motion';
-import { Search, Shield, Clock, Layers, Globe, DollarSign } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Shield, Clock, Layers, Globe, DollarSign, ChevronDown } from 'lucide-react';
+
+import Parallax, { ParallaxBlob } from '@/components/Parallax';
 
 const differentiators = [
   {
@@ -43,11 +46,18 @@ const fadeUp = {
   }),
 };
 
-const WhySaleixo = () => (
-  <section className="py-16 md:py-24 bg-transparent">
-    <div className="container mx-auto px-4 max-w-6xl">
+const WhySaleixo = () => {
+  const [showAll, setShowAll] = useState(false);
+  return (
+  <section className="section-airy relative overflow-hidden py-16 md:py-24 bg-transparent">
+    {/* Drifting ambient blobs — parallax on scroll */}
+    <ParallaxBlob hue="217 91% 52%" opacity={0.06} size={620} speed={0.45} style={{ top: '-10%', left: '-8%' }} />
+    <ParallaxBlob hue="340 100% 68%" opacity={0.045} size={520} speed={-0.3} style={{ bottom: '-15%', right: '-6%' }} />
 
-      {/* Header */}
+    <div className="container relative z-10 mx-auto px-4 max-w-6xl">
+
+      {/* Header — gentle counter-scroll drift */}
+      <Parallax speed={-0.08}>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -64,6 +74,7 @@ const WhySaleixo = () => (
           We've managed listings, ads, and photography for ecommerce brands across Amazon, Etsy, and Shopify. We know where the bottleneck is before we sell you a thing — because we've fixed it before.
         </motion.p>
       </motion.div>
+      </Parallax>
 
       {/* Cards grid */}
       <motion.div
@@ -77,7 +88,7 @@ const WhySaleixo = () => (
             key={d.title}
             variants={fadeUp}
             custom={i}
-            className="rounded-2xl p-6 border border-border/50 bg-card/50 hover:-translate-y-0.5 transition-transform duration-200"
+            className={`rounded-2xl p-6 border border-border/50 bg-card/50 active:scale-[0.98] hover:-translate-y-0.5 transition-transform duration-200${i >= 3 && !showAll ? ' hidden sm:flex sm:flex-col' : ''}`}
             style={{ boxShadow: '0 2px 16px rgba(0,0,0,0.04)' }}
           >
             <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 bg-primary/10 border border-primary/20">
@@ -89,8 +100,31 @@ const WhySaleixo = () => (
         ))}
       </motion.div>
 
+      {/* Show more — mobile only */}
+      <AnimatePresence>
+        {!showAll && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="sm:hidden flex justify-center mt-6"
+          >
+            <button
+              onClick={() => setShowAll(true)}
+              className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-border text-foreground bg-surface active:scale-95 transition-transform"
+              style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
+            >
+              Show 3 more reasons
+              <ChevronDown className="w-4 h-4" strokeWidth={2} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   </section>
-);
+  );
+};
 
 export default WhySaleixo;

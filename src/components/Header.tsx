@@ -125,14 +125,19 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
       }}
     />
 
-    {/* Dismiss button */}
+    {/* Dismiss button — 36px tap area to meet mobile touch target guidelines */}
     <button
       onClick={onDismiss}
       aria-label="Dismiss announcement"
-      className="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 flex-shrink-0 flex items-center justify-center transition-opacity duration-150 hover:opacity-100 opacity-80 active:scale-95"
-      style={{ background: 'rgba(0,0,0,0.25)', borderRadius: '50%', width: 22, height: 22 }}
+      className="absolute right-1.5 top-1/2 -translate-y-1/2 z-10 flex-shrink-0 flex items-center justify-center transition-opacity duration-150 hover:opacity-100 opacity-80 active:scale-95"
+      style={{ width: 36, height: 36 }}
     >
-      <X size={11} strokeWidth={2.5} style={{ color: '#ffffff' }} />
+      <span
+        className="flex items-center justify-center"
+        style={{ background: 'rgba(0,0,0,0.25)', borderRadius: '50%', width: 24, height: 24 }}
+      >
+        <X size={11} strokeWidth={2.5} style={{ color: '#ffffff' }} />
+      </span>
     </button>
   </motion.div>
 );

@@ -51,10 +51,10 @@ const FloatingCTA = () => {
         <button
           onClick={() => setIsDismissed(true)}
           aria-label="Dismiss"
-          className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-opacity duration-150 hover:opacity-70"
+          className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-opacity duration-150 hover:opacity-70 active:scale-90"
           style={{ background: 'hsl(var(--background) / 0.15)' }}
         >
-          <X size={10} style={{ color: 'hsl(var(--background))' }} strokeWidth={2.5} />
+          <X size={12} style={{ color: 'hsl(var(--background))' }} strokeWidth={2.5} />
         </button>
       </div>
     </div>
