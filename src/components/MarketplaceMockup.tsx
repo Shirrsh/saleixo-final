@@ -270,49 +270,49 @@ const chartBars = [40,65,45,80,55,90,70,85,60,95,75,88,50,72,92,68,84,76,91,63,8
 
 // ── Single marketplace dashboard ────────────────────────────────────────────
 const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
-  <div className="bg-[#f3f3f3] text-gray-800 text-xs overflow-hidden" style={{ minHeight: '320px' }}>
+  <div className="bg-[#f3f3f3] text-gray-800 text-xs overflow-hidden">
     {/* Top nav */}
-    <div className="px-3 py-2 flex items-center justify-between" style={{ background: mp.navBg }}>
+    <div className="px-3 py-1.5 flex items-center justify-between" style={{ background: mp.navBg }}>
       <div className="flex items-center gap-2">
         {mp.logo}
         <span className="text-[10px]" style={{ color: `${mp.navText}80` }}>{mp.subLabel}</span>
       </div>
-      <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>S</div>
+      <div className="w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>S</div>
     </div>
 
-    <div className="p-3 overflow-hidden">
+    <div className="p-2 overflow-hidden">
       {/* Title row */}
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-gray-800">{mp.name} Dashboard</h3>
-        <div className="text-[9px] font-bold px-2 py-1 rounded flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>Last 30 Days</div>
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-[11px] font-semibold text-gray-800">{mp.name} Dashboard</h3>
+        <div className="text-[8px] font-bold px-1.5 py-0.5 rounded flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>Last 30 Days</div>
       </div>
 
-      {/* Stats — 2 cols on mobile, 4 on larger */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+      {/* Stats — always 2×2 grid */}
+      <div className="grid grid-cols-2 gap-1.5 mb-2">
         {mp.stats.map((stat, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.07 }}
-            className="bg-white rounded-lg p-2 border border-gray-200 shadow-sm"
+            transition={{ delay: i * 0.06 }}
+            className="bg-white rounded-lg p-1.5 border border-gray-200 shadow-sm"
           >
-            <div className="text-[8px] text-gray-500 mb-1 leading-tight">{stat.label}</div>
-            <div className="text-xs font-bold text-gray-800">{stat.value}</div>
-            <div className="text-[9px] font-semibold mt-0.5" style={{ color: stat.change.startsWith('-') && stat.label.toLowerCase().includes('return') ? '#16a34a' : stat.change.startsWith('-') ? '#dc2626' : '#16a34a' }}>
+            <div className="text-[7px] text-gray-500 mb-0.5 leading-tight">{stat.label}</div>
+            <div className="text-[11px] font-bold text-gray-800">{stat.value}</div>
+            <div className="text-[8px] font-semibold" style={{ color: stat.change.startsWith('-') && stat.label.toLowerCase().includes('return') ? '#16a34a' : stat.change.startsWith('-') ? '#dc2626' : '#16a34a' }}>
               {stat.change.startsWith('-') ? '▼' : '▲'} {stat.change}
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Chart */}
-      <div className="bg-white rounded-lg p-3 border border-gray-200 shadow-sm mb-3">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-semibold text-gray-700">Sales Performance</span>
-          <span className="text-[9px] text-gray-400">30 days</span>
+      {/* Chart — hidden on small screens to keep the mockup in one frame */}
+      <div className="hidden sm:block bg-white rounded-lg p-2 border border-gray-200 shadow-sm mb-2">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-[9px] font-semibold text-gray-700">Sales Performance</span>
+          <span className="text-[8px] text-gray-400">30 days</span>
         </div>
-        <div className="flex items-end gap-0.5 h-12">
+        <div className="flex items-end gap-0.5 h-8">
           {chartBars.map((h, i) => (
             <motion.div
               key={i}
@@ -325,27 +325,27 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
           ))}
         </div>
         <div className="flex justify-between mt-1">
-          <span className="text-[8px] text-gray-400">Day 1</span>
-          <span className="text-[8px] font-semibold" style={{ color: mp.accentChart }}>Day 30</span>
+          <span className="text-[7px] text-gray-400">Day 1</span>
+          <span className="text-[7px] font-semibold" style={{ color: mp.accentChart }}>Day 30</span>
         </div>
       </div>
 
-      {/* Table — show only 2 rows on mobile */}
+      {/* Table — 2 rows */}
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-        <div className="px-3 py-1.5 border-b border-gray-100 flex items-center justify-between">
-          <span className="text-[10px] font-semibold text-gray-700">{mp.rowLabel}</span>
-          <span className="text-[9px] cursor-pointer" style={{ color: mp.accent }}>View all</span>
+        <div className="px-2.5 py-1 border-b border-gray-100 flex items-center justify-between">
+          <span className="text-[9px] font-semibold text-gray-700">{mp.rowLabel}</span>
+          <span className="text-[8px] cursor-pointer" style={{ color: mp.accent }}>View all</span>
         </div>
         {mp.rows.slice(0, 2).map((row, i) => (
-          <div key={i} className={`px-3 py-1.5 flex items-center gap-2 text-[9px] ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-            <div className="w-5 h-5 rounded flex-shrink-0 flex items-center justify-center text-[7px] text-gray-400 bg-gray-100">IMG</div>
+          <div key={i} className={`px-2.5 py-1 flex items-center gap-1.5 text-[9px] ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+            <div className="w-4 h-4 rounded flex-shrink-0 flex items-center justify-center text-[6px] text-gray-400 bg-gray-100">IMG</div>
             <div className="flex-1 min-w-0">
-              <div className="font-medium text-gray-800 truncate">{row.title}</div>
+              <div className="font-medium text-gray-800 truncate text-[8px]">{row.title}</div>
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="font-semibold text-gray-800">{row.sales}</div>
+              <div className="font-semibold text-gray-800 text-[8px]">{row.sales}</div>
             </div>
-            <div className="text-[8px] font-bold px-1.5 py-0.5 rounded flex-shrink-0" style={{ background: `${mp.accent}22`, color: mp.accent }}>
+            <div className="text-[7px] font-bold px-1 py-0.5 rounded flex-shrink-0" style={{ background: `${mp.accent}22`, color: mp.accent }}>
               {row.badge}
             </div>
           </div>

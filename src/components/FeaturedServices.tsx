@@ -6,6 +6,7 @@ import {
   BarChart3,
   Check,
   ArrowRight,
+  ChevronDown,
 } from 'lucide-react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -329,9 +330,10 @@ const StaticVisual = ({ src, alt, stat, accentVar }: StaticVisualProps) => (
 //
 // Responsive behaviour:
 //   < sm  (< 640px)  — Tabs scroll horizontally, panel stacks (visual above text),
-//                       visual height 240px, CTA buttons full-width
+//                       visual height 240px, CTA buttons full-width,
+//                       body + features collapsed behind "See what's included ↓" toggle
 //   sm–md (640–1024px) — Tabs wrap to two rows if needed, 2-col grid at md (768px),
-//                        visual height 320–380px
+//                        visual height 320–380px, body + features always visible
 //   lg+   (≥ 1024px)   — Single pill row, 2-col grid with alternating L/R image per
 //                        tab index (even = image right, odd = image left),
 //                        visual height 420px, generous side-by-side spacing
@@ -339,11 +341,27 @@ const StaticVisual = ({ src, alt, stat, accentVar }: StaticVisualProps) => (
 const FeaturedServices = () => {
   const [activeIdx, setActiveIdx] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [showDetails, setShowDetails] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 640 : false
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)');
+    setIsMobile(mq.matches);
+    const h = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+      if (!e.matches) setShowDetails(false); // reset when going to desktop
+    };
+    mq.addEventListener('change', h);
+    return () => mq.removeEventListener('change', h);
+  }, []);
 
   const switchTab = (i: number) => {
     if (i === activeIdx) return;
     setDirection(i > activeIdx ? 1 : -1);
     setActiveIdx(i);
+    setShowDetails(false); // collapse details on tab change
   };
 
   const s = services[activeIdx];
@@ -497,30 +515,55 @@ const FeaturedServices = () => {
                 </span>
               </div>
 
-              {/* Headline — smaller on mobile, larger on desktop */}
+              {/* Headline */}
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-[1.1] text-balance text-foreground mb-3 md:mb-4">
                 {s.headline}
               </h2>
 
-              {/* Body */}
-              <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed mb-5 md:mb-6">
-                {s.body}
-              </p>
+              {/* Mobile-only toggle — collapses body + features */}
+              <button
+                className="sm:hidden flex items-center gap-2 text-sm font-semibold mb-3 active:scale-95 transition-transform"
+                style={{ color: s.colorVar }}
+                onClick={() => setShowDetails(v => !v)}
+              >
+                {showDetails ? 'Hide details' : "See what's included"}
+                <ChevronDown
+                  className="w-4 h-4 transition-transform duration-300"
+                  style={{ transform: showDetails ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  strokeWidth={2}
+                />
+              </button>
 
-              {/* Features — 1 col on mobile, 2 col on sm+ */}
-              <ul className="grid sm:grid-cols-2 gap-x-5 gap-y-2.5 md:gap-y-3 mb-6 md:mb-8">
-                {s.features.map((feature, fi) => (
-                  <li key={fi} className="flex items-start gap-2.5">
-                    <div
-                      className="mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${s.colorVar.replace(')', ' / 0.15)')}` }}
-                    >
-                      <Check className="w-2.5 h-2.5" style={{ color: s.colorVar }} aria-hidden />
-                    </div>
-                    <span className="text-sm text-foreground/90 leading-snug">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* Body + Features — always visible sm+, collapsible on mobile */}
+              <AnimatePresence initial={false}>
+                {(!isMobile || showDetails) && (
+                  <motion.div
+                    key="details"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed mb-5 md:mb-6">
+                      {s.body}
+                    </p>
+                    <ul className="grid sm:grid-cols-2 gap-x-5 gap-y-2.5 md:gap-y-3 mb-6 md:mb-8">
+                      {s.features.map((feature, fi) => (
+                        <li key={fi} className="flex items-start gap-2.5">
+                          <div
+                            className="mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                            style={{ background: `${s.colorVar.replace(')', ' / 0.15)')}` }}
+                          >
+                            <Check className="w-2.5 h-2.5" style={{ color: s.colorVar }} aria-hidden />
+                          </div>
+                          <span className="text-sm text-foreground/90 leading-snug">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* CTAs — full-width on mobile, auto-width on sm+ */}
               <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
