@@ -414,7 +414,7 @@ const FeaturedServices = () => {
   const imgIsRight = activeIdx % 2 === 0;
 
   return (
-    <section id="services" className="py-14 md:py-20 lg:py-24 bg-transparent">
+    <section id="services" className="relative py-14 md:py-20 lg:py-24 bg-transparent overflow-x-hidden">
 
       {/* ── Section header ── */}
       <motion.div
@@ -468,7 +468,7 @@ const FeaturedServices = () => {
       </motion.div>
 
       {/* ── Animated service panel ── */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
         <AnimatePresence custom={direction} mode="wait">
           <motion.div
             key={activeIdx}
@@ -489,7 +489,7 @@ const FeaturedServices = () => {
             >
               {/* Color halo */}
               <div
-                className="absolute -inset-4 sm:-inset-6 rounded-[2rem] blur-3xl opacity-50 pointer-events-none"
+                className="absolute inset-0 rounded-[2rem] blur-3xl opacity-50 pointer-events-none"
                 aria-hidden
                 style={{ background: `radial-gradient(ellipse at center, ${s.colorVar.replace(')', ' / 0.20)')} 0%, transparent 70%)` }}
               />

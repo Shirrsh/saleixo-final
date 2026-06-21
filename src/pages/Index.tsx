@@ -29,7 +29,7 @@ const Index = () => {
       
       <Header />
       <main>
-        <div className="overflow-x-hidden w-full max-w-full">
+        <div className="relative overflow-x-hidden w-full max-w-full">
           <Hero />
           <MarketplaceLogos />
           <FeaturedServices />
