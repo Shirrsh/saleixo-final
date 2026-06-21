@@ -137,6 +137,52 @@ const Hero = () => {
   const bg = isLight ? '#ffffff' : 'hsl(220 30% 7%)';
   // Solid and transparent versions for gradients (hex alpha suffix breaks on hsl strings)
   const bgSolid = isLight ? 'rgb(255,255,255)' : 'hsl(220 30% 7%)';
+  // Top padding = fixed header (64px) + announcement bar (40px if visible) + 8px breathing room
+  const [heroPadTop, setHeroPadTop] = useState(() => {
+    try { return localStorage.getItem('saleixo_bar_dismissed') === '1' ? 72 : 112; }
+    catch { return 112; }
+  });
+  useEffect(() => {
+    const onDismiss = () => setHeroPadTop(72);
+    window.addEventListener('bar-dismissed', onDismiss);
+    return () => window.removeEventListener('bar-dismissed', onDismiss);
+  }, []);
+
+  // Auto-scrolling strip
+  const stripRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = stripRef.current;
+    if (!el) return;
+    const touching = { v: false };
+    let animId: number;
+    let lastT = 0;
+    const SPEED = 45; // px/s
+
+    const step = (t: number) => {
+      if (lastT) {
+        const dt = Math.min((t - lastT) / 1000, 0.05);
+        if (!touching.v) {
+          const max = el.scrollWidth - el.clientWidth;
+          if (max > 0)
+            el.scrollLeft = el.scrollLeft >= max - 1 ? 0 : el.scrollLeft + SPEED * dt;
+        }
+      }
+      lastT = t;
+      animId = requestAnimationFrame(step);
+    };
+    animId = requestAnimationFrame(step);
+
+    const pause  = () => { touching.v = true; };
+    const resume = () => { setTimeout(() => { touching.v = false; }, 2200); };
+    el.addEventListener('touchstart', pause,  { passive: true });
+    el.addEventListener('touchend',   resume, { passive: true });
+    return () => {
+      cancelAnimationFrame(animId);
+      el.removeEventListener('touchstart', pause);
+      el.removeEventListener('touchend',   resume);
+    };
+  }, []);
+
   const bgT80 = isLight ? 'rgba(255,255,255,0.8)' : 'hsl(220 30% 7% / 0.8)';
   const bgT40 = isLight ? 'rgba(255,255,255,0.4)' : 'hsl(220 30% 7% / 0.4)';
   const bgT0 = isLight ? 'rgba(255,255,255,0)' : 'hsl(220 30% 7% / 0)';
@@ -379,7 +425,7 @@ const Hero = () => {
       <div className="lg:hidden relative z-10 flex flex-col w-full max-w-full overflow-hidden">
 
         {/* Text content */}
-        <div className="flex flex-col items-center text-center px-5 pt-28 pb-8 w-full">
+        <div className="flex flex-col items-center text-center px-5 pb-8 w-full" style={{ paddingTop: heroPadTop }}>
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -464,35 +510,34 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Mobile image strip — native horizontal scroll with snap */}
+        {/* Mobile image strip — auto-scrolling + touch-swipeable */}
         <div
           className="relative w-full"
           style={{ height: 'clamp(230px, 58vw, 300px)' }}
         >
-          {/* Edge fades */}
           <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
             style={{ width: '36px', background: `linear-gradient(to right, ${bgSolid}, ${bgT0})` }} />
           <div className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
             style={{ width: '36px', background: `linear-gradient(to left, ${bgSolid}, ${bgT0})` }} />
 
           <div
+            ref={stripRef}
             className="scrollbar-hide flex gap-3 h-full items-center"
             style={{
               overflowX: 'auto',
               overflowY: 'hidden',
-              scrollSnapType: 'x mandatory',
               WebkitOverflowScrolling: 'touch',
               overscrollBehaviorX: 'contain',
               paddingLeft: '20px',
               paddingRight: '20px',
             }}
           >
-            {[...col1, ...col2].map((src, i) => (
+            {/* Triple the images so seamless looping is invisible */}
+            {[...col1, ...col2, ...col1].map((src, i) => (
               <div
                 key={i}
-                className="relative overflow-hidden rounded-2xl flex-shrink-0 active:scale-[0.97] transition-transform duration-200"
+                className="relative overflow-hidden rounded-2xl flex-shrink-0"
                 style={{
-                  scrollSnapAlign: 'start',
                   width: 'clamp(148px, 40vw, 180px)',
                   height: 'clamp(196px, 52vw, 240px)',
                   border: `1px solid ${borderColor}`,
@@ -505,7 +550,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Swipe hint */}
         <p className="text-center text-[10px] font-medium mt-1.5 mb-6" style={{ color: isLight ? 'hsl(0 0% 55%)' : '#64748b', letterSpacing: '0.06em' }}>
           ← swipe to explore →
         </p>

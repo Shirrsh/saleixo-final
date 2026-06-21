@@ -298,6 +298,7 @@ const Header = () => {
   const dismissBar = () => {
     setShowBar(false);
     try { localStorage.setItem('saleixo_bar_dismissed', '1'); } catch {} // eslint-disable-line no-empty
+    window.dispatchEvent(new Event('bar-dismissed'));
   };
 
   const headerTop = showBar ? BAR_H : 0;
