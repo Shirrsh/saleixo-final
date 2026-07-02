@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { usePageMeta } from '@/hooks/usePageMeta';
-import { Check, ArrowRight, Star, Zap } from 'lucide-react';
+import { Check, ArrowRight, Star, Zap, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -13,10 +14,10 @@ const tiers = [
   {
     name: 'Starter',
     badge: null,
-    priceUSD: 299,
-    priceINR: 24999,
-    setupUSD: 99,
-    setupINR: 7999,
+    priceUSD: 249,
+    priceINR: 14999,
+    setupUSD: 79,
+    setupINR: 4999,
     contract: 'Month-to-month · 14-day notice',
     bestFor: 'Artisans, new sellers, under 50 SKUs',
     features: [
@@ -33,10 +34,10 @@ const tiers = [
   {
     name: 'Growth',
     badge: 'Most Popular',
-    priceUSD: 699,
-    priceINR: 59999,
+    priceUSD: 599,
+    priceINR: 34999,
     setupUSD: 149,
-    setupINR: 12999,
+    setupINR: 7999,
     contract: '3-month minimum, then monthly',
     bestFor: 'Small Amazon sellers, $1–10k/mo revenue',
     features: [
@@ -56,10 +57,10 @@ const tiers = [
   {
     name: 'Pro',
     badge: null,
-    priceUSD: 1499,
-    priceINR: 124999,
-    setupUSD: 299,
-    setupINR: 24999,
+    priceUSD: 1299,
+    priceINR: 74999,
+    setupUSD: 249,
+    setupINR: 14999,
     contract: '6-month minimum, then monthly',
     bestFor: 'Mid-size brands, $10–100k/mo revenue',
     features: [
@@ -85,8 +86,8 @@ const tiers = [
     priceINR: null,
     setupUSD: null,
     setupINR: null,
-    startingUSD: 2999,
-    startingINR: 249999,
+    startingUSD: 2499,
+    startingINR: 149999,
     contract: '12-month minimum',
     bestFor: 'Established brands, aggregators, multi-marketplace',
     features: [
@@ -96,7 +97,7 @@ const tiers = [
       'Custom SLAs',
       'Quarterly business reviews',
       'White-glove onboarding',
-      'Custom setup fee (typically $499–$1,499)',
+      'Custom setup fee (~$599)',
     ],
     cta: 'Contact Sales',
     highlight: false,
@@ -144,7 +145,7 @@ const notIncluded = [
 const faq = [
   {
     q: 'Are there any setup fees?',
-    a: 'Yes — Starter: $99 / ₹7,999, Growth: $149 / ₹12,999, Pro: $299 / ₹24,999. Enterprise setup fees are custom (typically $499–$1,499). Setup fees are one-time and cover onboarding, account configuration, and initial strategy.',
+    a: 'Yes — Starter: $79 / ₹4,999, Growth: $149 / ₹7,999, Pro: $249 / ₹14,999. Enterprise setup fees are custom (indicatively $599 / ₹24,999). Setup fees are one-time and cover onboarding, account configuration, and initial strategy.',
   },
   {
     q: 'Can I cancel anytime?',
@@ -193,7 +194,10 @@ const ServiceTable = ({ title, rows }: { title: string; rows: { name: string; us
             {rows.map((r, i) => (
               <tr key={i} className={cn('border-t border-border', i % 2 === 0 ? 'bg-background' : 'bg-muted/20')}>
                 <td className="px-4 py-2.5 text-foreground">{r.name}</td>
-                <td className="px-4 py-2.5 text-right font-medium text-foreground">{fmt(r.usd, r.inr)}</td>
+                <td className="px-4 py-2.5 text-right font-medium text-foreground">
+                  <span className="text-muted-foreground font-normal text-xs mr-1">from</span>
+                  {fmt(r.usd, r.inr)}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -208,9 +212,10 @@ const ServiceTable = ({ title, rows }: { title: string; rows: { name: string; us
 const CustomPricing = () => {
   usePageMeta({
     title: 'Transparent Pricing — Saleixo',
-    description: 'Starter at $299, Growth at $699, Pro at $1,499. Full à-la-carte pricing for photography, design, Amazon, Shopify, and marketing.',
+    description: 'Starter at $249, Growth at $599, Pro at $1,299. Plans plus à-la-carte services for photography, design, Amazon, Shopify, and marketing.',
   });
   const { fmt } = useCurrency();
+  const [showAlaCarte, setShowAlaCarte] = useState(false);
 
   const localAddOns = [
     { name: '48-hr express photo delivery*', price: '+25% of service price' },
@@ -331,27 +336,46 @@ const CustomPricing = () => {
           </div>
         </section>
 
-        {/* ── À-la-carte ── */}
+        {/* ── À-la-carte (collapsed by default) ── */}
         <section className="px-4 pb-20 max-w-5xl mx-auto">
-          <div className="text-center mb-10">
-            <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">À-La-Carte</p>
-            <h2 className="text-3xl font-bold text-foreground">Individual Services</h2>
-            <p className="text-muted-foreground mt-2">One-time or per-unit pricing. Mix and match with any plan.</p>
+          <div className="text-center">
+            <button
+              onClick={() => setShowAlaCarte(v => !v)}
+              aria-expanded={showAlaCarte}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-sm font-semibold text-foreground transition-colors hover:border-primary"
+            >
+              Need just one thing? See à-la-carte services
+              <ChevronDown className={cn('w-4 h-4 transition-transform duration-200', showAlaCarte && 'rotate-180')} strokeWidth={1.5} />
+            </button>
+            <p className="text-xs text-muted-foreground mt-3">
+              Indicative starting prices — final quote depends on catalogue size, category, and turnaround. Plans above are better value for ongoing work.
+            </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <ServiceTable title="📸 Photography" rows={photography} />
-              <p className="text-xs text-muted-foreground mt-2 pl-1">
-                * Standard delivery: 3–5 business days. 48-hr express delivery available — add +25% (see Add-Ons below).
-              </p>
+
+          {showAlaCarte && (
+            <div className="mt-10">
+              <div className="text-center mb-10">
+                <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">À-La-Carte</p>
+                <h2 className="text-3xl font-bold text-foreground">Individual Services</h2>
+                <p className="text-muted-foreground mt-2">One-time or per-unit starting prices. Mix and match with any plan.</p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <ServiceTable title="📸 Photography" rows={photography} />
+                  <p className="text-xs text-muted-foreground mt-2 pl-1">
+                    * Standard delivery: 3–5 business days. 48-hr express delivery available — add +25% (see Add-Ons below).
+                  </p>
+                </div>
+                <ServiceTable title="🎨 Design" rows={design} />
+                <ServiceTable title="🛍️ Amazon-Specific" rows={amazon} />
+                <ServiceTable title="📣 Marketing" rows={marketing} />
+              </div>
             </div>
-            <ServiceTable title="🎨 Design" rows={design} />
-            <ServiceTable title="🛍️ Amazon-Specific" rows={amazon} />
-            <ServiceTable title="📣 Marketing" rows={marketing} />
-          </div>
+          )}
         </section>
 
-        {/* ── Add-ons ── */}
+        {/* ── Add-ons (shown with à-la-carte) ── */}
+        {showAlaCarte && (
         <section className="px-4 pb-20 max-w-3xl mx-auto">
           <div className="text-center mb-8">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">Extras</p>
@@ -377,6 +401,7 @@ const CustomPricing = () => {
             </table>
           </div>
         </section>
+        )}
 
         {/* ── Not included ── */}
         <section className="px-4 pb-20 max-w-3xl mx-auto">
@@ -429,16 +454,16 @@ const CustomPricing = () => {
         <section className="px-4 pb-24 max-w-2xl mx-auto text-center">
           <div className="rounded-2xl border border-border bg-card p-10">
             <Zap className="w-10 h-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-foreground mb-3">Ready to get started?</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-3">Not sure which plan fits?</h2>
             <p className="text-muted-foreground mb-6">
-              Book a free discovery call — we'll recommend the right plan for your business and answer any questions.
+              Book a free discovery call — we audit your listings first, then recommend a plan. We tell you the bottleneck before we sell you a service.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/get-started"
                 className="px-7 py-3.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90 bg-primary text-primary-foreground"
               >
-                Get Started Free <ArrowRight className="inline w-4 h-4 ml-1" />
+                Book a Free Discovery Call <ArrowRight className="inline w-4 h-4 ml-1" />
               </Link>
               <a
                 href="mailto:info@saleixo.com"

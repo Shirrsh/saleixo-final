@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, ArrowRight, Check } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { ParallaxBlob } from '@/components/Parallax';
 
 const services = [
   'Product Photography',
@@ -64,6 +65,9 @@ const Contact = () => {
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 100%, hsl(var(--primary) / 0.04) 0%, transparent 70%)' }}
       />
+      {/* Drifting ambient blobs — parallax on scroll */}
+      <ParallaxBlob hue="217 91% 52%" opacity={0.055} size={580} speed={0.4} style={{ top: '-8%', left: '-10%' }} />
+      <ParallaxBlob hue="258 90% 66%" opacity={0.045} size={480} speed={-0.25} style={{ bottom: '-12%', right: '-8%' }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
