@@ -13,6 +13,12 @@ import jewelryEarrings from '@/assets/categories/jewelry-earrings.jpg';
 import incensePackaging from '@/assets/categories/incense-packaging.jpg';
 import spiritualProducts from '@/assets/categories/spiritual-products.jpg';
 import aquamarineB from '@/assets/categories/aquamarine-bracelet.jpg';
+import apparelSleepwear from '@/assets/categories/apparel-sleepwear.webp';
+import beautyPersonalCare from '@/assets/categories/beauty-personal-care.webp';
+import handmadeArtisanCraft from '@/assets/categories/handmade-artisan-craft.webp';
+import homeStorageOrganisation from '@/assets/categories/home-storage-organisation.webp';
+import jewelryBeadedPhotography from '@/assets/categories/jewelry-beaded-photography.webp';
+import wellnessIncensePooja from '@/assets/categories/wellness-incense-pooja.webp';
 
 interface Category {
   id: string;
@@ -29,6 +35,12 @@ const fallbackCategories: Category[] = [
   { id: '3', name: 'Spiritual & Wellness', description: 'Sacred incense, spiritual artifacts, and wellness products photographed with reverence and authenticity. We capture the essence and cultural significance of each item.', image_url: spiritualProducts, alt_text: 'Spiritual wellness products and incense sticks product photography', slug: 'spiritual-wellness' },
   { id: '4', name: 'Premium Incense & Packaging', description: 'Packaging and product photography for premium incense brands. We highlight the heritage, quality, and visual appeal of your spiritual product lines.', image_url: incensePackaging, alt_text: 'Premium incense stick packaging photography with traditional design', slug: 'incense-packaging' },
   { id: '6', name: 'Gemstone Accessories', description: 'Natural gemstone bracelets and accessories photographed to highlight their unique colors, textures, and healing properties. Ideal for lifestyle and wellness brands.', image_url: aquamarineB, alt_text: 'Aquamarine gemstone bracelet lifestyle photography', slug: 'gemstone-accessories' },
+  { id: '7', name: 'Apparel & Sleepwear', description: 'Flat-lay and on-model apparel photography for sleepwear, loungewear, and everyday fashion. We capture fabric texture, fit, and drape so shoppers can picture themselves in every piece.', image_url: apparelSleepwear, alt_text: 'Apparel and sleepwear product photography showcasing fabric texture and fit', slug: 'apparel-sleepwear' },
+  { id: '8', name: 'Beauty & Personal Care', description: 'Skincare, cosmetics, and personal care product photography that highlights texture, packaging, and ingredients. Clean, conversion-focused visuals built for beauty brands and marketplaces.', image_url: beautyPersonalCare, alt_text: 'Beauty and personal care product photography with clean packaging shots', slug: 'beauty-personal-care' },
+  { id: '9', name: 'Handmade & Artisan Craft', description: 'Pottery, woodwork, and other handcrafted goods photographed to showcase texture, technique, and the maker’s story. Built to help artisan sellers earn buyer trust at a glance.', image_url: handmadeArtisanCraft, alt_text: 'Handmade artisan craft product photography highlighting texture and technique', slug: 'handmade-artisan-craft' },
+  { id: '10', name: 'Home Storage & Organisation', description: 'Baskets, wardrobes, and organizational products photographed in styled settings that show scale, materials, and everyday use. Built to help shoppers visualize the product in their own space.', image_url: homeStorageOrganisation, alt_text: 'Home storage and organisation product photography in a styled setting', slug: 'home-storage-organisation' },
+  { id: '11', name: 'Beaded Jewelry', description: 'Beaded necklaces, bracelets, and statement jewelry photographed to capture color, pattern, and craftsmanship. Ideal for handmade and boutique jewelry sellers.', image_url: jewelryBeadedPhotography, alt_text: 'Beaded jewelry product photography showcasing color and pattern detail', slug: 'beaded-jewelry' },
+  { id: '12', name: 'Pooja & Ritual Essentials', description: 'Diyas, ritual items, and pooja essentials photographed with warmth and cultural authenticity. We highlight craftsmanship and detail for spiritual and festive product lines.', image_url: wellnessIncensePooja, alt_text: 'Pooja and ritual essentials product photography with warm styling', slug: 'pooja-ritual-essentials' },
 ];
 
 const fadeUp = {

@@ -5,24 +5,22 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useSiteImages } from '@/hooks/useSiteImages';
 import Parallax, { ParallaxBlob } from '@/components/Parallax';
 
-// Portfolio images
-import port1 from '@/assets/portfolio-1.jpg';
-import port2 from '@/assets/portfolio-2.jpg';
-import port3 from '@/assets/portfolio-3.jpeg';
-import port4 from '@/assets/portfolio-4.jpeg';
-// Hero showcase images
-import hero4  from '@/assets/hero/showcase-4.jpeg';
-import hero5  from '@/assets/hero/showcase-5.jpg';
-import hero9  from '@/assets/hero/showcase-9.jpeg';
+// Selected-work images
+import apparelSilkDetail from '@/assets/selected-work/apparel-silk-detail.webp';
+import jewelryEarringsHero from '@/assets/selected-work/jewelry-earrings-hero.webp';
+import beautyAmberBottle from '@/assets/selected-work/beauty-amber-bottle.webp';
+import homeStorageWardrobe from '@/assets/selected-work/home-storage-wardrobe.webp';
+import handmadePottery from '@/assets/selected-work/handmade-pottery.webp';
+import wellnessGiftFlatlay from '@/assets/selected-work/wellness-gift-flatlay.webp';
 
 // ── Image key → fallback mapping ─────────────────────────────────────────────
 const PORTFOLIO_SLOTS = [
-  { key: 'portfolio_1', fallback: port1, alt: 'Product Studio Shoot — Saleixo'         },
-  { key: 'portfolio_hero_4', fallback: hero4, alt: 'Jewelry Studio Shoot — Saleixo'     },
-  { key: 'portfolio_3', fallback: port3, alt: 'Studio Photography — Saleixo'           },
-  { key: 'portfolio_4', fallback: port4, alt: 'Ecommerce Shoot — Full Service'         },
-  { key: 'portfolio_5', fallback: hero5, alt: 'Product Collection — Saleixo Studio'    },
-  { key: 'portfolio_6', fallback: port2, alt: 'Brand Design — The Weave Studio'        },
+  { key: 'portfolio_1', fallback: apparelSilkDetail, alt: 'Silk Apparel Detail Shoot — Saleixo'      },
+  { key: 'portfolio_hero_4', fallback: jewelryEarringsHero, alt: 'Jewelry Earrings Hero Shoot — Saleixo' },
+  { key: 'portfolio_3', fallback: beautyAmberBottle, alt: 'Beauty Product Photography — Saleixo'     },
+  { key: 'portfolio_4', fallback: homeStorageWardrobe, alt: 'Home Storage Product Shoot — Saleixo'   },
+  { key: 'portfolio_5', fallback: handmadePottery, alt: 'Handmade Pottery Photography — Saleixo'     },
+  { key: 'portfolio_6', fallback: wellnessGiftFlatlay, alt: 'Wellness Gift Flatlay — Saleixo'        },
 ];
 
 // ── Single image cell ─────────────────────────────────────────────────────────
