@@ -359,8 +359,15 @@ const ScrollColumn = ({
   );
 };
 
+// ── Feature flag ──────────────────────────────────────────────────────────────
+// The section is currently hidden via `className="hidden"` on its root <section>
+// (intentional business decision — do not remove that class). This flag stops
+// the component from doing any work (scroll-velocity tracking, per-column rAF
+// animation loops) while it's invisible. Flip to `true` to fully re-enable.
+const TESTIMONIALS_ENABLED = false;
+
 // ── Main component ────────────────────────────────────────────────────────────
-const Testimonials = () => {
+const TestimonialsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollVelocity = useRef(0);
   const lastScrollY = useRef(0);
@@ -497,6 +504,14 @@ const Testimonials = () => {
 
     </section>
   );
+};
+
+// ── Public export — gated by TESTIMONIALS_ENABLED ────────────────────────────
+// When disabled, this renders nothing and never mounts TestimonialsSection, so
+// none of its hooks (scroll listener, decay rAF, per-column rAF loops) run at all.
+const Testimonials = () => {
+  if (!TESTIMONIALS_ENABLED) return null;
+  return <TestimonialsSection />;
 };
 
 export default Testimonials;
