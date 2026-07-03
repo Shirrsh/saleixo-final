@@ -13,7 +13,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 const cookieTypes = [
   { type: 'Essential', purpose: 'Required for the website to function correctly', examples: 'Session management, security, form submissions', required: true },
   { type: 'Analytics', purpose: 'Help us understand how visitors use our site', examples: 'Google Analytics - page views, session duration, traffic source', required: false },
-  { type: 'Marketing', purpose: 'Track ad campaign performance', examples: 'Meta Pixel, Google Ads conversion tracking', required: false },
+  { type: 'Marketing', purpose: 'Track ad campaign performance', examples: 'Google Ads conversion tracking', required: false },
   { type: 'Preferences', purpose: 'Remember your settings between visits', examples: 'Theme preference, cookie consent status', required: false },
 ];
 
@@ -69,10 +69,9 @@ const Cookies = () => {
           </Section>
 
           <Section title="Third-Party Cookies">
-            <p>We use Google Analytics and Meta Pixel. These third parties may place their own cookies on your device subject to their own privacy policies. We do not control these third-party cookies.</p>
+            <p>We use Google Analytics. This third party may place its own cookies on your device subject to its own privacy policy. We do not control these third-party cookies.</p>
             <ul className="list-disc list-inside space-y-1 ml-2">
               <li>Google Analytics: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">policies.google.com/privacy</a></li>
-              <li>Meta / Facebook: <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">facebook.com/privacy/policy</a></li>
             </ul>
           </Section>
 
@@ -80,7 +79,6 @@ const Cookies = () => {
             <p>You can control and delete cookies through your browser settings. Disabling certain cookies may affect website functionality. You can also opt out of specific tracking:</p>
             <ul className="list-disc list-inside space-y-1 ml-2">
               <li>Google Analytics opt-out: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">tools.google.com/dlpage/gaoptout</a></li>
-              <li>Meta ad preferences: Your Facebook account → Settings → Ads</li>
             </ul>
           </Section>
 
