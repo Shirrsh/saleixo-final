@@ -6,6 +6,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import imgStudioBts from '@/assets/services/studio-bts.webp';
+import imgPackingDelivery from '@/assets/services/packing-delivery.webp';
+
+const studioImages = [
+  { src: imgStudioBts, alt: 'Behind-the-scenes look at the Saleixo product photography studio setup' },
+  { src: imgPackingDelivery, alt: 'Saleixo team packing and preparing client orders for delivery' },
+];
 
 const W = 'px-6 md:px-12 lg:px-20 xl:px-28';
 
@@ -173,6 +180,27 @@ const About = () => {
                 </div>
               ))}
             </motion.div>
+          </div>
+        </section>
+
+        {/* ── Behind the scenes ────────────────────────────────────────────── */}
+        <section className={`py-20 ${W}`}>
+          <div className="max-w-5xl mx-auto">
+            <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
+              <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-muted-foreground mb-3">Behind The Scenes</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground leading-tight"
+                style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
+                Inside the studio<br />and the warehouse.
+              </h2>
+            </motion.div>
+            <div className="grid sm:grid-cols-2 gap-5">
+              {studioImages.map((img, i) => (
+                <motion.div key={img.src} variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }}
+                  className="rounded-2xl overflow-hidden" style={{ border: '1px solid hsl(var(--border))', aspectRatio: '4 / 3' }}>
+                  <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 

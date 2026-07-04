@@ -13,6 +13,7 @@ import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import imgBeautyPedestal from '@/assets/services/beauty-pedestal-alt.webp';
 
 const ROTATING_PHRASES = [
   'More Conversions',
@@ -540,13 +541,23 @@ const GetStarted = () => {
 
       {/* ── Quick contact form ── */}
       <section className="bg-background py-14 px-4 border-b border-border">
-        <div className="max-w-xl mx-auto">
-          <div className="mb-6">
-            <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-2">Quick Enquiry</p>
-            <h2 className="text-2xl font-bold text-foreground mb-1">Have a question? Just ask.</h2>
-            <p className="text-sm text-muted-foreground">Drop us a message and we'll reply within 24 hours.</p>
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <div className="hidden md:block rounded-2xl overflow-hidden" style={{ aspectRatio: '4 / 5' }}>
+            <img
+              src={imgBeautyPedestal}
+              alt="Beauty product on a pedestal, styled product photography example"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
           </div>
-          <QuickContactForm />
+          <div>
+            <div className="mb-6">
+              <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-2">Quick Enquiry</p>
+              <h2 className="text-2xl font-bold text-foreground mb-1">Have a question? Just ask.</h2>
+              <p className="text-sm text-muted-foreground">Drop us a message and we'll reply within 24 hours.</p>
+            </div>
+            <QuickContactForm />
+          </div>
         </div>
       </section>
 

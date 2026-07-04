@@ -6,6 +6,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import imgHero from '@/assets/portfolio-3.jpeg';
+import imgJewelryLifestyle from '@/assets/services/jewelry-lifestyle-wrist.webp';
+import imgHomeStorageTowel from '@/assets/services/home-storage-towel-detail.webp';
+
+const storefrontExamples = [
+  { src: imgJewelryLifestyle, alt: 'Jewelry bracelet lifestyle shot on model wrist for Shopify product page' },
+  { src: imgHomeStorageTowel, alt: 'Home storage towel fabric detail shot for Shopify product listing' },
+];
 
 const whatWeDo = [
   'Custom Shopify theme setup or full development from scratch',
@@ -203,6 +210,22 @@ const Shopify = () => {
                 <Check className="w-3.5 h-3.5 text-primary" strokeWidth={2.5} />
               </div>
               <span className="text-sm text-foreground/85 leading-relaxed">{item}</span>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Storefront photography examples */}
+      <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+        <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
+          <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">Product photography for your store</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Product pages that look worth buying from.</h2>
+        </motion.div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {storefrontExamples.map((img, i) => (
+            <motion.div key={img.src} variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
+              className="rounded-2xl overflow-hidden" style={{ border: '1px solid hsl(var(--border))', aspectRatio: '4 / 3' }}>
+              <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />
             </motion.div>
           ))}
         </div>

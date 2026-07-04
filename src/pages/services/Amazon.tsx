@@ -6,6 +6,17 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import imgHero from '@/assets/design-service.jpg';
+import imgJewelryEarrings from '@/assets/selected-work/jewelry-earrings-hero.webp';
+import imgHomeStorageOrganizer from '@/assets/services/home-storage-organizer-hero.webp';
+import imgBrassDiya from '@/assets/services/brass-diya-hero.webp';
+import imgBeautyAmberBottle from '@/assets/selected-work/beauty-amber-bottle.webp';
+
+const amazonSpecExamples = [
+  { src: imgJewelryEarrings, alt: 'Jewelry earrings on pure white background, Amazon main-image compliant' },
+  { src: imgHomeStorageOrganizer, alt: 'Home storage organizer product shot on white background for Amazon listing' },
+  { src: imgBrassDiya, alt: 'Brass diya oil lamp on white background, marketplace-compliant main image' },
+  { src: imgBeautyAmberBottle, alt: 'Amber glass beauty bottle on white background, Amazon-spec product photo' },
+];
 
 const whatWeDo = [
   'Keyword research using Helium 10, Jungle Scout & Amazon Brand Analytics',
@@ -206,6 +217,23 @@ const Amazon = () => {
                 <Check className="w-3.5 h-3.5 text-primary" strokeWidth={2.5} />
               </div>
               <span className="text-sm text-foreground/85 leading-relaxed">{item}</span>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Amazon-spec examples */}
+      <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+        <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
+          <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">Amazon-spec examples</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Main images built to Amazon's exact spec.</h2>
+        </motion.div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {amazonSpecExamples.map((img, i) => (
+            <motion.div key={img.src} variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
+              className="rounded-2xl overflow-hidden aspect-square"
+              style={{ background: '#ffffff', border: '1px solid hsl(var(--border))' }}>
+              <img src={img.src} alt={img.alt} className="w-full h-full object-contain p-4" loading="lazy" />
             </motion.div>
           ))}
         </div>
