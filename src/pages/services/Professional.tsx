@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Camera, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -42,6 +42,11 @@ const Professional = () => {
   usePageMeta({
     title: 'Professional Plan — Growth Package | Saleixo',
     description: 'Advanced product photography, website design, competitor analysis, and monthly strategy calls. Saleixo Professional Plan for established sellers ready to scale.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Services', url: 'https://saleixo.com/services' },
+      { name: 'Professional Plan', url: 'https://saleixo.com/services/professional' },
+    ]),
   });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;

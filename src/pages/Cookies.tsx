@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,10 @@ const Cookies = () => {
   usePageMeta({
     title: 'Cookie Policy — Saleixo',
     description: 'How Saleixo uses cookies and tracking technologies on saleixo.com.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Cookie Policy', url: 'https://saleixo.com/cookies' },
+    ]),
   });
   return (
   <>

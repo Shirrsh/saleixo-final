@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -58,6 +58,23 @@ const Design = () => {
   usePageMeta({
     title: 'Ecommerce Design Services — Saleixo',
     description: 'Brand identity, listing design, and storefront design for ecommerce sellers. Built for Amazon, Shopify, and all major marketplaces.',
+    structuredData: [
+      buildBreadcrumbSchema([
+        { name: 'Home', url: 'https://saleixo.com/' },
+        { name: 'Services', url: 'https://saleixo.com/services' },
+        { name: 'Ecommerce Design', url: 'https://saleixo.com/design' },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Ecommerce Design Services',
+        url: 'https://saleixo.com/design',
+        serviceType: 'Ecommerce Design',
+        provider: { '@id': ORG_ID },
+        areaServed: ['IN', 'US', 'GB', 'FR', 'DE', 'AU', 'CA'],
+        description: 'Brand identity, listing design, and storefront design for ecommerce sellers. Built for Amazon, Shopify, and all major marketplaces.',
+      },
+    ],
   });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;

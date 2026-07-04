@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Mail, MessageCircle, MapPin, Clock, ArrowRight, ExternalLink, Check } from 'lucide-react';
 import Header from '@/components/Header';
@@ -63,6 +63,10 @@ const Contact = () => {
   usePageMeta({
     title: 'Contact Saleixo | Noida, India',
     description: 'Get in touch with Saleixo. Free listing audit within 48 hours. Email, WhatsApp, or visit us at Awfis, Sector 62, Noida.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Contact', url: 'https://saleixo.com/contact' },
+    ]),
   });
 
   const [form, setForm] = useState({

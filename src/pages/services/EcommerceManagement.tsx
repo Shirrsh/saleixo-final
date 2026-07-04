@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Plus, Minus, ShoppingCart, TrendingUp, Shield, BarChart2, Package, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -135,6 +135,23 @@ const EcommerceManagement = () => {
   usePageMeta({
     title: 'Ecommerce Management — Saleixo',
     description: 'Full-service ecommerce operations — inventory, orders, listings, and account health across 20+ marketplaces. Let us run your store.',
+    structuredData: [
+      buildBreadcrumbSchema([
+        { name: 'Home', url: 'https://saleixo.com/' },
+        { name: 'Services', url: 'https://saleixo.com/services' },
+        { name: 'Ecommerce Management', url: 'https://saleixo.com/services/ecommerce-management' },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Ecommerce Management',
+        url: 'https://saleixo.com/services/ecommerce-management',
+        serviceType: 'Ecommerce Account Management',
+        provider: { '@id': ORG_ID },
+        areaServed: ['IN', 'US', 'GB', 'FR', 'DE', 'AU', 'CA'],
+        description: 'Full-service ecommerce operations — inventory, orders, listings, and account health across 20+ marketplaces.',
+      },
+    ],
   });
   const scrollToContact = () =>
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });

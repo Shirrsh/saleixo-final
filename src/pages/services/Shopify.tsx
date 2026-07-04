@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Globe, Zap, BarChart2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -55,6 +55,23 @@ const Shopify = () => {
   usePageMeta({
     title: 'Shopify Store Design & Setup — Saleixo',
     description: 'Custom Shopify stores built for conversion. Products, promotions, brand identity, and ongoing management included.',
+    structuredData: [
+      buildBreadcrumbSchema([
+        { name: 'Home', url: 'https://saleixo.com/' },
+        { name: 'Services', url: 'https://saleixo.com/services' },
+        { name: 'Shopify Setup & Design', url: 'https://saleixo.com/services/shopify' },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Shopify Store Design & Setup',
+        url: 'https://saleixo.com/services/shopify',
+        serviceType: 'Shopify Store Development',
+        provider: { '@id': ORG_ID },
+        areaServed: ['IN', 'US', 'GB', 'FR', 'DE', 'AU', 'CA'],
+        description: 'Custom Shopify stores built for conversion. Products, promotions, brand identity, and ongoing management included.',
+      },
+    ],
   });
   return (
   <>

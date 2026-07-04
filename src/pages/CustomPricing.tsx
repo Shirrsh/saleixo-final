@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { Check, ArrowRight, Star, Zap, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -214,6 +214,10 @@ const CustomPricing = () => {
   usePageMeta({
     title: 'Transparent Pricing — Saleixo',
     description: 'Starter at $249, Growth at $599, Pro at $1,299. Plans plus à-la-carte services for photography, design, Amazon, Shopify, and marketing.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Pricing', url: 'https://saleixo.com/custom-pricing' },
+    ]),
   });
   const { fmt } = useCurrency();
   const [showAlaCarte, setShowAlaCarte] = useState(false);

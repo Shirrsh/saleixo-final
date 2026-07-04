@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, BarChart2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -55,6 +55,23 @@ const SocialAds = () => {
   usePageMeta({
     title: 'Social & Paid Ads — Saleixo',
     description: 'Google, Meta, TikTok & Amazon ad campaigns for ecommerce sellers. Full creative, targeting, optimisation, and monthly reporting. First campaign live in 5 days.',
+    structuredData: [
+      buildBreadcrumbSchema([
+        { name: 'Home', url: 'https://saleixo.com/' },
+        { name: 'Services', url: 'https://saleixo.com/services' },
+        { name: 'Social & Paid Ads', url: 'https://saleixo.com/services/social-ads' },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Social & Paid Ads',
+        url: 'https://saleixo.com/services/social-ads',
+        serviceType: 'Social Media & Paid Advertising',
+        provider: { '@id': ORG_ID },
+        areaServed: ['IN', 'US', 'GB', 'FR', 'DE', 'AU', 'CA'],
+        description: 'Google, Meta, TikTok & Amazon ad campaigns for ecommerce sellers. Full creative, targeting, optimisation, and monthly reporting.',
+      },
+    ],
   });
   return (
   <>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -38,6 +38,11 @@ const Visibility = () => {
   usePageMeta({
     title: 'Visibility Plan — Starter Package | Saleixo',
     description: 'Launch your online presence with professional product photography, SEO optimisation, and social media assets. Saleixo Visibility Plan for artisans starting out.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Services', url: 'https://saleixo.com/services' },
+      { name: 'Visibility Plan', url: 'https://saleixo.com/services/visibility' },
+    ]),
   });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;

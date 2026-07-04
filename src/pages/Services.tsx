@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import {
   ArrowRight, Check, Camera, ShoppingCart, BarChart2, Globe,
@@ -168,6 +168,10 @@ export default function Services() {
   usePageMeta({
     title: 'Amazon Imaging, Cataloging & Advertising Services | Saleixo',
     description: 'Amazon Imaging (product photography), Cataloging (A+ Content & listings), Advertising Optimization, and Account Management for Amazon sellers and ecommerce brands.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Services', url: 'https://saleixo.com/services' },
+    ]),
   });
   const { fmt } = useCurrency();
   return (

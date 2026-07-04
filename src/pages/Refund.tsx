@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
@@ -59,6 +59,10 @@ const Refund = () => {
   usePageMeta({
     title: 'Refund & Service Policy — Saleixo',
     description: "Saleixo's complete refund, cancellation, service delivery, and dispute resolution policy. Clear, fair, and transparent.",
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Refund & Service Policy', url: 'https://saleixo.com/refund' },
+    ]),
   });
 
   return (

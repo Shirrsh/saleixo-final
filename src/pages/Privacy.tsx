@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
@@ -14,6 +14,10 @@ const Privacy = () => {
   usePageMeta({
     title: 'Privacy Policy — Saleixo',
     description: 'How Saleixo collects, uses, stores, and protects your personal information. Full privacy policy for saleixo.com.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Privacy Policy', url: 'https://saleixo.com/privacy' },
+    ]),
   });
   return (
   <>
