@@ -29,6 +29,13 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it-",
+      "destination": "/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
