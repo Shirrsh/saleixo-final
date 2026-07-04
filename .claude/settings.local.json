@@ -118,7 +118,12 @@
       "Bash(rm -f pr_body.json)",
       "Bash(curl -s -o /dev/null -w \"status: %{http_code}\\\\n\" \"https://saleixo.com/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it\")",
       "Bash(python3 *)",
-      "Bash(echo \"exit:$? \\(1 means none found, good\\)\")"
+      "Bash(echo \"exit:$? \\(1 means none found, good\\)\")",
+      "Bash(grep -B2 -A5 \"BlogPost.tsx\\\\|pages\\\\\\\\\\\\\\\\Blog.tsx\\\\|pages/Blog.tsx\")",
+      "Bash(grep -v \"^--$\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(rm -f .pr_body.md .pr_payload.json .pr_response.json)"
     ]
   }
 }
