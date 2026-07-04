@@ -1,3 +1,11 @@
+-- ⚠️ NOTE (2026-07-04): The production database ALREADY HAS a public.leads table,
+-- created via the dashboard, with a SUPERSET of these columns (adds assigned_to,
+-- notes, follow_up_date, last_contacted_at, newsletter) and equivalent RLS
+-- (anon insert-only, admin manage). Do NOT expect this migration to define the
+-- canonical schema — regenerate types from the live DB. This file is kept for
+-- local/dev environment parity only; it is idempotent and safe if re-applied,
+-- but running it against prod adds a redundant duplicate insert policy.
+--
 -- Create leads table to capture public lead-gen form submissions.
 -- Populated by:
 --   src/components/Contact.tsx (homepage "Start a Project" form, source = 'contact-section')

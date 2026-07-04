@@ -4,9 +4,27 @@ Guidance for Claude Code when working in this repository.
 
 ## Project
 
-**Saleixo** (formerly "Alvaio Digital Studio") — marketing website for a digital studio offering professional photography, creative design, and data-driven marketing for artisans and ecommerce sellers. Headlines: "500+ artisans helped, 98% satisfaction rate." Plus an admin CMS backed by Supabase. Originally scaffolded with Lovable; now maintained through Claude Code.
+**Saleixo** (formerly "Alvaio Digital Studio") — marketing website for a full-stack ecommerce services studio, plus an admin CMS backed by Supabase. Originally scaffolded with Lovable; now maintained through Claude Code.
 
 Site deployed at `https://saleixo-final.vercel.app/` (canonical: `https://saleixo.com`). Public site lives at `/`, full admin panel at `/admin/*`.
+
+## Business facts (use these — do not invent or reuse stale copy)
+
+- **What Saleixo does:** product photography, Amazon listing optimisation & A+/A++ content, ecommerce account management, Shopify store setup & design, social media & paid ads, ecommerce design — for D2C brands and marketplace sellers (Amazon, Etsy, Walmart, Shopify, Flipkart and 20+ marketplaces).
+- **Address (matches Google Business Profile — use exactly this):** A-41, Block A, Industrial Area, Sector 62, Noida, Uttar Pradesh 201309, India. Serves IN, US, GB, FR, DE, AU, CA.
+- **Phone (matches GBP):** +91 70114 41159.
+- **Founded:** 2025.
+- **Contact:** `info@saleixo.com` (alias of the Zoho Workplace mailbox `shirrsh.kumar@saleixo.com`). WhatsApp is the primary chat channel.
+- **Social:** X/Twitter `@SaleixoStudio`. Instagram handle `@saleixo` is NOT ours (unrelated person) — do not link it; the planned handle is `@saleixostudio`.
+- **Google presence:** Google Business Profile is live and verified; Search Console verified, sitemap submitted and healthy (21 pages indexed as of July 2026).
+- **Marketing claims:** the "500+ artisans/sellers helped, 98% satisfaction" headline stats are unsubstantiated — do not add new unverifiable claims; prefer specific, checkable statements (e.g. 48-hr photo delivery). Client brand names are withheld by request; testimonials use first name + category + marketplace format only.
+
+## Production backend facts (verified live, July 2026 — trust these over repo files)
+
+- Supabase project: **Alvaio-digital-backend** (`syoungrummuurrptckbt`) — the old brand name; it IS the saleixo.com backend.
+- `public.leads` table **exists in production** with a SUPERSET of the repo migration's columns (adds assigned_to, notes, follow_up_date, last_contacted_at, newsletter) and correct RLS (anon insert-only, admin manage). Regenerate `types.ts` from the live DB, never from the migration file.
+- `notify-lead` edge function is deployed and **verified working** (form → leads row → email to info@saleixo.com). It uses **Zoho SMTP** (`smtp.zoho.in`, secrets `ZOHO_EMAIL`/`ZOHO_PASSWORD`). There is no Resend account — never replace it with a Resend implementation.
+- Git remotes: `origin` → alvaio-digital-studio (old name, backup), `prod` → saleixo-final (Vercel deploys from this — pushing to prod IS deploying).
 
 ## Stack
 
