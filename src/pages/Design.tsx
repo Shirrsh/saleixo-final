@@ -14,6 +14,14 @@ import WhyChooseUs from '@/components/design/WhyChooseUs';
 import FreeAuditCTA from '@/components/design/FreeAuditCTA';
 import PlatformsTabs from '@/components/design/PlatformsTabs';
 
+import imgApparelOnModel from '@/assets/services/apparel-onmodel-robe.webp';
+import imgBeautyTextureSwatches from '@/assets/services/beauty-texture-swatches.webp';
+
+const designWorkExamples = [
+  { src: imgApparelOnModel, alt: 'Apparel robe styled on-model for ecommerce brand identity' },
+  { src: imgBeautyTextureSwatches, alt: 'Beauty product texture swatches used for packaging and brand colour design' },
+];
+
 const processSteps = [
   { icon: Phone, title: 'Discovery Call', bullets: ['Brand vision, product category & target audience', 'Competitor visual audit', 'Platform priorities & creative brief'] },
   { icon: Palette, title: 'Brand Strategy', bullets: ['Moodboard & visual direction', 'Colour palette, typography & logo system', 'Packaging & label concepts'] },
@@ -336,6 +344,49 @@ const Design = () => {
               <Users className="w-4 h-4" />
               Dedicated team assigned from Day 1
             </motion.div>
+          </div>
+        </section>
+
+        {/* ── Design Work Examples ── */}
+        <section className="py-20 px-6 md:px-12 lg:px-20 xl:px-28">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-center mb-12"
+            >
+              <span
+                className="inline-flex px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase mb-4"
+                style={isLight ? { background: 'hsl(0 0% 92%)', border: '1px solid hsl(0 0% 82%)', color: 'hsl(0 0% 30%)' } : { background: 'hsl(210 85% 55% / 0.15)', border: '1px solid hsl(210 85% 55% / 0.3)', color: '#93c5fd' }}
+              >
+                Our Work
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold mt-3 mb-3" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>
+                Brand & Listing <span style={{ color: accentColor }}>Creative</span>
+              </h2>
+              <p className="text-base max-w-xl mx-auto" style={{ color: textMuted }}>
+                A sample of on-model apparel styling and packaging colour work from recent projects.
+              </p>
+            </motion.div>
+
+            <div className="grid sm:grid-cols-2 gap-5">
+              {designWorkExamples.map((img, i) => (
+                <motion.div
+                  key={img.src}
+                  variants={fadeUp}
+                  custom={i * 0.5}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="rounded-2xl overflow-hidden"
+                  style={{ border: `1px solid ${cardBorder}`, aspectRatio: '4 / 3', boxShadow: isLight ? '0 2px 12px hsl(0 0% 0% / 0.05)' : '0 4px 20px hsl(220 30% 5% / 0.35)' }}
+                >
+                  <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 

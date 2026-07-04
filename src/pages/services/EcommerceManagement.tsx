@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import MarketplaceMockup from '@/components/MarketplaceMockup';
 
+import imgPackingDelivery from '@/assets/services/packing-delivery.webp';
 import img1 from '@/assets/hero/showcase-1.jpg';
 import img2 from '@/assets/hero/showcase-2.jpg';
 import img3 from '@/assets/hero/showcase-3.jpg';
@@ -309,6 +310,26 @@ const EcommerceManagement = () => {
               );
             })}
           </div>
+        </section>
+
+        {/* ── FULFILMENT VISUAL ── */}
+        <section className={`py-20 md:py-28 ${W}`}>
+          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}
+            className="relative rounded-3xl overflow-hidden" style={{ minHeight: 320 }}>
+            <img
+              src={imgPackingDelivery}
+              alt="Warehouse team packing and preparing ecommerce orders for delivery"
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="relative z-10 p-8 md:p-12 flex flex-col justify-end" style={{ minHeight: 320 }}>
+              <p className="text-xs font-bold tracking-[0.3em] uppercase text-white/60 mb-3">Inventory & operations</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight max-w-lg">
+                FBA prep, packing, and shipment creation — handled end to end.
+              </h3>
+            </div>
+          </motion.div>
         </section>
 
         {/* ── LIVE MOCKUP ── */}

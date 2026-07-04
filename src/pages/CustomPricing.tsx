@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { useCurrency } from '@/context/CurrencyContext';
 import CurrencyToggle from '@/components/CurrencyToggle';
+import imgHandmadeBasketCollection from '@/assets/services/handmade-basket-collection.webp';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -244,6 +245,18 @@ const CustomPricing = () => {
           <p className="text-xs text-muted-foreground">
             Last updated: May 2026 · Prices may be updated with 30 days' notice to existing clients.
           </p>
+        </section>
+
+        {/* ── Sample deliverable ── */}
+        <section className="px-4 pb-16 max-w-3xl mx-auto">
+          <div className="rounded-2xl overflow-hidden border border-border" style={{ aspectRatio: '16 / 7' }}>
+            <img
+              src={imgHandmadeBasketCollection}
+              alt="Collection of handmade woven baskets styled for ecommerce catalog photography"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
         </section>
 
         {/* ── Tier cards ── */}
