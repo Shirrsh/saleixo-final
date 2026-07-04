@@ -195,4 +195,31 @@ for (const route of routes) {
   console.log(`  ✓ ${route.path}`);
 }
 
+// ── Real 404 for unknown routes ────────────────────────────────────────────
+// vercel.json only rewrites /admin/* to index.html now (the routes above are
+// already served as real static files, matched before any rewrite). Any other
+// unmatched path falls through with no rewrite and no static file, so Vercel
+// serves this dist/404.html automatically with a genuine HTTP 404 status —
+// while still booting the same SPA bundle, so React Router's catch-all "*"
+// route renders the existing <NotFound /> page for the visitor.
+let notFoundHtml = template;
+notFoundHtml = notFoundHtml.replace(/<title>[^<]*<\/title>/, '<title>Page Not Found | Saleixo</title>');
+notFoundHtml = notFoundHtml.replace(
+  /(<meta name="description" content=")[^"]*(")/,
+  `$1${esc('The page you are looking for does not exist or has moved.')}$2`,
+);
+if (/<meta name="robots" content="[^"]*"\s*\/?>/.test(notFoundHtml)) {
+  notFoundHtml = notFoundHtml.replace(
+    /(<meta name="robots" content=")[^"]*(")/,
+    '$1noindex, follow$2',
+  );
+} else {
+  notFoundHtml = notFoundHtml.replace(
+    '</head>',
+    '  <meta name="robots" content="noindex, follow" />\n  </head>',
+  );
+}
+writeFileSync(join(DIST, '404.html'), notFoundHtml);
+console.log('  ✓ 404.html (real 404 status for unknown routes)');
+
 console.log(`\n[prerender-meta] Injected static meta into ${count} routes.`);
