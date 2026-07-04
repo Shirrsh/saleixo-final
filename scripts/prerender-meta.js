@@ -24,11 +24,13 @@ const routes = [
     path: '/',
     title: 'Saleixo — Product Photography, Amazon Listings & Shopify Stores',
     description: 'Amazon Imaging, Cataloging, A+ Content, and conversion-tested Shopify stores. 500+ ecommerce sellers helped. 98% satisfaction rate.',
+    ogImage: `${BASE_URL}/og/home-og.jpg`,
   },
   {
     path: '/about',
     title: 'About Saleixo — Our Story & Mission',
     description: 'Meet the team behind Saleixo. We help artisans and ecommerce sellers grow with professional photography, Amazon listings, and digital marketing.',
+    ogImage: `${BASE_URL}/og/about-og.jpg`,
   },
   {
     path: '/contact',
@@ -44,6 +46,7 @@ const routes = [
     path: '/services',
     title: 'Amazon Imaging, Cataloging & Advertising Services | Saleixo',
     description: 'Amazon Imaging (product photography), Cataloging (A+ Content & listings), Advertising Optimization, and Account Management for Amazon sellers and ecommerce brands.',
+    ogImage: `${BASE_URL}/og/services-og.jpg`,
   },
   {
     path: '/services/photography',
@@ -99,6 +102,7 @@ const routes = [
     path: '/blog',
     title: 'Blog — Ecommerce & Amazon Seller Tips | Saleixo',
     description: 'Guides, tips, and case studies for Amazon sellers and ecommerce businesses. Product photography, listings, Shopify, and marketing.',
+    ogImage: `${BASE_URL}/og/blog-og.jpg`,
   },
   {
     path: '/categories',
@@ -182,6 +186,27 @@ for (const route of routes) {
     /(<meta name="twitter:url" content=")[^"]*(")/,
     `$1${canonical}$2`,
   );
+
+  // Only override the image tags for routes with a dedicated 1200x630 crop;
+  // routes without one keep the default og-image.png baked into the template.
+  // All dedicated crops are 1200x630 JPEGs, matching og:image:width/height
+  // already in the template — only the mime type needs updating.
+  if (route.ogImage) {
+    html = html.replace(
+      /(<meta property="og:image" content=")[^"]*(")/,
+      `$1${route.ogImage}$2`,
+    );
+
+    html = html.replace(
+      /(<meta property="og:image:type" content=")[^"]*(")/,
+      '$1image/jpeg$2',
+    );
+
+    html = html.replace(
+      /(<meta name="twitter:image" content=")[^"]*(")/,
+      `$1${route.ogImage}$2`,
+    );
+  }
 
   if (route.path === '/') {
     writeFileSync(join(DIST, 'index.html'), html);
