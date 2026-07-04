@@ -116,7 +116,9 @@
       "Bash(npx esbuild *)",
       "Bash(cd *)",
       "Bash(rm -f pr_body.json)",
-      "Bash(curl -s -o /dev/null -w \"status: %{http_code}\\\\n\" \"https://saleixo.com/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it\")"
+      "Bash(curl -s -o /dev/null -w \"status: %{http_code}\\\\n\" \"https://saleixo.com/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it\")",
+      "Bash(python3 *)",
+      "Bash(echo \"exit:$? \\(1 means none found, good\\)\")"
     ]
   }
 }
