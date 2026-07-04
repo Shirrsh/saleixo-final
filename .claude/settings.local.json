@@ -102,7 +102,21 @@
       "Bash(rm -f .pr-body.json .pr-response.json)",
       "Bash(rm -f .pr_body.json)",
       "mcp__claude_ai_Supabase__list_migrations",
-      "Bash(git status *)"
+      "Bash(git status *)",
+      "Bash(npm ls *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP status for unknown route: %{http_code}\\\\n\" https://saleixo.com/this-route-should-not-exist-xyz123)",
+      "Bash(curl -s -o /dev/null -w \"HTTP status for known route \\(/\\): %{http_code}\\\\n\" https://saleixo.com/)",
+      "Bash(grep -i \"^sharp$\")",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(mkdir *)",
+      "Bash(grep -B2 -E \"usePageMeta.ts|pages[\\\\\\\\\\\\\\\\/]\\(About|Blog|Categories|Contact|Cookies|CustomPricing|Design|GetStarted|Privacy|Refund|Terms|Services\\)\\\\.tsx|services[\\\\\\\\\\\\\\\\/]\\(Photography|Amazon|Shopify|SocialAds|EcommerceManagement|Visibility|Professional|Enterprise\\)\\\\.tsx\")",
+      "Bash(grep -A 10 -E \"Index\\\\.tsx|Services\\\\.tsx$|About\\\\.tsx|Blog\\\\.tsx|gen-og-images\")",
+      "Bash(echo \"EXIT_CODE=$?\")",
+      "Bash(rm -rf \"C:/SALEIXO/saleixo-digital-studio/.claude/worktrees/agent-a66cacfede82b7ffa/src/assets/og\")",
+      "Bash(npx esbuild *)",
+      "Bash(cd *)",
+      "Bash(rm -f pr_body.json)",
+      "Bash(curl -s -o /dev/null -w \"status: %{http_code}\\\\n\" \"https://saleixo.com/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it\")"
     ]
   }
 }
