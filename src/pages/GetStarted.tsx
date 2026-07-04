@@ -156,6 +156,7 @@ const QuickContactForm = () => {
   const [form, setForm] = useState({ name: '', email: '', whatsapp: '', service: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [rateLimited, setRateLimited] = useState(false);
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [k]: e.target.value }));
@@ -163,6 +164,8 @@ const QuickContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setRateLimited(false);
+    let wasRateLimited = false;
     try {
       await supabase.from('leads' as any).insert([{
         name:     form.name,
@@ -177,17 +180,36 @@ const QuickContactForm = () => {
       await supabase.from('activity_log').insert({
         action: 'New quick enquiry via Get Started page', item_type: 'lead',
       });
-      // Fire-and-forget email notification
-      supabase.functions.invoke('notify-lead', {
+      // Notification email — awaited (not fire-and-forget) so a 429 from the
+      // notify-lead rate limiter can be surfaced to the user.
+      const { error: notifyError } = await supabase.functions.invoke('notify-lead', {
         body: { name: form.name, email: form.email, phone: form.whatsapp || null,
                 services: form.service ? [form.service] : [], message: form.message,
                 source: 'get-started-quick-form' },
-      }).catch(() => {});
-    } catch (_) { /* silent */ } finally {
+      });
+      if (notifyError && (notifyError as { context?: Response })?.context?.status === 429) {
+        wasRateLimited = true;
+        setRateLimited(true);
+      }
+    } catch (_) { /* silent — other failures don't block the success state */ } finally {
       setLoading(false);
-      setSubmitted(true);
+      if (!wasRateLimited) setSubmitted(true);
     }
   };
+
+  if (rateLimited) {
+    return (
+      <div className="flex flex-col items-center justify-center text-center py-10 gap-4">
+        <div className="w-14 h-14 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+          <MessageCircle className="w-7 h-7 text-amber-600 dark:text-amber-400" strokeWidth={2} />
+        </div>
+        <h3 className="text-xl font-bold text-foreground">Too many requests</h3>
+        <p className="text-sm text-muted-foreground max-w-xs">
+          We've received a few messages from you already. Please wait a few minutes and try again, or message us on WhatsApp.
+        </p>
+      </div>
+    );
+  }
 
   if (submitted) {
     return (
@@ -255,12 +277,13 @@ const GetStarted = () => {
     title: 'Get Started Free — Saleixo',
     description: 'Tell us about your store and get a free written listing audit within 48 hours. No commitment, no sales pitch.',
   });
-  const [step,      setStep]      = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [submitted, setSubmitted] = useState(false);
-  const [loading,   setLoading]   = useState(false);
-  const [phraseIdx, setPhraseIdx] = useState(0);
-  const [mounted,   setMounted]   = useState(false);
+  const [step,        setStep]        = useState(0);
+  const [direction,   setDirection]   = useState(1);
+  const [submitted,   setSubmitted]   = useState(false);
+  const [rateLimited, setRateLimited] = useState(false);
+  const [loading,     setLoading]     = useState(false);
+  const [phraseIdx,   setPhraseIdx]   = useState(0);
+  const [mounted,     setMounted]     = useState(false);
   const { resolvedTheme } = useTheme();
   const isDark = mounted && resolvedTheme === 'dark';
 
@@ -307,6 +330,8 @@ const GetStarted = () => {
 
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
+    setRateLimited(false);
+    let wasRateLimited = false;
     try {
       const { error } = await supabase
         .from('leads' as any)
@@ -335,8 +360,9 @@ const GetStarted = () => {
         item_type: 'lead',
       });
 
-      // Fire-and-forget email notification
-      supabase.functions.invoke('notify-lead', {
+      // Notification email — awaited (not fire-and-forget) so a 429 from the
+      // notify-lead rate limiter can be surfaced to the user.
+      const { error: notifyError } = await supabase.functions.invoke('notify-lead', {
         body: {
           name: data.name, email: data.email, phone: data.phone,
           business: data.business, product: data.product,
@@ -344,14 +370,19 @@ const GetStarted = () => {
           budget_range: data.budget, timeline: data.timeline,
           message: data.challenge, source: 'get-started-form',
         },
-      }).catch(() => {});
+      });
 
-      setSubmitted(true);
+      if (notifyError && (notifyError as { context?: Response })?.context?.status === 429) {
+        wasRateLimited = true;
+        setRateLimited(true);
+      } else {
+        setSubmitted(true);
+      }
     } catch (err: any) {
       console.error('Lead submission error:', err);
       // Still show success to the user — don't expose DB errors
       // But log it so we can debug
-      setSubmitted(true);
+      if (!wasRateLimited) setSubmitted(true);
     } finally {
       setLoading(false);
     }
@@ -362,6 +393,44 @@ const GetStarted = () => {
     center: { x: 0, opacity: 1 },
     exit:   (dir: number) => ({ x: dir * -48, opacity: 0 }),
   };
+
+  // ── Rate limited ─────────────────────────────────────────────────────────
+  if (rateLimited) {
+    return (
+      <>
+        <Header />
+        <main className="min-h-screen px-6 pt-28 pb-20" style={{ background: 'hsl(var(--background))' }}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl mx-auto text-center"
+          >
+            <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+              style={{ background: 'hsl(38 92% 50% / 0.12)', border: '2px solid hsl(38 92% 50% / 0.3)' }}>
+              <MessageCircle className="w-10 h-10" style={{ color: 'hsl(38 92% 50%)' }} strokeWidth={1.5} />
+            </div>
+            <h1 className="text-3xl font-bold text-foreground mb-3">Too many requests</h1>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              We've received a few submissions from you already. Please wait a few minutes and try again,
+              or reach out to us directly on WhatsApp for a faster response.
+            </p>
+            <a
+              href="https://wa.me/917011441159?text=Hi%2C%20I%27d%20like%20a%20free%20listing%20audit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
+              style={{ background: '#25d366', color: '#fff' }}
+            >
+              <MessageCircle className="w-4 h-4" strokeWidth={2} />
+              WhatsApp Us Directly
+            </a>
+          </motion.div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 
   // ── Success ──────────────────────────────────────────────────────────────
   if (submitted) {
