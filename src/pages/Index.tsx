@@ -21,6 +21,7 @@ const Index = () => {
     title: 'Saleixo — Product Photography, Amazon Listings & Shopify Stores',
     description: 'Amazon Imaging, Cataloging, A+ Content, and conversion-tested Shopify stores. 500+ ecommerce sellers helped. 98% satisfaction rate.',
     canonical: 'https://saleixo.com/',
+    ogImage: 'https://saleixo.com/og/home-og.jpg',
   });
   return (
     <>

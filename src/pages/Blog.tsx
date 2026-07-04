@@ -309,6 +309,7 @@ export default function Blog() {
   usePageMeta({
     title: 'Blog — Saleixo',
     description: 'Amazon tips, Shopify growth guides, ecommerce marketing strategies, and product photography insights from the Saleixo team.',
+    ogImage: 'https://saleixo.com/og/blog-og.jpg',
   });
   const [email, setEmail] = useState('');
   const [posts, setPosts] = useState<BlogPost[]>([]);

@@ -82,6 +82,7 @@ const About = () => {
     title: 'About Saleixo — The Diagnostic-First Ecommerce Studio',
     description: 'Saleixo is a full-stack ecommerce studio based in Noida, India. We help D2C brands and Amazon sellers with photography, design, listings, and marketing across 20+ global marketplaces.',
     canonical: 'https://saleixo.com/about',
+    ogImage: 'https://saleixo.com/og/about-og.jpg',
   });
 
   return (

@@ -168,6 +168,7 @@ export default function Services() {
   usePageMeta({
     title: 'Amazon Imaging, Cataloging & Advertising Services | Saleixo',
     description: 'Amazon Imaging (product photography), Cataloging (A+ Content & listings), Advertising Optimization, and Account Management for Amazon sellers and ecommerce brands.',
+    ogImage: 'https://saleixo.com/og/services-og.jpg',
   });
   const { fmt } = useCurrency();
   return (
