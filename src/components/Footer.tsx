@@ -1,4 +1,4 @@
-import { Mail, MessageCircle, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { Mail, MessageCircle, Phone, ArrowUpRight, ChevronDown, X as XIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -92,7 +92,7 @@ const Footer = () => {
           </div>
 
           {/* Link columns — accordion on mobile, grid on desktop */}
-          <div className="md:grid md:grid-cols-4 md:gap-8 md:pt-8">
+          <div className="md:grid md:grid-cols-4 md:gap-8 md:pt-8 lg:grid-cols-5">
 
             {/* Services */}
             <FooterAccordion title="Services">
@@ -205,6 +205,54 @@ const Footer = () => {
               <div className="mt-4 pt-4 border-t border-border/30">
                 <p className="text-[10px] text-muted-foreground/50 uppercase tracking-widest mb-2">Markets</p>
                 <p className="text-xs text-muted-foreground/70">US · UK · FR · DE · AU · CA · IN</p>
+              </div>
+            </FooterAccordion>
+
+            {/* Business — registered NAP details for trust & directory consistency */}
+            <FooterAccordion title="Business">
+              <div className="space-y-3 mb-5">
+                <p className="text-sm font-medium text-foreground">Saleixo</p>
+                <p className="text-sm text-foreground/70 leading-relaxed">
+                  A-41, Block A, Industrial Area,<br />
+                  Sector 62, Noida, Uttar Pradesh 201309
+                </p>
+                <a
+                  href="tel:+917011441159"
+                  className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-200"
+                >
+                  <span className="text-muted-foreground"><Phone className="w-3.5 h-3.5" /></span>
+                  +91 70114 41159
+                </a>
+                <a
+                  href="mailto:info@saleixo.com"
+                  className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-200"
+                >
+                  <span className="text-muted-foreground"><Mail className="w-3.5 h-3.5" /></span>
+                  info@saleixo.com
+                </a>
+              </div>
+
+              {/* Social — only confirmed, owned profiles are linked here.
+                  LinkedIn and Instagram intentionally omitted: no confirmed
+                  LinkedIn URL on file, and the Instagram handle @saleixo
+                  belongs to an unrelated third party (planned handle
+                  @saleixostudio is not yet confirmed registered). */}
+              <div className="flex items-center gap-3 pt-4 border-t border-border/30">
+                <a
+                  href="https://x.com/SaleixoStudio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Saleixo on X (Twitter)"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  <XIcon className="w-4 h-4" />
+                </a>
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-border/30">
+                <p className="text-[10px] text-muted-foreground/40 tracking-wide">
+                  GST: {'{{ASK_OWNER}}'}
+                </p>
               </div>
             </FooterAccordion>
 
