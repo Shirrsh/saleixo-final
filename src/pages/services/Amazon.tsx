@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -65,6 +65,23 @@ const Amazon = () => {
   usePageMeta({
     title: 'Amazon Listing & FBA Services — Saleixo',
     description: 'Full Amazon seller support — keyword-optimised listings, A+ content, FBA setup, and account management. 0 compliance rejections.',
+    structuredData: [
+      buildBreadcrumbSchema([
+        { name: 'Home', url: 'https://saleixo.com/' },
+        { name: 'Services', url: 'https://saleixo.com/services' },
+        { name: 'Amazon Listing & FBA', url: 'https://saleixo.com/services/amazon' },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Amazon Listing & FBA Services',
+        url: 'https://saleixo.com/services/amazon',
+        serviceType: 'Amazon Listing Optimization',
+        provider: { '@id': ORG_ID },
+        areaServed: ['IN', 'US', 'GB', 'FR', 'DE', 'AU', 'CA'],
+        description: 'Full Amazon seller support — keyword-optimised listings, A+ content, FBA setup, and account management.',
+      },
+    ],
   });
   return (
   <>

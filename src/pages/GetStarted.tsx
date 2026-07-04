@@ -12,7 +12,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import imgBeautyPedestal from '@/assets/services/beauty-pedestal-alt.webp';
 
 const ROTATING_PHRASES = [
@@ -276,6 +276,10 @@ const GetStarted = () => {
   usePageMeta({
     title: 'Get Started Free — Saleixo',
     description: 'Tell us about your store and get a free written listing audit within 48 hours. No commitment, no sales pitch.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Get Started', url: 'https://saleixo.com/get-started' },
+    ]),
   });
   const [step,        setStep]        = useState(0);
   const [direction,   setDirection]   = useState(1);

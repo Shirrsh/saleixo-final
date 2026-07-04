@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
@@ -118,10 +118,40 @@ const getDate = (post: BlogPost) =>
     year: 'numeric', month: 'short', day: 'numeric',
   });
 
+// ISO 8601 date for structured data (schema.org datePublished/dateModified).
+const getISODate = (post: BlogPost) =>
+  new Date(post.published_date || post.created_at || Date.now()).toISOString();
+
 const getSlug = (post: BlogPost) => post.slug || post.id;
 
 const getCover = (post: BlogPost, idx: number) =>
   post.featured_image_url || fallbackCovers[idx % fallbackCovers.length];
+
+// Cover images are either an absolute Supabase Storage URL (featured_image_url) or a
+// root-relative bundled asset path (fallback covers) — normalise both to an absolute URL.
+const toAbsoluteUrl = (src: string) => (src.startsWith('http') ? src : `https://saleixo.com${src}`);
+
+// Blog listing schema: a Blog containing one Article per real post, built only from
+// fields that exist on BlogPost — no invented fields (no separate "updated" timestamp
+// exists in the data model, so dateModified mirrors datePublished).
+const buildBlogSchema = (posts: BlogPost[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': 'https://saleixo.com/blog#blog',
+  name: 'The Saleixo Journal',
+  url: 'https://saleixo.com/blog',
+  publisher: { '@id': ORG_ID },
+  blogPost: posts.map((post, idx) => ({
+    '@type': 'Article',
+    headline: post.title,
+    description: getExcerpt(post),
+    image: toAbsoluteUrl(getCover(post, idx)),
+    datePublished: getISODate(post),
+    dateModified: getISODate(post),
+    author: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
+  })),
+});
 
 const getCategoryColor = (cat?: string) => {
   const map: Record<string, string> = {
@@ -306,16 +336,24 @@ const WideCard = ({ post, idx, delay = 0 }: { post: BlogPost; idx: number; delay
 
 // ── Main page ─────────────────────────────────────────────────────────────────
 export default function Blog() {
-  usePageMeta({
-    title: 'Blog — Saleixo',
-    description: 'Amazon tips, Shopify growth guides, ecommerce marketing strategies, and product photography insights from the Saleixo team.',
-  });
   const [email, setEmail] = useState('');
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
   const [page, setPage] = useState(1);
   const POSTS_PER_PAGE = 8;
+
+  usePageMeta({
+    title: 'Blog — Saleixo',
+    description: 'Amazon tips, Shopify growth guides, ecommerce marketing strategies, and product photography insights from the Saleixo team.',
+    structuredData: [
+      buildBreadcrumbSchema([
+        { name: 'Home', url: 'https://saleixo.com/' },
+        { name: 'Blog', url: 'https://saleixo.com/blog' },
+      ]),
+      buildBlogSchema(posts),
+    ],
+  });
 
   useEffect(() => {
     supabase

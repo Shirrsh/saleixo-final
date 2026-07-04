@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
@@ -14,6 +14,10 @@ const Terms = () => {
   usePageMeta({
     title: 'Terms of Service — Saleixo',
     description: 'Terms governing your use of Saleixo services — scope, payment, IP, liability, and more.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Terms of Service', url: 'https://saleixo.com/terms' },
+    ]),
   });
   return (
   <>

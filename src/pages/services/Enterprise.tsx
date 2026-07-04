@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Crown, Shield, Star, UserCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -57,6 +57,11 @@ const Enterprise = () => {
   usePageMeta({
     title: 'Enterprise Plan — Full-Service Brand Partner | Saleixo',
     description: 'Dedicated account manager, 200+ product images, video content, CRM automation, and performance-based engagement terms. Saleixo Enterprise for serious ecommerce brands.',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'Services', url: 'https://saleixo.com/services' },
+      { name: 'Enterprise Plan', url: 'https://saleixo.com/services/enterprise' },
+    ]),
   });
   const [isLight, setIsLight] = useState(() => {
     if (typeof window === 'undefined') return false;

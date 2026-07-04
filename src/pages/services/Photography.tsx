@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Camera, Clock, Star, Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -76,6 +76,23 @@ const Photography = () => {
   usePageMeta({
     title: 'Product Photography Services — Saleixo',
     description: 'Studio-grade product photography for Amazon, Shopify, and all major marketplaces. White-background, lifestyle, 360°, and infographic shots.',
+    structuredData: [
+      buildBreadcrumbSchema([
+        { name: 'Home', url: 'https://saleixo.com/' },
+        { name: 'Services', url: 'https://saleixo.com/services' },
+        { name: 'Product Photography', url: 'https://saleixo.com/services/photography' },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Product Photography Services',
+        url: 'https://saleixo.com/services/photography',
+        serviceType: 'Product Photography',
+        provider: { '@id': ORG_ID },
+        areaServed: ['IN', 'US', 'GB', 'FR', 'DE', 'AU', 'CA'],
+        description: 'Studio-grade product photography for Amazon, Shopify, and all major marketplaces. White-background, lifestyle, 360°, and infographic shots.',
+      },
+    ],
   });
   return (
   <>

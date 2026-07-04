@@ -1,4 +1,4 @@
-import { usePageMeta } from '@/hooks/usePageMeta';
+import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Camera, ShoppingCart, Palette, BarChart2, MapPin, Award, Users, Clock, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -82,6 +82,10 @@ const About = () => {
     title: 'About Saleixo — The Diagnostic-First Ecommerce Studio',
     description: 'Saleixo is a full-stack ecommerce studio based in Noida, India. We help D2C brands and Amazon sellers with photography, design, listings, and marketing across 20+ global marketplaces.',
     canonical: 'https://saleixo.com/about',
+    structuredData: buildBreadcrumbSchema([
+      { name: 'Home', url: 'https://saleixo.com/' },
+      { name: 'About', url: 'https://saleixo.com/about' },
+    ]),
   });
 
   return (
