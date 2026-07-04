@@ -36,7 +36,12 @@
     }
   ],
   "redirects": [
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.saleixo.com" }], "destination": "https://saleixo.com/$1", "permanent": true }
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.saleixo.com" }], "destination": "https://saleixo.com/$1", "permanent": true },
+    {
+      "source": "/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it-",
+      "destination": "/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it",
+      "permanent": true
+    }
   ],
   "rewrites": [
     { "source": "/admin(/.*)?", "destination": "/index.html" }

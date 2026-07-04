@@ -440,7 +440,10 @@ const Hero = () => {
             ✦ Amazon sellers · Etsy · Shopify · eCommerce
           </motion.span>
 
-          <motion.h1
+          {/* Not an <h1> — the canonical page heading is the desktop-layout
+              <h1> above; this is the same headline restyled for mobile, so it
+              must not duplicate the h1 in the rendered DOM (SEO: one h1 per page). */}
+          <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -451,7 +454,7 @@ const Hero = () => {
             <span style={{ color: textPrimary, display: 'block' }}>are great.</span>
             <span style={{ color: textAccent, display: 'block' }}>Your listings are</span>
             <span style={{ color: textPrimary, display: 'block' }}>killing them.</span>
-          </motion.h1>
+          </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 12 }}
