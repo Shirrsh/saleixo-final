@@ -5,20 +5,34 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
-import imgHero from '@/assets/photography-service.jpg';
+import imgHero from '@/assets/services/studio-bts.webp';
 
-import jewelryNecklace   from '@/assets/categories/jewelry-necklace.jpg';
-import jewelryEarrings   from '@/assets/categories/jewelry-earrings.jpg';
-import incensePackaging  from '@/assets/categories/incense-packaging.jpg';
-import spiritualProducts from '@/assets/categories/spiritual-products.jpg';
-import aquamarineB       from '@/assets/categories/aquamarine-bracelet.jpg';
+import jewelryBeaded    from '@/assets/categories/jewelry-beaded-photography.webp';
+import homeStorage      from '@/assets/categories/home-storage-organisation.webp';
+import handmadeCraft    from '@/assets/categories/handmade-artisan-craft.webp';
+import apparelSleepwear from '@/assets/categories/apparel-sleepwear.webp';
+import wellnessIncense  from '@/assets/categories/wellness-incense-pooja.webp';
+import beautyCare       from '@/assets/categories/beauty-personal-care.webp';
+
+import heroEarrings  from '@/assets/selected-work/jewelry-earrings-hero.webp';
+import heroOrganizer from '@/assets/services/home-storage-organizer-hero.webp';
+import heroDiya      from '@/assets/services/brass-diya-hero.webp';
+import heroAmber     from '@/assets/selected-work/beauty-amber-bottle.webp';
 
 const categoryPreviews = [
-  { name: 'Jewelry Photography',         image: jewelryNecklace,   alt: 'Ornate gold necklace jewelry photography' },
-  { name: 'Pearl & Fine Jewelry',        image: jewelryEarrings,   alt: 'Elegant pearl drop earrings photography' },
-  { name: 'Spiritual & Wellness',        image: spiritualProducts, alt: 'Spiritual wellness products photography' },
-  { name: 'Premium Incense & Packaging', image: incensePackaging,  alt: 'Premium incense packaging photography' },
-  { name: 'Gemstone Accessories',        image: aquamarineB,       alt: 'Aquamarine gemstone bracelet photography' },
+  { name: 'Jewelry & Beaded Accessories', image: jewelryBeaded,    alt: 'Macro product photo of handcrafted beaded bracelet on ivory linen' },
+  { name: 'Home Storage & Organisation',  image: homeStorage,      alt: 'Woven fabric storage baskets styled on a wardrobe shelf' },
+  { name: 'Handmade & Artisan Craft',     image: handmadeCraft,    alt: 'Artisan hands embroidering fabric hoop, overhead flat-lay' },
+  { name: 'Apparel & Sleepwear',          image: apparelSleepwear, alt: 'Blush satin sleepwear robe on wooden hanger, studio backdrop' },
+  { name: 'Wellness, Incense & Pooja',    image: wellnessIncense,  alt: 'Kraft incense box with lit incense stick and jasmine flower on slate' },
+  { name: 'Beauty & Personal Care',       image: beautyCare,       alt: 'Frosted serum bottle on stone pedestal with cream swatch' },
+];
+
+const deliverExamples = [
+  { image: heroEarrings,  alt: 'White-background hero shot of kundan chandbali earrings, Amazon compliant' },
+  { image: heroOrganizer, alt: 'White-background hero shot of bamboo and canvas storage organizer' },
+  { image: heroDiya,      alt: 'White-background hero shot of engraved brass diya oil lamp' },
+  { image: heroAmber,     alt: 'White-background hero shot of amber glass dropper bottle' },
 ];
 
 const whatWeDo = [
@@ -187,6 +201,22 @@ const Photography = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* What we deliver — white-background examples */}
+        <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-14 mb-6">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-muted-foreground">
+            What we deliver — marketplace-ready hero shots
+          </p>
+        </motion.div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {deliverExamples.map((ex, i) => (
+            <motion.div key={ex.alt} variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
+              className="overflow-hidden rounded-2xl aspect-[4/5]"
+              style={{ border: '1px solid hsl(var(--border))', background: '#ffffff' }}>
+              <img src={ex.image} alt={ex.alt} loading="lazy" className="w-full h-full object-cover" />
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* ── Process ── */}
@@ -271,7 +301,7 @@ const Photography = () => {
           <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">What we shoot</p>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
-              Specialised in every category.
+              Categories we shoot every week.
             </h2>
             <Link to="/categories"
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline underline-offset-4 flex-shrink-0">
@@ -279,7 +309,7 @@ const Photography = () => {
             </Link>
           </div>
         </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
           {categoryPreviews.map((cat, i) => (
             <motion.div key={cat.name} variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}>
               <Link to="/categories" className="group block overflow-hidden rounded-2xl relative aspect-[3/4]"
