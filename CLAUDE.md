@@ -24,7 +24,8 @@ Site deployed at `https://saleixo-final.vercel.app/` (canonical: `https://saleix
 - Supabase project: **Alvaio-digital-backend** (`syoungrummuurrptckbt`) — the old brand name; it IS the saleixo.com backend.
 - `public.leads` table **exists in production** with a SUPERSET of the repo migration's columns (adds assigned_to, notes, follow_up_date, last_contacted_at, newsletter) and correct RLS (anon insert-only, admin manage). Regenerate `types.ts` from the live DB, never from the migration file.
 - `notify-lead` edge function is deployed and **verified working** (form → leads row → email to info@saleixo.com). It uses **Zoho SMTP** (`smtp.zoho.in`, secrets `ZOHO_EMAIL`/`ZOHO_PASSWORD`). There is no Resend account — never replace it with a Resend implementation.
-- Git remotes: `origin` → alvaio-digital-studio (old name, backup), `prod` → saleixo-final (Vercel deploys from this — pushing to prod IS deploying).
+- Git remotes: `origin` → saleixo-digital-studio on GitHub (renamed from alvaio-digital-studio), `prod` → saleixo-final (Vercel deploys from this — pushing to prod IS deploying).
+- **NEVER modify the production database, deployed edge functions, or secrets directly (via Supabase MCP or otherwise) without explicit owner approval in the current conversation.** Write migrations/PRs and stop; ask before applying anything to prod. Read-only queries for diagnosis are fine.
 
 ## Stack
 
