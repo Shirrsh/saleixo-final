@@ -61,7 +61,7 @@ const Card = ({ item }: { item: Testimonial }) => (
       boxShadow: '0 2px 16px rgba(0,0,0,0.05)',
     }}
   >
-    <Quote className="w-6 h-6 flex-shrink-0" strokeWidth={1.5} style={{ color: '#d4af37' }} />
+    <Quote aria-hidden className="w-6 h-6 flex-shrink-0" strokeWidth={1.5} style={{ color: '#d4af37' }} />
     <blockquote className="text-sm md:text-[15px] leading-relaxed text-foreground/80 flex-1">
       {item.quote}
     </blockquote>
@@ -121,7 +121,7 @@ const TestimonialsSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="flex gap-5 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:snap-none"
+          className="flex gap-5 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:snap-none"
           style={{ scrollbarWidth: 'none' }}
         >
           {TESTIMONIALS.map(item => (
