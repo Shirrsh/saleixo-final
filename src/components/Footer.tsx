@@ -42,6 +42,7 @@ const Footer = () => {
     { label: 'Shopify Setup & Design', href: '/services/shopify'             },
     { label: 'Product Photography',    href: '/services/photography'         },
     { label: 'Social & Paid Ads',      href: '/services/social-ads'          },
+    { label: 'Handmade & Artisan Brands', href: '/handmade'                  },
     { label: 'Ecommerce Design',       href: '/design'                       },
     { label: 'All Services',           href: '/services'                     },
     { label: 'Pricing',                href: '/custom-pricing'               },

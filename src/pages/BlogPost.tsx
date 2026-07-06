@@ -6,7 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import NotFound from '@/pages/NotFound';
-import { ArrowLeft, Calendar, Clock, BookOpen } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, BookOpen, Sparkles, Camera, ArrowUpRight } from 'lucide-react';
 import {
   type BlogPost as BlogPostRow,
   FALLBACK_POSTS,
@@ -211,6 +211,70 @@ const BlogPost = () => {
               </div>
 
               <div className="mt-14 pt-8" style={{ borderTop: '1px solid hsl(var(--border))' }}>
+                <span
+                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-5"
+                  style={{ color: 'hsl(var(--muted-foreground))' }}
+                >
+                  <Sparkles className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  Related
+                </span>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Link
+                    to="/handmade"
+                    className="group flex items-start gap-4 rounded-2xl p-5 transition-colors duration-200"
+                    style={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  >
+                    <span
+                      className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl"
+                      style={{ background: 'hsl(var(--primary) / 0.1)', color: 'hsl(var(--primary))' }}
+                    >
+                      <Sparkles className="w-5 h-5" strokeWidth={1.5} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="flex items-center gap-1.5 font-semibold text-foreground">
+                        Ecommerce studio for handmade &amp; artisan brands
+                        <ArrowUpRight
+                          className="w-4 h-4 flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          strokeWidth={1.5}
+                          style={{ color: 'hsl(var(--muted-foreground))' }}
+                        />
+                      </span>
+                      <span className="block text-sm mt-1" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                        Photography, listings &amp; growth built for makers.
+                      </span>
+                    </span>
+                  </Link>
+
+                  <Link
+                    to="/services/photography"
+                    className="group flex items-start gap-4 rounded-2xl p-5 transition-colors duration-200"
+                    style={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                  >
+                    <span
+                      className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl"
+                      style={{ background: 'hsl(var(--primary) / 0.1)', color: 'hsl(var(--primary))' }}
+                    >
+                      <Camera className="w-5 h-5" strokeWidth={1.5} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="flex items-center gap-1.5 font-semibold text-foreground">
+                        Product photography services
+                        <ArrowUpRight
+                          className="w-4 h-4 flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          strokeWidth={1.5}
+                          style={{ color: 'hsl(var(--muted-foreground))' }}
+                        />
+                      </span>
+                      <span className="block text-sm mt-1" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                        Studio-grade images that convert browsers to buyers.
+                      </span>
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-10 pt-8" style={{ borderTop: '1px solid hsl(var(--border))' }}>
                 <Link
                   to="/blog"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 hover:gap-3"

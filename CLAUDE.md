@@ -67,7 +67,7 @@ src/
     CustomPricing.tsx,
     Privacy.tsx, Terms.tsx,
     Cookies.tsx, Refund.tsx,
-    GetStarted.tsx,
+    GetStarted.tsx, Handmade.tsx,
     NotFound.tsx
     services/                   # Visibility, Professional, Enterprise tiers
     admin/                      # Full CMS — out of scope
@@ -146,6 +146,7 @@ All routes are wired in `src/App.tsx`. Do not remove or rename them.
 | `/refund` | `src/pages/Refund.tsx` | Live | Cancellation & Refund Policy. Full content. |
 | `/privacy` | `src/pages/Privacy.tsx` | Updated | Full Privacy Policy replacing the old stub. |
 | `/terms` | `src/pages/Terms.tsx` | Updated | Full 12-clause Terms of Service replacing the old stub. |
+| `/handmade` | `src/pages/Handmade.tsx` | Live | SEO landing page for handmade & artisan brands. Sections: hero, problem, services, categories, testimonials, pricing strip, FAQ (with FAQPage JSON-LD), CTA. Uses existing assets only; no stats/percentage claims. |
 
 ### Utility components added
 
@@ -169,6 +170,7 @@ All routes are wired in `src/App.tsx`. Do not remove or rename them.
 | Shopify Setup & Design | `/services/shopify` |
 | Social & Paid Ads | `/services/social-ads` |
 | Ecommerce Design | `/design` |
+| Handmade & Artisan Brands | `/handmade` |
 | All Services | `/services` |
 | Pricing | `/custom-pricing` |
 

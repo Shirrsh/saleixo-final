@@ -22,6 +22,7 @@ const Blog               = lazy(() => import('./pages/Blog'));
 const BlogPost           = lazy(() => import('./pages/BlogPost'));
 const Categories         = lazy(() => import('./pages/Categories'));
 const Design             = lazy(() => import('./pages/Design'));
+const Handmade           = lazy(() => import('./pages/Handmade'));
 const Services           = lazy(() => import('./pages/Services'));
 const CustomPricing      = lazy(() => import('./pages/CustomPricing'));
 
@@ -77,6 +78,7 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/categories" element={<Categories />} />
               <Route path="/design" element={<Design />} />
+              <Route path="/handmade" element={<Handmade />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/services" element={<Services />} />
