@@ -123,7 +123,15 @@
       "Bash(grep -v \"^--$\")",
       "Bash(npx tsc *)",
       "Bash(echo \"EXIT: $?\")",
-      "Bash(rm -f .pr_body.md .pr_payload.json .pr_response.json)"
+      "Bash(rm -f .pr_body.md .pr_payload.json .pr_response.json)",
+      "Bash(python -c \"import json; json.load\\(open\\('vercel.json'\\)\\); print\\('valid JSON'\\)\")",
+      "Bash(echo \"origin exit:$?\")",
+      "Bash(echo \"prod exit:$?\")",
+      "Bash(curl -s -L -o /dev/null -w \"final status: %{http_code}, final URL: %{url_effective}\\\\n\" \"https://saleixo.com/blog/why-73-of-d2c-brands-fail-at-product-photography-and-how-to-fix-it-\")",
+      "Bash(curl -s -o /dev/null -w \"status: %{http_code}\\\\n\" \"https://saleixo.com/blog/this-post-does-not-exist-xyz\")",
+      "Bash(grep -iA3 \"errors during optimization\")",
+      "Skill(artifact-design)",
+      "Artifact"
     ]
   }
 }
