@@ -2,7 +2,7 @@ import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import {
   ArrowRight, Check, Camera, ShoppingCart, BarChart2, Globe,
-  Users, TrendingUp, Shield, Clock, Star, Zap,
+  Users, TrendingUp, Shield, Clock, Star, Zap, Sparkles,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -17,6 +17,7 @@ import imgDesign from '@/assets/design-service.jpg';
 import imgMarketing from '@/assets/marketing-service.jpg';
 import imgPortfolio1 from '@/assets/portfolio-1.jpg';
 import imgPortfolio3 from '@/assets/portfolio-3.jpeg';
+import imgHandmade from '@/assets/categories/handmade-artisan-craft.webp';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -111,6 +112,23 @@ const SERVICES = [
     img: imgPortfolio1,
     href: '/services/ecommerce-management',
     cta: 'Explore Management',
+  },
+  {
+    icon: Sparkles,
+    color: '#c2410c',
+    badge: 'Handmade',
+    spnCategory: 'SPN: Artisan & Handmade',
+    title: 'Handmade & Artisan Brands',
+    headline: 'Macro photography and listings built for makers.',
+    desc: 'A dedicated studio track for handmade sellers — macro product photography, Etsy & Amazon Handmade listings, and Shopify stores planned against every marketplace spec from a single shoot.',
+    bullets: [
+      'Macro detail shots for beadwork, jewelry & pottery',
+      'Etsy & Amazon Handmade listings, not recycled Amazon SEO',
+      'One session, every marketplace spec delivered',
+    ],
+    img: imgHandmade,
+    href: '/handmade',
+    cta: 'Explore Handmade',
   },
 ];
 
@@ -244,7 +262,7 @@ structuredData: buildBreadcrumbSchema([
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-14">
               <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">WHAT WE DO</p>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
-                Five services. One studio.
+                Six services. One studio.
               </h2>
             </motion.div>
 

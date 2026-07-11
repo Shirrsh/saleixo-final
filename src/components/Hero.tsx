@@ -1,6 +1,6 @@
 import { useSiteImages } from '@/hooks/useSiteImages';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -191,6 +191,14 @@ const Hero = () => {
   const textMuted = isLight ? 'hsl(0 0% 35%)' : '#cbd5e1';
   const borderColor = isLight ? 'hsl(0 0% 88%)' : 'hsl(215 40% 30% / 0.6)';
 
+  // Hero proof chips — verifiable claims only (no percentages). Chip 2 is the
+  // "published pricing" positioning weapon and links straight to the pricing page.
+  const heroChips: { label: string; to?: string }[] = [
+    { label: '48-hr express shoots' },
+    { label: 'Prices published — no sales call', to: '/custom-pricing' },
+    { label: '20+ marketplace specs' },
+  ];
+
   return (
     <section
       ref={sectionRef}
@@ -336,9 +344,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            style={{ color: textMuted, fontSize: 17, lineHeight: 1.65, marginBottom: 30, maxWidth: 460 }}
+            style={{ color: textMuted, fontSize: 17, lineHeight: 1.65, marginBottom: 30, maxWidth: 480 }}
           >
-            Studio-grade product photos, compliant listings, and conversion-tested creative — built by ecommerce operators, not freelancers. We find the problem in your funnel, then fix it.
+            A product photography studio that also runs your listings. Real prices published on the site. Marketplace-ready images in 48 hours.
           </motion.p>
 
           <motion.div
@@ -372,19 +380,40 @@ const Hero = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex gap-8 pt-5"
+            className="flex flex-wrap gap-2.5 pt-5"
             style={{ borderTop: `1px solid ${borderColor}` }}
           >
-            {[
-              { value: '500+', label: 'Projects completed' },
-              { value: '48 hr', label: 'Avg. delivery' },
-              { value: '20+', label: 'Marketplaces' },
-            ].map(s => (
-              <div key={s.label}>
-                <div className="text-2xl font-extrabold" style={{ color: textPrimary }}>{s.value}</div>
-                <div className="text-xs font-medium mt-0.5" style={{ color: isLight ? 'hsl(0 0% 45%)' : '#94a3b8' }}>{s.label}</div>
-              </div>
-            ))}
+            {heroChips.map(chip => {
+              const inner = (
+                <>
+                  <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: textAccent }} strokeWidth={2} />
+                  {chip.label}
+                </>
+              );
+              const chipStyle: React.CSSProperties = {
+                background: isLight ? 'hsl(0 0% 96%)' : 'hsl(210 85% 55% / 0.08)',
+                border: `1px solid ${borderColor}`,
+                color: isLight ? 'hsl(0 0% 20%)' : '#cbd5e1',
+              };
+              return chip.to ? (
+                <Link
+                  key={chip.label}
+                  to={chip.to}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 hover:opacity-80"
+                  style={chipStyle}
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <span
+                  key={chip.label}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
+                  style={chipStyle}
+                >
+                  {inner}
+                </span>
+              );
+            })}
           </motion.div>
         </motion.div>
 
@@ -463,7 +492,7 @@ const Hero = () => {
             className="text-sm mb-6 leading-relaxed font-medium"
             style={{ color: textMuted }}
           >
-            Studio-grade product photos, compliant listings, and conversion-tested creative — built by ecommerce operators, not freelancers.
+            A product photography studio that also runs your listings. Real prices published on the site. Marketplace-ready images in 48 hours.
           </motion.p>
 
           <motion.div
@@ -497,19 +526,40 @@ const Hero = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.45 }}
-            className="flex justify-center gap-8 pt-5 w-full"
+            className="flex flex-wrap justify-center gap-2 pt-5 w-full"
             style={{ borderTop: `1px solid ${borderColor}` }}
           >
-            {[
-              { value: '500+', label: 'Projects completed' },
-              { value: '48 hr', label: 'Avg. delivery' },
-              { value: '20+', label: 'Marketplaces' },
-            ].map(s => (
-              <div key={s.label}>
-                <div className="text-2xl font-extrabold" style={{ color: textPrimary }}>{s.value}</div>
-                <div className="text-xs font-medium mt-0.5" style={{ color: isLight ? 'hsl(0 0% 45%)' : '#94a3b8' }}>{s.label}</div>
-              </div>
-            ))}
+            {heroChips.map(chip => {
+              const inner = (
+                <>
+                  <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: textAccent }} strokeWidth={2} />
+                  {chip.label}
+                </>
+              );
+              const chipStyle: React.CSSProperties = {
+                background: isLight ? 'hsl(0 0% 96%)' : 'hsl(210 85% 55% / 0.08)',
+                border: `1px solid ${borderColor}`,
+                color: isLight ? 'hsl(0 0% 20%)' : '#cbd5e1',
+              };
+              return chip.to ? (
+                <Link
+                  key={chip.label}
+                  to={chip.to}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
+                  style={chipStyle}
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <span
+                  key={chip.label}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
+                  style={chipStyle}
+                >
+                  {inner}
+                </span>
+              );
+            })}
           </motion.div>
         </div>
 

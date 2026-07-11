@@ -170,6 +170,13 @@ const routes = [
     breadcrumb: [{ name: "Home", url: H }, { name: "Pricing", url: BASE_URL + "/custom-pricing" }],
   },
   {
+    path: "/handmade",
+    title: "Ecommerce Studio for Handmade & Artisan Brands — Saleixo",
+    description: "Product photography, Etsy & Amazon Handmade listings, and Shopify stores for artisan brands. Studio in Noida, delivering to 20+ marketplaces worldwide.",
+    breadcrumb: [{ name: "Home", url: H }, { name: "Handmade & Artisan Brands", url: BASE_URL + "/handmade" }],
+    service: { name: "Ecommerce Services for Handmade & Artisan Brands", url: BASE_URL + "/handmade", serviceType: "Ecommerce services for handmade and artisan brands", description: "Product photography, Etsy & Amazon Handmade listings, and Shopify stores for artisan brands — beadwork, jewelry, textiles, pottery, incense." },
+  },
+  {
     path: "/design",
     title: "Ecommerce Design Services | Saleixo",
     description: "Brand identity, packaging design, A+ Content graphics, and Shopify storefront design for ecommerce sellers and artisans.",
