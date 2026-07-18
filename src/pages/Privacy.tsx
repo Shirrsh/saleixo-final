@@ -91,6 +91,12 @@ const Privacy = () => {
             <p>We implement industry-standard security measures including SSL encryption, access controls, and regular security reviews. No system is 100% secure - we encourage clients to keep access credentials private.</p>
           </Section>
 
+          <Section title="8. Contact">
+            <p>For privacy-related questions or requests, contact us at:<br />
+              <a href="mailto:info@saleixo.com" className="text-primary hover:underline">info@saleixo.com</a> &nbsp;·&nbsp; <a href="https://saleixo.com" className="text-primary hover:underline">saleixo.com</a>
+            </p>
+          </Section>
+
           {/* ── Amazon SP-API sections (required for Amazon SPN application) ── */}
           <Section title="9. Amazon Selling Partner Data">
             <p>In connection with services provided through the Amazon Solution Provider Network (SPN), Saleixo may access certain data from Amazon's Selling Partner API (SP-API) on behalf of Selling Partners who have explicitly authorised such access. This data may include, but is not limited to: order information, inventory data, shipment details, financial reports, and account performance metrics.</p>
@@ -132,12 +138,6 @@ const Privacy = () => {
 
           <Section title="14. Changes to This Policy">
             <p>We will notify Amazon and update this Privacy Policy within 30 days of any material organisational or operational changes that affect how Amazon SP-API data is handled. Continued use of our services after updates constitutes acceptance of the revised policy.</p>
-          </Section>
-
-          <Section title="8. Contact">
-            <p>For privacy-related questions or requests, contact us at:<br />
-              <a href="mailto:info@saleixo.com" className="text-primary hover:underline">info@saleixo.com</a> &nbsp;·&nbsp; <a href="https://saleixo.com" className="text-primary hover:underline">saleixo.com</a>
-            </p>
           </Section>
         </div>
 
