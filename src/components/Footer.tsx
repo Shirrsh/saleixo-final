@@ -249,12 +249,6 @@ const Footer = () => {
                   <XIcon className="w-4 h-4" />
                 </a>
               </div>
-
-              <div className="mt-4 pt-4 border-t border-border/30">
-                <p className="text-[10px] text-muted-foreground/40 tracking-wide">
-                  GST: {'{{ASK_OWNER}}'}
-                </p>
-              </div>
             </FooterAccordion>
 
           </div>
