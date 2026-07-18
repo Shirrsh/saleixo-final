@@ -21,7 +21,7 @@ const features = [
 
 const outcomes = [
   'More qualified leads month-on-month',
-  'Conversion rate improvement — clients typically move from sub-2% toward 3–4%',
+  'Conversion rate improvement through better photography, listings, and site experience',
   'Measurable revenue growth within 90 days',
   'Customer confidence builds as brand presentation improves',
   'Stronger market position as a premium choice',
@@ -128,7 +128,7 @@ const Professional = () => {
               className="text-lg max-w-2xl mx-auto leading-relaxed"
               style={{ color: textMuted }}
             >
-              Most ecommerce listings convert at 1–2%. Our clients typically see 3–4% after photography and listing optimisation — all in one tier.
+              Better photography, listing optimisation, and website design — bundled into one tier built for growing brands.
             </motion.p>
           </div>
         </section>
@@ -194,34 +194,6 @@ const Professional = () => {
                   ))}
                 </ul>
               </div>
-            </motion.div>
-
-            {/* Real Example */}
-            <motion.div
-              variants={fadeUp}
-              custom={2}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              className="rounded-2xl p-8"
-              style={{
-                background: cardBg,
-                border: `1px solid ${isLight ? 'hsl(210 85% 55% / 0.35)' : 'hsl(210 85% 55% / 0.3)'}`,
-              }}
-            >
-              <h2 className="text-xl font-bold mb-4" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>Case Study</h2>
-              <p className="text-sm font-semibold mb-3" style={{ color: isLight ? 'hsl(0 0% 15%)' : 'hsl(215 20% 85%)' }}>Fashion ecommerce brand — results after 6 months:</p>
-              <ul className="space-y-2 text-sm mb-5" style={{ color: textMuted }}>
-                <li><span className="font-semibold" style={{ color: textPrimary }}>Before:</span> 1.5% conversion rate, stagnant monthly sales</li>
-                <li><span className="font-semibold" style={{ color: textPrimary }}>After:</span> 3.8% conversion rate, significant revenue growth</li>
-                <li><span className="font-semibold" style={{ color: accentBlue }}>Key driver:</span> Photography refresh + full listing rewrite</li>
-              </ul>
-              <blockquote
-                className="text-sm italic pl-4"
-                style={{ borderLeft: `3px solid ${accentBlue}`, color: isLight ? 'hsl(0 0% 30%)' : 'hsl(215 20% 72%)' }}
-              >
-                "Best investment we made. ROI within 60 days."
-              </blockquote>
             </motion.div>
 
             {/* Who this is for */}

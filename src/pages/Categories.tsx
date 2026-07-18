@@ -290,7 +290,7 @@ const Categories = () => {
                 style={{ borderTop: `1px solid ${borderColor}` }}
               >
                 {[
-                  { value: '500+', label: 'Products Shot' },
+                  { value: '2025', label: 'Founded' },
                   { value: '6', label: 'Specializations' },
                   { value: '48hr', label: 'Turnaround' },
                 ].map(s => (

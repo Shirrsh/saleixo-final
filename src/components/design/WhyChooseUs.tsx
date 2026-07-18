@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 import { Users, TrendingUp, Award, UserCheck, Target, Clock, MessageCircle, Headphones } from 'lucide-react';
 
 const reasons = [
-  { icon: Users, title: '500+ Clients', desc: 'Trusted by brands across India & globally' },
-  { icon: TrendingUp, title: '91% Client Retention', desc: 'Clients stay because we deliver results' },
-  { icon: Award, title: 'Amazon SPN Partner', desc: 'Certified Amazon Service Provider Network' },
+  { icon: Users, title: 'New Agency, Real Expertise', desc: 'Team from inside corporate ecommerce, not a reseller network' },
+  { icon: TrendingUp, title: 'Transparent Pricing', desc: 'Every price public — no quotes, no hidden fees' },
+  { icon: Award, title: 'In-House Team', desc: 'No outsourcing to freelancer pools' },
   { icon: UserCheck, title: 'Expert Managers', desc: 'Category-specific marketplace specialists' },
   { icon: Target, title: 'Sales-First Focus', desc: 'Every strategy is tied to revenue growth' },
-  { icon: Clock, title: '15+ Years Experience', desc: 'Deep ecommerce & digital marketing expertise' },
+  { icon: Clock, title: '24–48 Hour Delivery', desc: 'Fast turnaround on standard photography & listing packages' },
   { icon: MessageCircle, title: 'WhatsApp Support', desc: 'Real-time communication, no ticket queues' },
   { icon: Headphones, title: 'Dedicated Manager', desc: 'Single point of contact for your account' },
 ];

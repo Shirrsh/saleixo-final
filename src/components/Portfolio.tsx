@@ -184,7 +184,7 @@ const Portfolio = () => {
             className="font-bold tracking-tight text-foreground mb-2"
             style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.4rem)' }}
           >
-            500+ products. Multiple marketplaces. One studio.
+            Product photography. Multiple marketplaces. One studio.
           </h2>
           <p className="text-muted-foreground text-sm max-w-sm mx-auto leading-relaxed">
             Jewelry, apparel, home, beauty, food, and craft — shot, listed, and grown.

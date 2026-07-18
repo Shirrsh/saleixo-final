@@ -150,8 +150,8 @@ const SocialAds = () => {
             <div className="absolute bottom-8 left-8 right-8">
               <div className="inline-block px-4 py-3 rounded-xl"
                 style={{ background: 'rgba(10,10,10,0.72)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                <p className="text-white text-sm font-semibold">250% average campaign ROI.</p>
-                <p className="text-white/55 text-xs mt-0.5">Tracked, attributed, and reported every month.</p>
+                <p className="text-white text-sm font-semibold">Every campaign, tracked and attributed.</p>
+                <p className="text-white/55 text-xs mt-0.5">Full reporting delivered every month.</p>
               </div>
             </div>
           </motion.div>

@@ -25,8 +25,8 @@ const fadeUp = {
 };
 
 const stats = [
-  { value: '500+', label: 'Projects completed' },
-  { value: '98%',  label: 'Client retention' },
+  { value: '2025', label: 'Founded' },
+  { value: '100%',  label: 'In-house team' },
   { value: '20+',  label: 'Marketplaces' },
   { value: '48 hr', label: 'Avg. delivery' },
 ];
@@ -169,7 +169,7 @@ structuredData: buildBreadcrumbSchema([
               {[
                 { icon: MapPin, label: 'Headquartered in Noida, UP, India', sub: 'Awfis, A-41, Sector 62, Noida 201309' },
                 { icon: Award, label: 'MSME Registered', sub: 'Udyam No: UDYAM-BR-06-0036869' },
-                { icon: Star,  label: '98% client retention rate', sub: 'Across 500+ completed projects' },
+                { icon: Star,  label: 'New agency, real expertise', sub: 'Founded 2025 by a team from inside corporate ecommerce' },
                 { icon: Clock, label: '48-hour average delivery', sub: 'For standard photography & listing packages' },
               ].map(({ icon: Icon, label, sub }) => (
                 <div key={label} className="flex items-start gap-4 rounded-xl p-4"

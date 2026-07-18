@@ -32,7 +32,7 @@ const SERVICES = [
     icon: Camera,
     color: '#3b82f6',
     badge: 'Photography',
-    spnCategory: 'SPN: Imaging',
+    spnCategory: 'Imaging',
     title: 'Product Photography',
     headline: 'Studio-grade images that stop the scroll and sell.',
     desc: 'Professional product photography optimised for Amazon, Flipkart, Shopify, and social — white background, lifestyle, and on-model shoots delivered in 24–48 hours.',
@@ -49,7 +49,7 @@ const SERVICES = [
     icon: ShoppingCart,
     color: '#10b981',
     badge: 'Amazon',
-    spnCategory: 'SPN: Cataloging · A+ Content',
+    spnCategory: 'Cataloging · A+ Content',
     title: 'Amazon FBA & Listing Optimisation',
     headline: 'Rank higher, win the Buy Box, dominate search.',
     desc: 'End-to-end Amazon listing management — keyword research, A+ content, brand storefront, suppression recovery, and ongoing listing health monitoring.',
@@ -66,7 +66,7 @@ const SERVICES = [
     icon: Globe,
     color: '#8b5cf6',
     badge: 'Shopify',
-    spnCategory: 'SPN: Storefront Design',
+    spnCategory: 'Storefront Design',
     title: 'Shopify Setup & Design',
     headline: 'Your dream store — live, fast, and built to convert.',
     desc: 'From blank canvas to fully operational Shopify store. Mobile-first design, conversion-optimised layouts, app integrations, and full launch support — in 14 days.',
@@ -83,7 +83,7 @@ const SERVICES = [
     icon: BarChart2,
     color: '#ec4899',
     badge: 'Social & Ads',
-    spnCategory: 'SPN: Advertising Optimization',
+    spnCategory: 'Advertising Optimization',
     title: 'Social Media & Paid Ads',
     headline: 'Turn scrollers into buyers with ads that work.',
     desc: 'Meta, TikTok, and Google campaigns built for ecommerce — combining creative strategy, precise targeting, and constant optimisation for profitable, scalable growth.',
@@ -100,7 +100,7 @@ const SERVICES = [
     icon: Users,
     color: 'hsl(var(--gold))',
     badge: 'Management',
-    spnCategory: 'SPN: Account Management',
+    spnCategory: 'Account Management',
     title: 'Ecommerce Management',
     headline: "Run your business. We'll run your ecommerce.",
     desc: 'Fully managed ecommerce operations — listings, inventory planning, order management, competitor monitoring, and monthly performance reviews across every marketplace.',
@@ -117,7 +117,7 @@ const SERVICES = [
     icon: Sparkles,
     color: '#c2410c',
     badge: 'Handmade',
-    spnCategory: 'SPN: Artisan & Handmade',
+    spnCategory: 'Artisan & Handmade',
     title: 'Handmade & Artisan Brands',
     headline: 'Macro photography and listings built for makers.',
     desc: 'A dedicated studio track for handmade sellers — macro product photography, Etsy & Amazon Handmade listings, and Shopify stores planned against every marketplace spec from a single shoot.',
@@ -167,10 +167,10 @@ const TIERS = [
 ];
 
 const STATS = [
-  { value: '500+', label: 'Projects completed' },
+  { value: '2025', label: 'Founded' },
   { value: '48 hr', label: 'Avg. delivery' },
   { value: '20+', label: 'Marketplaces' },
-  { value: '98%', label: 'Client Retention' },
+  { value: '100%', label: 'In-house Team' },
 ];
 
 const WHY = [
@@ -232,7 +232,7 @@ structuredData: buildBreadcrumbSchema([
 
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }}
               className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-              {['No Long-Term Contracts', 'Dedicated Account Manager', '30+ Marketplaces Covered', '500+ Products Shot'].map(t => (
+              {['No Long-Term Contracts', 'Dedicated Account Manager', '30+ Marketplaces Covered', 'Transparent, Fixed Pricing'].map(t => (
                 <span key={t} className="flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-gold" />{t}
                 </span>

@@ -57,7 +57,7 @@ const pillars = [
     num: '05',
     icon: RefreshCw,
     title: 'Inventory & Operations',
-    body: 'FBA prep, shipment creation, reorder alerts, and suppression recovery (24–72 hr turnaround in 90% of cases). We reduce the operational complexity of multi-marketplace selling so you can focus on sourcing.',
+    body: 'FBA prep, shipment creation, reorder alerts, and suppression recovery (typical 24–72 hr turnaround). We reduce the operational complexity of multi-marketplace selling so you can focus on sourcing.',
   },
   {
     num: '06',
@@ -78,7 +78,7 @@ const faqs = [
   { q: 'What does ecommerce management actually include?', a: 'Everything from daily listing health monitoring and suppression fixes to inventory planning, FBA prep, A+ content, PPC management, and monthly performance reviews. You get a dedicated account manager who acts as your in-house ecommerce team.' },
   { q: 'How quickly can you get started?', a: 'Onboarding takes 5–7 business days. We audit your account, document your workflows, gain platform access, and resolve any active issues in the first two weeks. Most clients are fully stabilised within 14 days.' },
   { q: 'Do you manage multiple marketplaces simultaneously?', a: 'Yes. We manage accounts across 20+ platforms including Amazon, Flipkart, Meesho, Shopify, Etsy, Walmart, eBay, Myntra, Nykaa, WooCommerce, JioMart, IndiaMART, and more. You get one point of contact for all platforms.' },
-  { q: 'How do you handle suppressed listings?', a: 'We monitor listing health daily. When a suppression is detected, we diagnose the root cause and submit the fix within hours. Our average recovery time is 48 hours, with 90% of cases resolved within 72 hours.' },
+  { q: 'How do you handle suppressed listings?', a: 'We monitor listing health daily. When a suppression is detected, we diagnose the root cause and submit the fix within hours. Typical recovery time is 24–72 hours.' },
   { q: 'What does reporting look like?', a: 'Weekly WhatsApp or Slack updates on key metrics. Monthly performance review with a full breakdown of traffic, conversion, ad spend, unit economics, and the priority actions for the next month.' },
   { q: 'What is your pricing structure?', a: 'Engagements start at a flat monthly retainer based on the number of platforms and SKUs managed, with an optional performance incentive tied to revenue growth. Book a call and we\'ll scope it honestly for your situation.' },
 ];

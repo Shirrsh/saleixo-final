@@ -133,7 +133,7 @@ const defaultValueProps: ValueProposition[] = [
     id: '4',
     title: 'Trusted by Modern Brands',
     description:
-      "From startups to established brands, we've helped 500+ businesses elevate their visual presence and boost sales.",
+      "A new agency built by a team from inside corporate ecommerce — every price is public, no quotes needed.",
     icon: 'Users',
     display_order: 3,
     is_active: true,

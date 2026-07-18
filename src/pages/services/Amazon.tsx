@@ -27,7 +27,7 @@ const whatWeDo = [
   'Listing audit and full optimisation for existing sellers',
   'Brand Registry setup and storefront design',
   'Review strategy and social proof optimisation',
-  'Suppressed listing recovery — 24–72 hr turnaround in 90% of cases',
+  'Suppressed listing recovery — typical 24–72 hr turnaround',
 ];
 
 const process = [

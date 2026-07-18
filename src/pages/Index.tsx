@@ -19,7 +19,7 @@ import FloatingCTA from '@/components/FloatingCTA';
 const Index = () => {
   usePageMeta({
     title: 'Saleixo — Product Photography, Amazon Listings & Shopify Stores',
-    description: 'Amazon Imaging, Cataloging, A+ Content, and conversion-tested Shopify stores. 500+ ecommerce sellers helped. 98% satisfaction rate.',
+    description: 'Amazon imaging, cataloging, A+ content, and conversion-focused Shopify stores. Transparent pricing, built by a team from inside corporate e-commerce.',
     canonical: 'https://saleixo.com/',
     ogImage: 'https://saleixo.com/og/home-og.jpg',
   });

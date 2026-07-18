@@ -185,10 +185,10 @@ const Design = () => {
               style={{ borderTop: `1px solid ${borderColor}` }}
             >
               {[
-                { value: '500+', label: 'Artisans Helped' },
+                { value: '2025', label: 'Founded' },
                 { value: '20+', label: 'Marketplaces' },
                 { value: '7', label: 'Countries' },
-                { value: '98%', label: 'Satisfaction Rate' },
+                { value: '100%', label: 'In-house Team' },
               ].map(s => (
                 <div key={s.label} className="text-center">
                   <div className="text-2xl font-extrabold" style={{ fontFamily: '"Inter Tight", Inter, sans-serif', color: textPrimary }}>{s.value}</div>
@@ -485,7 +485,7 @@ const Design = () => {
               }}
             >
               {[
-                { icon: Shield, label: '100% Satisfaction' },
+                { icon: Shield, label: 'Fixed-Price Projects' },
                 { icon: Star, label: 'Unlimited Revisions' },
                 { icon: UserCheck, label: 'Dedicated Manager' },
               ].map((badge, i) => {

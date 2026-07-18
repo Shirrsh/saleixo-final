@@ -14,7 +14,7 @@ const fallbackFaqs: FaqItem[] = [
   {
     id: '1',
     question: 'How long does a full listing setup take?',
-    answer: 'A standard new-SKU launch — photography, listing copy, A+ content, ads setup — takes 14–21 days from kickoff. A multi-SKU brand launch with storefront is 4–6 weeks. Suppressed-listing recovery is 24–72 hours in 90% of cases.',
+    answer: 'A standard new-SKU launch — photography, listing copy, A+ content, ads setup — takes 14–21 days from kickoff. A multi-SKU brand launch with storefront is 4–6 weeks. Suppressed-listing recovery typically takes 24–72 hours.',
   },
   {
     id: '2',

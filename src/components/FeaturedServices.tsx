@@ -105,7 +105,7 @@ const services: Service[] = [
       'Logo, packaging, and brand identity',
       'Social creative built from the same kit',
     ],
-    stat: { value: '200+', label: 'listings fixed' },
+    stat: { value: '5', label: 'marketplace specs' },
     cta: 'See Design Work',
   },
   {
