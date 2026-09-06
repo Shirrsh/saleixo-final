@@ -15,7 +15,7 @@ import wellnessGiftFlatlay from '@/assets/selected-work/wellness-gift-flatlay.we
 
 // ── Image key → fallback mapping ─────────────────────────────────────────────
 const PORTFOLIO_SLOTS = [
-  { key: 'portfolio_1', fallback: apparelSilkDetail, alt: 'Silk Apparel Detail Shoot — Saleixo', category: 'Apparel & Fashion' },
+  { key: 'portfolio_apparel', fallback: apparelSilkDetail, alt: 'Silk Apparel Detail Shoot — Saleixo', category: 'Apparel & Fashion' },
   { key: 'portfolio_hero_4', fallback: jewelryEarringsHero, alt: 'Jewelry Earrings Hero Shoot — Saleixo', category: 'Fine Jewelry' },
   { key: 'portfolio_3', fallback: beautyPedestalAlt, alt: 'Luxury Beauty & Cosmetics Editorial Shoot — Saleixo', category: 'Beauty & Cosmetics' },
   { key: 'portfolio_4', fallback: homeStorageWardrobe, alt: 'Home Storage Product Shoot — Saleixo', category: 'Home & Living' },
