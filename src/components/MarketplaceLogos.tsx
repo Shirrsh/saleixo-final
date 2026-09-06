@@ -97,7 +97,7 @@ const MarketplaceLogos = () => {
               <span className="text-[9px] font-semibold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-muted-foreground">
                 {country.code}
               </span>
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 glass-purple text-foreground text-xs px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-foreground text-background text-xs px-2.5 py-1 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
                 {country.name}
               </span>
             </motion.div>

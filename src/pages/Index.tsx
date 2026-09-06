@@ -44,6 +44,7 @@ const Index = () => {
         {/* Bottom sections — no frame */}
         <div className="overflow-x-hidden w-full max-w-full">
           <Testimonials />
+          <FAQ />
           <Contact />
         </div>
       </main>

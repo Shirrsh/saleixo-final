@@ -40,7 +40,7 @@ const MEGA_SERVICES = [
   {
     icon: BarChart2, color: '#8b5cf6',
     title: 'Social Ads',
-    desc: 'Google & Meta ads with 250% avg. ROI',
+    desc: 'Conversion-tested Google & Meta campaigns',
     href: '/services/social-ads',
   },
   {
@@ -78,7 +78,7 @@ const menuSections = [
       { icon: Star,       name: 'Portfolio',    desc: 'Our work & results', href: '#portfolio',            type: 'scroll' as const },
       { icon: BookOpen,   name: 'Blog',         desc: 'Tips & insights',    href: '/blog',                 type: 'route'  as const },
       { icon: HelpCircle, name: 'Pricing',      desc: 'Transparent plans',  href: '/custom-pricing',       type: 'route'  as const },
-      { icon: Users,      name: 'How It Works', desc: '6-step process',     href: '#how-it-works-section', type: 'scroll' as const },
+      { icon: Users,      name: 'How It Works', desc: '4-step process',     href: '#how-it-works-section', type: 'scroll' as const },
     ],
   },
 ];

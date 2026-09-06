@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { cn } from '@/lib/utils';
 
 interface FaqItem {
   id: string;
@@ -88,21 +89,29 @@ const FAQ = () => {
   const toggle = (id: string) => setOpenId(prev => prev === id ? null : id);
 
   return (
-    <section className="py-20 md:py-28 bg-transparent">
+    <section id="faq" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 max-w-3xl">
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10 md:mb-14"
         >
-          <p className="text-xs font-bold tracking-[0.3em] uppercase text-accent-violet mb-4">Questions sellers actually ask</p>
-          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-3">
+            Questions sellers actually ask
+          </p>
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight leading-[1.12]"
+            style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}
+          >
             Real answers, no fluff.
           </h2>
+          <p className="text-sm md:text-base text-muted-foreground max-w-md mx-auto mt-3 leading-relaxed">
+            Everything you need to know about timelines, deliverables, and how we work with brands.
+          </p>
         </motion.div>
 
         {/* Accordion */}
@@ -113,53 +122,45 @@ const FAQ = () => {
             return (
               <motion.div
                 key={faq.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
+                transition={{ duration: 0.35, delay: i * 0.04 }}
               >
                 <div
-                  className="rounded-2xl border transition-all duration-300 overflow-hidden"
-                  style={{
-                    background: isOpen
-                      ? 'hsl(174 37% 16% / 0.8)'
-                      : 'hsl(174 37% 16% / 0.4)',
-                    borderColor: isOpen
-                      ? 'hsl(var(--gold) / 0.35)'
-                      : 'hsl(174 30% 22% / 0.5)',
-                    boxShadow: isOpen
-                      ? '0 0 30px hsl(var(--gold) / 0.08)'
-                      : 'none',
-                    backdropFilter: 'blur(20px)',
-                  }}
+                  className={cn(
+                    'rounded-2xl border transition-all duration-200 overflow-hidden',
+                    isOpen
+                      ? 'border-primary/40 bg-card shadow-sm shadow-primary/5'
+                      : 'border-border/60 bg-card/60 hover:border-border'
+                  )}
                 >
                   {/* Question row */}
                   <button
                     onClick={() => toggle(faq.id)}
-                    className="w-full flex items-center justify-between px-5 py-5 text-left group"
-                    style={{ minHeight: '60px' }}
+                    aria-expanded={isOpen}
+                    className="w-full flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl"
+                    style={{ minHeight: '56px' }}
                   >
                     <span
-                      className="text-base font-medium pr-4 transition-colors duration-200"
-                      style={{ color: isOpen ? '#ffffff' : 'hsl(0 0% 90%)' }}
+                      className={cn(
+                        'text-sm sm:text-base font-medium pr-4 transition-colors duration-200 leading-snug',
+                        isOpen ? 'text-foreground font-semibold' : 'text-foreground/85 group-hover:text-foreground'
+                      )}
                     >
                       {faq.question}
                     </span>
                     <motion.div
                       animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.25 }}
-                      className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-200"
-                      style={{
-                        background: isOpen
-                          ? 'hsl(var(--gold) / 0.15)'
-                          : 'hsl(174 30% 22% / 0.6)',
-                        border: `1px solid ${isOpen ? 'hsl(var(--gold) / 0.4)' : 'hsl(174 30% 22%)'}`,
-                      }}
+                      transition={{ duration: 0.22 }}
+                      className={cn(
+                        'flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors duration-200',
+                        isOpen
+                          ? 'bg-primary/15 text-primary border border-primary/30'
+                          : 'bg-surface-elevated text-muted-foreground border border-border group-hover:text-foreground'
+                      )}
                     >
-                      {isOpen
-                        ? <X className="w-3.5 h-3.5 text-accent-violet" />
-                        : <Plus className="w-3.5 h-3.5 text-muted-foreground" />
-                      }
+                      <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2} />
                     </motion.div>
                   </button>
 
@@ -170,14 +171,11 @@ const FAQ = () => {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                       >
-                        <div className="px-6 pb-6">
-                          <div
-                            className="w-full h-px mb-4"
-                            style={{ background: 'hsl(var(--gold) / 0.15)' }}
-                          />
-                          <p className="text-muted-foreground leading-relaxed">
+                        <div className="px-5 sm:px-6 pb-5 sm:pb-6">
+                          <div className="w-full h-px mb-3.5 bg-border/60" />
+                          <p className="text-muted-foreground text-sm sm:text-[15px] leading-relaxed">
                             {faq.answer}
                           </p>
                         </div>

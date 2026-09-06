@@ -476,8 +476,8 @@ const Hero = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-extrabold leading-[1.02] tracking-tight mb-4"
-            style={{ fontFamily: '"Inter Tight", Inter, sans-serif', fontSize: 'clamp(2.4rem, 10vw, 3.5rem)' }}
+            className="font-extrabold leading-[1.06] tracking-tight mb-4"
+            style={{ fontFamily: '"Inter Tight", Inter, sans-serif', fontSize: 'clamp(2.1rem, 8.8vw, 3.2rem)' }}
           >
             <span style={{ color: textPrimary, display: 'block' }}>Your products</span>
             <span style={{ color: textPrimary, display: 'block' }}>are great.</span>
@@ -489,7 +489,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="text-sm mb-6 leading-relaxed font-medium"
+            className="text-sm mb-6 leading-relaxed font-medium max-w-md mx-auto"
             style={{ color: textMuted }}
           >
             A product photography studio that also runs your listings. Real prices published on the site. Marketplace-ready images in 48 hours.
@@ -499,20 +499,20 @@ const Hero = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.35 }}
-            className="flex flex-col gap-3 mb-7"
+            className="flex flex-col gap-3 mb-7 w-full max-w-xs mx-auto"
           >
             <button
               onClick={scrollToContact}
-              className="w-full px-6 py-3.5 rounded-xl font-semibold text-sm transition-opacity duration-200"
+              className="w-full px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm hover:shadow-md"
               style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a', minHeight: '48px' }}
-              onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
+              onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.88')}
               onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
             >
               Get a Free Listing Audit
             </button>
             <Link
               to="/categories"
-              className="group flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200"
+              className="group flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-[0.98]"
               style={{ color: textMuted, border: `1.5px solid ${borderColor}`, minHeight: '48px' }}
               onMouseEnter={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.color = textPrimary; el.style.borderColor = isLight ? '#0a0a0a' : '#ffffff'; }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLAnchorElement; el.style.color = textMuted; el.style.borderColor = borderColor; }}

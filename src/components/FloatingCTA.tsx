@@ -30,18 +30,17 @@ const FloatingCTA = () => {
 
   return (
     <div
-      className="fixed bottom-36 right-5 sm:right-6 z-40"
+      className="fixed bottom-5 left-4 z-40 sm:bottom-36 sm:right-6 sm:left-auto max-w-[calc(100%-88px)] sm:max-w-none"
       style={{ animation: 'fadeIn 0.25s ease' }}
     >
-      <div className="relative flex items-center gap-2 pl-4 pr-2 py-2 rounded-full"
+      <div className="relative flex items-center gap-2 pl-4 pr-1.5 py-2 rounded-full border border-border/50 shadow-lg shadow-black/10 dark:shadow-black/40 backdrop-blur-md"
         style={{
           background: 'hsl(var(--foreground))',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
         }}
       >
         <Link
           to="/get-started"
-          className="flex items-center gap-2 text-sm font-semibold whitespace-nowrap"
+          className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold whitespace-nowrap active:scale-[0.98] transition-transform"
           style={{ color: 'hsl(var(--background))' }}
         >
           Get a Free Quote
@@ -50,8 +49,8 @@ const FloatingCTA = () => {
 
         <button
           onClick={() => setIsDismissed(true)}
-          aria-label="Dismiss"
-          className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-opacity duration-150 hover:opacity-70 active:scale-90"
+          aria-label="Dismiss quote prompt"
+          className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-opacity duration-150 hover:opacity-75 active:scale-90"
           style={{ background: 'hsl(var(--background) / 0.15)' }}
         >
           <X size={12} style={{ color: 'hsl(var(--background))' }} strokeWidth={2.5} />
