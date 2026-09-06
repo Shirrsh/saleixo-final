@@ -102,7 +102,19 @@ const Hero = () => {
       attributes: true,
       attributeFilter: ['class'],
     });
-    return () => obs.disconnect();
+    const onThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ isDark: boolean }>;
+      if (customEvent.detail) {
+        setIsLight(!customEvent.detail.isDark);
+      } else {
+        sync();
+      }
+    };
+    window.addEventListener('saleixo-theme-changed', onThemeChange);
+    return () => {
+      obs.disconnect();
+      window.removeEventListener('saleixo-theme-changed', onThemeChange);
+    };
   }, []);
 
   const { scrollYProgress } = useScroll({

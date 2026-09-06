@@ -75,7 +75,19 @@ const HowItWorks = () => {
     sync();
     const obs = new MutationObserver(sync);
     obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => obs.disconnect();
+    const onThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ isDark: boolean }>;
+      if (customEvent.detail) {
+        setIsLight(!customEvent.detail.isDark);
+      } else {
+        sync();
+      }
+    };
+    window.addEventListener('saleixo-theme-changed', onThemeChange);
+    return () => {
+      obs.disconnect();
+      window.removeEventListener('saleixo-theme-changed', onThemeChange);
+    };
   }, []);
 
   // Desktop sticky scroll physics

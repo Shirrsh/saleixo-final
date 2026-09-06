@@ -1,34 +1,35 @@
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toggleThemeWithTransition } from '@/lib/theme';
 
 const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(false); // default light
 
   useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    // Default to light unless user has explicitly saved 'dark'
-    const dark = saved === 'dark';
-    setIsDark(dark);
-    applyTheme(dark);
+    const sync = () => setIsDark(document.documentElement.classList.contains('dark'));
+    sync();
+    const obs = new MutationObserver(sync);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    const onThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ isDark: boolean }>;
+      if (customEvent.detail) {
+        setIsDark(customEvent.detail.isDark);
+      } else {
+        sync();
+      }
+    };
+    window.addEventListener('saleixo-theme-changed', onThemeChange);
+    return () => {
+      obs.disconnect();
+      window.removeEventListener('saleixo-theme-changed', onThemeChange);
+    };
   }, []);
 
-  const applyTheme = (dark: boolean) => {
-    const html = document.documentElement;
-    if (dark) {
-      html.classList.remove('light');
-      html.classList.add('dark');
-    } else {
-      html.classList.remove('dark');
-      html.classList.add('light');
-    }
-  };
-
   const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    applyTheme(next);
-    localStorage.setItem('theme', next ? 'dark' : 'light');
+    toggleThemeWithTransition((dark) => {
+      setIsDark(dark);
+    });
   };
 
   return (
