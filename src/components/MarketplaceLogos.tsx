@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const allMarketplaces = [
-  'Amazon', 'Flipkart', 'Meesho', 'Shopify', 'Myntra', 'Nykaa',
-  'eBay', 'Walmart', 'Etsy', 'WooCommerce', 'Snapdeal', 'JioMart',
-  'Tata Cliq', 'Ajio', 'IndiaMART', 'Amazon EU', 'Amazon JP', 'Amazon AU',
-  'BigCommerce', 'Wix', 'Squarespace', 'Temu', 'Zalando',
-  'ASOS', 'SHEIN', 'Poshmark', 'Depop', 'Alibaba', 'Global Sources', 'Faire',
+  'Amazon US', 'Shopify Plus', 'Walmart', 'Etsy', 'Amazon EU', 'eBay',
+  'Target Plus', 'Amazon UK', 'WooCommerce', 'TikTok Shop', 'Faire', 'Poshmark',
+  'Amazon AU', 'BigCommerce', 'Flipkart', 'Myntra', 'Nykaa', 'Meesho',
+  'Zalando', 'ASOS', 'SHEIN', 'Alibaba', 'Amazon JP',
 ];
 
 const marqueeItems = [...allMarketplaces, ...allMarketplaces];

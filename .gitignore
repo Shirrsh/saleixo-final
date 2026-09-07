@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Claude Code worktrees
-.claude/worktrees/
+# Claude Code & agent worktrees/scratches
+.claude/
+.agents/
+

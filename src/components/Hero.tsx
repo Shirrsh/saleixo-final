@@ -128,8 +128,14 @@ const Hero = () => {
   // Gallery drifts up slightly slower than scroll for depth
   const galleryY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
-  const scrollToContact = () =>
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToContact = () => {
+    const el = document.querySelector('#instant-audit-bar') || document.querySelector('#contact');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      const input = el.querySelector('input');
+      if (input) setTimeout(() => input.focus(), 600);
+    }
+  };
 
   const col1 = [
     getImageUrl('hero_showcase_1',  img1Src),

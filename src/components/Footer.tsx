@@ -1,30 +1,30 @@
-import { Mail, MessageCircle, Phone, ArrowUpRight, ChevronDown, X as XIcon } from 'lucide-react';
+import { Mail, MessageCircle, Phone, ArrowUpRight, ChevronDown, Video, Sparkles, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import SaleixoLogo from '@/components/SaleixoLogo';
 
 // Collapsible section for mobile footer
-const FooterAccordion = ({ title, children }: { title: string; children: React.ReactNode }) => {
-  const [open, setOpen] = useState(false);
+const FooterAccordion = ({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) => {
+  const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-border/30 md:border-none">
+    <div className="border-b border-border/20 md:border-none last:border-none">
       <button
         onClick={() => setOpen(o => !o)}
-        className="flex items-center justify-between w-full py-4 md:py-0 md:cursor-default"
+        className="flex items-center justify-between w-full py-4 md:py-0 md:cursor-default group text-left"
         aria-expanded={open}
       >
-        <span className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground md:mb-5">
+        <span className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground group-hover:text-foreground md:group-hover:text-muted-foreground transition-colors md:mb-5">
           {title}
         </span>
         <ChevronDown
           className={cn(
             'w-4 h-4 text-muted-foreground transition-transform duration-200 md:hidden',
-            open && 'rotate-180'
+            open && 'rotate-180 text-foreground'
           )}
         />
       </button>
-      <div className={cn('overflow-hidden transition-all duration-300 md:block', open ? 'max-h-96 pb-4' : 'max-h-0 md:max-h-none')}>
+      <div className={cn('overflow-hidden transition-all duration-300 md:block', open ? 'max-h-[1600px] pb-4' : 'max-h-0 md:max-h-none')}>
         {children}
       </div>
     </div>
@@ -34,232 +34,316 @@ const FooterAccordion = ({ title, children }: { title: string; children: React.R
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  
-
-  const services = [
-    { label: 'Ecommerce Management',   href: '/services/ecommerce-management'},
-    { label: 'Amazon Listing & FBA',   href: '/services/amazon'              },
-    { label: 'Shopify Setup & Design', href: '/services/shopify'             },
-    { label: 'Product Photography',    href: '/services/photography'         },
-    { label: 'Social & Paid Ads',      href: '/services/social-ads'          },
-    { label: 'Handmade & Artisan Brands', href: '/handmade'                  },
-    { label: 'Ecommerce Design',       href: '/design'                       },
-    { label: 'All Services',           href: '/services'                     },
-    { label: 'Pricing',                href: '/custom-pricing'               },
+  const amazonServices = [
+    { label: 'Amazon SPN Flagship Hub', href: '/services/amazon' },
+    { label: 'Imaging (RGB 255 & Video)', href: '/services/amazon#imaging' },
+    { label: 'Cataloging & A9 SEO', href: '/services/amazon#cataloging' },
+    { label: 'A+ & Premium A++ Content', href: '/services/amazon#a-plus' },
+    { label: 'Amazon Advertising & PPC', href: '/services/amazon#advertising' },
+    { label: 'Account Health & Appeals', href: '/services/amazon#account-health' },
+    { label: 'Brand Storefront Design', href: '/services/amazon#storefronts' },
+    { label: 'FBA & Logistics Consulting', href: '/services/amazon#fba-logistics' },
+    { label: 'Global Marketplace Sync', href: '/services/amazon#global-expansion' },
   ];
 
-  const studio = [
-    { label: 'About',       href: '/about',        action: undefined },
-    { label: 'Process',     href: null,            action: () => document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Portfolio',   href: null,            action: () => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Blog',        href: '/blog',         action: undefined },
-    { label: 'Get Started', href: '/get-started',  action: undefined },
-    { label: 'Contact',     href: '/contact',      action: undefined },
+  const shopifyServices = [
+    { label: 'Shopify & Plus Enterprise', href: '/services/shopify' },
+    { label: 'Shopify Flow Automations', href: '/services/shopify#automations' },
+    { label: 'Plus Checkout Extensibility', href: '/services/shopify#plus' },
+    { label: 'Analytics & CRO Flywheel', href: '/services/shopify#analytics' },
+    { label: 'B2B Wholesale Portals', href: '/services/shopify#b2b' },
   ];
 
-  const legal = [
-    { label: 'Privacy Policy',           href: '/privacy'  },
-    { label: 'Terms of Service',          href: '/terms'    },
-    { label: 'Cookie Policy',             href: '/cookies'  },
-    { label: 'Cancellation & Refund',     href: '/refund'   },
+  const creativeServices = [
+    { label: 'Product Photography (48hr)', href: '/services/photography' },
+    { label: 'Ecommerce Management', href: '/services/ecommerce-management' },
+    { label: 'Social & Paid Ads (Meta/Google)', href: '/services/social-ads' },
+    { label: 'Ecommerce Design & Packaging', href: '/design' },
+    { label: 'Handmade & Artisan Brands', href: '/handmade' },
+    { label: 'All Services Overview', href: '/services' },
+    { label: 'Transparent Pricing Plans', href: '/custom-pricing' },
+  ];
+
+  const companyLinks = [
+    { label: 'About Studio',    href: '/about',       action: undefined },
+    { label: 'How We Work',     href: null,           action: () => document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Selected Work',   href: null,           action: () => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Ecommerce Blog',  href: '/blog',        action: undefined },
+    { label: 'Get Started Form',href: '/get-started', action: undefined },
+    { label: 'Contact Team',    href: '/contact',     action: undefined },
+  ];
+
+  const legalLinks = [
+    { label: 'Privacy Policy',       href: '/privacy' },
+    { label: 'Terms of Service',      href: '/terms'   },
+    { label: 'Cookie Policy',         href: '/cookies' },
+    { label: 'Cancellation & Refund', href: '/refund'  },
   ];
 
   const openCookieSettings = () =>
     window.dispatchEvent(new Event('saleixo:open-cookie-settings'));
 
-  return (
-    <footer className="relative overflow-hidden border-t border-border/40">
+  const triggerAudit = () => {
+    window.dispatchEvent(new CustomEvent('saleixo:open-quick-audit'));
+  };
 
-      {/* Subtle top glow */}
+  const triggerBooking = () => {
+    window.dispatchEvent(new CustomEvent('saleixo:open-calendar-booking'));
+  };
+
+  return (
+    <footer className="relative overflow-hidden bg-gradient-to-b from-background via-surface/40 to-surface border-t border-border/30">
+
+      {/* Subtle ambient lighting accent */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] pointer-events-none"
-        style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--accent-violet) / 0.4), transparent)' }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] pointer-events-none"
+        style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), transparent)' }}
+      />
+      <div
+        className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[160px] bg-primary/5 blur-3xl pointer-events-none rounded-full"
       />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-0">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
 
-        {/* ── Top grid ── */}
-        <div className="pb-4 md:pb-12 border-b border-border/30">
-
-          {/* Brand — always visible, full width on mobile */}
-          <div className="pb-6 mb-2 border-b border-border/30 md:border-none md:mb-0 md:pb-0">
-            <div className="mb-4"><SaleixoLogo size="text-3xl" /></div>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-1">
-              The diagnostic-first ecommerce studio.
-            </p>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Photography · Design · Listings · Marketing.
-            </p>
-          </div>
-
-          {/* Link columns — accordion on mobile, grid on desktop */}
-          <div className="md:grid md:grid-cols-4 md:gap-8 md:pt-8 lg:grid-cols-5">
-
-            {/* Services */}
-            <FooterAccordion title="Services">
-              <ul className="space-y-3">
-                {services.map(item => (
-                  <li key={item.label}>
-                    <Link
-                      to={item.href}
-                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
-                    >
-                      {item.label}
-                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </FooterAccordion>
-
-            {/* Studio */}
-            <FooterAccordion title="Studio">
-              <ul className="space-y-3">
-                {studio.map(item => (
-                  <li key={item.label}>
-                    {item.action ? (
-                      <button
-                        onClick={item.action}
-                        className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
-                      >
-                        {item.label}
-                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
-                      </button>
-                    ) : (
-                      <Link
-                        to={item.href!}
-                        className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
-                      >
-                        {item.label}
-                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </FooterAccordion>
-
-            {/* Legal */}
-            <FooterAccordion title="Legal">
-              <ul className="space-y-3">
-                {legal.map(item => (
-                  <li key={item.label}>
-                    <Link
-                      to={item.href}
-                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
-                    >
-                      {item.label}
-                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <button
-                    onClick={openCookieSettings}
-                    className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-1 group"
-                  >
-                    Cookie Settings
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5" />
-                  </button>
-                </li>
-              </ul>
-            </FooterAccordion>
-
-            {/* Contact */}
-            <FooterAccordion title="Contact">
-              <ul className="space-y-3 mb-5">
-                {[
-                  { icon: <Mail className="w-3.5 h-3.5" />,          label: 'info@saleixo.com',  href: 'mailto:info@saleixo.com'    },
-                  { icon: <MessageCircle className="w-3.5 h-3.5" />, label: 'WhatsApp Us',        href: 'https://wa.me/917011441159' },
-                ].map((item, i) => (
-                  <li key={i}>
-                    <a
-                      href={item.href}
-                      target={item.href.startsWith('http') ? '_blank' : undefined}
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-200 group"
-                    >
-                      <span className="text-muted-foreground">{item.icon}</span>
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="pt-4 border-t border-border/30">
-                <p className="text-[10px] text-muted-foreground/50 uppercase tracking-widest mb-2">Free resources</p>
-                <ul className="space-y-2">
-                  {['Free Listing Audit', 'Amazon Image Checklist', 'Multi-Marketplace Spec Sheet'].map(r => (
-                    <li key={r}>
-                      <Link
-                        to="/contact"
-                        className="text-xs text-foreground/50 hover:text-foreground transition-colors duration-200"
-                      >
-                        {r}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+        {/* ── Seamless Pre-Footer Conversion Strip ── */}
+        <div className="mb-14 p-6 sm:p-8 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-md shadow-sm">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-3">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Production Studios Live · 48-Hour Turnaround Available</span>
               </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
+                Ready to scale your ecommerce revenue?
+              </h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 leading-relaxed">
+                Receive a diagnostic audit of your live listings and ad account before spending a dollar on retainers. Serving US (EST & PST), UK, India, and global marketplace sellers.
+              </p>
+            </div>
 
-              {/* Markets */}
-              <div className="mt-4 pt-4 border-t border-border/30">
-                <p className="text-[10px] text-muted-foreground/50 uppercase tracking-widest mb-2">Markets</p>
-                <p className="text-xs text-muted-foreground/70">US · UK · FR · DE · AU · CA · IN</p>
-              </div>
-            </FooterAccordion>
-
-            {/* Business — registered NAP details for trust & directory consistency */}
-            <FooterAccordion title="Business">
-              <div className="space-y-3 mb-5">
-                <p className="text-sm font-medium text-foreground">Saleixo</p>
-                <p className="text-sm text-foreground/70 leading-relaxed">
-                  A-41, Block A, Industrial Area,<br />
-                  Sector 62, Noida, Uttar Pradesh 201309
-                </p>
-                <a
-                  href="tel:+917011441159"
-                  className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-200"
-                >
-                  <span className="text-muted-foreground"><Phone className="w-3.5 h-3.5" /></span>
-                  +91 70114 41159
-                </a>
-                <a
-                  href="mailto:info@saleixo.com"
-                  className="flex items-center gap-2.5 text-sm text-foreground/70 hover:text-foreground transition-colors duration-200"
-                >
-                  <span className="text-muted-foreground"><Mail className="w-3.5 h-3.5" /></span>
-                  info@saleixo.com
-                </a>
-              </div>
-
-              {/* Social — only confirmed, owned profiles are linked here.
-                  LinkedIn and Instagram intentionally omitted: no confirmed
-                  LinkedIn URL on file, and the Instagram handle @saleixo
-                  belongs to an unrelated third party (planned handle
-                  @saleixostudio is not yet confirmed registered). */}
-              <div className="flex items-center gap-3 pt-4 border-t border-border/30">
-                <a
-                  href="https://x.com/SaleixoStudio"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Saleixo on X (Twitter)"
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-                >
-                  <XIcon className="w-4 h-4" />
-                </a>
-              </div>
-            </FooterAccordion>
-
+            <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={triggerAudit}
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-sm shadow-primary/20"
+              >
+                <Sparkles className="w-4 h-4" />
+                Instant Listing Audit
+              </button>
+              <button
+                type="button"
+                onClick={triggerBooking}
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-border bg-card hover:bg-muted text-foreground transition-all"
+              >
+                <Video className="w-4 h-4 text-primary" />
+                Book 15-Min Call
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* ── Bottom bar ── */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 py-5 text-xs text-muted-foreground/50">
-          <span>© {currentYear} Saleixo Studio · saleixo.com · info@saleixo.com</span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/40 text-muted-foreground/60">
-            🏛️ MSME Registered &nbsp;·&nbsp; Udyam No: UDYAM-BR-06-0036869
-          </span>
+        {/* ── Main Footer Columns ── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 pb-12">
+
+          {/* Column 1: Brand & Operational Studio HQ (Span 4 on MD, Span 4 on LG) */}
+          <div className="md:col-span-4 space-y-4">
+            <SaleixoLogo size="text-3xl" />
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              The diagnostic-first ecommerce services studio. Amazon SPN standards, Shopify Plus architecture, catalog imaging, and revenue engineering for high-growth brands.
+            </p>
+
+            {/* Studio Registered Details (GBP Verified) */}
+            <div className="pt-2 text-xs space-y-2 text-foreground/80">
+              <p className="font-semibold text-foreground flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-primary" />
+                Noida Production Studio HQ (GBP Verified)
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                A-41, Block A, Industrial Area, Sector 62, Noida, Uttar Pradesh 201309, India
+              </p>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-muted-foreground pt-1">
+                <a
+                  href="tel:+917011441159"
+                  className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-primary" />
+                  +91 70114 41159
+                </a>
+                <span className="hidden sm:inline text-border">·</span>
+                <a
+                  href="mailto:info@saleixo.com"
+                  className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5 text-primary" />
+                  info@saleixo.com
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Chat Channels */}
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href="https://wa.me/917011441159"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
+              >
+                <MessageCircle className="w-3.5 h-3.5" />
+                WhatsApp Direct
+              </a>
+              <a
+                href="https://x.com/SaleixoStudio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-border/80 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Saleixo on X (Twitter)"
+              >
+                <span className="font-bold">𝕏</span> @SaleixoStudio
+              </a>
+            </div>
+          </div>
+
+          {/* Column 2: Amazon SPN Services (Span 2 on MD) */}
+          <div className="md:col-span-2">
+            <FooterAccordion title="Amazon SPN">
+              <ul className="space-y-2">
+                {amazonServices.map(item => (
+                  <li key={item.label}>
+                    <Link
+                      to={item.href}
+                      className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-1 group py-0.5"
+                    >
+                      <span>{item.label}</span>
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5 text-primary flex-shrink-0" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </FooterAccordion>
+          </div>
+
+          {/* Column 3: Shopify & DTC Studio (Span 2 on MD) */}
+          <div className="md:col-span-2">
+            <FooterAccordion title="Shopify & DTC">
+              <ul className="space-y-2">
+                {shopifyServices.map(item => (
+                  <li key={item.label}>
+                    <Link
+                      to={item.href}
+                      className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-1 group py-0.5"
+                    >
+                      <span>{item.label}</span>
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5 text-primary flex-shrink-0" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-6 pt-4 border-t border-border/20 hidden md:block">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70 mb-2">
+                  Marketplace Coverage
+                </p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  US, UK, Canada, Germany, France, Australia, India & 20+ global regions.
+                </p>
+              </div>
+            </FooterAccordion>
+          </div>
+
+          {/* Column 4: Creative & Marketing (Span 2 on MD) */}
+          <div className="md:col-span-2">
+            <FooterAccordion title="Creative Studio">
+              <ul className="space-y-2">
+                {creativeServices.map(item => (
+                  <li key={item.label}>
+                    <Link
+                      to={item.href}
+                      className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-1 group py-0.5"
+                    >
+                      <span>{item.label}</span>
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5 text-primary flex-shrink-0" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </FooterAccordion>
+          </div>
+
+          {/* Column 5: Company & Legal (Span 2 on MD) */}
+          <div className="md:col-span-2">
+            <FooterAccordion title="Company & Legal">
+              <div className="space-y-4">
+                <ul className="space-y-2">
+                  {companyLinks.map(item => (
+                    <li key={item.label}>
+                      {item.action ? (
+                        <button
+                          onClick={item.action}
+                          className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-1 group py-0.5 text-left"
+                        >
+                          <span>{item.label}</span>
+                          <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5 text-primary flex-shrink-0" />
+                        </button>
+                      ) : (
+                        <Link
+                          to={item.href!}
+                          className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-1 group py-0.5"
+                        >
+                          <span>{item.label}</span>
+                          <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-y-0.5 text-primary flex-shrink-0" />
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="pt-3 border-t border-border/20">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 mb-2">
+                    Policies
+                  </p>
+                  <ul className="space-y-1.5">
+                    {legalLinks.map(item => (
+                      <li key={item.label}>
+                        <Link
+                          to={item.href}
+                          className="text-[11px] text-muted-foreground/80 hover:text-foreground transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <button
+                        onClick={openCookieSettings}
+                        className="text-[11px] text-muted-foreground/80 hover:text-foreground transition-colors"
+                      >
+                        Cookie Preferences
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </FooterAccordion>
+          </div>
+
+        </div>
+
+        {/* ── Seamless Bottom Compliance Bar ── */}
+        <div className="pt-6 border-t border-border/20 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+          <div className="flex items-center gap-3 flex-wrap justify-center md:justify-start">
+            <span>© {currentYear} Saleixo Studio (saleixo.com). All rights reserved.</span>
+            <span className="hidden sm:inline text-border">·</span>
+            <span>Canonical domain: saleixo.com</span>
+          </div>
+
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/50 text-[11px] bg-card/40">
+              🏛️ MSME Registered &nbsp;·&nbsp; UDYAM-BR-06-0036869
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/50 text-[11px] bg-card/40">
+              🇺🇸 W-8BEN Verified
+            </span>
+          </div>
         </div>
 
       </div>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import USStandardsStrip from '@/components/USStandardsStrip';
 import imgHero from '@/assets/services/studio-bts.webp';
 
 import jewelryBeaded    from '@/assets/categories/jewelry-beaded-photography.webp';
@@ -36,14 +37,14 @@ const deliverExamples = [
 ];
 
 const whatWeDo = [
-  'White-background hero shots (Amazon / Walmart / Flipkart compliant)',
-  'Lifestyle photography — product in context, real-world settings',
+  '3D Virtual Staging & Photorealistic CGI — 4K renders from factory CAD/specs (zero international shipping delays)',
+  'White-background hero shots (Amazon US, Walmart Marketplace, Shopify & Etsy compliant)',
+  'Lifestyle photography — product in contextual room and lifestyle settings',
   '360° photography and product rotation sequences',
-  'Detail and texture close-up shots',
+  'Detail and macro texture close-up shots',
   'Infographic images — features, dimensions, benefits overlaid',
-  'Bundle and variation photography',
-  'Short product video clips and GIFs for enhanced listings',
-  'Full post-production — retouching, color correction, background removal',
+  'Bundle, kit, and variation photography',
+  'Full post-production — retouching, reflection drops, and color correction',
 ];
 
 const process = [
@@ -142,8 +143,8 @@ const Photography = () => {
               className="flex flex-wrap gap-3 mb-8">
               {[
                 { icon: Clock,   label: '48-hr express delivery' },
-                { icon: Star,    label: 'Amazon compliant' },
-                { icon: Package, label: 'All marketplaces' },
+                { icon: Star,    label: 'Amazon & Walmart compliant' },
+                { icon: Package, label: 'Physical + 3D Virtual Studio' },
               ].map(({ icon: Icon, label }) => (
                 <span key={label} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
                   style={{ background: 'hsl(var(--surface-elevated))', border: '1px solid hsl(var(--border))', color: 'hsl(var(--foreground))' }}>
@@ -182,12 +183,15 @@ const Photography = () => {
               <div className="inline-block px-4 py-3 rounded-xl"
                 style={{ background: 'rgba(10,10,10,0.72)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <p className="text-white text-sm font-semibold">48-hr express delivery available<sup className="text-[10px] font-normal ml-px" style={{ verticalAlign: 'super' }}>*</sup></p>
-                <p className="text-white/55 text-xs mt-0.5">Standard delivery: 3–5 business days.</p>
+                <p className="text-white/55 text-xs mt-0.5">Physical shoots + 3D virtual CAD staging</p>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
+
+      {/* ── US Standards Strip ── */}
+      <USStandardsStrip />
 
       {/* ── Problem callout ── */}
       <section className={`py-14 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
@@ -269,18 +273,19 @@ const Photography = () => {
             <div>
               <p className="font-semibold text-foreground mb-1">What's included</p>
               <ul className="space-y-1">
-                <li>· White-background hero shots (up to 10 SKUs)</li>
-                <li>· Product must be received at our studio by 10 AM IST on the shoot day</li>
-                <li>· Standard retouching and background removal</li>
-                <li>· Files delivered in marketplace-ready specs</li>
+                <li>· White-background hero shots & 3D virtual staging (up to 10 SKUs)</li>
+                <li>· For physical shoots: sample received at studio by 10 AM IST on shoot day</li>
+                <li>· For 3D CGI: factory CAD / dimension specs approved by 10 AM IST</li>
+                <li>· Standard retouching, reflections, and shadow drops</li>
+                <li>· Files delivered in Amazon, Walmart & Shopify compliant specs</li>
               </ul>
             </div>
             <div>
               <p className="font-semibold text-foreground mb-1">Standard delivery (3–5 business days) applies to</p>
               <ul className="space-y-1">
-                <li>· Lifestyle photography and complex setups</li>
+                <li>· Multi-scene lifestyle staging and complex physical sets</li>
                 <li>· Large catalogs (11+ SKUs)</li>
-                <li>· 360° spins, video clips, and infographics</li>
+                <li>· 360° spins, listing video clips, and infographic composite suites</li>
                 <li>· Orders without prior brief approval</li>
               </ul>
             </div>

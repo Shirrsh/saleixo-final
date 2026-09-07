@@ -27,8 +27,8 @@ const differentiators = [
   },
   {
     Icon: Globe,
-    title: 'We\'ve shipped on multiple marketplaces.',
-    body: 'Amazon US/UK/EU, Etsy, Shopify, Flipkart, Meesho — each with different image specs, listing rules, and ranking signals. We know all of them. No rejected images. No compliance surprises.',
+    title: 'Multi-marketplace mastery.',
+    body: 'Amazon (US/UK/EU), Walmart Marketplace, Shopify Plus, and Etsy — each with distinct image specs, A9/A10 ranking signals, and compliance guidelines. No rejected images. No compliance surprises.',
   },
   {
     Icon: DollarSign,

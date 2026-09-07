@@ -25,7 +25,7 @@ const fallbackFaqs: FaqItem[] = [
   {
     id: '3',
     question: 'How much does a product photoshoot cost?',
-    answer: 'Standard catalog shoots start at a flat rate per SKU and scale with set complexity (lifestyle, on-model, video). We quote project-priced, never hourly. Most shoots fall between $40–$120 per SKU depending on category and shot count.',
+    answer: 'Standard catalog shoots start at a transparent flat rate per SKU and scale with set complexity (pure white, lifestyle, on-model, 3D, video). We quote project-priced, never hourly. Complete per-SKU rate cards and volume discounts are accessible directly on our pricing page.',
   },
   {
     id: '4',
@@ -139,13 +139,13 @@ const FAQ = () => {
                   <button
                     onClick={() => toggle(faq.id)}
                     aria-expanded={isOpen}
-                    className="w-full flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl"
+                    className="w-full flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl cursor-pointer"
                     style={{ minHeight: '56px' }}
                   >
                     <span
                       className={cn(
                         'text-sm sm:text-base font-medium pr-4 transition-colors duration-200 leading-snug',
-                        isOpen ? 'text-foreground font-semibold' : 'text-foreground/85 group-hover:text-foreground'
+                        isOpen ? 'text-foreground font-semibold' : 'text-foreground/90 group-hover:text-primary'
                       )}
                     >
                       {faq.question}
@@ -157,7 +157,7 @@ const FAQ = () => {
                         'flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-colors duration-200',
                         isOpen
                           ? 'bg-primary/15 text-primary border border-primary/30'
-                          : 'bg-surface-elevated text-muted-foreground border border-border group-hover:text-foreground'
+                          : 'bg-surface-elevated text-muted-foreground border border-border group-hover:text-foreground group-hover:border-primary/40'
                       )}
                     >
                       <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2} />

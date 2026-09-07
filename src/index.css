@@ -382,16 +382,16 @@
 
 /* ── Global button hover: solid black pill ───────────────────────────────── */
 /* Targets padded CTA buttons (have px-* class) — skips icon-only controls   */
-/* (p-2 square) and plain text nav links (no px-* class).                    */
-button[class*="px-"]:not([disabled]):hover,
-a[class*="px-"][class*="rounded"]:not([disabled]):hover {
+/* (p-2 square), full-width rows, accordions, and tabs.                       */
+button[class*="px-"]:not([disabled]):not([aria-expanded]):not([class*="w-full"]):not([class*="justify-between"]):not([role="tab"]):not([role="switch"]):not([data-state]):not([class*="accordion"]):hover,
+a[class*="px-"][class*="rounded"]:not([disabled]):not([class*="w-full"]):not([class*="block"]):not([role="tab"]):not([class*="card"]):hover {
   background: hsl(0 0% 6%) !important;
   color: hsl(0 0% 100%) !important;
   border-color: transparent !important;
   border-radius: 9999px !important;
 }
-.dark button[class*="px-"]:not([disabled]):hover,
-.dark a[class*="px-"][class*="rounded"]:not([disabled]):hover {
+.dark button[class*="px-"]:not([disabled]):not([aria-expanded]):not([class*="w-full"]):not([class*="justify-between"]):not([role="tab"]):not([role="switch"]):not([data-state]):not([class*="accordion"]):hover,
+.dark a[class*="px-"][class*="rounded"]:not([disabled]):not([class*="w-full"]):not([class*="block"]):not([role="tab"]):not([class*="card"]):hover {
   background: hsl(0 0% 94%) !important;
   color: hsl(0 0% 6%) !important;
   border-color: transparent !important;

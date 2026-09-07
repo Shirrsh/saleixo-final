@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import {
   ArrowRight, Check, Camera, ShoppingCart, BarChart2, Globe,
-  Users, TrendingUp, Shield, Clock, Star, Zap, Sparkles,
+  Users, TrendingUp, Shield, Clock, Star, Zap, Sparkles, Palette, Lock,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
@@ -27,7 +28,23 @@ const fadeUp = {
   }),
 };
 
-const SERVICES = [
+interface ServiceItem {
+  icon: React.ElementType;
+  color: string;
+  badge: string;
+  spnCategory: string;
+  title: string;
+  headline: string;
+  desc: string;
+  bullets: string[];
+  img: string;
+  href: string;
+  cta: string;
+  spnPillars?: { name: string; href: string }[];
+  capabilities?: { name: string; href: string }[];
+}
+
+const SERVICES: ServiceItem[] = [
   {
     icon: Camera,
     color: '#3b82f6',
@@ -35,7 +52,7 @@ const SERVICES = [
     spnCategory: 'Imaging',
     title: 'Product Photography',
     headline: 'Studio-grade images that stop the scroll and sell.',
-    desc: 'Professional product photography optimised for Amazon, Flipkart, Shopify, and social — white background, lifestyle, and on-model shoots delivered in 24–48 hours.',
+    desc: 'Professional product photography and 3D digital staging for Amazon, Walmart, Shopify Plus, and Etsy — pure white background, lifestyle, and on-model renders delivered in 24–48 hours.',
     bullets: [
       'White background + lifestyle + on-model shoots',
       'Delivered in 24–48 hours, retouched',
@@ -46,38 +63,57 @@ const SERVICES = [
     cta: 'Explore Photography',
   },
   {
-    icon: ShoppingCart,
-    color: '#10b981',
-    badge: 'Amazon',
-    spnCategory: 'Cataloging · A+ Content',
-    title: 'Amazon FBA & Listing Optimisation',
-    headline: 'Rank higher, win the Buy Box, dominate search.',
-    desc: 'End-to-end Amazon listing management — keyword research, A+ content, brand storefront, suppression recovery, and ongoing listing health monitoring.',
+    icon: Palette,
+    color: '#f97316',
+    badge: 'Flagship · Amazon SPN',
+    spnCategory: 'All 8 Official SPN Disciplines',
+    title: 'Amazon SPN Flagship Hub',
+    headline: 'End-to-end seller operations built to official Amazon SPN standards.',
+    desc: 'Full-lifecycle Amazon execution covering all 8 Service Provider Network categories — pure white RGB 255 imaging, A9/A10 algorithmic indexing, Premium A++ brand content, full-funnel PPC, AHR 200+ account health defense, and FBA global expansion.',
     bullets: [
-      'A9/A10 keyword-optimised titles & bullets',
-      'A+ Content, brand storefront, and infographics',
-      'Suppression recovery within 24–72 hours',
+      'Imaging: RGB 255 pure white hero packshots & 4K mobile listing video',
+      'Cataloging & Listing: A9/A10 SEO, 249-byte backend keywords & variation feeds',
+      'Brand Content: Standard A+ & Premium A++ modules with Brand Story carousels',
+      'Advertising & PPC: Sponsored Products, Brands, Video & TACoS profitability controls',
+      'Account Health: Daily AHR 200+ governance & 24–72 hr suppression recovery',
+      'Storefronts, FBA & Global: Multi-page Brand Stores, FBA logistics & international sync',
+    ],
+    spnPillars: [
+      { name: '1. Imaging', href: '/services/amazon#imaging' },
+      { name: '2. Cataloging', href: '/services/amazon#cataloging' },
+      { name: '3. A+ / A++', href: '/services/amazon#a-plus' },
+      { name: '4. Advertising', href: '/services/amazon#advertising' },
+      { name: '5. Account Health', href: '/services/amazon#account-health' },
+      { name: '6. Storefronts', href: '/services/amazon#storefronts' },
+      { name: '7. FBA Logistics', href: '/services/amazon#fba-logistics' },
+      { name: '8. Global Expansion', href: '/services/amazon#global-expansion' },
     ],
     img: imgDesign,
     href: '/services/amazon',
-    cta: 'Explore Amazon',
+    cta: 'Explore Amazon SPN Flagship Hub',
   },
   {
     icon: Globe,
     color: '#8b5cf6',
-    badge: 'Shopify',
-    spnCategory: 'Storefront Design',
-    title: 'Shopify Setup & Design',
-    headline: 'Your dream store — live, fast, and built to convert.',
-    desc: 'From blank canvas to fully operational Shopify store. Mobile-first design, conversion-optimised layouts, app integrations, and full launch support — in 14 days.',
+    badge: 'Shopify Plus Enterprise',
+    spnCategory: 'Automations · Analytics · Plus',
+    title: 'Shopify & Shopify Plus Enterprise',
+    headline: 'High-conversion storefronts, Flow automations & enterprise scale.',
+    desc: 'From custom Online Store 2.0 theme builds to enterprise DTC architecture. We configure Shopify Flow automated operations, integrate Klaviyo retention flows, deploy GA4/CAPI server-side analytics, and scale with Shopify Plus Checkout Extensibility and B2B wholesale.',
     bullets: [
-      'Custom theme design or setup from scratch',
-      'Payments, shipping, SEO, and apps wired in',
-      'Kickoff to launch in 14 days',
+      'Shopify Flow Automations Engine (VIP routing, inventory alerts & fraud rules)',
+      'Advanced Analytics & CRO (GA4 E-commerce, Meta CAPI server-side & slide cart)',
+      'Shopify Plus Enterprise (Checkout Extensibility, B2B wholesale & multi-store)',
+      'Klaviyo retention lifecycle flows & 14-day kickoff-to-launch roadmap',
+    ],
+    capabilities: [
+      { name: 'Flow Automations', href: '/services/shopify#automations' },
+      { name: 'Shopify Plus', href: '/services/shopify#plus' },
+      { name: 'Analytics & CRO', href: '/services/shopify#analytics' },
     ],
     img: imgPortfolio3,
     href: '/services/shopify',
-    cta: 'Explore Shopify',
+    cta: 'Explore Shopify & Plus',
   },
   {
     icon: BarChart2,
@@ -106,7 +142,7 @@ const SERVICES = [
     desc: 'Fully managed ecommerce operations — listings, inventory planning, order management, competitor monitoring, and monthly performance reviews across every marketplace.',
     bullets: [
       'Dedicated account manager via WhatsApp or Slack',
-      'Amazon, Shopify, Flipkart, Walmart & more',
+      'Amazon (US/Global), Shopify Plus, Walmart & Etsy',
       'Stabilised and managed within 2 weeks',
     ],
     img: imgPortfolio1,
@@ -136,7 +172,7 @@ const TIERS = [
   {
     label: 'Visibility',
     desc: 'For new sellers who need a professional presence fast.',
-    priceUSD: 4999 / 83, // ~$60 — kept as INR-primary tier
+    priceUSD: 59,
     priceINR: 4999,
     unit: 'starting at',
     color: '#3b82f6',
@@ -146,7 +182,7 @@ const TIERS = [
   {
     label: 'Professional',
     desc: 'For growing sellers ready to scale across marketplaces.',
-    priceUSD: 14999 / 83, // ~$180
+    priceUSD: 179,
     priceINR: 14999,
     unit: 'starting at',
     color: '#10b981',
@@ -177,7 +213,7 @@ const WHY = [
   { icon: Shield, title: 'All-in-One Studio', desc: 'One team for photography, design, ads, and listings. No juggling vendors.' },
   { icon: Clock, title: 'Fast Turnaround', desc: 'Photography in 24–48 hrs. Listings in 3–5 days. Ad campaigns live in 5 days.' },
   { icon: TrendingUp, title: 'Results-Focused', desc: 'We track sales lift, CTR, and ROAS — not vanity metrics.' },
-  { icon: Users, title: 'Dedicated Manager', desc: 'Your own account manager on WhatsApp. 2-hour response guarantee.' },
+  { icon: Users, title: 'Dedicated Manager', desc: 'Your own account manager on WhatsApp or Slack. Daily US overlap & guaranteed same-day response.' },
   { icon: Star, title: 'Studio-Grade Quality', desc: 'Studio-grade output across jewelry, fashion, home décor, beauty, and electronics categories.' },
   { icon: Zap, title: 'Transparent Pricing', desc: 'No hidden fees. No lock-in contracts. Cancel anytime.' },
 ];
@@ -193,6 +229,10 @@ structuredData: buildBreadcrumbSchema([
     ogImage: 'https://saleixo.com/og/services-og.jpg',
   });
   const { fmt } = useCurrency();
+  const [isUnlocked] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem('saleixo_pricing_unlocked') === 'true';
+  });
   return (
     <>
       <Header />
@@ -279,7 +319,19 @@ structuredData: buildBreadcrumbSchema([
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.15 }}
                     className="group rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5"
-                    style={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', boxShadow: '0 2px 24px rgba(0,0,0,0.06)' }}
+                    style={{
+                      background: 'hsl(var(--card))',
+                      border: svc.badge.includes('Flagship')
+                        ? '1px solid rgba(249,115,22,0.4)'
+                        : svc.badge.includes('Shopify Plus')
+                        ? '1px solid rgba(139,92,246,0.4)'
+                        : '1px solid hsl(var(--border))',
+                      boxShadow: svc.badge.includes('Flagship')
+                        ? '0 4px 28px rgba(249,115,22,0.08)'
+                        : svc.badge.includes('Shopify Plus')
+                        ? '0 4px 28px rgba(139,92,246,0.08)'
+                        : '0 2px 24px rgba(0,0,0,0.06)',
+                    }}
                   >
                     <div className={`flex flex-col ${imageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
 
@@ -325,6 +377,54 @@ structuredData: buildBreadcrumbSchema([
                             </li>
                           ))}
                         </ul>
+
+                        {/* Interactive SPN Pillars Pills */}
+                        {svc.spnPillars && (
+                          <div className="mb-7">
+                            <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-2.5">
+                              8 Official SPN Disciplines:
+                            </p>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                              {svc.spnPillars.map((p) => (
+                                <Link
+                                  key={p.name}
+                                  to={p.href}
+                                  className="px-2.5 py-1.5 rounded-lg text-xs font-medium text-center transition-colors hover:border-[#f97316] hover:text-[#f97316]"
+                                  style={{
+                                    background: 'hsl(var(--surface, var(--card)))',
+                                    border: '1px solid hsl(var(--border))',
+                                  }}
+                                >
+                                  {p.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Interactive Shopify Capabilities Pills */}
+                        {svc.capabilities && (
+                          <div className="mb-7">
+                            <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-2.5">
+                              Enterprise DTC Capabilities:
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {svc.capabilities.map((c) => (
+                                <Link
+                                  key={c.name}
+                                  to={c.href}
+                                  className="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors hover:border-[#8b5cf6] hover:text-[#8b5cf6]"
+                                  style={{
+                                    background: 'hsl(var(--surface, var(--card)))',
+                                    border: '1px solid hsl(var(--border))',
+                                  }}
+                                >
+                                  {c.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        )}
 
                         <div>
                           <Link
@@ -389,12 +489,27 @@ structuredData: buildBreadcrumbSchema([
                     </span>
                   </div>
 
-                  <div className="mt-4 mb-1">
-                    <span className={`text-xs block mb-0.5 ${tier.featured ? 'text-white/50' : 'text-muted-foreground'}`}>{tier.unit}</span>
-                    <span className={`text-3xl font-extrabold ${tier.featured ? 'text-white' : 'text-foreground'}`}
-                      style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
-                      {tier.priceUSD != null ? fmt(tier.priceUSD, tier.priceINR) : 'Custom'}
-                    </span>
+                  <div className="mt-4 mb-1 min-h-[58px] flex flex-col justify-end">
+                    {isUnlocked || tier.priceUSD == null ? (
+                      <>
+                        <span className={`text-xs block mb-0.5 ${tier.featured ? 'text-white/50' : 'text-muted-foreground'}`}>{tier.unit}</span>
+                        <span className={`text-3xl font-extrabold ${tier.featured ? 'text-white' : 'text-foreground'}`}
+                          style={{ fontFamily: '"Inter Tight", Inter, sans-serif' }}>
+                          {tier.priceUSD != null ? fmt(tier.priceUSD, tier.priceINR) : 'Custom'}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className={`text-xs block mb-0.5 ${tier.featured ? 'text-white/50' : 'text-muted-foreground'}`}>Verified Rates</span>
+                        <Link
+                          to="/custom-pricing"
+                          className="inline-flex items-center gap-1.5 text-base font-bold hover:underline pt-1"
+                          style={{ color: tier.featured ? '#fff' : tier.color }}
+                        >
+                          <Lock className="w-4 h-4" /> Unlock Rates →
+                        </Link>
+                      </>
+                    )}
                   </div>
 
                   <p className={`text-xs mt-2 mb-5 leading-relaxed ${tier.featured ? 'text-white/60' : 'text-muted-foreground'}`}>

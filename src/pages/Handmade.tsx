@@ -79,7 +79,7 @@ const services = [
   {
     icon: Layers,
     title: 'One shoot, every marketplace',
-    body: 'Amazon, Etsy, eBay, Walmart, Flipkart specs delivered from a single session.',
+    body: 'Amazon, Etsy, eBay, Walmart, Shopify specs delivered from a single session.',
     href: '/services/ecommerce-management',
     cta: 'Management',
     image: imgBaskets,
@@ -138,14 +138,14 @@ const faqs = [
   },
   {
     q: 'Where are you located, and do you take international clients?',
-    a: 'Studio in Noida (Sector 62), India; we deliver for sellers on IN, US, UK, EU and AU marketplaces.',
+    a: 'Production Studio HQ in Noida Sector 62; serving brands across the US (EST & PST), UK, EU, Australia, and worldwide with daily US timezone overlap and 3D digital staging.',
   },
 ];
 
 const Handmade = () => {
   usePageMeta({
     title: 'Ecommerce Studio for Handmade & Artisan Brands — Saleixo',
-    description: 'Product photography, Etsy & Amazon Handmade listings, and Shopify stores for artisan brands. Studio in Noida, delivering to 20+ marketplaces worldwide.',
+    description: 'Product photography, Etsy & Amazon Handmade listings, and Shopify stores for artisan brands. Serving US & global brands with production studio HQ in Noida Sector 62.',
     structuredData: [
       buildBreadcrumbSchema([
         { name: 'Home', url: 'https://saleixo.com/' },
@@ -375,7 +375,7 @@ const Handmade = () => {
               <p className="text-xl md:text-2xl font-semibold text-white leading-snug">
                 Our prices are on the website.{' '}
                 <span className="text-white/70 font-normal">
-                  Photography from the à-la-carte menu, full management from $299/mo — see everything before you ever talk to us.
+                  On-demand commercial photography, structured marketplace management — transparent rate sheets available online.
                 </span>
               </p>
             </div>

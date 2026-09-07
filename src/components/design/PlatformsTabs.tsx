@@ -16,16 +16,15 @@ const domestic = [
 ];
 
 const global = [
-  { name: 'Amazon Global', services: ['US/UK/UAE Expansion', 'FBA International', 'Global Ads', 'Compliance'] },
-  { name: 'eBay', services: ['Listing Templates', 'Promoted Listings', 'Store Design', 'Global Shipping'] },
-  { name: 'Walmart', services: ['WFS Setup', 'Listing Quality', 'Sponsored Search', 'Catalog Sync'] },
-  { name: 'Etsy', services: ['Shop Optimization', 'SEO Tags', 'Photography', 'Ad Campaigns'] },
-  { name: 'Shopify', services: ['Store Design', 'App Integrations', 'Checkout Optimization', 'SEO'] },
-  { name: 'WooCommerce', services: ['Plugin Setup', 'Payment Gateways', 'Theme Customization', 'SEO'] },
-  { name: 'Lazada', services: ['Seller Center', 'Product Listing', 'Promotions', 'Logistics'] },
-  { name: 'Alibaba', services: ['Storefront Setup', 'RFQ Management', 'Trade Assurance', 'Keywords'] },
-  { name: 'Shopee', services: ['Shop Setup', 'Product Listing', 'Shopee Ads', 'Vouchers'] },
-  { name: 'Shein', services: ['Product Onboarding', 'Image Guidelines', 'Category Mapping', 'Trends'] },
+  { name: 'Amazon (US & Global)', services: ['A++ Content', 'FBA Logistics', 'DSP & Sponsored Ads', 'AHR 200+ Defense'] },
+  { name: 'Walmart Marketplace', services: ['WFS Setup', 'Listing Quality Score', 'Sponsored Search', 'Rich Media'] },
+  { name: 'Shopify & Shopify Plus', services: ['Theme Architecture', 'Flow Automations', 'Checkout Extensibility', 'CRO & Analytics'] },
+  { name: 'Etsy', services: ['Artisan SEO Tags', 'Warm Lifestyle Imaging', 'Shop Architecture', 'Ad Campaigns'] },
+  { name: 'eBay', services: ['Listing Templates', 'Promoted Listings', 'Multi-Variation Stores', 'Global Shipping'] },
+  { name: 'Target Plus', services: ['Partner Onboarding', 'High-Res Digital Assets', 'Catalog Mapping', 'Inventory Sync'] },
+  { name: 'TikTok Shop', services: ['Product Showcase', 'Spark Ads', 'Creator Collabs', 'Affiliate Engine'] },
+  { name: 'WooCommerce & BigCommerce', services: ['Store Build', 'Payment Gateways', 'Checkout Speed', 'Custom UX'] },
+  { name: 'Faire & Wholesale', services: ['B2B Storefront', 'Line Sheets', 'Buyer Messaging', 'Net Terms Setup'] },
 ];
 
 const quickCommerce = [
@@ -68,17 +67,17 @@ const PlatformsTabs = () => (
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Platforms We Master</h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          25+ marketplaces across domestic, international & quick commerce — each with tailored strategies.
+          25+ marketplaces across US, global, regional & quick commerce channels — each with tailored strategies.
         </p>
       </div>
-      <Tabs defaultValue="domestic" className="w-full">
+      <Tabs defaultValue="global" className="w-full">
         <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
-          <TabsTrigger value="domestic">Domestic</TabsTrigger>
-          <TabsTrigger value="global">Global</TabsTrigger>
+          <TabsTrigger value="global">Global & US</TabsTrigger>
+          <TabsTrigger value="domestic">Regional Markets</TabsTrigger>
           <TabsTrigger value="quick">Quick Commerce</TabsTrigger>
         </TabsList>
-        <TabsContent value="domestic"><PlatformGrid items={domestic} /></TabsContent>
         <TabsContent value="global"><PlatformGrid items={global} /></TabsContent>
+        <TabsContent value="domestic"><PlatformGrid items={domestic} /></TabsContent>
         <TabsContent value="quick"><PlatformGrid items={quickCommerce} /></TabsContent>
       </Tabs>
     </div>

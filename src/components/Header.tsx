@@ -3,54 +3,15 @@ import {
   Menu, X, Camera, ShoppingCart, BookOpen, Grid,
   Mail, MessageCircle, ArrowRight, Star, HelpCircle,
   Users, LogIn, Sun, Moon, Palette, Video, TrendingUp, BarChart2, ChevronDown,
+  Globe, Sparkles, Calendar,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import imgPhotography from '@/assets/photography-service.jpg';
 import SaleixoLogo from '@/components/SaleixoLogo';
 import { toggleThemeWithTransition } from '@/lib/theme';
+import { openCalendarBooking } from '@/lib/booking';
 
 const BAR_H = 40;
-
-// ─── Mega menu services ───────────────────────────────────────────────────────
-const MEGA_SERVICES = [
-  {
-    icon: ShoppingCart, color: '#10b981',
-    title: 'Ecommerce Management',
-    desc: 'Full store operations & account management',
-    href: '/services/ecommerce-management',
-  },
-  {
-    icon: Palette, color: '#f97316',
-    title: 'Amazon Selling',
-    desc: 'Listings, A+ content & account management',
-    href: '/services/amazon',
-  },
-  {
-    icon: Video, color: '#ec4899',
-    title: 'Shopify Stores',
-    desc: 'Custom stores, products & promotions',
-    href: '/services/shopify',
-  },
-  {
-    icon: Camera, color: '#3b82f6',
-    title: 'Product Photography',
-    desc: 'Studio-grade shoots for every marketplace',
-    href: '/services/photography',
-  },
-  {
-    icon: BarChart2, color: '#8b5cf6',
-    title: 'Social Ads',
-    desc: 'Conversion-tested Google & Meta campaigns',
-    href: '/services/social-ads',
-  },
-  {
-    icon: TrendingUp, color: 'hsl(var(--primary))',
-    title: 'Ecommerce Design',
-    desc: 'Brand identity, listings & storefronts',
-    href: '/design',
-  },
-];
 
 // ─── Desktop nav ──────────────────────────────────────────────────────────────
 const desktopNav = [
@@ -63,23 +24,127 @@ const desktopNav = [
 // ─── Mobile menu sections ─────────────────────────────────────────────────────
 const menuSections = [
   {
-    label: 'Services',
+    label: 'Flagship Platforms',
     items: [
-      { icon: Camera,       name: 'Product Photography',   desc: 'Studio-grade shoots',       href: '/services/photography',          type: 'route'  as const },
-      { icon: ShoppingCart, name: 'Ecommerce Management',  desc: 'Full store operations',      href: '/services/ecommerce-management', type: 'route'  as const },
-      { icon: BarChart2,    name: 'Social Ads',            desc: 'Google & Meta campaigns',    href: '/services/social-ads',           type: 'route'  as const },
-      { icon: Palette,      name: 'Amazon Selling',        desc: 'Listings & A+ content',      href: '/services/amazon',              type: 'route'  as const },
-      { icon: Video,        name: 'Shopify Stores',        desc: 'Custom store management',    href: '/services/shopify',             type: 'route'  as const },
-      { icon: Grid,         name: 'All Services',          desc: 'Full service overview',      href: '/services',                     type: 'route'  as const },
+      {
+        icon: Palette,
+        color: '#f97316',
+        name: 'Amazon SPN Flagship Hub',
+        desc: '8 SPN Categories: Imaging, A++, PPC, FBA & Global',
+        href: '/services/amazon',
+        badge: 'Flagship · SPN Standards',
+        type: 'route' as const,
+        quicklinks: [
+          { name: 'Imaging', href: '/services/amazon#imaging' },
+          { name: 'Cataloging', href: '/services/amazon#cataloging' },
+          { name: 'A+ Content', href: '/services/amazon#a-plus' },
+          { name: 'Advertising', href: '/services/amazon#advertising' },
+          { name: 'Account Health', href: '/services/amazon#account-health' },
+          { name: 'Storefronts', href: '/services/amazon#storefronts' },
+          { name: 'FBA Logistics', href: '/services/amazon#fba-logistics' },
+          { name: 'Global Selling', href: '/services/amazon#global-expansion' },
+        ],
+      },
+      {
+        icon: Globe,
+        color: '#8b5cf6',
+        name: 'Shopify & Shopify Plus',
+        desc: 'Flow Automations, Analytics, CRO & Plus Scale',
+        href: '/services/shopify',
+        badge: 'Enterprise',
+        type: 'route' as const,
+        quicklinks: [
+          { name: 'Flow Automations', href: '/services/shopify#automations' },
+          { name: 'Shopify Plus', href: '/services/shopify#plus' },
+          { name: 'Analytics & CRO', href: '/services/shopify#analytics' },
+        ],
+      },
     ],
   },
   {
-    label: 'Explore',
+    label: 'Studio Disciplines',
     items: [
-      { icon: Star,       name: 'Portfolio',    desc: 'Our work & results', href: '#portfolio',            type: 'scroll' as const },
-      { icon: BookOpen,   name: 'Blog',         desc: 'Tips & insights',    href: '/blog',                 type: 'route'  as const },
-      { icon: HelpCircle, name: 'Pricing',      desc: 'Transparent plans',  href: '/custom-pricing',       type: 'route'  as const },
-      { icon: Users,      name: 'How It Works', desc: '4-step process',     href: '#how-it-works-section', type: 'scroll' as const },
+      {
+        icon: Camera,
+        color: '#3b82f6',
+        name: 'Product Photography',
+        desc: 'Studio, lifestyle & 48-hr delivery',
+        href: '/services/photography',
+        type: 'route' as const,
+      },
+      {
+        icon: ShoppingCart,
+        color: '#10b981',
+        name: 'Ecommerce Management',
+        desc: 'Operations across 20+ marketplaces',
+        href: '/services/ecommerce-management',
+        type: 'route' as const,
+      },
+      {
+        icon: BarChart2,
+        color: '#ec4899',
+        name: 'Social & Paid Ads',
+        desc: 'Meta, Google & ROAS campaigns',
+        href: '/services/social-ads',
+        type: 'route' as const,
+      },
+      {
+        icon: TrendingUp,
+        color: 'hsl(var(--primary))',
+        name: 'Ecommerce Design',
+        desc: 'Brand identity, listings & packaging',
+        href: '/design',
+        type: 'route' as const,
+      },
+      {
+        icon: Sparkles,
+        color: '#c2410c',
+        name: 'Handmade & Artisan Brands',
+        desc: 'Macro photos & craft marketplace specs',
+        href: '/handmade',
+        type: 'route' as const,
+      },
+      {
+        icon: Grid,
+        color: 'hsl(var(--primary))',
+        name: 'All Services Overview',
+        desc: 'Compare full service catalog',
+        href: '/services',
+        type: 'route' as const,
+      },
+    ],
+  },
+  {
+    label: 'Explore & Pricing',
+    items: [
+      {
+        icon: HelpCircle,
+        name: 'Transparent Pricing',
+        desc: 'Retainers & on-demand deliverables',
+        href: '/custom-pricing',
+        type: 'route' as const,
+      },
+      {
+        icon: Star,
+        name: 'Portfolio & Results',
+        desc: 'Our verified work',
+        href: '#portfolio',
+        type: 'scroll' as const,
+      },
+      {
+        icon: BookOpen,
+        name: 'Blog & Seller Guides',
+        desc: 'Ecommerce insights',
+        href: '/blog',
+        type: 'route' as const,
+      },
+      {
+        icon: Users,
+        name: 'How It Works',
+        desc: '4-step diagnostic process',
+        href: '#how-it-works-section',
+        type: 'scroll' as const,
+      },
     ],
   },
 ];
@@ -155,7 +220,7 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
   </motion.div>
 );
 
-// ─── Mega Menu ────────────────────────────────────────────────────────────────
+// ─── Mega Menu (3-Pillar Hierarchy) ──────────────────────────────────────────
 const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
   isLight: boolean;
   onClose: () => void;
@@ -168,7 +233,7 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -8 }}
     transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-    className="fixed left-0 right-0 z-40"
+    className="fixed left-0 right-0 z-40 max-h-[calc(100vh-80px)] overflow-y-auto"
     style={{ top: topOffset }}
     onMouseEnter={onEnter}
     onMouseLeave={onLeave}
@@ -181,103 +246,376 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
         backdropFilter: 'blur(24px)',
       }}
     >
-      <div className="max-w-7xl mx-auto px-10 py-8">
-        <div className="grid grid-cols-12 gap-8">
+      <div className="max-w-7xl mx-auto px-8 py-7">
+        {/* Top Header */}
+        <div
+          className="flex items-center justify-between mb-5 pb-3 border-b"
+          style={{ borderColor: isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)' }}
+        >
+          <div className="flex items-center gap-2">
+            <span
+              className="text-[10px] font-bold tracking-[0.25em] uppercase"
+              style={{ color: isLight ? 'hsl(0 0% 45%)' : 'hsl(215 20% 55%)' }}
+            >
+              Service Architecture
+            </span>
+            <span className="text-xs text-muted-foreground/40">/</span>
+            <span className="text-xs font-medium text-muted-foreground">
+              Dual Flagship Pillars & Creative Disciplines
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link
+              to="/custom-pricing"
+              onClick={onClose}
+              className="text-xs font-semibold text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+            >
+              Custom Pricing <ArrowRight className="w-3 h-3" />
+            </Link>
+            <Link
+              to="/services"
+              onClick={onClose}
+              className="text-xs font-bold text-primary hover:opacity-80 transition-opacity flex items-center gap-1"
+            >
+              All Services <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+        </div>
 
-          {/* ── Left: service grid ── */}
-          <div className="col-span-8">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase mb-5"
-              style={{ color: isLight ? 'hsl(0 0% 50%)' : 'hsl(215 20% 50%)' }}>
-              What We Do
-            </p>
-            <div className="grid grid-cols-3 gap-3">
-              {MEGA_SERVICES.map((svc, i) => {
-                const Icon = svc.icon;
-                return (
-                  <Link key={i} to={svc.href} onClick={onClose}
-                    className="group flex items-start gap-3 p-3.5 rounded-xl transition-all duration-200"
-                    style={{ background: 'transparent' }}
-                    onMouseEnter={e => (e.currentTarget.style.background = isLight ? 'hsl(0 0% 96%)' : 'hsl(220 28% 13%)')}
-                    onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+        {/* 3 Pillars Grid */}
+        <div className="grid grid-cols-12 gap-5">
+          {/* ── Pillar 1: Amazon SPN Flagship Hub (col-span-5) ── */}
+          <div
+            className="col-span-5 rounded-2xl p-5 flex flex-col justify-between transition-all"
+            style={{
+              background: isLight ? 'hsl(28 100% 98% / 0.7)' : 'hsl(28 35% 10% / 0.4)',
+              border: `1px solid ${isLight ? 'hsl(28 80% 86%)' : 'hsl(28 60% 22% / 0.6)'}`,
+            }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span
+                  className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                  style={{
+                    background: 'rgba(249,115,22,0.15)',
+                    color: '#f97316',
+                    border: '1px solid rgba(249,115,22,0.35)',
+                  }}
+                >
+                  Flagship · SPN Standards
+                </span>
+                <span className="text-[10px] font-semibold text-muted-foreground">8 Disciplines</span>
+              </div>
+
+              <Link
+                to="/services/amazon"
+                onClick={onClose}
+                className="group flex items-center justify-between mt-1 mb-1.5"
+              >
+                <span
+                  className="text-base font-bold transition-colors group-hover:text-[#f97316]"
+                  style={{ color: isLight ? '#0a0a0a' : '#fff' }}
+                >
+                  Amazon SPN Flagship Hub
+                </span>
+                <ArrowRight className="w-4 h-4 text-[#f97316] opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
+              </Link>
+              <p className="text-xs leading-relaxed text-muted-foreground mb-4">
+                Full lifecycle seller operations aligned with official Amazon Service Provider Network standards.
+              </p>
+
+              {/* 8 SPN Quicklinks Grid */}
+              <div className="grid grid-cols-2 gap-1.5">
+                {[
+                  { name: 'Imaging & 3D Video', href: '/services/amazon#imaging' },
+                  { name: 'Cataloging & A9 SEO', href: '/services/amazon#cataloging' },
+                  { name: 'A+ & Premium A++', href: '/services/amazon#a-plus' },
+                  { name: 'Advertising & PPC', href: '/services/amazon#advertising' },
+                  { name: 'Account Health & Appeals', href: '/services/amazon#account-health' },
+                  { name: 'Brand Storefronts', href: '/services/amazon#storefronts' },
+                  { name: 'FBA & Logistics', href: '/services/amazon#fba-logistics' },
+                  { name: 'Global Expansion', href: '/services/amazon#global-expansion' },
+                ].map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={onClose}
+                    className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all group"
+                    style={{
+                      background: isLight ? 'rgba(255,255,255,0.85)' : 'hsl(220 28% 13% / 0.8)',
+                      border: `1px solid ${isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)'}`,
+                      color: isLight ? 'hsl(0 0% 25%)' : 'hsl(215 20% 75%)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(249,115,22,0.4)';
+                      e.currentTarget.style.color = '#f97316';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)';
+                      e.currentTarget.style.color = isLight ? 'hsl(0 0% 25%)' : 'hsl(215 20% 75%)';
+                    }}
                   >
-                    <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ background: `${svc.color}18`, border: `1px solid ${svc.color}30` }}>
-                      <Icon className="w-4 h-4" style={{ color: svc.color }} />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold mb-0.5"
-                        style={{ color: isLight ? '#0a0a0a' : '#fff' }}>
-                        {svc.title}
-                      </div>
-                      <div className="text-xs leading-relaxed"
-                        style={{ color: isLight ? 'hsl(0 0% 45%)' : 'hsl(215 20% 55%)' }}>
-                        {svc.desc}
-                      </div>
-                    </div>
+                    <span className="truncate">{item.name}</span>
+                    <ArrowRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 text-[#f97316]" />
                   </Link>
-                );
-              })}
+                ))}
+              </div>
             </div>
 
-            {/* Stats strip */}
-            <div className="mt-5 pt-4 grid grid-cols-3 gap-4"
-              style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}>
-              {[
-                { value: '3.1×', label: 'Avg. ROAS' },
-                { value: '+187%', label: 'Avg. CTR Lift' },
-                { value: '20+', label: 'Marketplaces' },
-              ].map(stat => (
-                <div key={stat.label} className="text-center">
-                  <div className="text-base font-extrabold" style={{ color: 'hsl(var(--primary))' }}>{stat.value}</div>
-                  <div className="text-[10px] font-medium mt-0.5"
-                    style={{ color: isLight ? 'hsl(0 0% 50%)' : 'hsl(215 20% 50%)' }}>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* View all link */}
-            <div className="mt-4 pt-3"
-              style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}>
-              <Link to="/services" onClick={onClose}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-150"
-                style={{ color: 'hsl(var(--primary))' }}>
-                View all services & pricing
-                <ArrowRight className="w-3.5 h-3.5" />
+            <div className="mt-4 pt-3 border-t" style={{ borderColor: isLight ? 'hsl(28 60% 90%)' : 'hsl(28 40% 18%)' }}>
+              <Link
+                to="/services/amazon"
+                onClick={onClose}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f97316] hover:underline"
+              >
+                Explore Amazon SPN Flagship Hub <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
           </div>
 
-          {/* ── Right: featured CTA ── */}
-          <div className="col-span-4">
-            <div className="relative rounded-2xl overflow-hidden h-full min-h-[240px]">
-              <img src={imgPhotography} alt="Saleixo Studio" className="w-full h-full object-cover absolute inset-0" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5">
-                <div className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: 'hsl(var(--primary))' }}>
-                  Free Consultation
-                </div>
-                <p className="text-white text-sm font-semibold leading-snug mb-4">
-                  Get a free brand audit & custom growth plan
-                </p>
-                <div className="flex flex-col gap-2">
-                  <Link to="/get-started" onClick={onClose}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 hover:opacity-90"
-                    style={{ background: 'hsl(var(--primary))', color: '#000' }}>
-                    Get Started Free <ArrowRight className="w-3 h-3" />
-                  </Link>
-                  <a href="https://wa.me/917011441159" target="_blank" rel="noopener noreferrer"
-                    onClick={onClose}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 hover:opacity-90"
-                    style={{ background: '#25D366', color: '#fff' }}>
-                    <MessageCircle className="w-3 h-3" strokeWidth={2} /> WhatsApp Us
-                  </a>
-                </div>
+          {/* ── Pillar 2: Shopify & Shopify Plus Enterprise (col-span-3) ── */}
+          <div
+            className="col-span-3 rounded-2xl p-5 flex flex-col justify-between transition-all"
+            style={{
+              background: isLight ? 'hsl(260 100% 99% / 0.7)' : 'hsl(260 30% 10% / 0.4)',
+              border: `1px solid ${isLight ? 'hsl(260 80% 90%)' : 'hsl(260 50% 22% / 0.6)'}`,
+            }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span
+                  className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                  style={{
+                    background: 'rgba(139,92,246,0.15)',
+                    color: '#8b5cf6',
+                    border: '1px solid rgba(139,92,246,0.35)',
+                  }}
+                >
+                  Enterprise
+                </span>
+                <span className="text-[10px] font-semibold text-muted-foreground">OS 2.0 & Plus</span>
               </div>
+
+              <Link
+                to="/services/shopify"
+                onClick={onClose}
+                className="group flex items-center justify-between mt-1 mb-1.5"
+              >
+                <span
+                  className="text-base font-bold transition-colors group-hover:text-[#8b5cf6]"
+                  style={{ color: isLight ? '#0a0a0a' : '#fff' }}
+                >
+                  Shopify & Plus
+                </span>
+                <ArrowRight className="w-4 h-4 text-[#8b5cf6] opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
+              </Link>
+              <p className="text-xs leading-relaxed text-muted-foreground mb-4">
+                High-conversion DTC storefronts, Flow automations, and enterprise scale.
+              </p>
+
+              {/* Shopify Quicklinks List */}
+              <div className="space-y-1.5">
+                {[
+                  { name: 'Flow Automations Engine', href: '/services/shopify#automations' },
+                  { name: 'Shopify Plus Extensibility', href: '/services/shopify#plus' },
+                  { name: 'Advanced Analytics & CRO', href: '/services/shopify#analytics' },
+                  { name: '14-Day Launch Roadmap', href: '/services/shopify' },
+                ].map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={onClose}
+                    className="flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-medium transition-all group"
+                    style={{
+                      background: isLight ? 'rgba(255,255,255,0.85)' : 'hsl(220 28% 13% / 0.8)',
+                      border: `1px solid ${isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)'}`,
+                      color: isLight ? 'hsl(0 0% 25%)' : 'hsl(215 20% 75%)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)';
+                      e.currentTarget.style.color = '#8b5cf6';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)';
+                      e.currentTarget.style.color = isLight ? 'hsl(0 0% 25%)' : 'hsl(215 20% 75%)';
+                    }}
+                  >
+                    <span className="truncate">{item.name}</span>
+                    <ArrowRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 text-[#8b5cf6]" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-4 pt-3 border-t" style={{ borderColor: isLight ? 'hsl(260 50% 90%)' : 'hsl(260 30% 18%)' }}>
+              <Link
+                to="/services/shopify"
+                onClick={onClose}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8b5cf6] hover:underline"
+              >
+                Explore Shopify Studio <ArrowRight className="w-3 h-3" />
+              </Link>
             </div>
           </div>
 
+          {/* ── Column 3: Multi-Channel Studio Disciplines (col-span-4) ── */}
+          <div
+            className="col-span-4 rounded-2xl p-5 flex flex-col justify-between"
+            style={{
+              background: isLight ? 'hsl(0 0% 98%)' : 'hsl(220 28% 11%)',
+              border: `1px solid ${isLight ? 'hsl(0 0% 89%)' : 'hsl(220 25% 18%)'}`,
+            }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span
+                  className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                  style={{
+                    background: 'hsl(var(--primary) / 0.12)',
+                    color: 'hsl(var(--primary))',
+                    border: '1px solid hsl(var(--primary) / 0.3)',
+                  }}
+                >
+                  Studio Disciplines
+                </span>
+                <span className="text-[10px] font-semibold text-muted-foreground">Multi-Channel</span>
+              </div>
+
+              <Link
+                to="/services"
+                onClick={onClose}
+                className="group flex items-center justify-between mt-1 mb-1.5"
+              >
+                <span
+                  className="text-base font-bold transition-colors group-hover:text-primary"
+                  style={{ color: isLight ? '#0a0a0a' : '#fff' }}
+                >
+                  Multi-Channel Studio
+                </span>
+                <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
+              </Link>
+              <p className="text-xs leading-relaxed text-muted-foreground mb-3">
+                High-impact creative production & multi-channel commerce management.
+              </p>
+
+              {/* 5 Studio Services */}
+              <div className="space-y-1.5">
+                {[
+                  {
+                    icon: Camera,
+                    color: '#3b82f6',
+                    name: 'Product Photography',
+                    desc: 'Studio, lifestyle & 48-hr turnaround',
+                    href: '/services/photography',
+                  },
+                  {
+                    icon: ShoppingCart,
+                    color: '#10b981',
+                    name: 'Ecommerce Management',
+                    desc: 'Full operations for 20+ marketplaces',
+                    href: '/services/ecommerce-management',
+                  },
+                  {
+                    icon: BarChart2,
+                    color: '#ec4899',
+                    name: 'Social & Paid Ads',
+                    desc: 'Meta & Google ROAS campaigns',
+                    href: '/services/social-ads',
+                  },
+                  {
+                    icon: TrendingUp,
+                    color: 'hsl(var(--primary))',
+                    name: 'Ecommerce Design',
+                    desc: 'Packaging, dielines & brand identity',
+                    href: '/design',
+                  },
+                  {
+                    icon: Sparkles,
+                    color: '#c2410c',
+                    name: 'Handmade & Artisan Brands',
+                    desc: 'Macro craft shoots & Etsy specs',
+                    href: '/handmade',
+                  },
+                ].map((svc) => {
+                  const SvcIcon = svc.icon;
+                  return (
+                    <Link
+                      key={svc.name}
+                      to={svc.href}
+                      onClick={onClose}
+                      className="group flex items-center gap-2.5 p-2 rounded-xl transition-all"
+                      style={{ background: 'transparent' }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.background = isLight ? 'hsl(0 0% 93%)' : 'hsl(220 28% 15%)')
+                      }
+                      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                    >
+                      <div
+                        className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{ background: `${svc.color}18`, border: `1px solid ${svc.color}30` }}
+                      >
+                        <SvcIcon className="w-3.5 h-3.5" style={{ color: svc.color }} />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div
+                          className="text-xs font-semibold leading-tight truncate group-hover:text-primary transition-colors"
+                          style={{ color: isLight ? '#0a0a0a' : '#fff' }}
+                        >
+                          {svc.name}
+                        </div>
+                        <div className="text-[11px] text-muted-foreground truncate">{svc.desc}</div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="mt-3 pt-2.5 border-t" style={{ borderColor: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)' }}>
+              <Link
+                to="/services"
+                onClick={onClose}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
+              >
+                Browse All Studio Services <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Credibility Strip */}
+        <div
+          className="mt-5 pt-4 flex flex-wrap items-center justify-between gap-4"
+          style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}
+        >
+          <div className="flex flex-wrap items-center gap-5 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5 font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#f97316]" />
+              Official Amazon SPN Categories
+            </span>
+            <span className="flex items-center gap-1.5 font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#8b5cf6]" />
+              Shopify Plus Architecture
+            </span>
+            <span className="flex items-center gap-1.5 font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              48-hr Delivery Guarantee
+            </span>
+            <span className="flex items-center gap-1.5 font-medium">
+              <span className="w-2 h-2 rounded-full bg-blue-500" />
+              20+ Marketplaces Supported
+            </span>
+          </div>
+          <div className="flex items-center gap-3 text-xs">
+            <span className="text-muted-foreground">Transparent pricing model:</span>
+            <Link
+              to="/custom-pricing"
+              onClick={onClose}
+              className="font-bold text-primary hover:underline flex items-center gap-1"
+            >
+              Explore Pricing Calculator <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -458,6 +796,21 @@ const Header = () => {
             {/* ── Desktop right ─────────────────────────────────────────────── */}
             <div className="hidden md:flex items-center gap-2 justify-self-end">
 
+              {/* Book 1-on-1 Call Button */}
+              <button
+                type="button"
+                onClick={() => openCalendarBooking()}
+                className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold transition-all duration-200 hover:opacity-85 active:scale-95 whitespace-nowrap border"
+                style={{
+                  background: isLight ? 'hsl(0 0% 96%)' : 'hsl(220 25% 15%)',
+                  color: isLight ? 'hsl(0 0% 20%)' : 'hsl(215 20% 85%)',
+                  borderColor: isLight ? 'hsl(0 0% 86%)' : 'hsl(220 25% 24%)',
+                }}
+              >
+                <Calendar className="w-3.5 h-3.5 text-primary" />
+                <span>Book Call</span>
+              </button>
+
               {/* Get Started CTA */}
               <Link
                 to="/get-started"
@@ -559,33 +912,118 @@ const Header = () => {
                   <div className="space-y-2">
                     {section.items.map((item, ii) => {
                       const Icon = item.icon;
-                      const row = (
+                      const hasQuicklinks = Boolean(item.quicklinks && item.quicklinks.length > 0);
+                      const iconColor = item.color || (isLight ? '#0a0a0a' : '#93c5fd');
+                      const badgeIsFlagship = item.badge?.includes('Flagship');
+
+                      const content = (
                         <motion.div
                           key={ii}
                           initial={{ opacity: 0, x: -12 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: si * 0.08 + ii * 0.05 }}
-                          className="flex items-center gap-4 p-4 rounded-2xl active:scale-[0.98] transition-transform"
-                          style={{ background: menuCard, minHeight: 64 }}
-                          onClick={() => {
-                            if (item.type === 'scroll') scrollTo(item.href, true);
-                            else setMobileOpen(false);
-                          }}
+                          className="p-4 rounded-2xl transition-all"
+                          style={{ background: menuCard }}
                         >
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                            style={{ background: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 28% 18%)' }}>
-                            <Icon size={18} style={{ color: isLight ? '#0a0a0a' : '#93c5fd' }} />
+                          <div
+                            className="flex items-center gap-4 cursor-pointer"
+                            style={{ minHeight: 48 }}
+                            onClick={() => {
+                              if (item.type === 'scroll') scrollTo(item.href, true);
+                              else {
+                                setMobileOpen(false);
+                                if (hasQuicklinks) {
+                                  window.location.href = item.href;
+                                }
+                              }
+                            }}
+                          >
+                            <div
+                              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                              style={{
+                                background: item.color
+                                  ? `${item.color}18`
+                                  : isLight ? 'hsl(0 0% 90%)' : 'hsl(220 28% 18%)',
+                                border: item.color ? `1px solid ${item.color}35` : 'none',
+                              }}
+                            >
+                              <Icon size={18} style={{ color: iconColor }} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <div className="font-semibold text-sm" style={{ color: menuText }}>
+                                  {item.name}
+                                </div>
+                                {item.badge && (
+                                  <span
+                                    className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider"
+                                    style={{
+                                      background: badgeIsFlagship ? 'rgba(249,115,22,0.15)' : 'rgba(139,92,246,0.15)',
+                                      color: badgeIsFlagship ? '#f97316' : '#8b5cf6',
+                                      border: `1px solid ${badgeIsFlagship ? 'rgba(249,115,22,0.35)' : 'rgba(139,92,246,0.35)'}`,
+                                    }}
+                                  >
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="text-xs mt-0.5 leading-relaxed" style={{ color: menuMuted }}>
+                                {item.desc}
+                              </div>
+                            </div>
+                            {item.type === 'route' ? (
+                              <Link
+                                to={item.href}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setMobileOpen(false);
+                                }}
+                                className="p-2 -mr-2 rounded-lg flex items-center justify-center hover:opacity-80"
+                                aria-label={`Navigate to ${item.name}`}
+                              >
+                                <ArrowRight size={16} style={{ color: menuMuted, flexShrink: 0 }} />
+                              </Link>
+                            ) : (
+                              <ArrowRight size={16} style={{ color: menuMuted, flexShrink: 0 }} />
+                            )}
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="font-semibold text-sm" style={{ color: menuText }}>{item.name}</div>
-                            <div className="text-xs mt-0.5" style={{ color: menuMuted }}>{item.desc}</div>
-                          </div>
-                          <ArrowRight size={16} style={{ color: menuMuted, flexShrink: 0 }} />
+
+                          {/* Sub-category quick links */}
+                          {hasQuicklinks && item.quicklinks && (
+                            <div
+                              className="mt-3 pt-3 flex flex-wrap gap-1.5"
+                              style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)'}` }}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {item.quicklinks.map((ql, qli) => (
+                                <Link
+                                  key={qli}
+                                  to={ql.href}
+                                  onClick={() => setMobileOpen(false)}
+                                  className="px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95 flex items-center justify-center"
+                                  style={{
+                                    background: isLight ? 'rgba(255,255,255,0.9)' : 'hsl(220 28% 16%)',
+                                    color: isLight ? 'hsl(0 0% 25%)' : 'hsl(215 20% 80%)',
+                                    border: `1px solid ${isLight ? 'hsl(0 0% 86%)' : 'hsl(220 25% 24%)'}`,
+                                    minHeight: '36px',
+                                  }}
+                                >
+                                  {ql.name}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
                         </motion.div>
                       );
-                      return item.type === 'route'
-                        ? <Link key={ii} to={item.href} onClick={() => setMobileOpen(false)}>{row}</Link>
-                        : <div key={ii} className="cursor-pointer">{row}</div>;
+
+                      if (!hasQuicklinks && item.type === 'route') {
+                        return (
+                          <Link key={ii} to={item.href} onClick={() => setMobileOpen(false)} className="block">
+                            {content}
+                          </Link>
+                        );
+                      }
+                      return <div key={ii}>{content}</div>;
                     })}
                   </div>
                 </div>
@@ -617,6 +1055,18 @@ const Header = () => {
               <div>
                 <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: menuMuted }}>Get In Touch</p>
                 <div className="space-y-2">
+                  <Link to="/get-started" onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-4 p-4 rounded-2xl active:opacity-70 border border-primary/30"
+                    style={{ background: isLight ? 'hsl(217 91% 60% / 0.08)' : 'hsl(217 91% 60% / 0.12)' }}>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: 'hsl(var(--primary))' }}>
+                      <Video size={18} style={{ color: '#fff' }} />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-sm" style={{ color: menuText }}>Book Strategy Call</div>
+                      <div className="text-xs mt-0.5" style={{ color: menuMuted }}>15-min Google Meet / Zoom (EST/PST)</div>
+                    </div>
+                  </Link>
                   <a href="mailto:info@saleixo.com" onClick={() => setMobileOpen(false)}
                     className="flex items-center gap-4 p-4 rounded-2xl active:opacity-70"
                     style={{ background: menuCard }}>
@@ -625,21 +1075,21 @@ const Header = () => {
                       <Mail size={18} style={{ color: isLight ? '#0a0a0a' : '#93c5fd' }} />
                     </div>
                     <div>
-                      <div className="font-semibold text-sm" style={{ color: menuText }}>Email Us</div>
+                      <div className="font-semibold text-sm" style={{ color: menuText }}>Email Studio</div>
                       <div className="text-xs mt-0.5" style={{ color: menuMuted }}>info@saleixo.com</div>
                     </div>
                   </a>
                   <a href="https://wa.me/917011441159" target="_blank" rel="noopener noreferrer"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-4 p-4 rounded-2xl active:opacity-70"
+                    className="flex items-center gap-4 p-3.5 rounded-2xl active:opacity-70"
                     style={{ background: menuCard }}>
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
                       style={{ background: '#25D36622' }}>
-                      <MessageCircle size={18} style={{ color: '#25D366' }} />
+                      <MessageCircle size={16} style={{ color: '#25D366' }} />
                     </div>
                     <div>
-                      <div className="font-semibold text-sm" style={{ color: menuText }}>WhatsApp</div>
-                      <div className="text-xs mt-0.5" style={{ color: menuMuted }}>Chat with us directly</div>
+                      <div className="font-semibold text-xs" style={{ color: menuText }}>Quick Chat</div>
+                      <div className="text-[11px]" style={{ color: menuMuted }}>WhatsApp / Slack Connect</div>
                     </div>
                   </a>
                 </div>

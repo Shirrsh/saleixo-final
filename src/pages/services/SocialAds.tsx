@@ -5,23 +5,24 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import USStandardsStrip from '@/components/USStandardsStrip';
 import imgHero from '@/assets/marketing-service.jpg';
 
 const whatWeDo = [
-  'Meta Ads (Facebook & Instagram) — prospecting, retargeting, lookalike audiences',
-  'TikTok Ads — UGC-style creative strategy and spark ads',
-  'Google Shopping & Performance Max campaigns',
-  'Amazon Sponsored Products, Brands & Display ads',
-  'A/B creative testing and ad fatigue management',
-  'ROAS tracking, attribution, and monthly reporting',
-  'Content calendar creation (30 posts/month)',
-  'Branded graphic & video content creation',
-  'Community management and comment response',
-  'Influencer outreach and UGC coordination',
+  'Meta Ads (Facebook & Instagram) — CAPI server-side tracking, prospecting & retargeting',
+  'TikTok Ads & TikTok Shop — UGC-style creative strategy and spark ads',
+  'Google Shopping & Performance Max campaigns with ROAS bid scaling',
+  'Amazon Sponsored Products, Brands, Video & DSP advertising',
+  'A/B creative testing, video hook analysis & ad fatigue management',
+  'ROAS & TACoS attribution tracking with monthly executive reporting',
+  'Content calendar creation & high-converting ad graphics',
+  'Branded lifestyle composite & motion video ad production',
+  'Community management and brand comment moderation',
+  'Creator outreach, UGC brief coordination & influencer whitelisting',
 ];
 
 const process = [
-  { num: '01', title: 'Audit', desc: 'We review your ad account, social presence, creative assets, and competitors before spending a rupee.' },
+  { num: '01', title: 'Audit', desc: 'We review your ad account, social presence, creative assets, and competitors before spending a single dollar of your ad budget.' },
   { num: '02', title: 'Strategy', desc: 'A 90-day growth plan with creative direction, audience targeting, and budget allocation — for your approval.' },
   { num: '03', title: 'Launch', desc: 'First campaigns live within 5 business days. Creative produced in-house, no freelancer handoffs.' },
   { num: '04', title: 'Optimise', desc: 'Weekly bid adjustments, creative swaps, audience refinement. We chase ROAS, not vanity metrics.' },
@@ -158,6 +159,9 @@ const SocialAds = () => {
         </div>
       </section>
 
+      {/* ── US Standards Strip ── */}
+      <USStandardsStrip />
+
       {/* Problem */}
       <section className={`py-14 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
         <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}
@@ -235,7 +239,7 @@ const SocialAds = () => {
           style={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}>
           <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-4">Free ad account audit</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-4">
-            See what's costing you money<br />before we spend a rupee.
+            See what's costing you money<br />before spending another dollar.
           </h2>
           <p className="text-muted-foreground mb-8 max-w-md mx-auto text-sm leading-relaxed">
             We'll audit your ad account and social presence and tell you the top 3 things wasting your budget. Free, no strings attached.

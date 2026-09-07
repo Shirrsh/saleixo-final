@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { ShoppingCart, Globe, Zap, Monitor, BarChart3, Store, Camera, Film, Palette } from 'lucide-react';
 
 const services = [
-  { icon: ShoppingCart, title: 'E-Commerce Account Management', desc: 'End-to-end seller account management on Amazon, Flipkart & more for sustained sales growth.' },
+  { icon: ShoppingCart, title: 'E-Commerce Account Management', desc: 'End-to-end seller account management on Amazon, Walmart, Shopify Plus & global channels.' },
   { icon: Globe, title: 'Global Seller Management', desc: 'International expansion across Amazon US/UK/UAE, eBay, Walmart & cross-border marketplaces.' },
-  { icon: Zap, title: 'Quick Commerce Onboarding', desc: 'Launch on Blinkit, Zepto & Swiggy Instamart with optimized catalogs and pricing.' },
+  { icon: Zap, title: 'Rapid Marketplace Launch', desc: 'Accelerated catalog onboarding, spec-compliant approvals, and inventory sync across 20+ channels.' },
   { icon: Monitor, title: 'Website Design & Development', desc: 'Custom ecommerce websites on Shopify, WooCommerce & WordPress with conversion-focused UX.' },
   { icon: BarChart3, title: 'Digital Marketing', desc: 'SEO, Google Ads, Meta Ads, social media marketing & lead generation campaigns.' },
   { icon: Store, title: 'Shopify Store Management', desc: 'Complete Shopify setup, theme customization, app integrations & checkout optimization.' },

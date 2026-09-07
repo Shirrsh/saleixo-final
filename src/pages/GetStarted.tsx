@@ -62,19 +62,17 @@ const STEPS = [
 ];
 
 const MARKETPLACES = [
-  // India
-  'Amazon India', 'Flipkart', 'Meesho', 'Myntra', 'Nykaa', 'Snapdeal',
-  'JioMart', 'Tata Cliq', 'Ajio', 'IndiaMART',
-  // Global
-  'Amazon US/UK', 'Amazon EU', 'Amazon JP', 'Amazon AU',
-  'eBay', 'Etsy', 'Walmart', 'Shopify', 'WooCommerce',
-  'BigCommerce', 'Wix eCommerce', 'Squarespace Commerce',
-  // Fashion / Lifestyle
-  'SHEIN', 'Temu', 'Zalando', 'ASOS Marketplace', 'Poshmark', 'Depop',
-  // B2B / Wholesale
-  'Alibaba', 'Global Sources', 'Faire',
+  // US & Global Flagships
+  'Amazon (US / North America)', 'Amazon (UK / Europe)', 'Walmart Marketplace',
+  'Shopify / Shopify Plus', 'Etsy', 'eBay', 'Target Plus',
+  // Direct & Social Channels
+  'TikTok Shop', 'WooCommerce', 'BigCommerce', 'Poshmark',
+  // B2B & Wholesale
+  'Faire', 'Alibaba', 'Amazon Business',
+  // Regional Markets
+  'Amazon India', 'Flipkart', 'Myntra', 'Nykaa',
   // Other
-  'My own website', 'Other',
+  'Custom Brand Storefront', 'Other',
 ];
 
 const SERVICES = [
@@ -87,19 +85,19 @@ const SERVICES = [
 ];
 
 const REVENUE_OPTIONS = [
-  'Just getting started',
-  'Up to ₹1 lakh / month',
-  '₹1–5 lakh / month',
-  '₹5–20 lakh / month',
-  '₹20 lakh+ / month',
+  'Pre-launch / Just getting started',
+  'Under $10,000 / month',
+  '$10,000 – $50,000 / month',
+  '$50,000 – $150,000 / month',
+  '$150,000+ / month (7-Figure Brand)',
 ];
 
 const BUDGET_OPTIONS = [
-  'Under ₹10,000 / month',
-  '₹10,000–25,000 / month',
-  '₹25,000–50,000 / month',
-  '₹50,000+ / month',
-  "Let's discuss",
+  'Under $500 / month',
+  '$500 – $1,500 / month',
+  '$1,500 – $3,500 / month',
+  '$3,500+ / month (Dedicated Studio)',
+  "Flexible / Let's discuss scope",
 ];
 
 const TIMELINE_OPTIONS = [
@@ -167,6 +165,7 @@ const QuickContactForm = () => {
     setRateLimited(false);
     let wasRateLimited = false;
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await supabase.from('leads' as any).insert([{
         name:     form.name,
         email:    form.email,
@@ -239,8 +238,8 @@ const QuickContactForm = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-semibold text-foreground mb-1.5">WhatsApp (optional)</label>
-          <input type="tel" className={quickInputCls} placeholder="+91 98765 43210" value={form.whatsapp} onChange={set('whatsapp')} />
+          <label className="block text-xs font-semibold text-foreground mb-1.5">WhatsApp / Phone (optional)</label>
+          <input type="tel" className={quickInputCls} placeholder="+1 (555) 000-0000 or WhatsApp" value={form.whatsapp} onChange={set('whatsapp')} />
         </div>
         <div>
           <label className="block text-xs font-semibold text-foreground mb-1.5">Service Required <span className="text-red-500">*</span></label>
@@ -338,6 +337,7 @@ const GetStarted = () => {
     let wasRateLimited = false;
     try {
       const { error } = await supabase
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .from('leads' as any)
         .insert([{
           name:         data.name,
@@ -382,7 +382,7 @@ const GetStarted = () => {
       } else {
         setSubmitted(true);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Lead submission error:', err);
       // Still show success to the user — don't expose DB errors
       // But log it so we can debug
@@ -739,7 +739,7 @@ const GetStarted = () => {
                       <input
                         {...register('phone')}
                         type="tel"
-                        placeholder="+91 98765 43210"
+                        placeholder="+1 (555) 000-0000 or WhatsApp"
                         className={inputCls(!!errors.phone)}
                       />
                       {errors.phone && <p className="mt-1 text-xs text-destructive">{errors.phone.message}</p>}

@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Plus, Minus, ShoppingCart, TrendingUp, Shield, BarChart2, Package, RefreshCw } from 'lucide-react';
+import { ArrowRight, Plus, Minus, ShoppingCart, TrendingUp, Shield, BarChart2, Package, RefreshCw, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import MarketplaceMockup from '@/components/MarketplaceMockup';
+import USStandardsStrip from '@/components/USStandardsStrip';
+import { useCurrency } from '@/context/CurrencyContext';
 
 import imgPackingDelivery from '@/assets/services/packing-delivery.webp';
 import img1 from '@/assets/hero/showcase-1.jpg';
@@ -51,7 +53,7 @@ const pillars = [
     num: '04',
     icon: BarChart2,
     title: 'Advertising & PPC',
-    body: 'Full-funnel ad management across Sponsored Products, Sponsored Brands, and DSP. Manual and automated bidding, weekly optimisation, and ROAS-first reporting — so every rupee of ad spend is accountable.',
+    body: 'Full-funnel ad management across Sponsored Products, Sponsored Brands, and DSP. Manual and automated bidding, weekly optimisation, and ROAS-first reporting — so every dollar of ad spend is accountable.',
   },
   {
     num: '05',
@@ -68,7 +70,7 @@ const pillars = [
 ];
 
 const results = [
-  { value: '20', suffix: '+', label: 'Marketplaces managed', sub: 'Amazon, Flipkart, Meesho, Shopify, Etsy, Walmart, eBay, Myntra, Nykaa & more' },
+  { value: '20', suffix: '+', label: 'Marketplaces managed', sub: 'Amazon (US, UK, CA, EU), Walmart Marketplace, Shopify Plus, Etsy, eBay, Target Plus & more' },
   { value: '48', suffix: 'hr', label: 'Avg. suppression recovery', sub: 'Most cases resolved within 24–72 hours' },
   { value: '200', suffix: '+', label: 'Suppressed listings fixed', sub: 'Across categories, geographies, and account types' },
   { value: '7', suffix: '', label: 'Countries served', sub: 'US · UK · FR · DE · AU · CA · IN' },
@@ -77,18 +79,17 @@ const results = [
 const faqs = [
   { q: 'What does ecommerce management actually include?', a: 'Everything from daily listing health monitoring and suppression fixes to inventory planning, FBA prep, A+ content, PPC management, and monthly performance reviews. You get a dedicated account manager who acts as your in-house ecommerce team.' },
   { q: 'How quickly can you get started?', a: 'Onboarding takes 5–7 business days. We audit your account, document your workflows, gain platform access, and resolve any active issues in the first two weeks. Most clients are fully stabilised within 14 days.' },
-  { q: 'Do you manage multiple marketplaces simultaneously?', a: 'Yes. We manage accounts across 20+ platforms including Amazon, Flipkart, Meesho, Shopify, Etsy, Walmart, eBay, Myntra, Nykaa, WooCommerce, JioMart, IndiaMART, and more. You get one point of contact for all platforms.' },
+  { q: 'Do you manage multiple marketplaces simultaneously?', a: 'Yes. We manage accounts across 20+ platforms including Amazon (US/Global), Walmart Marketplace, Shopify Plus, Etsy, eBay, Target Plus, WooCommerce, and specialized marketplaces worldwide. You get one point of contact for all platforms.' },
   { q: 'How do you handle suppressed listings?', a: 'We monitor listing health daily. When a suppression is detected, we diagnose the root cause and submit the fix within hours. Typical recovery time is 24–72 hours.' },
   { q: 'What does reporting look like?', a: 'Weekly WhatsApp or Slack updates on key metrics. Monthly performance review with a full breakdown of traffic, conversion, ad spend, unit economics, and the priority actions for the next month.' },
   { q: 'What is your pricing structure?', a: 'Engagements start at a flat monthly retainer based on the number of platforms and SKUs managed, with an optional performance incentive tied to revenue growth. Book a call and we\'ll scope it honestly for your situation.' },
 ];
 
 const marketplaceLogos = [
-  'Amazon', 'Flipkart', 'Meesho', 'Shopify', 'Myntra', 'Nykaa',
-  'eBay', 'Walmart', 'Etsy', 'WooCommerce', 'Snapdeal', 'JioMart',
-  'Tata Cliq', 'Ajio', 'IndiaMART', 'Amazon EU', 'Amazon JP', 'Amazon AU',
-  'BigCommerce', 'Wix', 'Zalando', 'ASOS', 'SHEIN', 'Poshmark',
-  'Alibaba', 'Global Sources',
+  'Amazon US', 'Shopify Plus', 'Walmart Marketplace', 'Etsy', 'eBay',
+  'Target Plus', 'Amazon EU', 'Amazon UK', 'Amazon CA', 'WooCommerce',
+  'BigCommerce', 'TikTok Shop', 'Poshmark', 'Zalando', 'ASOS',
+  'Flipkart', 'Nykaa', 'Myntra', 'Amazon JP', 'Amazon AU',
 ];
 
 // ── FAQ Item ──────────────────────────────────────────────────────────────────
@@ -132,6 +133,11 @@ const FaqItem = ({ q, a, index }: { q: string; a: string; index: number }) => {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 const EcommerceManagement = () => {
+  const { fmt } = useCurrency();
+  const [isUnlocked] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem('saleixo_pricing_unlocked') === 'true';
+  });
   usePageMeta({
     title: 'Ecommerce Management — Saleixo',
     description: 'Full-service ecommerce operations — inventory, orders, listings, and account health across 20+ marketplaces. Let us run your store.',
@@ -252,6 +258,9 @@ const EcommerceManagement = () => {
             </div>
           </div>
         </section>
+
+        {/* ── US Standards Strip ── */}
+        <USStandardsStrip />
 
         {/* ── INTRO STATEMENT ── */}
         <section className={`py-20 md:py-28 ${W}`}>
@@ -407,7 +416,7 @@ const EcommerceManagement = () => {
               </div>
               <div className="text-left">
                 <p className="text-sm font-bold text-foreground">Jewelry Brand</p>
-                <p className="text-xs text-muted-foreground">Amazon India · Artisan Seller</p>
+                <p className="text-xs text-muted-foreground">Amazon US & Global · Specialty Brand</p>
               </div>
             </div>
           </motion.div>
@@ -416,18 +425,18 @@ const EcommerceManagement = () => {
         {/* ── RESULTS ── */}
         <section className={`py-20 md:py-28 ${W}`}>
           <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-14">
-            <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-4">What to expect</p>
+            <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-4">Operational Standards</p>
             <h2 className="font-bold text-foreground tracking-tight leading-[1.1]"
               style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}>
-              Within 90 days of working together, on average our clients see:
+              Core operational benchmarks & service targets:
             </h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-px bg-border/40 rounded-2xl overflow-hidden border border-border/40">
             {[
-              { pct: '30%', label: 'Increase in revenue', desc: 'Through listing optimisation, A+ content, and targeted ad spend across all managed platforms.' },
-              { pct: '48hr', label: 'Avg. suppression fix', desc: 'Listing health issues resolved fast — before they cost you ranking, revenue, or account standing.' },
-              { pct: '25%', label: 'Reduction in wasted ad spend', desc: 'By auditing existing campaigns and rebuilding targeting around contribution margin, not just ROAS.' },
+              { pct: '48hr', label: 'Suppression Recovery SLA', desc: 'Listing health diagnostics and compliance fixes submitted within hours — minimizing lost sales velocity.' },
+              { pct: '100%', label: 'Spec-Compliant Deployment', desc: 'Listing feeds, rich media, and variation structures validated against strict marketplace algorithms.' },
+              { pct: 'Daily', label: 'Proactive Account Governance', desc: 'Continuous monitoring of buy box status, inventory reorder velocity, and ad spend efficiency.' },
             ].map((r, i) => (
               <motion.div key={r.label} variants={fadeUp} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }}
                 className="p-8 md:p-10 flex flex-col gap-3"
@@ -458,17 +467,36 @@ const EcommerceManagement = () => {
                 <p className="text-sm text-muted-foreground leading-relaxed max-w-lg mb-6">
                   Engagements start at a flat monthly retainer based on the number of platforms and SKUs managed, with an optional performance incentive tied to revenue growth. No lock-in contracts for the first 90 days.
                 </p>
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground">Starts at</span>
-                </div>
-                <div className="flex items-end gap-2">
-                  <span className="font-extrabold text-foreground leading-none"
-                    style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontFamily: '"Inter Tight", Inter, sans-serif' }}>
-                    ₹25,000
-                  </span>
-                  <span className="text-base text-muted-foreground pb-1">/ month</span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-2">Custom scoping for multi-platform or high-SKU accounts.</p>
+                {isUnlocked ? (
+                  <>
+                    <div className="flex items-baseline gap-2 mb-2">
+                      <span className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground">Starts at</span>
+                    </div>
+                    <div className="flex items-end gap-2">
+                      <span className="font-extrabold text-foreground leading-none"
+                        style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontFamily: '"Inter Tight", Inter, sans-serif' }}>
+                        {fmt(299, 25000)}
+                      </span>
+                      <span className="text-base text-muted-foreground pb-1">/ month</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-2">Custom scoping for multi-platform or high-SKU accounts.</p>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-baseline gap-2 mb-2">
+                      <span className="text-xs font-bold tracking-[0.2em] uppercase text-muted-foreground">Rate Structure</span>
+                    </div>
+                    <div className="flex items-center gap-3 my-2">
+                      <Link
+                        to="/custom-pricing"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold transition-all duration-200 border border-primary/30 hover:border-primary text-primary bg-primary/5 hover:bg-primary/10"
+                      >
+                        <Lock className="w-4 h-4 text-amber-500" /> Unlock Retainer Rates →
+                      </Link>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-2">Verified rate card with transparent monthly tiers & custom scoping.</p>
+                  </>
+                )}
               </div>
               <div className="flex flex-col gap-3 md:flex-shrink-0">
                 <Link to="/get-started"

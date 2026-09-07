@@ -1,9 +1,11 @@
 import { usePageMeta } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import InstantAuditBar from '@/components/InstantAuditBar';
 import MarketplaceLogos from '@/components/MarketplaceLogos';
 import FeaturedServices from '@/components/FeaturedServices';
 import WhySaleixo from '@/components/WhySaleixo';
+import USStandardsStrip from '@/components/USStandardsStrip';
 import Portfolio from '@/components/Portfolio';
 import HowItWorks from '@/components/HowItWorks';
 import Testimonials from '@/components/Testimonials';
@@ -32,9 +34,13 @@ const Index = () => {
       <main>
         <div className="relative overflow-x-hidden w-full max-w-full">
           <Hero />
+          <div className="px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-10 mb-8 relative z-20">
+            <InstantAuditBar />
+          </div>
           <MarketplaceLogos />
           <FeaturedServices />
           <WhySaleixo />
+          <USStandardsStrip />
           <Portfolio />
         </div>
 

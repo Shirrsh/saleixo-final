@@ -166,7 +166,7 @@ const routes = [
   {
     path: "/custom-pricing",
     title: "Pricing - Photography, Amazon, Shopify & Marketing | Saleixo",
-    description: "Transparent pricing for product photography, Amazon listing optimisation, Shopify setup, and digital marketing. Starter from $299. Enterprise custom quote.",
+    description: "Request instant access to Saleixo's verified 2026 rate card, monthly growth retainers, 14-day launch sprints, and on-demand studio deliverables for Amazon SPN and Shopify Plus.",
     breadcrumb: [{ name: "Home", url: H }, { name: "Pricing", url: BASE_URL + "/custom-pricing" }],
   },
   {

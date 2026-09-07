@@ -30,7 +30,7 @@ interface ValueProposition {
 const defaultContent: HomepageContent = {
   hero_title: 'Transform Your Brand Into Market-Winning Brands',
   hero_subtitle:
-    'Professional product photography and ecommerce solutions for Amazon, Flipkart, Etsy, Shopify and more across US, UK, EU, and India.',
+    'Professional product photography, 3D digital staging, and ecommerce solutions for Amazon, Walmart, Shopify Plus, and Etsy across the US, UK, EU, and worldwide.',
   hero_cta_text: 'Book Free Strategy Call',
   hero_cta_link: '#contact',
   hero_image_url: '',
@@ -42,7 +42,7 @@ const defaultContent: HomepageContent = {
   badge_2_text: '20+ Marketplaces | 7 Countries',
   badge_3_icon: '',
   badge_3_text: '',
-  trust_badges: 'Amazon | eBay | Etsy | Shopify | Flipkart | Walmart',
+  trust_badges: 'Amazon | Walmart | Shopify Plus | Etsy | eBay | Target Plus',
 };
 
 const mergeWithDefaults = (data: Record<string, string | null>): HomepageContent => ({

@@ -8,6 +8,8 @@ import { Analytics } from "@vercel/analytics/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CookieBanner from "@/components/CookieBanner";
+import QuickAuditDrawer from "@/components/QuickAuditDrawer";
+import CalendarBookingDrawer from "@/components/CalendarBookingDrawer";
 import { CurrencyProvider } from "@/context/CurrencyContext";
 
 // ── Lazy-loaded public pages ──────────────────────────────────────────────────
@@ -25,6 +27,8 @@ const Design             = lazy(() => import('./pages/Design'));
 const Handmade           = lazy(() => import('./pages/Handmade'));
 const Services           = lazy(() => import('./pages/Services'));
 const CustomPricing      = lazy(() => import('./pages/CustomPricing'));
+const FrameCraftDemo     = lazy(() => import('./pages/preview/FrameCraftDemo'));
+const AiServicesShowcase = lazy(() => import('./pages/preview/AiServicesShowcase'));
 
 // ── Lazy-loaded service sub-pages ─────────────────────────────────────────────
 const Visibility          = lazy(() => import('./pages/services/Visibility'));
@@ -120,11 +124,18 @@ const App = () => (
                 <Route path="categories" element={<AdminCategories />} />
               </Route>
 
+              {/* Internal QC Preview Sandbox (Option A: Custom Frames & 7+2+1 Deal) */}
+              <Route path="/preview/frame-craft" element={<FrameCraftDemo />} />
+              {/* Internal QC Preview Sandbox (Option B: AI Services Showcase) */}
+              <Route path="/preview/ai-services" element={<AiServicesShowcase />} />
+
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
+      <QuickAuditDrawer />
+      <CalendarBookingDrawer />
       <CookieBanner />
       <Analytics />
     </TooltipProvider>

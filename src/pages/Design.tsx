@@ -25,8 +25,8 @@ const designWorkExamples = [
 const processSteps = [
   { icon: Phone, title: 'Discovery Call', bullets: ['Brand vision, product category & target audience', 'Competitor visual audit', 'Platform priorities & creative brief'] },
   { icon: Palette, title: 'Brand Strategy', bullets: ['Moodboard & visual direction', 'Colour palette, typography & logo system', 'Packaging & label concepts'] },
-  { icon: Camera, title: 'Listing Creative', bullets: ['A+ / A++ content for Amazon & Flipkart', 'Infographics, comparison charts & lifestyle composites', 'Marketplace-compliant main images'] },
-  { icon: Store, title: 'Storefront Design', bullets: ['Shopify theme customisation & brand alignment', 'Marketplace brand storefronts (Amazon, Flipkart)', 'Mobile-first layout & UX review'] },
+  { icon: Camera, title: 'Listing Creative', bullets: ['A+ / Premium A++ content for Amazon & major marketplaces', 'Infographics, comparison charts & lifestyle composites', 'Marketplace-compliant main images'] },
+  { icon: Store, title: 'Storefront Design', bullets: ['Shopify theme customisation & brand alignment', 'Marketplace brand storefronts (Amazon, Walmart, Shopify Plus)', 'Mobile-first layout & UX review'] },
   { icon: Search, title: 'Copy & SEO Layer', bullets: ['Conversion-focused titles & bullet points', 'Backend keyword integration', 'A/B headline variants for top SKUs'] },
   { icon: BarChart3, title: 'Launch & Handoff', bullets: ['Final brand guide & asset library', 'Marketplace compliance sign-off', 'Revision rounds until approved'] },
 ];
@@ -35,7 +35,7 @@ const teamRoles = [
   { icon: Palette, title: 'Brand Designers', desc: 'Logos, colour systems, typography, packaging & brand guides.' },
   { icon: Film, title: 'Photo & Video Editors', desc: 'Professional retouching, infographic compositing & short-form video.' },
   { icon: Store, title: 'Storefront Designers', desc: 'Shopify theme builds, marketplace brand stores & mobile UX.' },
-  { icon: Search, title: 'A+ Content Specialists', desc: 'Amazon A+/A++ modules, Flipkart rich content & comparison charts.' },
+  { icon: Search, title: 'A+ Content Specialists', desc: 'Amazon A+/Premium A++ modules, Walmart rich media & comparison charts.' },
   { icon: Target, title: 'Creative Directors', desc: 'Visual concepting, campaign art direction & style-guide ownership.' },
   { icon: UserCheck, title: 'Dedicated Account Managers', desc: 'Single point of contact — from brief to final delivery.' },
 ];

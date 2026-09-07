@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
-import { Mail, MessageCircle, MapPin, Clock, ArrowRight, ExternalLink, Check } from 'lucide-react';
+import { Mail, MessageCircle, MapPin, Clock, ArrowRight, ExternalLink, Check, Video } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
@@ -24,36 +24,44 @@ const services = [
 
 const contactItems = [
   {
+    icon: Video,
+    label: 'Strategy Call',
+    value: 'Google Meet / Zoom',
+    sub: '15-min discovery (EST/PST)',
+    href: '/get-started',
+    color: '#3b82f6',
+  },
+  {
     icon: Mail,
     label: 'Email',
     value: 'info@saleixo.com',
-    sub: 'We reply within 48 hours',
+    sub: 'Written reply within 24–48h',
     href: 'mailto:info@saleixo.com',
     color: '#60a5fa',
   },
   {
     icon: MessageCircle,
-    label: 'WhatsApp',
-    value: '+91 70114 41159',
-    sub: 'Chat with us directly',
+    label: 'Direct Line',
+    value: 'Slack & WhatsApp',
+    sub: '+91 70114 41159',
     href: 'https://wa.me/917011441159',
     color: '#4ade80',
   },
   {
     icon: MapPin,
-    label: 'Office',
-    value: 'Awfis, Sector 62',
-    sub: 'Noida, Uttar Pradesh 201309',
+    label: 'Studio & Coverage',
+    value: 'Serving US & Global Brands',
+    sub: 'New York (EST) · LA (PST) · Noida Studio',
     href: MAPS_LINK,
     color: '#f97316',
   },
   {
     icon: Clock,
-    label: 'Response Time',
-    value: '24 / 7',
-    sub: 'Written reply within 48 hrs',
+    label: 'Working Hours',
+    value: 'Daily US Overlap',
+    sub: 'Same-day response & EST morning sync',
     href: null,
-    color: 'hsl(var(--gold))',
+    color: '#eab308',
   },
 ];
 
@@ -83,6 +91,7 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await supabase.from('leads' as any).insert([{
         name:     form.name,
         email:    form.email,

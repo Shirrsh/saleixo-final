@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import USStandardsStrip from '@/components/USStandardsStrip';
 import imgStudioBts from '@/assets/services/studio-bts.webp';
 import imgPackingDelivery from '@/assets/services/packing-delivery.webp';
 
@@ -35,7 +36,7 @@ const disciplines = [
   {
     icon: ShoppingCart, color: '#10b981',
     title: 'Ecommerce Operations',
-    desc: 'End-to-end account management on Amazon, Flipkart, Meesho, and more — listings, inventory, FBA, account health, suppression recovery.',
+    desc: 'End-to-end account management on Amazon (US/Global), Walmart, Shopify Plus, Etsy & eBay — cataloging, FBA logistics, account health, and suppression recovery.',
   },
   {
     icon: BarChart2, color: '#8b5cf6',
@@ -80,7 +81,7 @@ const values = [
 const About = () => {
   usePageMeta({
     title: 'About Saleixo — The Diagnostic-First Ecommerce Studio',
-    description: 'Saleixo is a full-stack ecommerce studio based in Noida, India. We help D2C brands and Amazon sellers with photography, design, listings, and marketing across 20+ global marketplaces.',
+    description: 'Saleixo is an elite ecommerce production studio serving US and global brands with studio HQ in Noida Sector 62. Product photography, 3D CGI digital staging, Amazon SPN operations, and Shopify Plus.',
     canonical: 'https://saleixo.com/about',
 structuredData: buildBreadcrumbSchema([
       { name: 'Home', url: 'https://saleixo.com/' },
@@ -124,7 +125,7 @@ structuredData: buildBreadcrumbSchema([
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg leading-relaxed text-muted-foreground max-w-2xl"
             >
-              Saleixo is a full-stack ecommerce studio based in Noida, India. We help D2C brands, Amazon sellers, and ecommerce businesses look professional, list correctly, and market effectively — across every major marketplace.
+              Saleixo is an ecommerce production studio serving US & global brands across New York (EST), Los Angeles (PST), and worldwide, with our registered Production Studio HQ in Noida Sector 62. We deliver studio-grade 3D CGI staging, physical photography, cataloging, and storefront architecture with daily US timezone overlap.
             </motion.p>
           </div>
 
@@ -143,6 +144,9 @@ structuredData: buildBreadcrumbSchema([
             ))}
           </motion.div>
         </section>
+
+        {/* ── US Standards Strip ── */}
+        <USStandardsStrip />
 
         {/* ── Our story ────────────────────────────────────────────────────── */}
         <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
@@ -167,7 +171,7 @@ structuredData: buildBreadcrumbSchema([
             <motion.div variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}
               className="space-y-4">
               {[
-                { icon: MapPin, label: 'Headquartered in Noida, UP, India', sub: 'Awfis, A-41, Sector 62, Noida 201309' },
+                { icon: MapPin, label: 'Studio HQ: Noida Sector 62', sub: 'Awfis, A-41, Sector 62, Noida 201309 | Serving US & Global Brands' },
                 { icon: Award, label: 'MSME Registered', sub: 'Udyam No: UDYAM-BR-06-0036869' },
                 { icon: Star,  label: 'New agency, real expertise', sub: 'Founded 2025 by a team from inside corporate ecommerce' },
                 { icon: Clock, label: '48-hour average delivery', sub: 'For standard photography & listing packages' },
