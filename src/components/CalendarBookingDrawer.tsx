@@ -113,7 +113,7 @@ export default function CalendarBookingDrawer() {
                 <span>Zero sales pressure · 100% actionable diagnostic plan</span>
               </div>
               <a
-                href="https://wa.me/917011441159?text=Hi%2C%20I%20would%20like%20to%20schedule%20a%20strategy%20call"
+                href="https://wa.me/917011441159?text=Hi%2C%20we%20would%20like%20to%20schedule%20a%20strategy%20call"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"

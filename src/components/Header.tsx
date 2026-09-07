@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import {
   Menu, X, Camera, ShoppingCart, BookOpen, Grid,
   Mail, MessageCircle, ArrowRight, Star, HelpCircle,
-  Users, LogIn, Sun, Moon, Palette, Video, TrendingUp, BarChart2, ChevronDown,
+  Users, Sun, Moon, Palette, Video, TrendingUp, BarChart2, ChevronDown,
   Globe, Sparkles, Calendar,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -1029,25 +1029,7 @@ const Header = () => {
                 </div>
               ))}
 
-              <div style={{ height: 1, background: menuBorder }} />
 
-              {/* Sign In */}
-              <div>
-                <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: menuMuted }}>Account</p>
-                <Link to="/admin/login" onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-4 p-4 rounded-2xl active:opacity-70"
-                  style={{ background: menuCard }}>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 28% 18%)' }}>
-                    <LogIn size={18} style={{ color: isLight ? '#0a0a0a' : '#93c5fd' }} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-sm" style={{ color: menuText }}>Sign In</div>
-                    <div className="text-xs mt-0.5" style={{ color: menuMuted }}>Admin panel access</div>
-                  </div>
-                  <ArrowRight size={16} style={{ color: menuMuted, flexShrink: 0 }} />
-                </Link>
-              </div>
 
               <div style={{ height: 1, background: menuBorder }} />
 

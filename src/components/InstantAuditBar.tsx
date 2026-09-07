@@ -130,7 +130,7 @@ export default function InstantAuditBar({ className = '', id = 'instant-audit-ba
 
               <div className="flex flex-col sm:flex-row items-center gap-3">
                 <a
-                  href="https://wa.me/917011441159?text=Hi%2C%20I%20just%20requested%20a%20free%20listing%20audit%20for%20my%20product%3A%20"
+                  href="https://wa.me/917011441159?text=Hi%2C%20we%20just%20requested%20a%20free%20listing%20audit%20for%20our%20product%3A%20"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-sm"

@@ -81,7 +81,7 @@ const SERVICES = [
   { id: 'shopify',    label: 'Shopify Setup & Design' },
   { id: 'ads',        label: 'Social Media & Paid Ads' },
   { id: 'ecommerce',  label: 'Ecommerce Management' },
-  { id: 'unsure',     label: "Not sure — advise me" },
+  { id: 'unsure',     label: "Not sure — advise us" },
 ];
 
 const REVENUE_OPTIONS = [
@@ -420,7 +420,7 @@ const GetStarted = () => {
               or reach out to us directly on WhatsApp for a faster response.
             </p>
             <a
-              href="https://wa.me/917011441159?text=Hi%2C%20I%27d%20like%20a%20free%20listing%20audit"
+              href="https://wa.me/917011441159?text=Hi%2C%20we%27d%20like%20a%20free%20listing%20audit"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
@@ -596,10 +596,10 @@ const GetStarted = () => {
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-200 hover:opacity-90 active:scale-95"
               style={{ background: '#d4af37', color: '#0a0a0a', minHeight: '48px' }}
             >
-              Send Me the Audit <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
+              Send Our Audit <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
             </a>
             <a
-              href="https://wa.me/917011441159?text=Hi%2C%20I%27d%20like%20a%20free%20listing%20audit"
+              href="https://wa.me/917011441159?text=Hi%2C%20we%27d%20like%20a%20free%20listing%20audit"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all duration-200 hover:opacity-90 active:scale-95"
@@ -640,7 +640,7 @@ const GetStarted = () => {
           {/* ── Section label ── */}
           <div className="mb-8 pb-6 border-b border-border">
             <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-1">Free Listing Audit</p>
-            <h2 className="text-2xl font-bold text-foreground mb-1">Send Me the Audit</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-1">Send Our Audit</h2>
             <p className="text-sm text-muted-foreground">
               Tell us about your store in detail — we'll come back with a written diagnosis within 48 hours.
             </p>
@@ -911,7 +911,7 @@ const GetStarted = () => {
                       <textarea
                         {...register('challenge')}
                         rows={4}
-                        placeholder="e.g. My Amazon listing has a low click-through rate and I don't know why. Sales have been flat for 3 months."
+                        placeholder="e.g. Our Amazon listing has a low click-through rate and we need to improve conversion. Sales have been flat for 3 months."
                         className={cn(inputCls(!!errors.challenge), 'resize-none')}
                       />
                       {errors.challenge && <p className="mt-1 text-xs text-destructive">{errors.challenge.message}</p>}
@@ -991,7 +991,7 @@ const GetStarted = () => {
                 >
                   {loading
                     ? <><Loader2 className="w-4 h-4 animate-spin" /> Sending…</>
-                    : <>Send My Request <ArrowRight className="w-4 h-4" strokeWidth={1.5} /></>}
+                    : <>Send Our Request <ArrowRight className="w-4 h-4" strokeWidth={1.5} /></>}
                 </button>
               )}
             </div>

@@ -208,7 +208,7 @@ const Contact = () => {
 
                   <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 w-full">
                     <a
-                      href="https://wa.me/917011441159?text=Hi%2C%20I%20just%20submitted%20an%20enquiry%20on%20Saleixo"
+                      href="https://wa.me/917011441159?text=Hi%2C%20we%20just%20submitted%20an%20enquiry%20on%20Saleixo"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-sm"
@@ -338,7 +338,7 @@ const Contact = () => {
                           </>
                         ) : (
                           <>
-                            <span>Send My Free 3-Point Audit</span>
+                            <span>Send Our Free 3-Point Audit</span>
                             <ArrowRight className="w-4 h-4" />
                           </>
                         )}

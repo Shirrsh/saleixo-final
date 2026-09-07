@@ -1,4 +1,4 @@
-import { Mail, MessageCircle, Phone, ArrowUpRight, ChevronDown, Video, Sparkles, ShieldCheck } from 'lucide-react';
+import { Mail, MessageCircle, ArrowUpRight, ChevronDown, Video, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -152,24 +152,9 @@ const Footer = () => {
               The diagnostic-first ecommerce services studio. Amazon SPN standards, Shopify Plus architecture, catalog imaging, and revenue engineering for high-growth brands.
             </p>
 
-            {/* Studio Registered Details (GBP Verified) */}
+            {/* Studio Contact */}
             <div className="pt-2 text-xs space-y-2 text-foreground/80">
-              <p className="font-semibold text-foreground flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-primary" />
-                Noida Production Studio HQ (GBP Verified)
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                A-41, Block A, Industrial Area, Sector 62, Noida, Uttar Pradesh 201309, India
-              </p>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-muted-foreground pt-1">
-                <a
-                  href="tel:+917011441159"
-                  className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
-                >
-                  <Phone className="w-3.5 h-3.5 text-primary" />
-                  +91 70114 41159
-                </a>
-                <span className="hidden sm:inline text-border">·</span>
+              <div className="flex items-center gap-2 text-muted-foreground pt-1">
                 <a
                   href="mailto:info@saleixo.com"
                   className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
@@ -190,15 +175,6 @@ const Footer = () => {
               >
                 <MessageCircle className="w-3.5 h-3.5" />
                 WhatsApp Direct
-              </a>
-              <a
-                href="https://x.com/SaleixoStudio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-border/80 text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Saleixo on X (Twitter)"
-              >
-                <span className="font-bold">𝕏</span> @SaleixoStudio
               </a>
             </div>
           </div>
@@ -338,10 +314,10 @@ const Footer = () => {
 
           <div className="flex items-center gap-3 flex-wrap justify-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/50 text-[11px] bg-card/40">
-              🏛️ MSME Registered &nbsp;·&nbsp; UDYAM-BR-06-0036869
+              🇺🇸 W-8BEN Verified
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/50 text-[11px] bg-card/40">
-              🇺🇸 W-8BEN Verified
+              🔒 100% Confidential (Mutual NDA)
             </span>
           </div>
         </div>

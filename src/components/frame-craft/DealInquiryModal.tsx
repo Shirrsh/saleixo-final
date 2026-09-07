@@ -140,7 +140,7 @@ Timestamp: ${new Date().toISOString()}
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hi Saleixo, I just submitted an inquiry for the *${dealTierName}* (${nicheTitle}, ${skuQuantity} SKU for ${formattedPrice}). My name is ${formData.name || 'Seller'}.`
+    `Hi Saleixo, we just submitted an inquiry for the *${dealTierName}* (${nicheTitle}, ${skuQuantity} SKU for ${formattedPrice}). Our name / brand is ${formData.name || 'Seller'}.`
   );
 
   const whatsappUrl = `https://wa.me/917011441159?text=${whatsappMessage}`;

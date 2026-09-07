@@ -605,7 +605,7 @@ structuredData: buildBreadcrumbSchema([
                 <Link to="/get-started"
                   className="px-8 py-4 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90"
                   style={{ background: 'hsl(var(--gold))', color: '#000' }}>
-                  Book My Free Call
+                  Book Our Strategy Call
                 </Link>
                 <a href="https://wa.me/917011441159" target="_blank" rel="noopener noreferrer"
                   className="px-8 py-4 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90"

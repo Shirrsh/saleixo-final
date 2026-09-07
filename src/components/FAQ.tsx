@@ -49,12 +49,12 @@ const fallbackFaqs: FaqItem[] = [
   },
   {
     id: '8',
-    question: 'What if my listing gets suppressed after you fix it?',
+    question: 'What if our listing gets suppressed after you fix it?',
     answer: 'We monitor for the first 30 days post-launch. If a listing is suppressed in that window for any reason within our scope, we fix it free.',
   },
   {
     id: '9',
-    question: 'How do I send you my products?',
+    question: 'How do we send you our products?',
     answer: 'We have a primary studio and partner studios across the US, UK, and India. You ship products to the closest studio; we cover return shipping after the shoot.',
   },
   {

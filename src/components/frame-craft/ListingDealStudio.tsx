@@ -828,7 +828,7 @@ GUARANTEE: 100% Amazon/Marketplace Image Compliance
           </button>
           <a
             href={`https://wa.me/917011441159?text=${encodeURIComponent(
-              `Hi Saleixo, I'm interested in the ${
+              `Hi Saleixo, we are interested in the ${
                 includePlus2 && includeReel
                   ? '7+2+1 Deal'
                   : includePlus2

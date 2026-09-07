@@ -15,7 +15,7 @@ const WhatsAppButton = () => {
     return () => observer.disconnect();
   }, []);
 
-  const whatsappUrl = `https://wa.me/917011441159?text=${encodeURIComponent('Hi! I would like to schedule a strategy call or get more details about your ecommerce services.')}`;
+  const whatsappUrl = `https://wa.me/917011441159?text=${encodeURIComponent('Hi! We would like to schedule a strategy call or get more details about your ecommerce services.')}`;
 
   if (menuOpen || dismissed) return null;
 

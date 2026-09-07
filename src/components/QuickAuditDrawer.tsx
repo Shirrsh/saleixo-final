@@ -207,7 +207,7 @@ export default function QuickAuditDrawer() {
                   ) : (
                     <>
                       <Video className="w-3.5 h-3.5" />
-                      <span>Send My Free Video Audit</span>
+                      <span>Send Our Free Video Audit</span>
                       <ArrowRight className="w-3 h-3" />
                     </>
                   )}
@@ -220,7 +220,7 @@ export default function QuickAuditDrawer() {
                   onClick={handleDismiss}
                   className="text-[11px] text-muted-foreground/70 hover:text-foreground transition-colors"
                 >
-                  No thanks, I'll browse on my own
+                  No thanks, we'll browse on our own
                 </button>
               </div>
             </div>

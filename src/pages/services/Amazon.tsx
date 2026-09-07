@@ -690,7 +690,7 @@ const DATA_SECURITY_ITEMS = [
 // ── FAQ Data ──────────────────────────────────────────────────────────────────
 const FAQS = [
   {
-    q: 'How does Saleixo access my Seller Central account?',
+    q: 'How does Saleixo access our Seller Central account?',
     a: 'We strictly access your account through Amazon Secondary User permissions (User Permissions in Seller Central). We provide an authorized operational email address, and you grant granular, role-based access only to the specific modules we manage (e.g. Manage Inventory, Advertising, or Performance). We never ask for your primary master credentials or bank verification information, fully adhering to Amazon Selling Partner API (SP-API) Data Protection Policies.',
   },
   {

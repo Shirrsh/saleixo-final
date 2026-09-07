@@ -509,11 +509,11 @@ const CustomPricing = () => {
       a: 'Absolutely. Many of our clients are omnichannel brands who sell on Amazon while building direct equity on Shopify. Our Pro and Enterprise tiers are designed specifically to synchronize catalog assets, photography, and brand identity across both platforms seamlessly.',
     },
     {
-      q: 'How am I billed?',
+      q: 'How are we billed?',
       a: 'Monthly via Stripe (Visa, Mastercard, Amex, Apple Pay) or direct US ACH wire transfer. Invoices are issued on the 1st of each month for the upcoming service period.',
     },
     {
-      q: 'Do you require access to my Seller Central or Shopify store?',
+      q: 'Do you require access to our Seller Central or Shopify store?',
       a: "Yes — for most services we request limited secondary user permissions via Amazon's User Permissions or Shopify collaborator access. We never ask for your root login credentials, and access can be revoked by you at any time.",
     },
     {

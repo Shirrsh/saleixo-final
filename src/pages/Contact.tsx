@@ -43,7 +43,7 @@ const contactItems = [
     icon: MessageCircle,
     label: 'Direct Line',
     value: 'Slack & WhatsApp',
-    sub: '+91 70114 41159',
+    sub: 'Fast response on WhatsApp',
     href: 'https://wa.me/917011441159',
     color: '#4ade80',
   },
