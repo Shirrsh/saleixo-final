@@ -314,9 +314,6 @@ const Footer = () => {
 
           <div className="flex items-center gap-3 flex-wrap justify-center">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/50 text-[11px] bg-card/40">
-              🇺🇸 W-8BEN Verified
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/50 text-[11px] bg-card/40">
               🔒 100% Confidential (Mutual NDA)
             </span>
           </div>

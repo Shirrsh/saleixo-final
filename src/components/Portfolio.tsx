@@ -184,7 +184,7 @@ const Portfolio = () => {
   }));
 
   return (
-    <section id="portfolio" className="relative overflow-hidden py-14 md:py-20 bg-background">
+    <section id="portfolio" className="relative overflow-hidden py-10 md:py-14 bg-background">
       <ParallaxBlob hue="258 90% 66%" opacity={0.05} size={560} speed={0.4} style={{ top: '-12%', right: '-10%' }} />
       <div className="container relative z-10 mx-auto px-4 max-w-5xl">
 

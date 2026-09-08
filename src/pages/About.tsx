@@ -96,7 +96,7 @@ structuredData: buildBreadcrumbSchema([
       <main className="min-h-screen" style={{ background: 'hsl(var(--background))' }}>
 
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className={`relative pt-36 pb-20 ${W}`}>
+        <section className={`relative pt-28 md:pt-32 pb-10 md:pb-12 ${W}`}>
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="absolute rounded-full" style={{ top: '-5%', right: '-5%', width: '600px', height: '600px', background: 'radial-gradient(circle, hsl(var(--accent-purple) / 0.08) 0%, transparent 70%)', filter: 'blur(60px)' }} />
           </div>
@@ -149,7 +149,7 @@ structuredData: buildBreadcrumbSchema([
         <USStandardsStrip />
 
         {/* ── Our story ────────────────────────────────────────────────────── */}
-        <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+        <section className={`py-12 md:py-16 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-muted-foreground mb-4">Our Story</p>
@@ -193,7 +193,7 @@ structuredData: buildBreadcrumbSchema([
         </section>
 
         {/* ── Behind the scenes ────────────────────────────────────────────── */}
-        <section className={`py-20 ${W}`}>
+        <section className={`py-12 md:py-16 ${W}`}>
           <div className="max-w-5xl mx-auto">
             <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
               <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-muted-foreground mb-3">Behind The Scenes</p>
@@ -214,7 +214,7 @@ structuredData: buildBreadcrumbSchema([
         </section>
 
         {/* ── What we do ───────────────────────────────────────────────────── */}
-        <section className={`py-20 ${W}`}>
+        <section className={`py-12 md:py-16 ${W}`}>
           <div className="max-w-5xl mx-auto">
             <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
               <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-muted-foreground mb-3">What We Do</p>
@@ -242,7 +242,7 @@ structuredData: buildBreadcrumbSchema([
         </section>
 
         {/* ── Our values ───────────────────────────────────────────────────── */}
-        <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+        <section className={`py-12 md:py-16 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-5xl mx-auto">
             <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
               <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-muted-foreground mb-3">How We Work</p>
@@ -265,7 +265,7 @@ structuredData: buildBreadcrumbSchema([
         </section>
 
         {/* ── Location + registration ───────────────────────────────────────── */}
-        <section className={`py-20 ${W}`}>
+        <section className={`py-12 md:py-16 ${W}`}>
           <div className="max-w-5xl mx-auto">
             <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}
               className="rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8"

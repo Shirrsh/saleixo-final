@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
-import { Check, ArrowRight, Star, Zap, ChevronDown, ShieldCheck, Clock, CreditCard, Sparkles, Search, Plus, X, Layers, Activity, CheckCircle2, Lock } from 'lucide-react';
+import { Check, ArrowRight, Star, Zap, ChevronDown, ShieldCheck, Clock, Sparkles, Search, Plus, X, Layers, Activity, CheckCircle2, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -473,12 +473,12 @@ const CustomPricing = () => {
   });
 
   const localAddOns = [
-    { name: '48-hr Express Photo Delivery (Rush turnaround)', price: fmt(99, 7999) },
-    { name: '24-hr Emergency Suppression Response (Rapid listing recovery)', price: fmt(149, 12499) },
-    { name: 'Shopify Launchpad Event Support (Flash sale automation)', price: fmt(199, 16499) },
-    { name: 'Dedicated Slack / WhatsApp Priority Channel (Real-time team access)', price: `${fmt(99, 7999)}/mo` },
-    { name: 'Extra Revision Round (Beyond 2 included in plan)', price: fmt(29, 2499) },
-    { name: 'Additional Marketplace Sync (Per global region)', price: `${fmt(79, 6599)}/mo` },
+    { name: '48-hr Express Photo Delivery (Rush turnaround)', price: fmt(29, 2499) },
+    { name: '24-hr Emergency Suppression Response (Rapid listing recovery)', price: fmt(49, 3999) },
+    { name: 'Shopify Launchpad Event Support (Flash sale automation)', price: fmt(49, 3999) },
+    { name: 'Dedicated Slack / WhatsApp Priority Channel (Real-time team access)', price: `${fmt(29, 2499)}/mo` },
+    { name: 'Extra Revision Round (Beyond 2 included in plan)', price: fmt(15, 1299) },
+    { name: 'Additional Marketplace Sync (Per global region)', price: `${fmt(29, 2499)}/mo` },
   ];
 
   const faq = useMemo(() => [
@@ -510,7 +510,7 @@ const CustomPricing = () => {
     },
     {
       q: 'How are we billed?',
-      a: 'Monthly via Stripe (Visa, Mastercard, Amex, Apple Pay) or direct US ACH wire transfer. Invoices are issued on the 1st of each month for the upcoming service period.',
+      a: 'Monthly via Stripe (Visa, Mastercard, Amex, Apple Pay) or direct bank transfer. Invoices are issued on the 1st of each month for the upcoming service period.',
     },
     {
       q: 'Do you require access to our Seller Central or Shopify store?',
@@ -522,7 +522,7 @@ const CustomPricing = () => {
     },
     {
       q: 'What currencies do you accept?',
-      a: 'We bill primarily in USD for international clients, with support for Stripe, US ACH wire, and major international credit cards. Clients in India can also be invoiced in INR. You can use the currency converter at the top of the page to view indicative rates in your preferred local currency.',
+      a: 'We bill primarily in USD for international clients, with support for Stripe and major international credit cards. Clients in India can also be invoiced in INR. You can use the currency converter at the top of the page to view indicative rates in your preferred local currency.',
     },
   ], [fmt, isUnlocked]);
 
@@ -609,7 +609,7 @@ const CustomPricing = () => {
                 Enter your details below to instantly unlock our verified 2026 retainers, fixed-scope launch sprints, and on-demand studio deliverables.
               </p>
               <p className="text-xs text-muted-foreground">
-                Prices billed in USD with zero foreign exchange markup · Invoiced via Stripe or US ACH wire.
+                Prices billed in USD · Invoiced securely via Stripe or direct bank transfer.
               </p>
             </section>
 
@@ -648,7 +648,7 @@ const CustomPricing = () => {
         ) : (
           <>
             {/* ── Hero (Unlocked) ── */}
-            <section className="pt-28 pb-12 px-4 text-center">
+            <section className="pt-28 pb-6 sm:pb-8 px-4 text-center">
               <div className="inline-flex items-center justify-between gap-4 px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-4">
                 <span className="inline-flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
@@ -696,12 +696,12 @@ const CustomPricing = () => {
               </div>
 
               <p className="text-xs text-muted-foreground">
-                Prices billed in USD with zero foreign exchange markup · Invoiced via Stripe or US ACH wire.
+                Prices billed in USD · Invoiced securely via Stripe or direct bank transfer.
               </p>
             </section>
 
             {/* ── Model Switcher Tabs (Retainers vs Launch Sprints vs Diagnostic Audits) ── */}
-            <section className="px-4 pb-12 max-w-5xl mx-auto">
+            <section className="px-4 pb-8 sm:pb-10 max-w-5xl mx-auto">
               <div className="p-1.5 rounded-2xl bg-muted/70 border border-border flex flex-col sm:flex-row items-center justify-center gap-1.5 max-w-2xl mx-auto shadow-inner">
                 <button
                   type="button"
@@ -750,7 +750,7 @@ const CustomPricing = () => {
 
         {/* ── Tab 1: Monthly Growth Retainers ── */}
         {pricingTab === 'retainers' && (
-          <section className="px-4 pb-20 max-w-7xl mx-auto animate-in fade-in duration-200">
+          <section className="px-4 pb-10 md:pb-12 max-w-7xl mx-auto animate-in fade-in duration-200">
             <div className="text-center mb-8 max-w-2xl mx-auto">
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
                 Dedicated Monthly Growth Retainers
@@ -851,7 +851,7 @@ const CustomPricing = () => {
 
         {/* ── Tab 2: Fixed-Scope Launch Sprints ── */}
         {pricingTab === 'sprints' && (
-          <section className="px-4 pb-20 max-w-7xl mx-auto animate-in fade-in duration-200">
+          <section className="px-4 pb-10 md:pb-12 max-w-7xl mx-auto animate-in fade-in duration-200">
             <div className="text-center max-w-3xl mx-auto mb-10">
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
                 US Brand Launch Sprints (Fixed-Scope, Fixed-Timeline)
@@ -932,7 +932,7 @@ const CustomPricing = () => {
 
         {/* ── Tab 3: Diagnostic & Audit Sprints (Low-Friction Entry Point) ── */}
         {pricingTab === 'diagnostic' && (
-          <section className="px-4 pb-20 max-w-7xl mx-auto animate-in fade-in duration-200">
+          <section className="px-4 pb-10 md:pb-12 max-w-7xl mx-auto animate-in fade-in duration-200">
             <div className="text-center max-w-3xl mx-auto mb-10">
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
                 Diagnostic & Quick-Win Sprints
@@ -1007,7 +1007,7 @@ const CustomPricing = () => {
         )}
 
         {/* ── Sample Deliverable Banner ── */}
-        <section className="px-4 pb-16 max-w-4xl mx-auto">
+        <section className="px-4 pb-10 md:pb-12 max-w-4xl mx-auto">
           <div className="rounded-2xl overflow-hidden border border-border shadow-sm relative group" style={{ aspectRatio: '16 / 7' }}>
             <img
               src={imgHandmadeBasketCollection}
@@ -1021,41 +1021,8 @@ const CustomPricing = () => {
           </div>
         </section>
 
-        {/* ── US Invoicing & Payment Security Banner ── */}
-        <section className="px-4 pb-16 max-w-5xl mx-auto">
-          <div className="p-6 rounded-2xl bg-card border border-border flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
-                <CreditCard className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-foreground">
-                  US Domestic Invoicing & Direct Payments
-                </div>
-                <div className="text-xs text-muted-foreground mt-0.5">
-                  Pay securely in USD via Stripe (Visa, Mastercard, Amex, Apple Pay) or US ACH Wire. W-8BEN compliance provided for corporate expense deduction.
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-muted text-muted-foreground border border-border">
-                Stripe USD
-              </span>
-              <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-muted text-muted-foreground border border-border">
-                US ACH
-              </span>
-              <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-muted text-muted-foreground border border-border">
-                Zero FX Markup
-              </span>
-              <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-muted text-muted-foreground border border-border">
-                W-8BEN Verified
-              </span>
-            </div>
-          </div>
-        </section>
-
         {/* ── On-Demand Studio Deliverables Suite ── */}
-        <section className="px-4 pb-20 max-w-6xl mx-auto">
+        <section className="px-4 pb-10 md:pb-12 max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-2">Single-Scope Precision</p>
             <h2 className="text-3xl font-bold text-foreground tracking-tight">
@@ -1188,7 +1155,7 @@ const CustomPricing = () => {
         </section>
 
         {/* ── Add-Ons Table ── */}
-        <section className="px-4 pb-20 max-w-4xl mx-auto">
+        <section className="px-4 pb-10 md:pb-12 max-w-4xl mx-auto">
           <div className="text-center mb-6">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-2">Flexible Additions</p>
             <h2 className="text-2xl font-bold text-foreground">Add-On Capabilities</h2>
@@ -1217,7 +1184,7 @@ const CustomPricing = () => {
     )}
 
     {/* ── What's Not Included ── */}
-        <section className="px-4 pb-20 max-w-4xl mx-auto">
+        <section className="px-4 pb-10 md:pb-12 max-w-4xl mx-auto">
           <div className="text-center mb-6">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-2">Direct Provider Fees</p>
             <h2 className="text-2xl font-bold text-foreground">What's Not Included</h2>
@@ -1251,7 +1218,7 @@ const CustomPricing = () => {
         <USStandardsStrip className="border-t border-border/40" />
 
         {/* ── High-Contrast Interactive FAQ Accordion (Bug Fixed) ── */}
-        <section className="px-4 pb-20 max-w-3xl mx-auto">
+        <section className="px-4 pb-10 md:pb-12 max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-2">Real Answers</p>
             <h2 className="text-3xl font-bold text-foreground tracking-tight">Pricing Questions</h2>
@@ -1304,7 +1271,7 @@ const CustomPricing = () => {
         </section>
 
         {/* ── CTA ── */}
-        <section className="px-4 pb-24 max-w-2xl mx-auto text-center">
+        <section className="px-4 pb-12 md:pb-16 max-w-2xl mx-auto text-center">
           <div className="rounded-2xl border border-border bg-card p-8 sm:p-10 shadow-sm">
             <Zap className="w-10 h-10 text-primary mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-foreground mb-3">Not sure which plan fits?</h2>

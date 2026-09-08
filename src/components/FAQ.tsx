@@ -89,7 +89,7 @@ const FAQ = () => {
   const toggle = (id: string) => setOpenId(prev => prev === id ? null : id);
 
   return (
-    <section id="faq" className="py-16 md:py-24 bg-background">
+    <section id="faq" className="py-10 md:py-16 bg-background">
       <div className="container mx-auto px-4 max-w-3xl">
 
         {/* Header */}

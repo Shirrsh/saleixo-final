@@ -226,7 +226,7 @@ export default function USStandardsStrip({ className = '' }: USStandardsStripPro
   const current = REGION_DATA[region] || REGION_DATA.GLOBAL;
 
   return (
-    <section className={`py-16 md:py-20 relative overflow-hidden ${className}`}>
+    <section className={`py-10 md:py-14 relative overflow-hidden ${className}`}>
       {/* Background ambient accents */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 rounded-full bg-primary/10 blur-3xl" />

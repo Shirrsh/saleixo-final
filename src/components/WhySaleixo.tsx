@@ -49,7 +49,7 @@ const fadeUp = {
 const WhySaleixo = () => {
   const [showAll, setShowAll] = useState(false);
   return (
-  <section className="section-airy relative overflow-hidden py-16 md:py-24 bg-transparent">
+  <section className="section-airy relative overflow-hidden py-10 md:py-16 bg-transparent">
     {/* Drifting ambient blobs — parallax on scroll */}
     <ParallaxBlob hue="217 91% 52%" opacity={0.06} size={620} speed={0.45} style={{ top: '-10%', left: '-8%' }} />
     <ParallaxBlob hue="340 100% 68%" opacity={0.045} size={520} speed={-0.3} style={{ bottom: '-15%', right: '-6%' }} />

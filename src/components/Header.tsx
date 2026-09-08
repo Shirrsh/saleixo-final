@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Menu, X, Camera, ShoppingCart, BookOpen, Grid,
   Mail, MessageCircle, ArrowRight, Star, HelpCircle,
@@ -12,6 +12,7 @@ import { toggleThemeWithTransition } from '@/lib/theme';
 import { openCalendarBooking } from '@/lib/booking';
 
 const BAR_H = 40;
+const BAR_LIFETIME_MS = 10 * 60 * 1000; // 10 minutes
 
 // ─── Desktop nav ──────────────────────────────────────────────────────────────
 const desktopNav = [
@@ -628,17 +629,65 @@ const Header = () => {
   const [scrolled, setScrolled]     = useState(false);
   const [isLight, setIsLight]       = useState(false);
   const [megaOpen, setMegaOpen]     = useState(false);
-  const [showBar, setShowBar]       = useState(() => {
-    try { return localStorage.getItem('saleixo_bar_dismissed') !== '1'; }
-    catch { return true; }
+  const [showBar, setShowBar] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    try {
+      const dismissed = localStorage.getItem('saleixo_bar_dismissed');
+      if (dismissed === 'true' || dismissed === '1') {
+        return false;
+      }
+      const firstSeen = localStorage.getItem('saleixo_bar_first_seen');
+      if (firstSeen) {
+        const parsed = parseInt(firstSeen, 10);
+        if (!isNaN(parsed)) {
+          const elapsed = Date.now() - parsed;
+          if (elapsed >= BAR_LIFETIME_MS) {
+            localStorage.setItem('saleixo_bar_dismissed', 'true');
+            return false;
+          }
+          return true;
+        }
+      }
+      localStorage.setItem('saleixo_bar_first_seen', Date.now().toString());
+      return true;
+    } catch {
+      return true;
+    }
   });
   const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const dismissBar = () => {
+  const dismissBar = useCallback(() => {
     setShowBar(false);
-    try { localStorage.setItem('saleixo_bar_dismissed', '1'); } catch {} // eslint-disable-line no-empty
-    window.dispatchEvent(new Event('bar-dismissed'));
-  };
+    try {
+      localStorage.setItem('saleixo_bar_dismissed', 'true');
+    } catch {} // eslint-disable-line no-empty
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('bar-dismissed'));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showBar) {
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('bar-dismissed'));
+      }
+      return;
+    }
+    try {
+      const firstSeen = localStorage.getItem('saleixo_bar_first_seen') || Date.now().toString();
+      const elapsed = Date.now() - parseInt(firstSeen, 10);
+      const remaining = Math.max(0, BAR_LIFETIME_MS - elapsed);
+      const timer = setTimeout(() => {
+        dismissBar();
+      }, remaining);
+      return () => clearTimeout(timer);
+    } catch {
+      const timer = setTimeout(() => {
+        dismissBar();
+      }, BAR_LIFETIME_MS);
+      return () => clearTimeout(timer);
+    }
+  }, [showBar, dismissBar]);
 
   const headerTop = showBar ? BAR_H : 0;
   const megaTop   = headerTop + 64;

@@ -239,7 +239,7 @@ structuredData: buildBreadcrumbSchema([
       <main className="min-h-screen" style={{ background: 'hsl(var(--background))' }}>
 
         {/* ── HERO ── */}
-        <section className="relative pt-32 pb-20 px-4 overflow-hidden">
+        <section className="relative pt-28 md:pt-32 pb-10 md:pb-12 px-4 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none hidden dark:block">
             <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(215 45% 14%) 0%, hsl(220 35% 10%) 40%, hsl(222 30% 9%) 100%)' }} />
             <div className="absolute rounded-full" style={{ top: '-10%', right: '-5%', width: '600px', height: '600px', background: 'radial-gradient(circle, hsl(210 85% 55% / 0.22) 0%, transparent 70%)', filter: 'blur(70px)' }} />
@@ -297,7 +297,7 @@ structuredData: buildBreadcrumbSchema([
         </section>
 
         {/* ── SERVICE CARDS ── */}
-        <section className="py-20 px-4">
+        <section className="py-12 md:py-16 px-4">
           <div className="container mx-auto max-w-6xl">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-14">
               <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">WHAT WE DO</p>
@@ -445,7 +445,7 @@ structuredData: buildBreadcrumbSchema([
         </section>
 
         {/* ── PRICING TIERS ── */}
-        <section className="py-20 px-4" style={{ background: 'hsl(var(--surface))' }}>
+        <section className="py-12 md:py-16 px-4" style={{ background: 'hsl(var(--surface))' }}>
           <div className="container mx-auto max-w-5xl">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
               <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">PRICING PLANS</p>
@@ -554,7 +554,7 @@ structuredData: buildBreadcrumbSchema([
         </section>
 
         {/* ── WHY SALEIXO ── */}
-        <section className="py-20 px-4">
+        <section className="py-12 md:py-16 px-4">
           <div className="container mx-auto max-w-6xl">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-14">
               <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">WHY SALEIXO</p>
@@ -587,7 +587,7 @@ structuredData: buildBreadcrumbSchema([
         </section>
 
         {/* ── FINAL CTA ── */}
-        <section className="py-20 px-4" style={{ background: 'hsl(var(--surface))' }}>
+        <section className="py-12 md:py-16 px-4" style={{ background: 'hsl(var(--surface))' }}>
           <div className="container mx-auto max-w-4xl">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
               className="rounded-3xl p-10 md:p-16 text-center relative overflow-hidden"

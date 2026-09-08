@@ -414,7 +414,7 @@ const FeaturedServices = () => {
   const imgIsRight = activeIdx % 2 === 0;
 
   return (
-    <section id="services" className="relative py-14 md:py-20 lg:py-24 bg-transparent overflow-x-hidden">
+    <section id="services" className="relative py-10 md:py-16 bg-transparent overflow-x-hidden">
 
       {/* ── Section header ── */}
       <motion.div

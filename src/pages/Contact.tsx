@@ -158,7 +158,7 @@ const Contact = () => {
 
       {/* ── Hero ─────────────────────────────────────────────────────────────── */}
       <section
-        className="relative pt-40 pb-24 overflow-hidden"
+        className="relative pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden"
         style={{ background: '#060d0a' }}
       >
         <div
@@ -208,7 +208,7 @@ const Contact = () => {
       </section>
 
       {/* ── Contact cards ────────────────────────────────────────────────────── */}
-      <section className="bg-background py-16">
+      <section className="bg-background py-10 md:py-12">
         <div className="max-w-5xl mx-auto px-6 sm:px-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {contactItems.map((item, i) => {
@@ -267,7 +267,7 @@ const Contact = () => {
       </section>
 
       {/* ── Map + Form ───────────────────────────────────────────────────────── */}
-      <section className="bg-background pb-24">
+      <section className="bg-background pb-12 md:pb-16">
         <div className="max-w-5xl mx-auto px-6 sm:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
