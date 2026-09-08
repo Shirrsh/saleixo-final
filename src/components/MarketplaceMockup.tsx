@@ -270,35 +270,35 @@ const chartBars = [40,65,45,80,55,90,70,85,60,95,75,88,50,72,92,68,84,76,91,63,8
 
 // ── Single marketplace dashboard ────────────────────────────────────────────
 const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
-  <div className="bg-[#f3f3f3] text-gray-800 text-xs overflow-hidden">
+  <div className="bg-[#f3f3f3] text-gray-800 text-xs overflow-hidden w-full">
     {/* Top nav */}
     <div className="px-3 py-1.5 flex items-center justify-between" style={{ background: mp.navBg }}>
-      <div className="flex items-center gap-2">
-        {mp.logo}
-        <span className="text-[10px]" style={{ color: `${mp.navText}80` }}>{mp.subLabel}</span>
+      <div className="flex items-center gap-2 min-w-0">
+        <div className="flex-shrink-0">{mp.logo}</div>
+        <span className="text-[10px] truncate" style={{ color: `${mp.navText}80` }}>{mp.subLabel}</span>
       </div>
       <div className="w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>S</div>
     </div>
 
-    <div className="p-2 overflow-hidden">
+    <div className="p-2 sm:p-2.5 overflow-hidden">
       {/* Title row */}
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-[11px] font-semibold text-gray-800">{mp.name} Dashboard</h3>
+      <div className="flex items-center justify-between mb-2 gap-2">
+        <h3 className="text-[11px] font-semibold text-gray-800 truncate">{mp.name} Dashboard</h3>
         <div className="text-[8px] font-bold px-1.5 py-0.5 rounded flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>Last 30 Days</div>
       </div>
 
       {/* Stats — always 2×2 grid */}
-      <div className="grid grid-cols-2 gap-1.5 mb-2">
+      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mb-2">
         {mp.stats.map((stat, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.06 }}
-            className="bg-white rounded-lg p-1.5 border border-gray-200 shadow-sm"
+            transition={{ delay: i * 0.04 }}
+            className="bg-white rounded-lg p-1.5 sm:p-2 border border-gray-200 shadow-xs"
           >
-            <div className="text-[7px] text-gray-500 mb-0.5 leading-tight">{stat.label}</div>
-            <div className="text-[11px] font-bold text-gray-800">{stat.value}</div>
+            <div className="text-[7.5px] sm:text-[8px] text-gray-500 mb-0.5 leading-tight truncate">{stat.label}</div>
+            <div className="text-[11px] sm:text-xs font-bold text-gray-800">{stat.value}</div>
             <div className="text-[8px] font-semibold" style={{ color: stat.change.startsWith('-') && stat.label.toLowerCase().includes('return') ? '#16a34a' : stat.change.startsWith('-') ? '#dc2626' : '#16a34a' }}>
               {stat.change.startsWith('-') ? '▼' : '▲'} {stat.change}
             </div>
@@ -306,8 +306,8 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
         ))}
       </div>
 
-      {/* Chart — hidden on small screens to keep the mockup in one frame */}
-      <div className="hidden sm:block bg-white rounded-lg p-2 border border-gray-200 shadow-sm mb-2">
+      {/* Chart — hidden on small screens (< sm) to keep the mockup compact */}
+      <div className="hidden sm:block bg-white rounded-lg p-2 sm:p-2.5 border border-gray-200 shadow-xs mb-2">
         <div className="flex items-center justify-between mb-1.5">
           <span className="text-[9px] font-semibold text-gray-700">Sales Performance</span>
           <span className="text-[8px] text-gray-400">30 days</span>
@@ -316,11 +316,11 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
           {chartBars.map((h, i) => (
             <motion.div
               key={i}
-              className="flex-1 rounded-sm"
+              className="flex-1 rounded-xs"
               style={{ background: i >= 25 ? mp.accentChart : mp.chartColor, opacity: i >= 25 ? 1 : 0.35 }}
               initial={{ height: 0 }}
               animate={{ height: `${h}%` }}
-              transition={{ delay: 0.1 + i * 0.015, duration: 0.35 }}
+              transition={{ delay: 0.05 + i * 0.01, duration: 0.3 }}
             />
           ))}
         </div>
@@ -331,21 +331,21 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
       </div>
 
       {/* Table — 2 rows */}
-      <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg border border-gray-200 shadow-xs overflow-hidden">
         <div className="px-2.5 py-1 border-b border-gray-100 flex items-center justify-between">
           <span className="text-[9px] font-semibold text-gray-700">{mp.rowLabel}</span>
-          <span className="text-[8px] cursor-pointer" style={{ color: mp.accent }}>View all</span>
+          <span className="text-[8px] font-medium" style={{ color: mp.accent }}>View all</span>
         </div>
         {mp.rows.slice(0, 2).map((row, i) => (
-          <div key={i} className={`px-2.5 py-1 flex items-center gap-1.5 text-[9px] ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-            <div className="w-4 h-4 rounded flex-shrink-0 flex items-center justify-center text-[6px] text-gray-400 bg-gray-100">IMG</div>
+          <div key={i} className={`px-2.5 py-1 sm:py-1.5 flex items-center gap-2 text-[9px] ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+            <div className="w-4 h-4 rounded flex-shrink-0 flex items-center justify-center text-[6px] text-gray-400 bg-gray-100 font-bold">IMG</div>
             <div className="flex-1 min-w-0">
-              <div className="font-medium text-gray-800 truncate text-[8px]">{row.title}</div>
+              <div className="font-medium text-gray-800 truncate text-[8.5px] sm:text-[9px]">{row.title}</div>
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="font-semibold text-gray-800 text-[8px]">{row.sales}</div>
+              <div className="font-semibold text-gray-800 text-[8.5px] sm:text-[9px]">{row.sales}</div>
             </div>
-            <div className="text-[7px] font-bold px-1 py-0.5 rounded flex-shrink-0" style={{ background: `${mp.accent}22`, color: mp.accent }}>
+            <div className="text-[7px] sm:text-[7.5px] font-bold px-1.5 py-0.5 rounded flex-shrink-0" style={{ background: `${mp.accent}22`, color: mp.accent }}>
               {row.badge}
             </div>
           </div>
@@ -396,14 +396,14 @@ const MarketplaceMockup = () => {
   const mp = marketplaces[current];
 
   const variants = {
-    enter: (d: number) => ({ x: d > 0 ? 60 : -60, opacity: 0 }),
-    center: { x: 0, opacity: 1, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
-    exit: (d: number) => ({ x: d > 0 ? -60 : 60, opacity: 0, transition: { duration: 0.25 } }),
+    enter: (d: number) => ({ x: d > 0 ? 32 : -32, opacity: 0 }),
+    center: { x: 0, opacity: 1, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } },
+    exit: (d: number) => ({ x: d > 0 ? -32 : 32, opacity: 0, transition: { duration: 0.2 } }),
   };
 
-  // Arrow button style — always visible, works in both light & dark mode
+  // Arrow button style — subtle on desktop hover only
   const arrowStyle: React.CSSProperties = {
-    background: 'rgba(0,0,0,0.62)',
+    background: 'rgba(0,0,0,0.65)',
     backdropFilter: 'blur(10px)',
     WebkitBackdropFilter: 'blur(10px)',
     border: '1px solid rgba(255,255,255,0.18)',
@@ -418,13 +418,32 @@ const MarketplaceMockup = () => {
         onTouchEnd={onTouchEnd}
       >
         {/* Browser top bar */}
-        <div className="flex items-center gap-2 px-3 py-2.5 bg-[#0f0f1a] border-b border-white/10">
+        <div className="flex items-center gap-2 px-3 py-2 bg-[#0f0f1a] border-b border-white/10">
           <div className="flex gap-1.5 flex-shrink-0">
             <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
             <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
           </div>
-          <div className="flex-1 min-w-0 mx-2 bg-white/10 rounded-md px-2 py-1 flex items-center gap-1.5 overflow-hidden">
+
+          {/* Browser forward/backward controls in toolbar */}
+          <div className="flex items-center gap-0.5 flex-shrink-0 ml-0.5">
+            <button
+              onClick={() => go(-1)}
+              aria-label="Previous marketplace"
+              className="w-5 h-5 rounded flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 active:scale-90 transition-all"
+            >
+              <ChevronLeft className="w-3.5 h-3.5" strokeWidth={2.5} />
+            </button>
+            <button
+              onClick={() => go(1)}
+              aria-label="Next marketplace"
+              className="w-5 h-5 rounded flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 active:scale-90 transition-all"
+            >
+              <ChevronRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+            </button>
+          </div>
+
+          <div className="flex-1 min-w-0 mx-1 bg-white/10 rounded-md px-2 py-1 flex items-center gap-1.5 overflow-hidden">
             <span className="text-white/40 text-[10px] flex-shrink-0">🔒</span>
             <AnimatePresence mode="wait">
               <motion.span
@@ -433,7 +452,7 @@ const MarketplaceMockup = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.2 }}
-                className="text-[10px] text-white/50 font-mono truncate"
+                className="text-[10px] text-white/60 font-mono truncate"
               >
                 {mp.url}
               </motion.span>
@@ -457,21 +476,21 @@ const MarketplaceMockup = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Prev arrow — overlaid inside the dashboard frame */}
+          {/* Prev arrow — desktop only on hover, never overlapping on mobile/tablet */}
           <button
             onClick={() => go(-1)}
             aria-label="Previous marketplace"
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center z-20 active:scale-90 transition-transform lg:opacity-0 lg:group-hover:opacity-100 lg:transition-opacity"
+            className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity active:scale-90"
             style={arrowStyle}
           >
             <ChevronLeft className="w-4 h-4 text-white" strokeWidth={2.5} />
           </button>
 
-          {/* Next arrow */}
+          {/* Next arrow — desktop only on hover, never overlapping on mobile/tablet */}
           <button
             onClick={() => go(1)}
             aria-label="Next marketplace"
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center z-20 active:scale-90 transition-transform lg:opacity-0 lg:group-hover:opacity-100 lg:transition-opacity"
+            className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity active:scale-90"
             style={arrowStyle}
           >
             <ChevronRight className="w-4 h-4 text-white" strokeWidth={2.5} />

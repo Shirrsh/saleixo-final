@@ -200,14 +200,14 @@ const PhotographyVisual = ({ stat }: { stat: Service['stat'] }) => {
       variants={fadeUp}
       custom={0}
       ref={imgRef}
-      className="relative group overflow-hidden rounded-2xl shadow-2xl border border-border-glow/20 cursor-pointer"
+      className="relative group overflow-hidden rounded-2xl shadow-2xl border border-border-glow/20 cursor-pointer w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] lg:aspect-[16/10]"
       onHoverStart={triggerFlash}
       onClick={triggerFlash}
     >
       <img
         src={photographyImg}
         alt="Professional product photography studio setup with studio lights"
-        className="w-full h-[240px] sm:h-[320px] md:h-[380px] lg:h-[420px] object-cover"
+        className="w-full h-full object-cover object-center"
         style={{ transform: `scale(${imgScale})`, transformOrigin: 'center center', transition: 'transform 0.1s linear' }}
         loading="lazy"
       />
@@ -286,12 +286,12 @@ const PhotographyVisual = ({ stat }: { stat: Service['stat'] }) => {
         )}
       </AnimatePresence>
 
-      <div className="absolute bottom-4 left-4 flex items-baseline gap-1.5 rounded-xl px-3 py-2 pointer-events-none"
+      <div className="absolute bottom-4 left-4 flex items-baseline gap-1.5 rounded-xl px-3 py-2 pointer-events-none z-10"
         style={{ background: 'rgba(10,10,10,0.72)', backdropFilter: 'blur(12px)', border: '1px solid hsl(var(--accent-pink) / 0.4)' }}>
         <span className="text-white text-sm font-extrabold">{stat.value}</span>
         <span className="text-white/60 text-xs">/ {stat.label}</span>
       </div>
-      <div className="absolute inset-0 ring-1 ring-inset ring-border-glow/20 rounded-2xl" />
+      <div className="absolute inset-0 ring-1 ring-inset ring-border-glow/20 rounded-2xl pointer-events-none" />
     </motion.div>
   );
 };
@@ -308,21 +308,21 @@ const StaticVisual = ({ src, alt, stat, accentVar }: StaticVisualProps) => (
   <motion.div
     variants={fadeUp}
     custom={0}
-    className="relative group overflow-hidden rounded-2xl shadow-2xl border border-border-glow/20"
+    className="relative group overflow-hidden rounded-2xl shadow-2xl border border-border-glow/20 w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] lg:aspect-[16/10]"
   >
     <img
       src={src}
       alt={alt}
-      className="w-full h-[240px] sm:h-[320px] md:h-[380px] lg:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
+      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
       loading="lazy"
     />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
-    <div className="absolute bottom-4 left-4 flex items-baseline gap-1.5 rounded-xl px-3 py-2 pointer-events-none"
+    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
+    <div className="absolute bottom-4 left-4 flex items-baseline gap-1.5 rounded-xl px-3 py-2 pointer-events-none z-10"
       style={{ background: 'rgba(10,10,10,0.72)', backdropFilter: 'blur(12px)', border: `1px solid ${accentVar.replace(')', ' / 0.4)')}` }}>
       <span className="text-white text-sm font-extrabold">{stat.value}</span>
       <span className="text-white/60 text-xs">/ {stat.label}</span>
     </div>
-    <div className="absolute inset-0 ring-1 ring-inset ring-border-glow/20 rounded-2xl" />
+    <div className="absolute inset-0 ring-1 ring-inset ring-border-glow/20 rounded-2xl pointer-events-none" />
   </motion.div>
 );
 
@@ -402,9 +402,9 @@ const FeaturedServices = () => {
 
   // Slide direction based on which tab is chosen
   const panelVariants = {
-    enter: (d: number) => ({ x: d > 0 ? 56 : -56, opacity: 0 }),
-    center: { x: 0, opacity: 1, transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] } },
-    exit:  (d: number) => ({ x: d > 0 ? -56 : 56, opacity: 0, transition: { duration: 0.2 } }),
+    enter: (d: number) => ({ x: d > 0 ? 32 : -32, opacity: 0 }),
+    center: { x: 0, opacity: 1, transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] } },
+    exit:  (d: number) => ({ x: d > 0 ? -32 : 32, opacity: 0, transition: { duration: 0.2 } }),
   };
 
   const scrollToContact = () =>
@@ -438,12 +438,12 @@ const FeaturedServices = () => {
 
         {/* ── Tab pills ──
             Mobile  : scroll horizontally (overflow-x-auto), no-wrap
-            Tablet+ : allow wrapping so all tabs stay visible
+            Tablet+ : allow wrapping or clean flex so all tabs stay visible
         */}
         <motion.div
           variants={fadeUp}
           custom={1}
-          className="flex gap-2 mt-7 overflow-x-auto sm:overflow-x-visible sm:flex-wrap pb-1 scrollbar-hide -mx-1 px-1"
+          className="flex gap-2 mt-6 sm:mt-7 overflow-x-auto sm:overflow-x-visible flex-nowrap sm:flex-wrap pb-1 scrollbar-hide -mx-1 px-1 sm:mx-0 sm:px-0 sm:justify-start md:justify-start"
         >
           {services.map((svc, i) => {
             const active = i === activeIdx;
@@ -451,7 +451,7 @@ const FeaturedServices = () => {
               <button
                 key={svc.slug}
                 onClick={() => switchTab(i)}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap flex-shrink-0 sm:flex-shrink transition-all duration-300 active:scale-95"
+                className="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap flex-shrink-0 transition-all duration-300 active:scale-95"
                 style={{
                   background: active ? svc.colorVar : 'transparent',
                   color: active ? '#ffffff' : 'hsl(var(--muted-foreground))',
@@ -478,32 +478,33 @@ const FeaturedServices = () => {
             animate="center"
             exit="exit"
             // Mobile: single column (visual above, text below)
-            // md+: 2-column side-by-side
-            className="grid md:grid-cols-2 gap-6 md:gap-10 lg:gap-16 items-center"
+            // md (tablet): 2-column with visual consistently on left/top to prevent jumping
+            // lg+: alternating L/R image per tab index
+            className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-8 lg:gap-14 items-center"
           >
-            {/* Visual column — always first on mobile, alternates on desktop */}
+            {/* Visual column — consistently col-1 on tablet portrait, alternates on desktop lg+ */}
             <div
-              className={`relative ${
-                imgIsRight ? 'md:order-2' : 'md:order-1'
+              className={`relative w-full ${
+                imgIsRight ? 'lg:order-2' : 'lg:order-1'
               }`}
             >
               {/* Color halo */}
               <div
-                className="absolute inset-0 rounded-[2rem] blur-3xl opacity-50 pointer-events-none"
+                className="absolute inset-0 rounded-[2rem] blur-3xl opacity-40 pointer-events-none"
                 aria-hidden
                 style={{ background: `radial-gradient(ellipse at center, ${s.colorVar.replace(')', ' / 0.20)')} 0%, transparent 70%)` }}
               />
-              <div className="relative">{getVisual(activeIdx)}</div>
+              <div className="relative w-full">{getVisual(activeIdx)}</div>
             </div>
 
             {/* Text column */}
             <div
-              className={`flex flex-col ${
-                imgIsRight ? 'md:order-1' : 'md:order-2'
+              className={`flex flex-col w-full ${
+                imgIsRight ? 'lg:order-1' : 'lg:order-2'
               }`}
             >
               {/* Tag row */}
-              <div className="flex items-center gap-3 mb-4 md:mb-5">
+              <div className="flex items-center gap-3 mb-3 sm:mb-4 md:mb-5">
                 <span className={`text-xs font-bold tracking-[0.2em] tabular-nums ${s.colorClassText}`}>{s.num}</span>
                 <div className="h-px w-8 bg-border" />
                 <span
@@ -516,7 +517,7 @@ const FeaturedServices = () => {
               </div>
 
               {/* Headline */}
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-[1.1] text-balance text-foreground mb-3 md:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-2xl lg:text-4xl xl:text-5xl font-light tracking-tight leading-[1.15] text-balance text-foreground mb-3 md:mb-4">
                 {s.headline}
               </h2>
 
@@ -545,10 +546,10 @@ const FeaturedServices = () => {
                     transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
                   >
-                    <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed mb-5 md:mb-6">
+                    <p className="text-sm sm:text-base md:text-sm lg:text-base text-muted-foreground max-w-xl leading-relaxed mb-5 md:mb-6">
                       {s.body}
                     </p>
-                    <ul className="grid sm:grid-cols-2 gap-x-5 gap-y-2.5 md:gap-y-3 mb-6 md:mb-8">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-x-5 gap-y-2.5 md:gap-y-2.5 mb-6 md:mb-7">
                       {s.features.map((feature, fi) => (
                         <li key={fi} className="flex items-start gap-2.5">
                           <div
@@ -557,7 +558,7 @@ const FeaturedServices = () => {
                           >
                             <Check className="w-2.5 h-2.5" style={{ color: s.colorVar }} aria-hidden />
                           </div>
-                          <span className="text-sm text-foreground/90 leading-snug">{feature}</span>
+                          <span className="text-xs sm:text-sm text-foreground/90 leading-snug">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -566,11 +567,11 @@ const FeaturedServices = () => {
               </AnimatePresence>
 
               {/* CTAs — full-width on mobile, auto-width on sm+ */}
-              <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                 <Button
                   size="lg"
                   onClick={scrollToContact}
-                  className="rounded-full px-7 font-semibold text-white transition-all duration-300 w-full sm:w-auto"
+                  className="rounded-full px-6 md:px-7 font-semibold text-white transition-all duration-300 w-full sm:w-auto text-sm"
                   style={{
                     background: s.colorVar,
                     boxShadow: `0 0 0 0 ${s.colorVar.replace(')', ' / 0.35)')}`,
@@ -588,7 +589,7 @@ const FeaturedServices = () => {
                 {s.slug === 'ecommerce' && (
                   <a
                     href="#portfolio"
-                    className="inline-flex items-center justify-center sm:justify-start gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    className="inline-flex items-center justify-center sm:justify-start gap-1.5 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
                     See live storefronts
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden />
