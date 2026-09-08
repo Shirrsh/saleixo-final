@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SaleixoLogo from '@/components/SaleixoLogo';
 import { toggleThemeWithTransition } from '@/lib/theme';
 import { openCalendarBooking } from '@/lib/booking';
+import { cn } from '@/lib/utils';
 
 const BAR_H = 40;
 const BAR_LIFETIME_MS = 10 * 60 * 1000; // 10 minutes
@@ -167,26 +168,14 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
     animate={{ y: 0 }}
     exit={{ y: -BAR_H }}
     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-    className="fixed top-0 left-0 right-0 z-[60] flex items-center overflow-hidden"
+    className="fixed top-0 left-0 right-0 z-[60] hidden md:flex items-center overflow-hidden"
     style={{ height: BAR_H, background: '#dc2626' }}
   >
-    {/* Mobile: single clean centered line — no ticker jank */}
-    <div className="md:hidden flex-1 flex items-center justify-center px-10">
-      <Link
-        to="/get-started"
-        onClick={onDismiss}
-        className="text-[11px] font-bold tracking-[0.08em] text-white text-center whitespace-nowrap"
-        style={{ letterSpacing: '0.06em' }}
-      >
-        ✦ Free brand audit — <span className="underline underline-offset-2">Get started →</span>
-      </Link>
-    </div>
-
     {/* Desktop: scrolling ticker */}
     <motion.div
       animate={{ x: ['0%', '-50%'] }}
       transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
-      className="hidden md:flex items-center whitespace-nowrap text-[11px] font-bold tracking-wide flex-shrink-0"
+      className="flex items-center whitespace-nowrap text-[11px] font-bold tracking-wide flex-shrink-0"
       style={{ color: '#ffffff', willChange: 'transform' }}
     >
       <span className="flex items-center">{BAR_TEXT}</span>
@@ -197,14 +186,14 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
 
     {/* Right fade — desktop only (hides text sliding under dismiss button) */}
     <div
-      className="hidden md:block absolute right-0 top-0 bottom-0 pointer-events-none"
+      className="absolute right-0 top-0 bottom-0 pointer-events-none"
       style={{
         width: 56,
         background: 'linear-gradient(to right, transparent, #dc2626 60%)',
       }}
     />
 
-    {/* Dismiss button — 36px tap area to meet mobile touch target guidelines */}
+    {/* Dismiss button */}
     <button
       onClick={onDismiss}
       aria-label="Dismiss announcement"
@@ -767,9 +756,11 @@ const Header = () => {
 
       {/* ── Fixed bar ──────────────────────────────────────────────────────── */}
       <header
-        className="fixed left-0 right-0 z-50 transition-all duration-500"
+        className={cn(
+          "fixed left-0 right-0 z-50 transition-all duration-500 top-0",
+          showBar && "md:top-[40px]"
+        )}
         style={{
-          top: headerTop,
           background: glassBg,
           borderBottom: glassBorder,
           backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
@@ -948,10 +939,64 @@ const Header = () => {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 md:hidden flex flex-col"
-            style={{ background: menuBg, paddingTop: headerTop + 64 }}
+            style={{ background: menuBg, paddingTop: 64 }}
           >
             {/* Scrollable body */}
             <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-6 space-y-6">
+
+              {/* ✦ Free Brand Audit Spotlight Card */}
+              <Link
+                to="/get-started"
+                onClick={() => setMobileOpen(false)}
+                className="group relative block overflow-hidden rounded-2xl p-4 transition-all duration-200 active:scale-[0.98]"
+                style={{
+                  background: isLight
+                    ? 'linear-gradient(135deg, hsl(0 85% 97%) 0%, hsl(0 80% 94%) 100%)'
+                    : 'linear-gradient(135deg, hsl(0 70% 14% / 0.7) 0%, hsl(220 28% 12%) 100%)',
+                  border: isLight ? '1px solid hsl(0 75% 85%)' : '1px solid hsl(0 75% 32% / 0.5)',
+                }}
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{
+                        background: '#dc2626',
+                        color: '#ffffff',
+                        boxShadow: '0 2px 10px rgba(220,38,38,0.3)',
+                      }}
+                    >
+                      <Sparkles size={18} />
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] dark:text-red-400">
+                          Free Seller Diagnostic
+                        </span>
+                      </div>
+                      <div
+                        className="text-xs font-bold leading-tight mt-0.5"
+                        style={{ color: isLight ? '#0a0a0a' : '#ffffff' }}
+                      >
+                        Free Brand & ASIN Audit
+                      </div>
+                      <div className="text-[11px] text-muted-foreground mt-0.5">
+                        Tell us about your store — zero cost, zero pitch.
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-transform group-hover:translate-x-0.5"
+                    style={{
+                      background: isLight ? '#ffffff' : 'hsl(220 25% 18%)',
+                      border: `1px solid ${isLight ? 'hsl(0 0% 88%)' : 'hsl(220 25% 25%)'}`,
+                      color: '#dc2626',
+                    }}
+                  >
+                    <ArrowRight size={13} strokeWidth={2.5} />
+                  </span>
+                </div>
+              </Link>
 
               {menuSections.map((section, si) => (
                 <div key={si}>

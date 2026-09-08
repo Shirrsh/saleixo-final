@@ -472,7 +472,7 @@ const Hero = () => {
       <div className="lg:hidden relative z-10 flex flex-col w-full max-w-full overflow-hidden">
 
         {/* Text content */}
-        <div className="flex flex-col items-center text-center px-5 pb-8 w-full" style={{ paddingTop: heroPadTop }}>
+        <div className="flex flex-col items-center text-center px-5 pb-8 w-full pt-[72px]">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
