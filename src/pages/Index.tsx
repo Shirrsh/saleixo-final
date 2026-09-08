@@ -1,7 +1,6 @@
 import { usePageMeta } from '@/hooks/usePageMeta';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import InstantAuditBar from '@/components/InstantAuditBar';
 import MarketplaceLogos from '@/components/MarketplaceLogos';
 import FeaturedServices from '@/components/FeaturedServices';
 import WhySaleixo from '@/components/WhySaleixo';
@@ -15,8 +14,6 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import ScrollProgress from '@/components/ScrollProgress';
 import LoadingScreen from '@/components/LoadingScreen';
-import WhatsAppButton from '@/components/WhatsAppButton';
-import FloatingCTA from '@/components/FloatingCTA';
 
 const Index = () => {
   usePageMeta({
@@ -34,9 +31,6 @@ const Index = () => {
       <main>
         <div className="relative overflow-x-hidden w-full max-w-full">
           <Hero />
-          <div className="px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-10 mb-8 relative z-20">
-            <InstantAuditBar />
-          </div>
           <MarketplaceLogos />
           <FeaturedServices />
           <WhySaleixo />
@@ -57,8 +51,6 @@ const Index = () => {
       <Footer />
       
       <ScrollToTop />
-      <WhatsAppButton />
-      <FloatingCTA />
     </>
   );
 };
