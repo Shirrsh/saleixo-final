@@ -247,10 +247,10 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
         backdropFilter: 'blur(24px)',
       }}
     >
-      <div className="max-w-7xl mx-auto px-8 py-7">
+      <div className="max-w-7xl mx-auto px-6 py-3.5 sm:py-4">
         {/* Top Header */}
         <div
-          className="flex items-center justify-between mb-5 pb-3 border-b"
+          className="flex items-center justify-between mb-3 pb-2 border-b"
           style={{ borderColor: isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)' }}
         >
           <div className="flex items-center gap-2">
@@ -261,7 +261,7 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
               Service Architecture
             </span>
             <span className="text-xs text-muted-foreground/40">/</span>
-            <span className="text-xs font-medium text-muted-foreground">
+            <span className="text-[11px] font-medium text-muted-foreground">
               Dual Flagship Pillars & Creative Disciplines
             </span>
           </div>
@@ -269,14 +269,14 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
             <Link
               to="/custom-pricing"
               onClick={onClose}
-              className="text-xs font-semibold text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+              className="text-[11px] font-semibold text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
             >
               Custom Pricing <ArrowRight className="w-3 h-3" />
             </Link>
             <Link
               to="/services"
               onClick={onClose}
-              className="text-xs font-bold text-primary hover:opacity-80 transition-opacity flex items-center gap-1"
+              className="text-[11px] font-bold text-primary hover:opacity-80 transition-opacity flex items-center gap-1"
             >
               All Services <ArrowRight className="w-3 h-3" />
             </Link>
@@ -284,19 +284,19 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
         </div>
 
         {/* 3 Pillars Grid */}
-        <div className="grid grid-cols-12 gap-5">
+        <div className="grid grid-cols-12 gap-4">
           {/* ── Pillar 1: Amazon SPN Flagship Hub (col-span-5) ── */}
           <div
-            className="col-span-5 rounded-2xl p-5 flex flex-col justify-between transition-all"
+            className="col-span-5 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between transition-all"
             style={{
               background: isLight ? 'hsl(28 100% 98% / 0.7)' : 'hsl(28 35% 10% / 0.4)',
               border: `1px solid ${isLight ? 'hsl(28 80% 86%)' : 'hsl(28 60% 22% / 0.6)'}`,
             }}
           >
             <div>
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-1.5">
                 <span
-                  className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                  className="px-2 py-0.5 rounded-full text-[9.5px] font-bold uppercase tracking-wider"
                   style={{
                     background: 'rgba(249,115,22,0.15)',
                     color: '#f97316',
@@ -311,22 +311,22 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
               <Link
                 to="/services/amazon"
                 onClick={onClose}
-                className="group flex items-center justify-between mt-1 mb-1.5"
+                className="group flex items-center justify-between mt-0.5 mb-1"
               >
                 <span
-                  className="text-base font-bold transition-colors group-hover:text-[#f97316]"
+                  className="text-sm font-bold transition-colors group-hover:text-[#f97316]"
                   style={{ color: isLight ? '#0a0a0a' : '#fff' }}
                 >
                   Amazon SPN Flagship Hub
                 </span>
-                <ArrowRight className="w-4 h-4 text-[#f97316] opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#f97316] opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
               </Link>
-              <p className="text-xs leading-relaxed text-muted-foreground mb-4">
-                Full lifecycle seller operations aligned with official Amazon Service Provider Network standards.
+              <p className="text-[11px] leading-snug text-muted-foreground mb-2.5">
+                Full lifecycle seller operations aligned with official Amazon SPN standards.
               </p>
 
               {/* 8 SPN Quicklinks Grid */}
-              <div className="grid grid-cols-2 gap-1.5">
+              <div className="grid grid-cols-2 gap-1">
                 {[
                   { name: 'Imaging & 3D Video', href: '/services/amazon#imaging' },
                   { name: 'Cataloging & A9 SEO', href: '/services/amazon#cataloging' },
@@ -341,7 +341,7 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
                     key={item.name}
                     to={item.href}
                     onClick={onClose}
-                    className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all group"
+                    className="flex items-center justify-between px-2 py-1 rounded-md text-[11px] font-medium transition-all group"
                     style={{
                       background: isLight ? 'rgba(255,255,255,0.85)' : 'hsl(220 28% 13% / 0.8)',
                       border: `1px solid ${isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)'}`,
@@ -363,11 +363,11 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t" style={{ borderColor: isLight ? 'hsl(28 60% 90%)' : 'hsl(28 40% 18%)' }}>
+            <div className="mt-2.5 pt-2 border-t" style={{ borderColor: isLight ? 'hsl(28 60% 90%)' : 'hsl(28 40% 18%)' }}>
               <Link
                 to="/services/amazon"
                 onClick={onClose}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f97316] hover:underline"
+                className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#f97316] hover:underline"
               >
                 Explore Amazon SPN Flagship Hub <ArrowRight className="w-3 h-3" />
               </Link>
@@ -376,16 +376,16 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
 
           {/* ── Pillar 2: Shopify & Shopify Plus Enterprise (col-span-3) ── */}
           <div
-            className="col-span-3 rounded-2xl p-5 flex flex-col justify-between transition-all"
+            className="col-span-3 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between transition-all"
             style={{
               background: isLight ? 'hsl(260 100% 99% / 0.7)' : 'hsl(260 30% 10% / 0.4)',
               border: `1px solid ${isLight ? 'hsl(260 80% 90%)' : 'hsl(260 50% 22% / 0.6)'}`,
             }}
           >
             <div>
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-1.5">
                 <span
-                  className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                  className="px-2 py-0.5 rounded-full text-[9.5px] font-bold uppercase tracking-wider"
                   style={{
                     background: 'rgba(139,92,246,0.15)',
                     color: '#8b5cf6',
@@ -400,22 +400,22 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
               <Link
                 to="/services/shopify"
                 onClick={onClose}
-                className="group flex items-center justify-between mt-1 mb-1.5"
+                className="group flex items-center justify-between mt-0.5 mb-1"
               >
                 <span
-                  className="text-base font-bold transition-colors group-hover:text-[#8b5cf6]"
+                  className="text-sm font-bold transition-colors group-hover:text-[#8b5cf6]"
                   style={{ color: isLight ? '#0a0a0a' : '#fff' }}
                 >
                   Shopify & Plus
                 </span>
-                <ArrowRight className="w-4 h-4 text-[#8b5cf6] opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#8b5cf6] opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
               </Link>
-              <p className="text-xs leading-relaxed text-muted-foreground mb-4">
+              <p className="text-[11px] leading-snug text-muted-foreground mb-2.5">
                 High-conversion DTC storefronts, Flow automations, and enterprise scale.
               </p>
 
               {/* Shopify Quicklinks List */}
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 {[
                   { name: 'Flow Automations Engine', href: '/services/shopify#automations' },
                   { name: 'Shopify Plus Extensibility', href: '/services/shopify#plus' },
@@ -426,7 +426,7 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
                     key={item.name}
                     to={item.href}
                     onClick={onClose}
-                    className="flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-medium transition-all group"
+                    className="flex items-center justify-between px-2.5 py-1.5 rounded-md text-[11px] font-medium transition-all group"
                     style={{
                       background: isLight ? 'rgba(255,255,255,0.85)' : 'hsl(220 28% 13% / 0.8)',
                       border: `1px solid ${isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)'}`,
@@ -448,11 +448,11 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t" style={{ borderColor: isLight ? 'hsl(260 50% 90%)' : 'hsl(260 30% 18%)' }}>
+            <div className="mt-2.5 pt-2 border-t" style={{ borderColor: isLight ? 'hsl(260 50% 90%)' : 'hsl(260 30% 18%)' }}>
               <Link
                 to="/services/shopify"
                 onClick={onClose}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8b5cf6] hover:underline"
+                className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#8b5cf6] hover:underline"
               >
                 Explore Shopify Studio <ArrowRight className="w-3 h-3" />
               </Link>
@@ -461,16 +461,16 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
 
           {/* ── Column 3: Multi-Channel Studio Disciplines (col-span-4) ── */}
           <div
-            className="col-span-4 rounded-2xl p-5 flex flex-col justify-between"
+            className="col-span-4 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between"
             style={{
               background: isLight ? 'hsl(0 0% 98%)' : 'hsl(220 28% 11%)',
               border: `1px solid ${isLight ? 'hsl(0 0% 89%)' : 'hsl(220 25% 18%)'}`,
             }}
           >
             <div>
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-1.5">
                 <span
-                  className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                  className="px-2 py-0.5 rounded-full text-[9.5px] font-bold uppercase tracking-wider"
                   style={{
                     background: 'hsl(var(--primary) / 0.12)',
                     color: 'hsl(var(--primary))',
@@ -485,22 +485,22 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
               <Link
                 to="/services"
                 onClick={onClose}
-                className="group flex items-center justify-between mt-1 mb-1.5"
+                className="group flex items-center justify-between mt-0.5 mb-1"
               >
                 <span
-                  className="text-base font-bold transition-colors group-hover:text-primary"
+                  className="text-sm font-bold transition-colors group-hover:text-primary"
                   style={{ color: isLight ? '#0a0a0a' : '#fff' }}
                 >
                   Multi-Channel Studio
                 </span>
-                <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
+                <ArrowRight className="w-3.5 h-3.5 text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0" />
               </Link>
-              <p className="text-xs leading-relaxed text-muted-foreground mb-3">
+              <p className="text-[11px] leading-snug text-muted-foreground mb-2">
                 High-impact creative production & multi-channel commerce management.
               </p>
 
               {/* 5 Studio Services */}
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 {[
                   {
                     icon: Camera,
@@ -544,7 +544,7 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
                       key={svc.name}
                       to={svc.href}
                       onClick={onClose}
-                      className="group flex items-center gap-2.5 p-2 rounded-xl transition-all"
+                      className="group flex items-center gap-2 p-1.5 rounded-lg transition-all"
                       style={{ background: 'transparent' }}
                       onMouseEnter={(e) =>
                         (e.currentTarget.style.background = isLight ? 'hsl(0 0% 93%)' : 'hsl(220 28% 15%)')
@@ -552,19 +552,19 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
                       onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                     >
                       <div
-                        className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                        className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0"
                         style={{ background: `${svc.color}18`, border: `1px solid ${svc.color}30` }}
                       >
-                        <SvcIcon className="w-3.5 h-3.5" style={{ color: svc.color }} />
+                        <SvcIcon className="w-3 h-3" style={{ color: svc.color }} />
                       </div>
                       <div className="min-w-0 flex-1">
                         <div
-                          className="text-xs font-semibold leading-tight truncate group-hover:text-primary transition-colors"
+                          className="text-[11.5px] font-semibold leading-tight truncate group-hover:text-primary transition-colors"
                           style={{ color: isLight ? '#0a0a0a' : '#fff' }}
                         >
                           {svc.name}
                         </div>
-                        <div className="text-[11px] text-muted-foreground truncate">{svc.desc}</div>
+                        <div className="text-[10px] text-muted-foreground truncate leading-none mt-0.5">{svc.desc}</div>
                       </div>
                     </Link>
                   );
@@ -572,11 +572,11 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
               </div>
             </div>
 
-            <div className="mt-3 pt-2.5 border-t" style={{ borderColor: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)' }}>
+            <div className="mt-2 pt-2 border-t" style={{ borderColor: isLight ? 'hsl(0 0% 90%)' : 'hsl(220 25% 18%)' }}>
               <Link
                 to="/services"
                 onClick={onClose}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
+                className="inline-flex items-center gap-1.5 text-[11px] font-bold text-primary hover:underline"
               >
                 Browse All Studio Services <ArrowRight className="w-3 h-3" />
               </Link>
@@ -586,35 +586,35 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
 
         {/* Bottom Credibility Strip */}
         <div
-          className="mt-5 pt-4 flex flex-wrap items-center justify-between gap-4"
+          className="mt-3 pt-2.5 flex flex-wrap items-center justify-between gap-3 text-[11px]"
           style={{ borderTop: `1px solid ${isLight ? 'hsl(0 0% 92%)' : 'hsl(220 25% 16%)'}` }}
         >
-          <div className="flex flex-wrap items-center gap-5 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
             <span className="flex items-center gap-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-[#f97316]" />
-              Official Amazon SPN Categories
+              <span className="w-1.5 h-1.5 rounded-full bg-[#f97316]" />
+              Official Amazon SPN
             </span>
             <span className="flex items-center gap-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-[#8b5cf6]" />
-              Shopify Plus Architecture
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8b5cf6]" />
+              Shopify Plus
             </span>
             <span className="flex items-center gap-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              48-hr Delivery Guarantee
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              48-hr SLA
             </span>
             <span className="flex items-center gap-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-blue-500" />
-              20+ Marketplaces Supported
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              20+ Marketplaces
             </span>
           </div>
-          <div className="flex items-center gap-3 text-xs">
-            <span className="text-muted-foreground">Transparent pricing model:</span>
+          <div className="flex items-center gap-2">
+            <span className="text-muted-foreground">Transparent pricing:</span>
             <Link
               to="/custom-pricing"
               onClick={onClose}
               className="font-bold text-primary hover:underline flex items-center gap-1"
             >
-              Explore Pricing Calculator <ArrowRight className="w-3 h-3" />
+              Pricing Calculator <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
         </div>
