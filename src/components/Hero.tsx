@@ -155,10 +155,14 @@ const Hero = () => {
   const bg = isLight ? '#ffffff' : 'hsl(220 30% 7%)';
   // Solid and transparent versions for gradients (hex alpha suffix breaks on hsl strings)
   const bgSolid = isLight ? 'rgb(255,255,255)' : 'hsl(220 30% 7%)';
-  // Top padding = fixed header (64px) + announcement bar (40px if visible) + 8px breathing room
+  // Top padding = fixed header (64px) + announcement bar (38px if visible) + 8px breathing room
   const [heroPadTop, setHeroPadTop] = useState(() => {
-    try { return localStorage.getItem('saleixo_bar_dismissed') === '1' ? 72 : 112; }
-    catch { return 112; }
+    try {
+      const dismissed = sessionStorage.getItem('saleixo_bar_dismissed');
+      return dismissed === 'true' ? 72 : 110;
+    } catch {
+      return 110;
+    }
   });
   useEffect(() => {
     const onDismiss = () => setHeroPadTop(72);
@@ -472,7 +476,7 @@ const Hero = () => {
       <div className="lg:hidden relative z-10 flex flex-col w-full max-w-full overflow-hidden">
 
         {/* Text content */}
-        <div className="flex flex-col items-center text-center px-5 pb-8 w-full pt-[72px]">
+        <div className="flex flex-col items-center text-center px-5 pb-8 w-full transition-[padding-top] duration-300 ease-out" style={{ paddingTop: heroPadTop }}>
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}

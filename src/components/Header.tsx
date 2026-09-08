@@ -12,8 +12,8 @@ import { toggleThemeWithTransition } from '@/lib/theme';
 import { openCalendarBooking } from '@/lib/booking';
 import { cn } from '@/lib/utils';
 
-const BAR_H = 40;
-const BAR_LIFETIME_MS = 10 * 60 * 1000; // 10 minutes
+const BAR_H = 38;
+const BAR_LIFETIME_MS = 15 * 1000; // 15 seconds
 
 // ─── Desktop nav ──────────────────────────────────────────────────────────────
 const desktopNav = [
@@ -164,18 +164,36 @@ const BAR_TEXT = (
 
 const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
   <motion.div
-    initial={{ y: -BAR_H }}
-    animate={{ y: 0 }}
-    exit={{ y: -BAR_H }}
-    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-    className="fixed top-0 left-0 right-0 z-[60] hidden md:flex items-center overflow-hidden"
-    style={{ height: BAR_H, background: '#dc2626' }}
+    initial={{ y: -BAR_H, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    exit={{ y: -BAR_H, opacity: 0 }}
+    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+    className="fixed top-0 left-0 right-0 z-[60] flex items-center justify-between overflow-hidden shadow-sm"
+    style={{
+      height: BAR_H,
+      background: 'linear-gradient(90deg, #dc2626 0%, #b91c1c 100%)',
+    }}
   >
+    {/* Mobile: Edge-to-edge sleek banner (no wide borders, no clipping) */}
+    <div className="md:hidden flex-1 flex items-center justify-center pl-3 pr-8 min-w-0">
+      <Link
+        to="/get-started"
+        onClick={onDismiss}
+        className="flex items-center gap-1.5 text-[11px] font-bold text-white tracking-wide truncate active:opacity-80"
+      >
+        <span className="bg-white/20 text-[9px] px-1.5 py-0.5 rounded-full font-extrabold uppercase tracking-wider flex-shrink-0">
+          ✦ Free
+        </span>
+        <span className="truncate">Brand Audit for Sellers — Get Started</span>
+        <ArrowRight className="w-3 h-3 flex-shrink-0 opacity-90" />
+      </Link>
+    </div>
+
     {/* Desktop: scrolling ticker */}
     <motion.div
       animate={{ x: ['0%', '-50%'] }}
       transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
-      className="flex items-center whitespace-nowrap text-[11px] font-bold tracking-wide flex-shrink-0"
+      className="hidden md:flex items-center whitespace-nowrap text-[11px] font-bold tracking-wide flex-shrink-0"
       style={{ color: '#ffffff', willChange: 'transform' }}
     >
       <span className="flex items-center">{BAR_TEXT}</span>
@@ -184,12 +202,12 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
       <span className="flex items-center">{BAR_TEXT}</span>
     </motion.div>
 
-    {/* Right fade — desktop only (hides text sliding under dismiss button) */}
+    {/* Right fade — desktop only */}
     <div
-      className="absolute right-0 top-0 bottom-0 pointer-events-none"
+      className="hidden md:block absolute right-0 top-0 bottom-0 pointer-events-none"
       style={{
         width: 56,
-        background: 'linear-gradient(to right, transparent, #dc2626 60%)',
+        background: 'linear-gradient(to right, transparent, #b91c1c 65%)',
       }}
     />
 
@@ -197,12 +215,10 @@ const AnnouncementBar = ({ onDismiss }: { onDismiss: () => void }) => (
     <button
       onClick={onDismiss}
       aria-label="Dismiss announcement"
-      className="absolute right-1.5 top-1/2 -translate-y-1/2 z-10 flex-shrink-0 flex items-center justify-center transition-opacity duration-150 hover:opacity-100 opacity-80 active:scale-95"
-      style={{ width: 36, height: 36 }}
+      className="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center transition-all duration-150 hover:opacity-100 opacity-85 active:scale-90"
     >
       <span
-        className="flex items-center justify-center"
-        style={{ background: 'rgba(0,0,0,0.25)', borderRadius: '50%', width: 24, height: 24 }}
+        className="flex items-center justify-center w-5 h-5 rounded-full bg-black/25 hover:bg-black/40 transition-colors"
       >
         <X size={11} strokeWidth={2.5} style={{ color: '#ffffff' }} />
       </span>
@@ -621,23 +637,10 @@ const Header = () => {
   const [showBar, setShowBar] = useState(() => {
     if (typeof window === 'undefined') return true;
     try {
-      const dismissed = localStorage.getItem('saleixo_bar_dismissed');
-      if (dismissed === 'true' || dismissed === '1') {
+      const dismissed = sessionStorage.getItem('saleixo_bar_dismissed');
+      if (dismissed === 'true') {
         return false;
       }
-      const firstSeen = localStorage.getItem('saleixo_bar_first_seen');
-      if (firstSeen) {
-        const parsed = parseInt(firstSeen, 10);
-        if (!isNaN(parsed)) {
-          const elapsed = Date.now() - parsed;
-          if (elapsed >= BAR_LIFETIME_MS) {
-            localStorage.setItem('saleixo_bar_dismissed', 'true');
-            return false;
-          }
-          return true;
-        }
-      }
-      localStorage.setItem('saleixo_bar_first_seen', Date.now().toString());
       return true;
     } catch {
       return true;
@@ -648,7 +651,7 @@ const Header = () => {
   const dismissBar = useCallback(() => {
     setShowBar(false);
     try {
-      localStorage.setItem('saleixo_bar_dismissed', 'true');
+      sessionStorage.setItem('saleixo_bar_dismissed', 'true');
     } catch {} // eslint-disable-line no-empty
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('bar-dismissed'));
@@ -662,20 +665,11 @@ const Header = () => {
       }
       return;
     }
-    try {
-      const firstSeen = localStorage.getItem('saleixo_bar_first_seen') || Date.now().toString();
-      const elapsed = Date.now() - parseInt(firstSeen, 10);
-      const remaining = Math.max(0, BAR_LIFETIME_MS - elapsed);
-      const timer = setTimeout(() => {
-        dismissBar();
-      }, remaining);
-      return () => clearTimeout(timer);
-    } catch {
-      const timer = setTimeout(() => {
-        dismissBar();
-      }, BAR_LIFETIME_MS);
-      return () => clearTimeout(timer);
-    }
+    // Auto-dismiss after at least 15 seconds
+    const timer = setTimeout(() => {
+      dismissBar();
+    }, BAR_LIFETIME_MS);
+    return () => clearTimeout(timer);
   }, [showBar, dismissBar]);
 
   const headerTop = showBar ? BAR_H : 0;
@@ -756,11 +750,9 @@ const Header = () => {
 
       {/* ── Fixed bar ──────────────────────────────────────────────────────── */}
       <header
-        className={cn(
-          "fixed left-0 right-0 z-50 transition-all duration-500 top-0",
-          showBar && "md:top-[40px]"
-        )}
+        className="fixed left-0 right-0 z-50 transition-all duration-300 ease-out"
         style={{
+          top: showBar ? BAR_H : 0,
           background: glassBg,
           borderBottom: glassBorder,
           backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
@@ -938,8 +930,8 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 md:hidden flex flex-col"
-            style={{ background: menuBg, paddingTop: 64 }}
+            className="fixed inset-0 z-40 md:hidden flex flex-col transition-all duration-300"
+            style={{ background: menuBg, paddingTop: (showBar ? BAR_H : 0) + 64 }}
           >
             {/* Scrollable body */}
             <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-6 space-y-6">
