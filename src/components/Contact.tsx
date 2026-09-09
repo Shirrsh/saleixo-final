@@ -128,7 +128,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-12 lg:py-18"
+      className="relative overflow-hidden py-8 sm:py-10 md:py-12 lg:py-14"
       style={{ background: 'hsl(var(--surface-sunken))' }}
     >
       {/* Background blobs */}

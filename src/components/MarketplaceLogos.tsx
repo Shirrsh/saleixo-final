@@ -24,7 +24,7 @@ const MarketplaceLogos = () => {
   const [paused, setPaused] = useState(false);
 
   return (
-    <section className="py-10 md:py-14 bg-transparent overflow-hidden w-full max-w-full">
+    <section className="py-6 sm:py-8 md:py-10 bg-transparent overflow-hidden w-full max-w-full">
 
       {/* Heading */}
       <p className="text-center text-xs font-semibold mb-7 tracking-[0.25em] uppercase text-muted-foreground px-4 leading-relaxed">

@@ -97,13 +97,13 @@ const HowItWorks = () => {
   });
   const smooth = useSpring(scrollYProgress, { stiffness: 55, damping: 20 });
 
-  const stepRaw = useTransform(smooth, [0.12, 0.97], [0, steps.length - 0.01]);
+  const stepRaw = useTransform(smooth, [0.10, 0.95], [0, steps.length - 0.01]);
   useMotionValueEvent(stepRaw, 'change', v =>
     setActiveIdx(Math.min(steps.length - 1, Math.max(0, Math.floor(v))))
   );
 
-  const introOpacity = useTransform(smooth, [0, 0.06, 0.12], [1, 0.5, 0]);
-  const mainOpacity  = useTransform(smooth, [0.08, 0.18], [0, 1]);
+  const introOpacity = useTransform(smooth, [0, 0.05, 0.10], [1, 0.5, 0]);
+  const mainOpacity  = useTransform(smooth, [0.06, 0.14], [0, 1]);
 
   const step        = steps[activeIdx];
   const ActiveIcon  = step.Icon;
@@ -121,7 +121,7 @@ const HowItWorks = () => {
           MOBILE / TABLET VIEW (< 1024px)
           Natural vertical sequence — zero scroll trap, zero gesture fighting
           ───────────────────────────────────────────────────────────────── */}
-      <div className="lg:hidden py-16 px-4 sm:px-6 bg-background">
+      <div className="lg:hidden py-8 sm:py-10 px-4 sm:px-6 bg-background">
         <div className="max-w-xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-10">
@@ -215,7 +215,7 @@ const HowItWorks = () => {
           DESKTOP VIEW (>= 1024px)
           Interactive sticky scroll with spring progress & ambient backdrop
           ───────────────────────────────────────────────────────────────── */}
-      <div ref={containerRef} className="hidden lg:block relative" style={{ height: '420vh' }}>
+      <div ref={containerRef} className="hidden lg:block relative" style={{ height: '260vh' }}>
         <div
           className="sticky top-0 h-screen overflow-hidden"
           style={{ background: bg }}

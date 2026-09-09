@@ -14,6 +14,20 @@ export default function QuickAuditDrawer() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleOpen = () => {
+      setIsOpen(true);
+      setSubmitted(false);
+    };
+    window.addEventListener('open-quick-audit', handleOpen);
+    window.addEventListener('saleixo:open-quick-audit', handleOpen);
+    return () => {
+      window.removeEventListener('open-quick-audit', handleOpen);
+      window.removeEventListener('saleixo:open-quick-audit', handleOpen);
+    };
+  }, []);
+
+  useEffect(() => {
     // Check if user already dismissed or submitted this session
     if (typeof window === 'undefined') return;
     const dismissed = sessionStorage.getItem(DISMISS_KEY);

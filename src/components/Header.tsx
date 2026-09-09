@@ -5,7 +5,7 @@ import {
   Users, Sun, Moon, Palette, Video, TrendingUp, BarChart2, ChevronDown,
   Globe, Sparkles, Calendar,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import SaleixoLogo from '@/components/SaleixoLogo';
 import { toggleThemeWithTransition } from '@/lib/theme';
@@ -597,7 +597,7 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
           <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
             <span className="flex items-center gap-1.5 font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-[#f97316]" />
-              Official Amazon SPN
+              Amazon SPN Standards
             </span>
             <span className="flex items-center gap-1.5 font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-[#8b5cf6]" />
@@ -630,6 +630,8 @@ const MegaMenu = ({ isLight, onClose, onEnter, onLeave, topOffset }: {
 
 // ─── Header ───────────────────────────────────────────────────────────────────
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled]     = useState(false);
   const [isLight, setIsLight]       = useState(false);
@@ -711,7 +713,29 @@ const Header = () => {
 
   const scrollTo = (href: string, closeMobile = false) => {
     if (closeMobile) setMobileOpen(false);
-    setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }), closeMobile ? 300 : 50);
+    if (typeof window === 'undefined') return;
+
+    const targetId = href.startsWith('#') ? href : `#${href}`;
+
+    // If on an interior page, handle section navigation
+    if (location.pathname !== '/') {
+      if (targetId === '#contact') {
+        navigate('/contact');
+      } else {
+        navigate(`/${targetId}`);
+      }
+      return;
+    }
+
+    // Already on homepage: smooth scroll to element
+    setTimeout(() => {
+      const el = document.querySelector(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else if (targetId === '#contact') {
+        navigate('/contact');
+      }
+    }, closeMobile ? 300 : 50);
   };
 
   const toggleTheme = () => {

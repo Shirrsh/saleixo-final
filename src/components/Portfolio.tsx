@@ -184,7 +184,7 @@ const Portfolio = () => {
   }));
 
   return (
-    <section id="portfolio" className="relative overflow-hidden py-10 md:py-14 bg-background">
+    <section id="portfolio" className="relative overflow-hidden py-8 sm:py-10 md:py-12 bg-background">
       <ParallaxBlob hue="258 90% 66%" opacity={0.05} size={560} speed={0.4} style={{ top: '-12%', right: '-10%' }} />
       <div className="container relative z-10 mx-auto px-4 max-w-5xl">
 
@@ -234,7 +234,7 @@ const Portfolio = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="flex justify-center mt-9 md:mt-12"
+          className="flex justify-center mt-6 md:mt-8"
         >
           <Link
             to="/services/photography"

@@ -84,8 +84,6 @@ const Enterprise = () => {
   const cardBg = isLight ? 'hsl(0 0% 97%)' : 'hsl(220 28% 11%)';
   const cardBorder = isLight ? 'hsl(0 0% 88%)' : 'hsl(215 40% 22% / 0.6)';
 
-  const scrollToContact = () => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-
   return (
     <>
       <Header />
@@ -298,16 +296,17 @@ const Enterprise = () => {
               viewport={{ once: true, amount: 0.3 }}
               className="flex flex-col sm:flex-row gap-3 pt-4"
             >
-              <button
-                onClick={scrollToContact}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm transition-opacity duration-200"
-                style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
-                onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
-                onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
-              >
-                Let's Discuss Your Transformation
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <Link to="/get-started" className="flex-1">
+                <button
+                  className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm transition-opacity duration-200"
+                  style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
+                >
+                  Let's Discuss Your Transformation
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
               <Link to="/services/professional" className="flex-1">
                 <button
                   className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-200"

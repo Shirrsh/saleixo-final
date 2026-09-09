@@ -207,7 +207,7 @@ const Photography = () => {
       </section>
 
       {/* ── What We Do ── */}
-      <section className={`py-20 ${W}`}>
+      <section className={`py-10 md:py-14 ${W}`}>
         <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
           <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">What we do</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">Every shot type. Every marketplace spec.</h2>
@@ -241,7 +241,7 @@ const Photography = () => {
       </section>
 
       {/* ── Process ── */}
-      <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+      <section className={`py-10 md:py-14 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
         <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
           <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">Our process</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
@@ -297,7 +297,7 @@ const Photography = () => {
       </section>
 
       {/* ── Who It's For ── */}
-      <section className={`py-20 ${W}`}>
+      <section className={`py-10 md:py-14 ${W}`}>
         <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
           <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">Who this is for</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">Built for sellers who take listings seriously.</h2>
@@ -318,7 +318,7 @@ const Photography = () => {
       </section>
 
       {/* ── Categories ── */}
-      <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+      <section className={`py-10 md:py-14 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
         <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
           <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">What we shoot</p>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -354,7 +354,7 @@ const Photography = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className={`py-20 ${W}`}>
+      <section className={`py-10 md:py-14 ${W}`}>
         <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="rounded-3xl p-10 md:p-16 text-center relative overflow-hidden"
           style={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}>

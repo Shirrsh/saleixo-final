@@ -877,7 +877,7 @@ const Shopify = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 2: SHOPIFY PLUS ENTERPRISE STRIP (id="plus")
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="plus" className={`py-24 ${W} scroll-mt-24 border-b border-border`} style={{ background: 'hsl(var(--surface))' }}>
+        <section id="plus" className={`py-10 md:py-14 ${W} scroll-mt-24 border-b border-border`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-4xl mb-16">
             <Reveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
@@ -993,7 +993,7 @@ const Shopify = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 3: SHOPIFY AUTOMATIONS ENGINE (id="automations")
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="automations" className={`py-24 ${W} scroll-mt-24 border-b border-border`}>
+        <section id="automations" className={`py-10 md:py-14 ${W} scroll-mt-24 border-b border-border`}>
           <div className="max-w-4xl mb-14">
             <Reveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
@@ -1217,7 +1217,7 @@ const Shopify = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 4: ADVANCED ANALYTICS & CRO FLYWHEEL (id="analytics")
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="analytics" className={`py-24 ${W} scroll-mt-24 border-b border-border`} style={{ background: 'hsl(var(--surface))' }}>
+        <section id="analytics" className={`py-10 md:py-14 ${W} scroll-mt-24 border-b border-border`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-4xl mb-16">
             <Reveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
@@ -1327,7 +1327,7 @@ const Shopify = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 5: FULL-SERVICE CAPABILITIES ("WHAT WE DELIVER")
             ═════════════════════════════════════════════════════════════════════ */}
-        <section className={`py-24 ${W} border-b border-border`}>
+        <section className={`py-10 md:py-14 ${W} border-b border-border`}>
           <div className="max-w-4xl mb-14">
             <Reveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
@@ -1377,7 +1377,7 @@ const Shopify = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 6: 14-DAY LAUNCH BLUEPRINT (OUR PROCESS)
             ═════════════════════════════════════════════ */}
-        <section className={`py-24 ${W} border-b border-border`} style={{ background: 'hsl(var(--surface))' }}>
+        <section className={`py-10 md:py-14 ${W} border-b border-border`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-4xl mb-14">
             <Reveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
@@ -1431,7 +1431,7 @@ const Shopify = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 7: STOREFRONT VISUAL SHOWCASE
             ═════════════════════════════════════════════════════════════════════ */}
-        <section className={`py-24 ${W} border-b border-border`}>
+        <section className={`py-10 md:py-14 ${W} border-b border-border`}>
           <div className="max-w-4xl mb-14">
             <Reveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
@@ -1487,7 +1487,7 @@ const Shopify = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 8: ENTERPRISE FAQ ACCORDION (WAI-ARIA COMPLIANT)
             ═════════════════════════════════════════════════════════════════════ */}
-        <section className={`py-24 ${W} border-b border-border`} style={{ background: 'hsl(var(--surface))' }}>
+        <section className={`py-10 md:py-14 ${W} border-b border-border`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-4xl mb-14">
             <Reveal>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
@@ -1565,7 +1565,7 @@ const Shopify = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 9: HIGH-IMPACT CONVERSION CTA BLOCK
             ═════════════════════════════════════════════════════════════════════ */}
-        <section className={`py-24 ${W}`}>
+        <section className={`py-10 md:py-14 ${W}`}>
           <div
             className="rounded-3xl p-8 sm:p-14 text-center border border-border relative overflow-hidden"
             style={{ background: 'hsl(var(--card))' }}

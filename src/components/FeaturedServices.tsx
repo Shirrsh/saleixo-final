@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import MarketplaceMockup from '@/components/MarketplaceMockup';
 
 import photographyImg from '@/assets/photography-service.jpg';
@@ -42,6 +43,7 @@ interface Service {
   features: [string, string, string, string];
   stat: { value: string; label: string };
   cta: string;
+  to: string;
 }
 
 const services: Service[] = [
@@ -65,6 +67,7 @@ const services: Service[] = [
     ],
     stat: { value: '9', label: 'marketplaces' },
     cta: 'Boost Your Sales',
+    to: '/services/amazon',
   },
   {
     num: '02',
@@ -86,6 +89,7 @@ const services: Service[] = [
     ],
     stat: { value: '48hr', label: 'turnaround' },
     cta: 'Book a Shoot',
+    to: '/services/photography',
   },
   {
     num: '03',
@@ -107,6 +111,7 @@ const services: Service[] = [
     ],
     stat: { value: '5', label: 'marketplace specs' },
     cta: 'See Design Work',
+    to: '/design',
   },
   {
     num: '04',
@@ -128,6 +133,7 @@ const services: Service[] = [
     ],
     stat: { value: '5 days', label: 'to first campaign' },
     cta: 'Plan a Campaign',
+    to: '/services/social-ads',
   },
 ];
 
@@ -407,14 +413,11 @@ const FeaturedServices = () => {
     exit:  (d: number) => ({ x: d > 0 ? -32 : 32, opacity: 0, transition: { duration: 0.2 } }),
   };
 
-  const scrollToContact = () =>
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-
   // Alternate visual position L/R on desktop (even idx = image right, odd = image left)
   const imgIsRight = activeIdx % 2 === 0;
 
   return (
-    <section id="services" className="relative py-10 md:py-16 bg-transparent overflow-x-hidden">
+    <section id="services" className="relative py-8 sm:py-10 md:py-12 bg-transparent overflow-x-hidden">
 
       {/* ── Section header ── */}
       <motion.div
@@ -569,21 +572,24 @@ const FeaturedServices = () => {
               {/* CTAs — full-width on mobile, auto-width on sm+ */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                 <Button
+                  asChild
                   size="lg"
-                  onClick={scrollToContact}
-                  className="rounded-full px-6 md:px-7 font-semibold text-white transition-all duration-300 w-full sm:w-auto text-sm"
+                  className="rounded-full px-6 md:px-7 font-semibold text-white transition-all duration-300 w-full sm:w-auto text-sm shadow-sm hover:opacity-95"
                   style={{
                     background: s.colorVar,
                     boxShadow: `0 0 0 0 ${s.colorVar.replace(')', ' / 0.35)')}`,
                   }}
                   onMouseEnter={e => {
-                    (e.currentTarget as HTMLButtonElement).style.boxShadow = `0 0 28px ${s.colorVar.replace(')', ' / 0.45)')}`;
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 28px ${s.colorVar.replace(')', ' / 0.45)')}`;
                   }}
                   onMouseLeave={e => {
-                    (e.currentTarget as HTMLButtonElement).style.boxShadow = `0 0 0 0 ${s.colorVar.replace(')', ' / 0.35)')}`;
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 0 0 ${s.colorVar.replace(')', ' / 0.35)')}`;
                   }}
                 >
-                  {s.cta}
+                  <Link to={s.to} className="inline-flex items-center justify-center gap-2">
+                    <span>{s.cta}</span>
+                    <ArrowRight className="w-4 h-4" aria-hidden />
+                  </Link>
                 </Button>
 
                 {s.slug === 'ecommerce' && (

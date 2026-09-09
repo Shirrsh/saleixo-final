@@ -49,7 +49,7 @@ const fadeUp = {
 const WhySaleixo = () => {
   const [showAll, setShowAll] = useState(false);
   return (
-  <section className="section-airy relative overflow-hidden py-10 md:py-16 bg-transparent">
+  <section className="section-airy relative overflow-hidden py-8 sm:py-10 md:py-12 bg-transparent">
     {/* Drifting ambient blobs — parallax on scroll */}
     <ParallaxBlob hue="217 91% 52%" opacity={0.06} size={620} speed={0.45} style={{ top: '-10%', left: '-8%' }} />
     <ParallaxBlob hue="340 100% 68%" opacity={0.045} size={520} speed={-0.3} style={{ bottom: '-15%', right: '-6%' }} />
@@ -62,15 +62,15 @@ const WhySaleixo = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="text-center mb-12 md:mb-16"
+        className="text-center mb-8 md:mb-12"
       >
-        <motion.p variants={fadeUp} custom={0} className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-4">
+        <motion.p variants={fadeUp} custom={0} className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">
           Why Saleixo
         </motion.p>
-        <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 tracking-tight">
+        <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3.5 tracking-tight">
           A studio built by people who actually sell.
         </motion.h2>
-        <motion.p variants={fadeUp} custom={2} className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        <motion.p variants={fadeUp} custom={2} className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           We've managed listings, ads, and photography for ecommerce brands across Amazon, Etsy, and Shopify. We know where the bottleneck is before we sell you a thing — because we've fixed it before.
         </motion.p>
       </motion.div>
@@ -88,7 +88,7 @@ const WhySaleixo = () => {
             key={d.title}
             variants={fadeUp}
             custom={i}
-            className={`rounded-2xl p-6 border border-border/50 bg-card/50 active:scale-[0.98] hover:-translate-y-0.5 transition-transform duration-200${i >= 3 && !showAll ? ' hidden sm:flex sm:flex-col' : ''}`}
+            className={`rounded-2xl p-6 border border-border/50 bg-card/50 hover:-translate-y-0.5 transition-transform duration-200${i >= 3 && !showAll ? ' hidden sm:flex sm:flex-col' : ''}`}
             style={{ boxShadow: '0 2px 16px rgba(0,0,0,0.04)' }}
           >
             <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 bg-primary/10 border border-primary/20">

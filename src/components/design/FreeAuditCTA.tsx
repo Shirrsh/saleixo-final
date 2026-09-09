@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, ArrowRight } from 'lucide-react';
+import { openQuickAudit } from '@/lib/booking';
 
 const FreeAuditCTA = () => {
   const [isLight, setIsLight] = useState(() => {
@@ -24,7 +25,7 @@ const FreeAuditCTA = () => {
   const borderColor = isLight ? 'hsl(0 0% 88%)' : 'hsl(215 40% 24% / 0.6)';
 
   return (
-    <section className="py-16 px-4">
+    <section className="py-10 md:py-14 px-4">
       <div className="container mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -58,7 +59,7 @@ const FreeAuditCTA = () => {
               Our experts will analyze your listings, ads & account health — and show you exactly where you're losing sales.
             </p>
             <button
-              onClick={() => { window.location.href = '/#contact'; }}
+              onClick={() => openQuickAudit()}
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm transition-opacity duration-200"
               style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
               onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}

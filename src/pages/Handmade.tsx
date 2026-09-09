@@ -237,8 +237,8 @@ const Handmade = () => {
         </section>
 
         {/* ── Section 2 — The problem ── */}
-        <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
-          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 max-w-2xl">
+        <section className={`py-10 md:py-14 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 max-w-2xl">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">The problem</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
               Craft is in the detail. So is the drop-off.
@@ -264,8 +264,8 @@ const Handmade = () => {
         </section>
 
         {/* ── Section 3 — What we do for artisan brands ── */}
-        <section className={`py-20 ${W}`}>
-          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 max-w-2xl">
+        <section className={`py-10 md:py-14 ${W}`}>
+          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 max-w-2xl">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">What we do</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
               One studio for the whole craft-to-cart journey.
@@ -305,8 +305,8 @@ const Handmade = () => {
         </section>
 
         {/* ── Section 4 — Categories we shoot weekly ── */}
-        <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
-          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10">
+        <section className={`py-10 md:py-14 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">What we shoot</p>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
@@ -336,8 +336,8 @@ const Handmade = () => {
         </section>
 
         {/* ── Section 5 — Testimonials ── */}
-        <section className={`py-20 ${W}`}>
-          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10 max-w-2xl">
+        <section className={`py-10 md:py-14 ${W}`}>
+          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 max-w-2xl">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">In their words</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
               Makers who stopped losing the detail.
@@ -366,7 +366,7 @@ const Handmade = () => {
         </section>
 
         {/* ── Section 6 — Transparent pricing strip ── */}
-        <section className={`py-14 ${W}`}>
+        <section className={`py-8 md:py-12 ${W}`}>
           <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}
             className="rounded-3xl p-8 md:p-12 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10"
             style={{ background: 'linear-gradient(135deg, hsl(174 37% 13%) 0%, hsl(220 30% 10%) 100%)', border: '1px solid hsl(174 30% 22% / 0.5)' }}>
@@ -388,8 +388,8 @@ const Handmade = () => {
         </section>
 
         {/* ── Section 7 — FAQ ── */}
-        <section className={`py-20 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
-          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10 max-w-2xl">
+        <section className={`py-10 md:py-14 ${W}`} style={{ background: 'hsl(var(--surface))' }}>
+          <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8 max-w-2xl">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-3">Common questions</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
               Answers for artisan sellers.
@@ -411,7 +411,7 @@ const Handmade = () => {
         </section>
 
         {/* ── Section 8 — CTA ── */}
-        <section className={`py-20 ${W}`}>
+        <section className={`py-10 md:py-14 ${W}`}>
           <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}
             className="rounded-3xl p-10 md:p-16 text-center relative overflow-hidden"
             style={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}>

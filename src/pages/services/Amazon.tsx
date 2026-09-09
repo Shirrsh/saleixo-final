@@ -1051,7 +1051,7 @@ const Amazon = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 3: THE 8 OFFICIAL AMAZON SPN PILLARS (DEEP-DIVE & CONTRACTS)
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="spn-pillars" className={`py-24 ${W} border-b border-border scroll-mt-20`}>
+        <section id="spn-pillars" className={`py-10 md:py-14 ${W} border-b border-border scroll-mt-20`}>
           <div className="max-w-3xl mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
               Official SPN Taxonomy
@@ -1311,7 +1311,7 @@ const Amazon = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 4: INTERACTIVE LISTING HEALTH & SPN READINESS DIAGNOSTIC WIDGET
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="diagnostic" className={`py-24 ${W} border-b border-border scroll-mt-24`} style={{ background: 'hsl(var(--surface))' }}>
+        <section id="diagnostic" className={`py-10 md:py-14 ${W} border-b border-border scroll-mt-24`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-3xl mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
               Interactive Self-Assessment
@@ -1446,7 +1446,7 @@ const Amazon = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 5: ALGORITHM MECHANICS (A9 / A10 / COSMOS DEEP-DIVE)
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="algorithm" className={`py-24 ${W} border-b border-border scroll-mt-24`}>
+        <section id="algorithm" className={`py-10 md:py-14 ${W} border-b border-border scroll-mt-24`}>
           <div className="max-w-3xl mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
               Algorithmic Search Mechanics
@@ -1503,7 +1503,7 @@ const Amazon = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 6: RGB 255 PURE WHITE ZOOM SPEC GALLERY
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="spec-gallery" className={`py-24 ${W} border-b border-border scroll-mt-24`} style={{ background: 'hsl(var(--surface))' }}>
+        <section id="spec-gallery" className={`py-10 md:py-14 ${W} border-b border-border scroll-mt-24`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-3xl mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
               Visual Compliance Proof
@@ -1855,7 +1855,7 @@ const Amazon = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 7: 5-STAGE OPERATIONAL SLA PROCESS TIMELINE
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="sla-process" className={`py-24 ${W} border-b border-border scroll-mt-24`}>
+        <section id="sla-process" className={`py-10 md:py-14 ${W} border-b border-border scroll-mt-24`}>
           <div className="max-w-3xl mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
               Operational Roadmap
@@ -1909,7 +1909,7 @@ const Amazon = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 8: AMAZON DPP / SP-API DATA SECURITY ASSURANCE
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="security" className={`py-24 ${W} border-b border-border scroll-mt-24`} style={{ background: 'hsl(var(--surface))' }}>
+        <section id="security" className={`py-10 md:py-14 ${W} border-b border-border scroll-mt-24`} style={{ background: 'hsl(var(--surface))' }}>
           <div className="max-w-3xl mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-emerald-600 dark:text-emerald-400 bg-emerald-500/10">
               <ShieldCheck className="w-3.5 h-3.5" />
@@ -1971,7 +1971,7 @@ const Amazon = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 9: COMPREHENSIVE FAQ ACCORDION
             ═════════════════════════════════════════════════════════════════════ */}
-        <section id="faq" className={`py-24 ${W} border-b border-border scroll-mt-24`}>
+        <section id="faq" className={`py-10 md:py-14 ${W} border-b border-border scroll-mt-24`}>
           <div className="max-w-3xl mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 text-primary bg-primary/10">
               <HelpCircle className="w-3.5 h-3.5" />
@@ -2044,7 +2044,7 @@ const Amazon = () => {
         {/* ═════════════════════════════════════════════════════════════════════
             SECTION 8: FINAL CALL TO ACTION
             ═════════════════════════════════════════════════════════════════════ */}
-        <section className={`py-24 ${W}`}>
+        <section className={`py-10 md:py-14 ${W}`}>
           <div
             className="rounded-3xl p-8 sm:p-14 text-center border border-border relative overflow-hidden"
             style={{ background: 'hsl(var(--card))' }}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import { ArrowRight, Camera } from 'lucide-react';
@@ -6,6 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import { openCalendarBooking } from '@/lib/booking';
 import { supabase } from '@/integrations/supabase/client';
 
 import jewelryNecklace from '@/assets/categories/jewelry-necklace.jpg';
@@ -101,13 +103,13 @@ const CategoryCard = ({ category, index, isLight }: { category: Category; index:
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-            <button
-              onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+            <Link
+              to="/get-started"
               className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-sm font-semibold transition-all duration-200"
               style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
             >
               Get a Quote <ArrowRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -120,9 +122,13 @@ const CategoryCard = ({ category, index, isLight }: { category: Category; index:
             {category.name}
           </h3>
           <p className="text-sm leading-relaxed" style={{ color: textMuted }}>{category.description}</p>
-          <div className="mt-auto pt-3 flex items-center gap-1.5 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ color: accentBlue }}>
+          <Link
+            to="/get-started"
+            className="mt-auto pt-3 flex items-center gap-1.5 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+            style={{ color: accentBlue }}
+          >
             Book a shoot <ArrowRight className="w-3.5 h-3.5" />
-          </div>
+          </Link>
         </div>
       </motion.div>
     </motion.div>
@@ -181,15 +187,13 @@ const Categories = () => {
   const accentBlue = isLight ? 'hsl(210 85% 45%)' : '#60a5fa';
   const borderColor = isLight ? 'hsl(0 0% 88%)' : 'hsl(215 40% 24% / 0.6)';
 
-  const scrollToContact = () => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-
   return (
     <>
       <Header />
       <main className="min-h-screen" style={{ background: bg }}>
 
         {/* ── Hero ── */}
-        <section className="relative pt-32 pb-24 px-4 overflow-hidden">
+        <section className="relative pt-28 pb-12 px-4 overflow-hidden">
           {/* Ambient glow */}
           {!isLight && (
             <div className="absolute inset-0 pointer-events-none">
@@ -260,15 +264,15 @@ const Categories = () => {
                 transition={{ duration: 0.5, delay: 0.34 }}
                 className="flex flex-col sm:flex-row gap-3 mb-12"
               >
-                <button
-                  onClick={scrollToContact}
-                  className="px-6 py-3 rounded-xl font-semibold text-sm transition-opacity duration-200"
+                <Link
+                  to="/get-started"
+                  className="px-6 py-3 rounded-xl font-semibold text-sm transition-opacity duration-200 inline-flex items-center justify-center"
                   style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
-                  onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = '0.82')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = '1')}
                 >
                   Book a Shoot
-                </button>
+                </Link>
                 <a
                   href="#categories-grid"
                   className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
@@ -305,7 +309,7 @@ const Categories = () => {
         </section>
 
         {/* ── Categories Grid ── */}
-        <section id="categories-grid" className="py-20 px-4">
+        <section id="categories-grid" className="py-10 md:py-14 px-4">
           <div className="container mx-auto max-w-7xl">
             {loading ? (
               <div className="flex items-center justify-center py-16">
@@ -326,7 +330,7 @@ const Categories = () => {
         </section>
 
         {/* ── CTA Section ── */}
-        <section className="py-24 px-4">
+        <section className="py-10 md:py-14 px-4">
           <div className="container mx-auto max-w-4xl">
             <motion.div
               initial="hidden"
@@ -361,7 +365,7 @@ const Categories = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button
-                    onClick={scrollToContact}
+                    onClick={() => openCalendarBooking()}
                     className="px-8 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200"
                     style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
                     onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
@@ -369,15 +373,15 @@ const Categories = () => {
                   >
                     Book a Consultation
                   </button>
-                  <button
-                    onClick={scrollToContact}
-                    className="px-8 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200"
+                  <Link
+                    to="/contact"
+                    className="px-8 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 inline-flex items-center justify-center"
                     style={{ color: textMuted, border: `1.5px solid ${borderColor}` }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = textPrimary; el.style.borderColor = isLight ? '#0a0a0a' : '#ffffff'; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = textMuted; el.style.borderColor = borderColor; }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.color = textPrimary; el.style.borderColor = isLight ? '#0a0a0a' : '#ffffff'; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.color = textMuted; el.style.borderColor = borderColor; }}
                   >
                     Get In Touch
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>

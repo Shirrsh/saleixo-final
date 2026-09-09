@@ -159,8 +159,6 @@ const EcommerceManagement = () => {
       },
     ],
   });
-  const scrollToContact = () =>
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <>
@@ -559,7 +557,7 @@ const EcommerceManagement = () => {
         </section>
 
         {/* ── FINAL CTA ── */}
-        <section className={`py-24 md:py-32 ${W}`}>
+        <section className={`py-12 md:py-16 ${W}`}>
           <div className="text-center">
             <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <p className="text-xs font-bold tracking-[0.3em] uppercase text-muted-foreground mb-5">Let's talk</p>

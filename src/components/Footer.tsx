@@ -1,8 +1,9 @@
 import { Mail, MessageCircle, ArrowUpRight, ChevronDown, Video, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import SaleixoLogo from '@/components/SaleixoLogo';
+import { openCalendarBooking, openQuickAudit } from '@/lib/booking';
 
 // Collapsible section for mobile footer
 const FooterAccordion = ({ title, children, defaultOpen = false }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) => {
@@ -32,7 +33,20 @@ const FooterAccordion = ({ title, children, defaultOpen = false }: { title: stri
 };
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const currentYear = new Date().getFullYear();
+
+  const handleSectionClick = (targetId: string) => {
+    if (location.pathname !== '/') {
+      navigate(`/${targetId}`);
+      return;
+    }
+    const el = document.querySelector(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const amazonServices = [
     { label: 'Amazon SPN Flagship Hub', href: '/services/amazon' },
@@ -66,8 +80,8 @@ const Footer = () => {
 
   const companyLinks = [
     { label: 'About Studio',    href: '/about',       action: undefined },
-    { label: 'How We Work',     href: null,           action: () => document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Selected Work',   href: null,           action: () => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'How We Work',     href: null,           action: () => handleSectionClick('#how-it-works-section') },
+    { label: 'Selected Work',   href: null,           action: () => handleSectionClick('#portfolio') },
     { label: 'Ecommerce Blog',  href: '/blog',        action: undefined },
     { label: 'Get Started Form',href: '/get-started', action: undefined },
     { label: 'Contact Team',    href: '/contact',     action: undefined },
@@ -84,11 +98,11 @@ const Footer = () => {
     window.dispatchEvent(new Event('saleixo:open-cookie-settings'));
 
   const triggerAudit = () => {
-    window.dispatchEvent(new CustomEvent('saleixo:open-quick-audit'));
+    openQuickAudit();
   };
 
   const triggerBooking = () => {
-    window.dispatchEvent(new CustomEvent('saleixo:open-calendar-booking'));
+    openCalendarBooking();
   };
 
   return (

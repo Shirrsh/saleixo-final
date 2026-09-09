@@ -1,5 +1,6 @@
 import { ArrowRight, Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { openCalendarBooking } from '@/lib/booking';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Testimonial {
@@ -82,12 +83,9 @@ const TESTIMONIALS_ENABLED = false;
 
 // ── Main section ──────────────────────────────────────────────────────────────
 const TestimonialsSection = () => {
-  const scrollToContact = () =>
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-
   return (
     <section
-      className="py-20 md:py-28 px-4"
+      className="py-10 md:py-14 px-4"
       style={{ background: 'hsl(var(--background))' }}
     >
       <div className="container mx-auto max-w-6xl">
@@ -97,7 +95,7 @@ const TestimonialsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 md:mb-12"
         >
           <div
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-bold tracking-[0.2em] uppercase"
@@ -135,9 +133,9 @@ const TestimonialsSection = () => {
         </p>
 
         {/* ── CTA ── */}
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-8">
           <button
-            onClick={scrollToContact}
+            onClick={() => openCalendarBooking()}
             className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
             style={{ background: '#d4af37', color: '#000' }}
           >

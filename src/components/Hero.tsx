@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { openQuickAudit } from '@/lib/booking';
 
 import img1Src from '@/assets/hero/showcase-1.jpg';
 import img2Src from '@/assets/hero/showcase-2.jpg';
@@ -128,13 +129,8 @@ const Hero = () => {
   // Gallery drifts up slightly slower than scroll for depth
   const galleryY = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
-  const scrollToContact = () => {
-    const el = document.querySelector('#instant-audit-bar') || document.querySelector('#contact');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-      const input = el.querySelector('input');
-      if (input) setTimeout(() => input.focus(), 600);
-    }
+  const handleAuditClick = () => {
+    openQuickAudit();
   };
 
   const col1 = [
@@ -378,7 +374,7 @@ const Hero = () => {
             className="flex flex-row gap-3 mb-8"
           >
             <button
-              onClick={scrollToContact}
+              onClick={handleAuditClick}
               className="px-5 py-2.5 rounded-xl font-semibold text-sm whitespace-nowrap transition-opacity duration-200"
               style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
               onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.82')}
@@ -524,7 +520,7 @@ const Hero = () => {
             className="flex flex-col gap-3 mb-7 w-full max-w-xs mx-auto"
           >
             <button
-              onClick={scrollToContact}
+              onClick={handleAuditClick}
               className="w-full px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 active:scale-[0.98] shadow-sm hover:shadow-md"
               style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a', minHeight: '48px' }}
               onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.88')}

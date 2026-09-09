@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { usePageMeta, buildBreadcrumbSchema, ORG_ID } from '@/hooks/usePageMeta';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import { openCalendarBooking } from '@/lib/booking';
 
 import { Globe, Phone, Users, Camera, Search, BarChart3, Target, Headphones, Shield, CheckCircle2, TrendingUp, Film, UserCheck, Palette, Store, Star, ArrowRight } from 'lucide-react';
 
@@ -97,16 +99,13 @@ const Design = () => {
   const cardBg = isLight ? 'hsl(0 0% 97%)' : 'hsl(220 28% 11%)';
   const cardBorder = isLight ? 'hsl(0 0% 88%)' : 'hsl(215 40% 22% / 0.6)';
 
-  const scrollToContact = () =>
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-
   return (
     <>
       <Header />
       <main className="min-h-screen" style={{ background: bg }}>
 
         {/* ── Hero ── */}
-        <section className="relative pt-32 pb-20 overflow-hidden">
+        <section className="relative pt-28 pb-12 overflow-hidden">
           {!isLight && (
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, hsl(215 45% 14%) 0%, hsl(220 35% 10%) 40%, hsl(222 30% 9%) 100%)' }} />
@@ -157,16 +156,16 @@ const Design = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.34 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center mb-12"
+              className="flex flex-col sm:flex-row gap-3 justify-center mb-8"
             >
-              <button
-                onClick={scrollToContact}
-                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+              <Link
+                to="/get-started"
+                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 inline-flex items-center justify-center gap-2"
                 style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
               >
                 Get Started
-                <ArrowRight className="inline ml-2 w-4 h-4" />
-              </button>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
               <button
                 onClick={() => document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' })}
                 className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
@@ -203,7 +202,7 @@ const Design = () => {
         <CoreServices />
 
         {/* ── How It Works ── */}
-        <section id="process" className="py-20 px-6 md:px-12 lg:px-20 xl:px-28" style={{ background: isLight ? 'hsl(0 0% 97%)' : 'hsl(220 28% 9%)' }}>
+        <section id="process" className="py-10 md:py-14 px-6 md:px-12 lg:px-20 xl:px-28" style={{ background: isLight ? 'hsl(0 0% 97%)' : 'hsl(220 28% 9%)' }}>
           <div className="max-w-5xl mx-auto">
             <motion.div
               variants={fadeUp}
@@ -291,7 +290,7 @@ const Design = () => {
         <StrategySection />
 
         {/* ── Expert Team ── */}
-        <section className="py-20 px-6 md:px-12 lg:px-20 xl:px-28">
+        <section className="py-10 md:py-14 px-6 md:px-12 lg:px-20 xl:px-28">
           <div className="max-w-6xl mx-auto">
             <motion.div
               variants={fadeUp}
@@ -365,7 +364,7 @@ const Design = () => {
         </section>
 
         {/* ── Design Work Examples ── */}
-        <section className="py-20 px-6 md:px-12 lg:px-20 xl:px-28">
+        <section className="py-10 md:py-14 px-6 md:px-12 lg:px-20 xl:px-28">
           <div className="max-w-6xl mx-auto">
             <motion.div
               variants={fadeUp}
@@ -414,7 +413,7 @@ const Design = () => {
         <WhyChooseUs />
 
         {/* ── What You Get ── */}
-        <section className="py-20 px-6 md:px-12 lg:px-20 xl:px-28">
+        <section className="py-10 md:py-14 px-6 md:px-12 lg:px-20 xl:px-28">
           <div className="max-w-6xl mx-auto">
             <motion.div
               variants={fadeUp}
@@ -505,7 +504,7 @@ const Design = () => {
         <FreeAuditCTA />
 
         {/* ── Final CTA ── */}
-        <section className="py-24 px-6 md:px-12 lg:px-20 xl:px-28">
+        <section className="py-10 md:py-14 px-6 md:px-12 lg:px-20 xl:px-28">
           <div className="max-w-4xl mx-auto">
             <motion.div
               variants={fadeUp}
@@ -539,7 +538,7 @@ const Design = () => {
                   Book a free consultation and let our team build your ecommerce success story.
                 </p>
                 <button
-                  onClick={scrollToContact}
+                  onClick={() => openCalendarBooking()}
                   className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200"
                   style={{ background: isLight ? '#0a0a0a' : '#ffffff', color: isLight ? '#ffffff' : '#0a0a0a' }}
                 >

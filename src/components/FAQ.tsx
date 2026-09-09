@@ -89,7 +89,7 @@ const FAQ = () => {
   const toggle = (id: string) => setOpenId(prev => prev === id ? null : id);
 
   return (
-    <section id="faq" className="py-10 md:py-16 bg-background">
+    <section id="faq" className="py-8 sm:py-10 md:py-12 bg-background">
       <div className="container mx-auto px-4 max-w-3xl">
 
         {/* Header */}
@@ -98,7 +98,7 @@ const FAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10 md:mb-14"
+          className="text-center mb-6 md:mb-10"
         >
           <p className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-3">
             Questions sellers actually ask
