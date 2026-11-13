@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { usePageMeta, buildBreadcrumbSchema } from '@/hooks/usePageMeta';
-import { Check, ArrowRight, Star, Zap, ChevronDown, ShieldCheck, Clock, Sparkles, Search, Plus, X, Layers, Activity, CheckCircle2, Lock } from 'lucide-react';
+import { Check, ArrowRight, Star, Zap, ChevronDown, ShieldCheck, Clock, Sparkles, Search, Plus, X, Layers, Activity, CheckCircle2, Lock, TrendingUp, Flame } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -240,6 +240,39 @@ export const tiers = [
     highlight: false,
   },
 ];
+
+export const omnichannelGrowthTier = {
+  name: 'Omnichannel Paid Growth Partner',
+  badge: 'Flagship Scale · ₹2L Tier',
+  priceUSD: 2499,
+  priceINR: 199999,
+  setupUSD: 499,
+  setupINR: 29999,
+  contract: '3-month minimum, then monthly',
+  bestFor: 'Scaling D2C & Amazon brands (₹5L–₹25L / $6k–$30k monthly ad spend)',
+  coverage: 'Up to $25,000 / ₹20 Lakh monthly ad spend managed',
+  channels: [
+    'Amazon Sponsored Ads (SP, SB, SBV, SD) & DSP',
+    'Meta Ads (Facebook & Instagram Advantage+ Shopping)',
+    'Google Performance Max (PMax), Shopping & Brand Search',
+  ],
+  creativeDeliverables: '10–15 fresh static & motion video ad creatives produced in-house every month',
+  attribution: 'Meta CAPI, GA4 server-side measurement & Amazon Attribution (10% Brand Referral Bonus)',
+  features: [
+    'Unified cross-channel ad spend allocation across Amazon, Meta & Google',
+    'Amazon Sponsored Products, Brands, Video (SBV) & Display conquesting',
+    'Meta Advantage+ Shopping (ASC), top-of-funnel hooks & dynamic retargeting',
+    'Google Performance Max (PMax) + high-intent Shopping & Brand Search defense',
+    'In-House Ad Studio: 10–15 fresh static & motion video creatives produced monthly',
+    'Amazon Attribution setup: earns 10% cash back via Brand Referral Bonus',
+    'Meta CAPI & GA4 server-side deduplication (recovering iOS signal loss)',
+    'Amazon main image CTR testing & product page conversion rate optimization',
+    'Weekly executive steering calls & blended TACoS/MER profit dashboard',
+    'Dedicated Senior Growth Lead via private Slack / WhatsApp priority channel',
+  ],
+  cta: 'Apply for Growth Partner',
+};
+
 
 export const photography = [
   { name: 'Pure White RGB 255 Catalog Photo (Amazon main image compliant)', usd: 15, inr: 1299 },
@@ -649,9 +682,9 @@ const CustomPricing = () => {
           <>
             {/* ── Hero (Unlocked) ── */}
             <section className="pt-28 pb-6 sm:pb-8 px-4 text-center">
-              <div className="inline-flex items-center justify-between gap-4 px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-4">
+              <div className="inline-flex flex-wrap items-center justify-center sm:justify-between gap-x-4 gap-y-1 max-w-full px-4 py-1.5 rounded-2xl sm:rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-4">
                 <span className="inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
                   2026 Transparent Rate Card Unlocked
                 </span>
                 <button
@@ -674,12 +707,12 @@ const CustomPricing = () => {
 
               {/* Dual-experience USD indicator with subtle converter for international clients */}
               <div className="flex flex-col items-center justify-center mb-4">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium bg-muted/60 text-muted-foreground border border-border">
+                <div className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 max-w-full px-4 py-1.5 rounded-2xl sm:rounded-full text-xs font-medium bg-muted/60 text-muted-foreground border border-border">
                   <span className="inline-flex items-center gap-1.5 font-semibold text-foreground">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
                     Standard USD Pricing
                   </span>
-                  <span className="text-border">·</span>
+                  <span className="text-border hidden sm:inline">·</span>
                   <button
                     type="button"
                     onClick={() => setShowCurrencySelector((v) => !v)}
@@ -751,12 +784,120 @@ const CustomPricing = () => {
         {/* ── Tab 1: Monthly Growth Retainers ── */}
         {pricingTab === 'retainers' && (
           <section className="px-4 pb-10 md:pb-12 max-w-7xl mx-auto animate-in fade-in duration-200">
+            {/* ── Flagship Omnichannel Tier (₹2 Lakh / $2,499 Tier) ── */}
+            <div className="relative rounded-3xl border-2 border-primary/40 bg-gradient-to-br from-primary/[0.07] via-card to-background p-6 sm:p-10 mb-12 shadow-xl shadow-primary/5 overflow-hidden">
+              <div className="absolute -top-12 -right-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 pb-8 border-b border-border/70">
+                <div className="max-w-2xl">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-primary text-primary-foreground mb-3">
+                    <Flame className="w-3.5 h-3.5 fill-current" />
+                    <span>{omnichannelGrowthTier.badge}</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+                    {omnichannelGrowthTier.name}
+                  </h2>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                    A synchronized growth engine uniting <strong className="text-foreground">Amazon PPC, Meta Ads, and Google Ads</strong> with an <strong className="text-foreground">in-house creative studio</strong> delivering 10–15 fresh high-converting ad assets every month.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-3 text-xs font-medium text-muted-foreground">
+                    <span className="px-2.5 py-1 rounded-md bg-muted/80 border border-border">Target GMV: $25k–$150k / mo</span>
+                    <span className="px-2.5 py-1 rounded-md bg-muted/80 border border-border">Coverage: Up to $25,000 / ₹20L ad spend</span>
+                    <span className="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold">Includes 10% Amazon Referral Cashback</span>
+                  </div>
+                </div>
+
+                <div className="lg:text-right flex-shrink-0 bg-card/80 p-5 rounded-2xl border border-border/80 shadow-sm">
+                  <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider mb-1">Monthly Retainer</div>
+                  <div className="text-3xl sm:text-4xl font-black text-foreground">
+                    {fmt(omnichannelGrowthTier.priceUSD, omnichannelGrowthTier.priceINR)}
+                    <span className="text-muted-foreground text-sm font-normal">/mo</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Setup: {fmt(omnichannelGrowthTier.setupUSD, omnichannelGrowthTier.setupINR)} (3-month min)
+                  </p>
+                  <Link
+                    to="/get-started"
+                    className="mt-4 inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl text-sm font-bold bg-primary text-primary-foreground hover:opacity-90 shadow-md shadow-primary/20 transition-all"
+                  >
+                    {omnichannelGrowthTier.cta} <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* 3 Pillar Feature Breakdown */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-sm font-bold text-foreground">
+                    <TrendingUp className="w-4 h-4 text-primary" />
+                    <span>1. Cross-Channel Media Buying</span>
+                  </div>
+                  <ul className="space-y-2 text-xs text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      Amazon Sponsored Products, Brands, Video (SBV) & Display conquesting
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      Meta Advantage+ Shopping (ASC), top-of-funnel hooks & dynamic retargeting
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      Google Performance Max & high-intent search brand defense
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-sm font-bold text-foreground">
+                    <Sparkles className="w-4 h-4 text-primary" />
+                    <span>2. In-House Creative Engine</span>
+                  </div>
+                  <ul className="space-y-2 text-xs text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      <strong>10–15 fresh ad creatives/mo</strong> (motion reels, comparison statics)
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      Amazon Sponsored Brand Video production & main image CTR testing
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      Zero freelancer handoffs — produced directly in our studio
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-sm font-bold text-foreground">
+                    <ShieldCheck className="w-4 h-4 text-primary" />
+                    <span>3. Attribution & Governance</span>
+                  </div>
+                  <ul className="space-y-2 text-xs text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      Amazon Attribution setup (Unlocks 10% Brand Referral cashback)
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      Meta CAPI & GA4 server-side measurement (recovering lost signals)
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      Dedicated Senior Growth Lead, weekly steering & real-time MER dashboard
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             <div className="text-center mb-8 max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
-                Dedicated Monthly Growth Retainers
-              </h2>
-              <p className="text-sm text-muted-foreground mt-2">
-                Ongoing account management, continuous cataloging, weekly PPC tuning, and priority support.
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
+                Marketplace Management & Catalog Retainers
+              </h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1.5">
+                Need foundational Amazon SPN cataloging, listing design, and store maintenance? Explore our standard monthly tiers below:
               </p>
             </div>
 

@@ -270,9 +270,9 @@ const chartBars = [40,65,45,80,55,90,70,85,60,95,75,88,50,72,92,68,84,76,91,63,8
 
 // ── Single marketplace dashboard ────────────────────────────────────────────
 const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
-  <div className="bg-[#f3f3f3] text-gray-800 text-xs overflow-hidden w-full">
+  <div className="bg-[#f3f3f3] text-gray-800 text-xs overflow-hidden w-full min-w-0">
     {/* Top nav */}
-    <div className="px-3 py-1.5 flex items-center justify-between" style={{ background: mp.navBg }}>
+    <div className="px-2.5 sm:px-3 py-1.5 flex items-center justify-between gap-2 min-w-0" style={{ background: mp.navBg }}>
       <div className="flex items-center gap-2 min-w-0">
         <div className="flex-shrink-0">{mp.logo}</div>
         <span className="text-[10px] truncate" style={{ color: `${mp.navText}80` }}>{mp.subLabel}</span>
@@ -280,26 +280,26 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
       <div className="w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>S</div>
     </div>
 
-    <div className="p-2 sm:p-2.5 overflow-hidden">
+    <div className="p-2 sm:p-2.5 overflow-hidden min-w-0">
       {/* Title row */}
-      <div className="flex items-center justify-between mb-2 gap-2">
-        <h3 className="text-[11px] font-semibold text-gray-800 truncate">{mp.name} Dashboard</h3>
-        <div className="text-[8px] font-bold px-1.5 py-0.5 rounded flex-shrink-0" style={{ background: mp.accent, color: mp.accentText }}>Last 30 Days</div>
+      <div className="flex items-center justify-between mb-2 gap-2 min-w-0">
+        <h3 className="text-[11px] font-semibold text-gray-800 truncate min-w-0">{mp.name} Dashboard</h3>
+        <div className="text-[8px] font-bold px-1.5 py-0.5 rounded flex-shrink-0 whitespace-nowrap" style={{ background: mp.accent, color: mp.accentText }}>Last 30 Days</div>
       </div>
 
       {/* Stats — always 2×2 grid */}
-      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mb-2">
+      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mb-2 min-w-0">
         {mp.stats.map((stat, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.04 }}
-            className="bg-white rounded-lg p-1.5 sm:p-2 border border-gray-200 shadow-xs"
+            className="bg-white rounded-lg p-1.5 sm:p-2 border border-gray-200 shadow-xs min-w-0 overflow-hidden"
           >
             <div className="text-[7.5px] sm:text-[8px] text-gray-500 mb-0.5 leading-tight truncate">{stat.label}</div>
-            <div className="text-[11px] sm:text-xs font-bold text-gray-800">{stat.value}</div>
-            <div className="text-[8px] font-semibold" style={{ color: stat.change.startsWith('-') && stat.label.toLowerCase().includes('return') ? '#16a34a' : stat.change.startsWith('-') ? '#dc2626' : '#16a34a' }}>
+            <div className="text-[11px] sm:text-xs font-bold text-gray-800 truncate">{stat.value}</div>
+            <div className="text-[8px] font-semibold truncate" style={{ color: stat.change.startsWith('-') && stat.label.toLowerCase().includes('return') ? '#16a34a' : stat.change.startsWith('-') ? '#dc2626' : '#16a34a' }}>
               {stat.change.startsWith('-') ? '▼' : '▲'} {stat.change}
             </div>
           </motion.div>
@@ -307,20 +307,21 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
       </div>
 
       {/* Chart — hidden on small screens (< sm) to keep the mockup compact */}
-      <div className="hidden sm:block bg-white rounded-lg p-2 sm:p-2.5 border border-gray-200 shadow-xs mb-2">
+      <div className="hidden sm:block bg-white rounded-lg p-2 sm:p-2.5 border border-gray-200 shadow-xs mb-2 min-w-0 overflow-hidden">
         <div className="flex items-center justify-between mb-1.5">
           <span className="text-[9px] font-semibold text-gray-700">Sales Performance</span>
           <span className="text-[8px] text-gray-400">30 days</span>
         </div>
         <div className="flex items-end gap-0.5 h-8">
           {chartBars.map((h, i) => (
-            <motion.div
+            <div
               key={i}
               className="flex-1 rounded-xs"
-              style={{ background: i >= 25 ? mp.accentChart : mp.chartColor, opacity: i >= 25 ? 1 : 0.35 }}
-              initial={{ height: 0 }}
-              animate={{ height: `${h}%` }}
-              transition={{ delay: 0.05 + i * 0.01, duration: 0.3 }}
+              style={{
+                height: `${h}%`,
+                background: i >= 25 ? mp.accentChart : mp.chartColor,
+                opacity: i >= 25 ? 1 : 0.35,
+              }}
             />
           ))}
         </div>
@@ -331,21 +332,21 @@ const Dashboard = ({ mp }: { mp: typeof marketplaces[0] }) => (
       </div>
 
       {/* Table — 2 rows */}
-      <div className="bg-white rounded-lg border border-gray-200 shadow-xs overflow-hidden">
-        <div className="px-2.5 py-1 border-b border-gray-100 flex items-center justify-between">
-          <span className="text-[9px] font-semibold text-gray-700">{mp.rowLabel}</span>
-          <span className="text-[8px] font-medium" style={{ color: mp.accent }}>View all</span>
+      <div className="bg-white rounded-lg border border-gray-200 shadow-xs overflow-hidden min-w-0">
+        <div className="px-2 sm:px-2.5 py-1 border-b border-gray-100 flex items-center justify-between gap-2 min-w-0">
+          <span className="text-[9px] font-semibold text-gray-700 truncate min-w-0">{mp.rowLabel}</span>
+          <span className="text-[8px] font-medium flex-shrink-0 whitespace-nowrap" style={{ color: mp.accent }}>View all</span>
         </div>
         {mp.rows.slice(0, 2).map((row, i) => (
-          <div key={i} className={`px-2.5 py-1 sm:py-1.5 flex items-center gap-2 text-[9px] ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+          <div key={i} className={`px-2 sm:px-2.5 py-1 sm:py-1.5 flex items-center gap-1.5 sm:gap-2 text-[9px] min-w-0 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
             <div className="w-4 h-4 rounded flex-shrink-0 flex items-center justify-center text-[6px] text-gray-400 bg-gray-100 font-bold">IMG</div>
             <div className="flex-1 min-w-0">
               <div className="font-medium text-gray-800 truncate text-[8.5px] sm:text-[9px]">{row.title}</div>
             </div>
             <div className="text-right flex-shrink-0">
-              <div className="font-semibold text-gray-800 text-[8.5px] sm:text-[9px]">{row.sales}</div>
+              <div className="font-semibold text-gray-800 text-[8.5px] sm:text-[9px] whitespace-nowrap">{row.sales}</div>
             </div>
-            <div className="text-[7px] sm:text-[7.5px] font-bold px-1.5 py-0.5 rounded flex-shrink-0" style={{ background: `${mp.accent}22`, color: mp.accent }}>
+            <div className="text-[7px] sm:text-[7.5px] font-bold px-1.5 py-0.5 rounded flex-shrink-0 whitespace-nowrap" style={{ background: `${mp.accent}22`, color: mp.accent }}>
               {row.badge}
             </div>
           </div>
@@ -360,24 +361,48 @@ const MarketplaceMockup = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
+  const [inView, setInView] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
 
   useEffect(() => {
-    if (isPaused) return;
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '100px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || !inView) return;
     const timer = setInterval(() => {
       setDirection(1);
       setCurrent(c => (c + 1) % marketplaces.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, inView]);
+
+  const pauseTemporarily = () => {
+    setIsPaused(true);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = setTimeout(() => setIsPaused(false), 8000);
+  };
 
   const go = (dir: number) => {
     setDirection(dir);
     setCurrent(c => (c + dir + marketplaces.length) % marketplaces.length);
-    setIsPaused(true);
-    // Resume auto-play after manual nav
-    setTimeout(() => setIsPaused(false), 8000);
+    pauseTemporarily();
   };
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -410,15 +435,15 @@ const MarketplaceMockup = () => {
   };
 
   return (
-    <div className="relative group w-full max-w-full">
+    <div ref={containerRef} className="relative group w-full max-w-full min-w-0">
       {/* Browser chrome */}
       <div
-        className="rounded-2xl overflow-hidden shadow-2xl border border-border-glow/30 bg-[#1a1a2e] w-full"
+        className="rounded-2xl overflow-hidden shadow-2xl border border-border-glow/30 bg-[#1a1a2e] w-full max-w-full min-w-0"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
         {/* Browser top bar */}
-        <div className="flex items-center gap-2 px-3 py-2 bg-[#0f0f1a] border-b border-white/10">
+        <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 bg-[#0f0f1a] border-b border-white/10 min-w-0">
           <div className="flex gap-1.5 flex-shrink-0">
             <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
@@ -426,24 +451,26 @@ const MarketplaceMockup = () => {
           </div>
 
           {/* Browser forward/backward controls in toolbar */}
-          <div className="flex items-center gap-0.5 flex-shrink-0 ml-0.5">
+          <div className="flex items-center gap-0.5 flex-shrink-0">
             <button
+              type="button"
               onClick={() => go(-1)}
               aria-label="Previous marketplace"
-              className="w-5 h-5 rounded flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 active:scale-90 transition-all"
+              className="w-6 h-6 min-w-0 min-h-0 rounded flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 active:scale-90 transition-all"
             >
               <ChevronLeft className="w-3.5 h-3.5" strokeWidth={2.5} />
             </button>
             <button
+              type="button"
               onClick={() => go(1)}
               aria-label="Next marketplace"
-              className="w-5 h-5 rounded flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 active:scale-90 transition-all"
+              className="w-6 h-6 min-w-0 min-h-0 rounded flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 active:scale-90 transition-all"
             >
               <ChevronRight className="w-3.5 h-3.5" strokeWidth={2.5} />
             </button>
           </div>
 
-          <div className="flex-1 min-w-0 mx-1 bg-white/10 rounded-md px-2 py-1 flex items-center gap-1.5 overflow-hidden">
+          <div className="flex-1 min-w-0 bg-white/10 rounded-md px-2 py-1 flex items-center gap-1.5 overflow-hidden">
             <span className="text-white/40 text-[10px] flex-shrink-0">🔒</span>
             <AnimatePresence mode="wait">
               <motion.span
@@ -452,7 +479,7 @@ const MarketplaceMockup = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.2 }}
-                className="text-[10px] text-white/60 font-mono truncate"
+                className="text-[10px] text-white/60 font-mono truncate block min-w-0"
               >
                 {mp.url}
               </motion.span>
@@ -461,7 +488,7 @@ const MarketplaceMockup = () => {
         </div>
 
         {/* Dashboard slide */}
-        <div className="relative overflow-hidden w-full">
+        <div className="relative overflow-hidden w-full min-w-0">
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={mp.id}
@@ -470,7 +497,7 @@ const MarketplaceMockup = () => {
               initial="enter"
               animate="center"
               exit="exit"
-              className="w-full"
+              className="w-full min-w-0"
             >
               <Dashboard mp={mp} />
             </motion.div>
@@ -478,6 +505,7 @@ const MarketplaceMockup = () => {
 
           {/* Prev arrow — desktop only on hover, never overlapping on mobile/tablet */}
           <button
+            type="button"
             onClick={() => go(-1)}
             aria-label="Previous marketplace"
             className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity active:scale-90"
@@ -488,6 +516,7 @@ const MarketplaceMockup = () => {
 
           {/* Next arrow — desktop only on hover, never overlapping on mobile/tablet */}
           <button
+            type="button"
             onClick={() => go(1)}
             aria-label="Next marketplace"
             className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity active:scale-90"
@@ -498,22 +527,23 @@ const MarketplaceMockup = () => {
         </div>
       </div>
 
-      {/* Dot indicators — 32px tap area each */}
-      <div className="flex justify-center items-center gap-0.5 mt-3" role="tablist" aria-label="Marketplace slides">
+      {/* Dot indicators — compact width so all 9 fit cleanly on narrow phones */}
+      <div className="flex justify-center items-center gap-0.5 mt-3 w-full max-w-full overflow-hidden" role="tablist" aria-label="Marketplace slides">
         {marketplaces.map((m, i) => (
           <button
             key={m.id}
+            type="button"
             aria-label={`Show ${m.name}`}
             aria-selected={i === current}
             role="tab"
-            onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); setIsPaused(true); setTimeout(() => setIsPaused(false), 8000); }}
-            className="flex items-center justify-center"
-            style={{ width: 28, height: 28, background: 'transparent', border: 'none', cursor: 'pointer', flexShrink: 0 }}
+            onClick={() => { setDirection(i > current ? 1 : -1); setCurrent(i); pauseTemporarily(); }}
+            className="w-6 h-7 sm:w-7 sm:h-7 min-w-0 min-h-0 flex items-center justify-center flex-shrink-0"
+            style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
           >
             <span
               style={{
                 display: 'block',
-                width: i === current ? 18 : 5,
+                width: i === current ? 16 : 5,
                 height: 5,
                 borderRadius: 999,
                 background: i === current ? mp.accent : 'hsl(var(--muted-foreground) / 0.25)',

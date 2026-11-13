@@ -1134,7 +1134,7 @@ export default function Services() {
 
             {/* Track Switcher Navigation */}
             <div className="flex justify-center mb-8">
-              <div className="inline-flex p-1.5 rounded-2xl bg-surface border border-border shadow-sm max-w-full overflow-x-auto">
+              <div className="flex flex-col sm:inline-flex sm:flex-row p-1.5 rounded-2xl bg-surface border border-border shadow-sm w-full sm:w-auto max-w-full gap-1 sm:gap-0">
                 {ECOSYSTEM_TRACKS.map((track) => {
                   const isActive = activeTrack === track.id;
                   return (
@@ -1143,7 +1143,7 @@ export default function Services() {
                       onClick={() => {
                         setActiveTrack(track.id);
                       }}
-                      className={`relative px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors duration-200 whitespace-nowrap flex items-center gap-2 ${
+                      className={`relative px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors duration-200 whitespace-nowrap flex items-center justify-between sm:justify-center gap-2 ${
                         isActive ? 'text-white' : 'text-muted-foreground hover:text-foreground'
                       }`}
                     >
@@ -1170,7 +1170,7 @@ export default function Services() {
             </div>
 
             {/* Track Banner & Global Perspective Switcher */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-5 rounded-2xl bg-card border border-border mb-8">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-card border border-border mb-8">
               <div>
                 <span
                   className="inline-block px-2.5 py-0.5 rounded text-[10px] font-bold tracking-[0.15em] uppercase mb-1.5"
@@ -1186,7 +1186,7 @@ export default function Services() {
               </div>
 
               {/* Global Perspective Toggle */}
-              <div className="flex items-center gap-2 bg-surface p-1 rounded-xl border border-border flex-shrink-0">
+              <div className="grid grid-cols-2 sm:flex items-center gap-1.5 sm:gap-2 bg-surface p-1 rounded-xl border border-border w-full sm:w-auto flex-shrink-0">
                 <span className="text-[11px] font-semibold text-muted-foreground pl-2 hidden sm:inline">
                   Perspective:
                 </span>
@@ -1195,28 +1195,28 @@ export default function Services() {
                     setGlobalPerspective('solution');
                     setCardOverrides({});
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
                     globalPerspective === 'solution'
                       ? 'bg-emerald-500 text-white shadow-sm'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Solutions View
+                  <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
+                  <span>Solutions View</span>
                 </button>
                 <button
                   onClick={() => {
                     setGlobalPerspective('problem');
                     setCardOverrides({});
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
                     globalPerspective === 'problem'
                       ? 'bg-amber-600 text-white shadow-sm'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
-                  <AlertTriangle className="w-3.5 h-3.5" />
-                  Risks View
+                  <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
+                  <span>Risks View</span>
                 </button>
               </div>
             </div>
@@ -1250,7 +1250,7 @@ export default function Services() {
                       }}
                     >
                       {/* Discipline Card Header */}
-                      <div className="p-6 md:p-8 border-b border-border/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div className="p-4 sm:p-6 md:p-8 border-b border-border/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div className="flex items-start gap-3 sm:gap-4">
                           <div
                             className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
@@ -1291,28 +1291,28 @@ export default function Services() {
                         </div>
 
                         {/* Local Interactive Perspective Switcher */}
-                        <div className="flex items-center gap-1 bg-surface p-1 rounded-xl border border-border self-start md:self-auto">
+                        <div className="grid grid-cols-2 sm:flex items-center gap-1 bg-surface p-1 rounded-xl border border-border w-full sm:w-auto self-start md:self-auto">
                           <button
                             onClick={() => handleCardToggle(disc.id, 'solution')}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+                            className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 ${
                               !isProblem
                                 ? 'bg-emerald-500 text-white shadow-sm'
                                 : 'text-muted-foreground hover:text-foreground'
                             }`}
                           >
-                            <CheckCircle2 className="w-3.5 h-3.5" />
-                            Systematic Solution
+                            <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
+                            <span className="truncate">Systematic Solution</span>
                           </button>
                           <button
                             onClick={() => handleCardToggle(disc.id, 'problem')}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+                            className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 ${
                               isProblem
                                 ? 'bg-amber-600 text-white shadow-sm'
                                 : 'text-muted-foreground hover:text-foreground'
                             }`}
                           >
-                            <AlertTriangle className="w-3.5 h-3.5" />
-                            The Real Problem
+                            <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
+                            <span className="truncate">The Real Problem</span>
                           </button>
                         </div>
                       </div>

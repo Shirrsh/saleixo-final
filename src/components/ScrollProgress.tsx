@@ -1,28 +1,54 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const ScrollProgress = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrolled / maxHeight) * 100;
-      setScrollProgress(progress);
+    const bar = barRef.current;
+    if (!bar) return;
+
+    let rafId = 0;
+    let maxHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+
+    const measure = () => {
+      maxHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const update = () => {
+      rafId = 0;
+      const ratio = Math.min(1, Math.max(0, window.scrollY / maxHeight));
+      bar.style.transform = `scaleX(${ratio})`;
+    };
+
+    const onScroll = () => {
+      if (!rafId) {
+        rafId = requestAnimationFrame(update);
+      }
+    };
+
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    ro?.observe(document.documentElement);
+    window.addEventListener('resize', measure, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      ro?.disconnect();
+      window.removeEventListener('resize', measure);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-1 bg-secondary/20 z-50">
-      <div 
-        className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-150 ease-out"
-        style={{ width: `${scrollProgress}%` }}
+    <div className="scroll-progress fixed top-0 left-0 w-full h-1 bg-secondary/20 z-50 pointer-events-none">
+      <div
+        ref={barRef}
+        className="h-full w-full bg-gradient-to-r from-primary to-accent origin-left"
+        style={{ transform: 'scaleX(0)', willChange: 'transform' }}
       />
     </div>
   );
 };
 
-export default ScrollProgress;
+export default ScrollProgress;

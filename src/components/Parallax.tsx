@@ -9,7 +9,7 @@
  * negative values drift against scroll (foreground feel). 0.1–0.3 is subtle.
  */
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 interface ParallaxProps {
   children?: React.ReactNode;
@@ -20,16 +20,35 @@ interface ParallaxProps {
   'aria-hidden'?: boolean;
 }
 
+const useIsMobileOrCoarse = () => {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined'
+      ? window.matchMedia('(max-width: 767px), (hover: none) and (pointer: coarse)').matches
+      : false
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px), (hover: none) and (pointer: coarse)');
+    setIsMobile(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  return isMobile;
+};
+
 const Parallax = ({ children, className = '', speed = 0.15, style, ...rest }: ParallaxProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const isMobile = useIsMobileOrCoarse();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
   const y = useTransform(scrollYProgress, [0, 1], [speed * 100, speed * -100]);
 
-  if (reduced) {
+  if (reduced || isMobile) {
     return (
       <div ref={ref} className={className} style={style} {...rest}>
         {children}
@@ -63,7 +82,7 @@ export const ParallaxBlob = ({
 }) => (
   <Parallax
     speed={speed}
-    className={`absolute pointer-events-none ${className}`}
+    className={`absolute pointer-events-none hidden sm:block ${className}`}
     style={{
       width: size,
       height: size,

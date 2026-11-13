@@ -259,10 +259,10 @@
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
-      animation-duration: 0.01ms \!important;
-      animation-iteration-count: 1 \!important;
-      transition-duration: 0.01ms \!important;
-      scroll-behavior: auto \!important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 
@@ -336,9 +336,9 @@
   color: hsl(0 0% 20%);
   box-shadow: none;
 }
-.light .hero-text-white  { color: #0a0a0a \!important; }
-.light .hero-text-accent { color: hsl(217 91% 45%) \!important; text-shadow: none \!important; }
-.light .hero-subtitle    { color: hsl(240 4% 32%) \!important; }
+.light .hero-text-white  { color: #0a0a0a !important; }
+.light .hero-text-accent { color: hsl(217 91% 45%) !important; text-shadow: none !important; }
+.light .hero-subtitle    { color: hsl(240 4% 32%) !important; }
 
 /* Airy section backdrop — soft top-centre glow for light, airy sections */
 .section-airy {
@@ -380,22 +380,24 @@
   box-shadow: 0 0 32px hsl(258 90% 66% / 0.45);
 }
 
-/* ── Global button hover: solid black pill ───────────────────────────────── */
+/* ── Global button hover: solid black pill (desktop/mouse only) ──────────── */
 /* Targets padded CTA buttons (have px-* class) — skips icon-only controls   */
 /* (p-2 square), full-width rows, accordions, and tabs.                       */
-button[class*="px-"]:not([disabled]):not([aria-expanded]):not([class*="w-full"]):not([class*="justify-between"]):not([role="tab"]):not([role="switch"]):not([data-state]):not([class*="accordion"]):hover,
-a[class*="px-"][class*="rounded"]:not([disabled]):not([class*="w-full"]):not([class*="block"]):not([role="tab"]):not([class*="card"]):hover {
-  background: hsl(0 0% 6%) !important;
-  color: hsl(0 0% 100%) !important;
-  border-color: transparent !important;
-  border-radius: 9999px !important;
-}
-.dark button[class*="px-"]:not([disabled]):not([aria-expanded]):not([class*="w-full"]):not([class*="justify-between"]):not([role="tab"]):not([role="switch"]):not([data-state]):not([class*="accordion"]):hover,
-.dark a[class*="px-"][class*="rounded"]:not([disabled]):not([class*="w-full"]):not([class*="block"]):not([role="tab"]):not([class*="card"]):hover {
-  background: hsl(0 0% 94%) !important;
-  color: hsl(0 0% 6%) !important;
-  border-color: transparent !important;
-  border-radius: 9999px !important;
+@media (hover: hover) and (pointer: fine) {
+  button[class*="px-"]:not([disabled]):not([aria-expanded]):not([class*="w-full"]):not([class*="justify-between"]):not([role="tab"]):not([role="switch"]):not([data-state]):not([class*="accordion"]):hover,
+  a[class*="px-"][class*="rounded"]:not([disabled]):not([class*="w-full"]):not([class*="block"]):not([role="tab"]):not([class*="card"]):hover {
+    background: hsl(0 0% 6%) !important;
+    color: hsl(0 0% 100%) !important;
+    border-color: transparent !important;
+    border-radius: 9999px !important;
+  }
+  .dark button[class*="px-"]:not([disabled]):not([aria-expanded]):not([class*="w-full"]):not([class*="justify-between"]):not([role="tab"]):not([role="switch"]):not([data-state]):not([class*="accordion"]):hover,
+  .dark a[class*="px-"][class*="rounded"]:not([disabled]):not([class*="w-full"]):not([class*="block"]):not([role="tab"]):not([class*="card"]):hover {
+    background: hsl(0 0% 94%) !important;
+    color: hsl(0 0% 6%) !important;
+    border-color: transparent !important;
+    border-radius: 9999px !important;
+  }
 }
 
 /* ── Gallery scroll keyframes ────────────────────────────────────────────── */
@@ -559,9 +561,8 @@ a[class*="px-"][class*="rounded"]:not([disabled]):not([class*="w-full"]):not([cl
 /* Mobile optimisations */
 @media (hover: none) and (pointer: coarse) {
   body { cursor: auto; }
-  .cursor-follower { display: none \!important; }
-  button, a, [role="button"] { min-height: 44px; min-width: 44px; }
-  .hover-lift:hover, .hover-scale:hover, .hover-glow:hover {
+  .cursor-follower { display: none !important; }
+  .hover-lift:hover, .hover-scale:hover, .hover-glow:hover, .bento-card:hover, .card-sweep:hover {
     transform: none;
     box-shadow: none;
   }
@@ -582,8 +583,8 @@ a[class*="px-"][class*="rounded"]:not([disabled]):not([class*="w-full"]):not([cl
 /* Print */
 @media print {
   .cursor-follower, .theme-toggle, .scroll-progress,
-  .animate-float, [class*="animate-"] { display: none \!important; }
-  body { cursor: auto \!important; }
+  .animate-float, [class*="animate-"] { display: none !important; }
+  body { cursor: auto !important; }
 }
 
 @keyframes scrollNudge {

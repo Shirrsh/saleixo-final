@@ -148,11 +148,9 @@ const PhotographyVisual = ({ stat }: { stat: Service['stat'] }) => {
 
   const imgRef         = useRef<HTMLDivElement>(null);
   const hasAutoFlashed = useRef(false);
-  const isMobile       = useRef(false);
-
-  useEffect(() => {
-    isMobile.current = window.matchMedia('(hover: none)').matches;
-  }, []);
+  const isMobile       = useRef(
+    typeof window !== 'undefined' ? window.matchMedia('(hover: none)').matches : false,
+  );
 
   const triggerFlash = useCallback(() => {
     if (isFlashing) return;
@@ -165,18 +163,39 @@ const PhotographyVisual = ({ stat }: { stat: Service['stat'] }) => {
     if (!isMobile.current) return;
     const el = imgRef.current;
     if (!el) return;
-    const onScroll = () => {
+    let rafId = 0;
+    let inView = false;
+
+    const updateProgress = () => {
+      rafId = 0;
       const rect = el.getBoundingClientRect();
       const vh   = window.innerHeight;
       const progress = clamp(
         (vh - rect.bottom + rect.height) / (rect.height * 0.8),
         0, 1,
       );
-      setLightProgress(progress);
+      setLightProgress(prev => (Math.abs(prev - progress) > 0.02 ? progress : prev));
     };
+
+    const onScroll = () => {
+      if (!inView || rafId) return;
+      rafId = requestAnimationFrame(updateProgress);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView) onScroll();
+      },
+      { rootMargin: '100px' },
+    );
+    observer.observe(el);
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   useEffect(() => {
@@ -203,8 +222,6 @@ const PhotographyVisual = ({ stat }: { stat: Service['stat'] }) => {
 
   return (
     <motion.div
-      variants={fadeUp}
-      custom={0}
       ref={imgRef}
       className="relative group overflow-hidden rounded-2xl shadow-2xl border border-border-glow/20 cursor-pointer w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] lg:aspect-[16/10]"
       onHoverStart={triggerFlash}
@@ -311,9 +328,7 @@ interface StaticVisualProps {
 }
 
 const StaticVisual = ({ src, alt, stat, accentVar }: StaticVisualProps) => (
-  <motion.div
-    variants={fadeUp}
-    custom={0}
+  <div
     className="relative group overflow-hidden rounded-2xl shadow-2xl border border-border-glow/20 w-full aspect-[16/10] sm:aspect-[16/10] md:aspect-[4/3] lg:aspect-[16/10]"
   >
     <img
@@ -329,20 +344,19 @@ const StaticVisual = ({ src, alt, stat, accentVar }: StaticVisualProps) => (
       <span className="text-white/60 text-xs">/ {stat.label}</span>
     </div>
     <div className="absolute inset-0 ring-1 ring-inset ring-border-glow/20 rounded-2xl pointer-events-none" />
-  </motion.div>
+  </div>
 );
 
 // ── FeaturedServices — responsive tabbed layout ───────────────────────────────
 //
 // Responsive behaviour:
-//   < sm  (< 640px)  — Tabs scroll horizontally, panel stacks (visual above text),
-//                       visual height 240px, CTA buttons full-width,
-//                       body + features collapsed behind "See what's included ↓" toggle
-//   sm–md (640–1024px) — Tabs wrap to two rows if needed, 2-col grid at md (768px),
-//                        visual height 320–380px, body + features always visible
+//   < sm  (< 640px)  — Tabs in a clean 2×2 grid so all 4 disciplines stay visible
+//                       without right-edge clipping; panel stacks (visual above text);
+//                       CTA buttons full-width; body + features behind toggle
+//   sm–md (640–1024px) — Tabs wrap cleanly, 2-col grid at md (768px),
+//                        body + features always visible
 //   lg+   (≥ 1024px)   — Single pill row, 2-col grid with alternating L/R image per
-//                        tab index (even = image right, odd = image left),
-//                        visual height 420px, generous side-by-side spacing
+//                        tab index (even = image right, odd = image left)
 //
 const FeaturedServices = () => {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -377,9 +391,9 @@ const FeaturedServices = () => {
     switch (svc.slug) {
       case 'ecommerce':
         return (
-          <motion.div variants={fadeUp} custom={0} className="w-full max-w-full overflow-hidden">
+          <div className="w-full max-w-full min-w-0 overflow-hidden">
             <MarketplaceMockup />
-          </motion.div>
+          </div>
         );
       case 'photography':
         return <PhotographyVisual stat={svc.stat} />;
@@ -424,7 +438,7 @@ const FeaturedServices = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8 md:mb-10"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8 md:mb-10"
       >
         <motion.div variants={fadeUp} custom={0} className="max-w-2xl">
           <p className="text-xs font-bold tracking-[0.28em] uppercase text-muted-foreground mb-3">
@@ -440,21 +454,26 @@ const FeaturedServices = () => {
         </motion.div>
 
         {/* ── Tab pills ──
-            Mobile  : scroll horizontally (overflow-x-auto), no-wrap
-            Tablet+ : allow wrapping or clean flex so all tabs stay visible
+            Mobile (< sm) : 2×2 grid so all 4 disciplines fit in the viewport without clipping
+            Tablet+ (sm+) : flex-wrap row
         */}
         <motion.div
           variants={fadeUp}
           custom={1}
-          className="flex gap-2 mt-6 sm:mt-7 overflow-x-auto sm:overflow-x-visible flex-nowrap sm:flex-wrap pb-1 scrollbar-hide -mx-1 px-1 sm:mx-0 sm:px-0 sm:justify-start md:justify-start"
+          role="tablist"
+          aria-label="Studio disciplines"
+          className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 mt-6 sm:mt-7 w-full sm:justify-start"
         >
           {services.map((svc, i) => {
             const active = i === activeIdx;
             return (
               <button
                 key={svc.slug}
+                type="button"
+                role="tab"
+                aria-selected={active}
                 onClick={() => switchTab(i)}
-                className="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap flex-shrink-0 transition-all duration-300 active:scale-95"
+                className="flex items-center justify-center sm:justify-start gap-2 px-3 py-2.5 sm:px-4 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap min-w-0 transition-all duration-300 active:scale-95"
                 style={{
                   background: active ? svc.colorVar : 'transparent',
                   color: active ? '#ffffff' : 'hsl(var(--muted-foreground))',
@@ -463,7 +482,7 @@ const FeaturedServices = () => {
                 }}
               >
                 <svc.Icon className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={2} />
-                <span>{svc.tag}</span>
+                <span className="truncate">{svc.tag}</span>
               </button>
             );
           })}
@@ -483,11 +502,11 @@ const FeaturedServices = () => {
             // Mobile: single column (visual above, text below)
             // md (tablet): 2-column with visual consistently on left/top to prevent jumping
             // lg+: alternating L/R image per tab index
-            className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-8 lg:gap-14 items-center"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-8 lg:gap-14 items-center w-full min-w-0"
           >
             {/* Visual column — consistently col-1 on tablet portrait, alternates on desktop lg+ */}
             <div
-              className={`relative w-full ${
+              className={`relative w-full min-w-0 max-w-full ${
                 imgIsRight ? 'lg:order-2' : 'lg:order-1'
               }`}
             >
@@ -497,12 +516,12 @@ const FeaturedServices = () => {
                 aria-hidden
                 style={{ background: `radial-gradient(ellipse at center, ${s.colorVar.replace(')', ' / 0.20)')} 0%, transparent 70%)` }}
               />
-              <div className="relative w-full">{getVisual(activeIdx)}</div>
+              <div className="relative w-full min-w-0 max-w-full">{getVisual(activeIdx)}</div>
             </div>
 
             {/* Text column */}
             <div
-              className={`flex flex-col w-full ${
+              className={`flex flex-col w-full min-w-0 ${
                 imgIsRight ? 'lg:order-1' : 'lg:order-2'
               }`}
             >
@@ -526,7 +545,8 @@ const FeaturedServices = () => {
 
               {/* Mobile-only toggle — collapses body + features */}
               <button
-                className="sm:hidden flex items-center gap-2 text-sm font-semibold mb-3 active:scale-95 transition-transform"
+                type="button"
+                className="sm:hidden flex items-center gap-2 text-sm font-semibold mb-3 active:scale-95 transition-transform self-start"
                 style={{ color: s.colorVar }}
                 onClick={() => setShowDetails(v => !v)}
               >
@@ -595,7 +615,7 @@ const FeaturedServices = () => {
                 {s.slug === 'ecommerce' && (
                   <a
                     href="#portfolio"
-                    className="inline-flex items-center justify-center sm:justify-start gap-1.5 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    className="inline-flex items-center justify-center sm:justify-start gap-1.5 py-2 sm:py-0 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
                     See live storefronts
                     <ArrowRight className="w-3.5 h-3.5" aria-hidden />
@@ -611,10 +631,11 @@ const FeaturedServices = () => {
           {services.map((svc, i) => (
             <button
               key={svc.slug}
+              type="button"
               onClick={() => switchTab(i)}
               aria-label={`Switch to ${svc.tag}`}
               style={{ width: 36, height: 36 }}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center min-w-0 min-h-0"
             >
               <motion.span
                 animate={{

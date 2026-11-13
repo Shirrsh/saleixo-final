@@ -135,7 +135,7 @@ const Contact = () => {
       <ParallaxBlob hue="217 91% 52%" opacity={0.05} size={560} speed={0.35} style={{ top: '-15%', left: '-10%' }} />
       <ParallaxBlob hue="258 90% 66%" opacity={0.045} size={480} speed={-0.25} style={{ bottom: '-12%', right: '-8%' }} />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
           {/* ── LEFT ── */}
@@ -195,7 +195,7 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="rounded-2xl border border-border bg-surface p-6 sm:p-8 shadow-sm">
+            <div className="rounded-2xl border border-border bg-surface p-4 sm:p-8 shadow-sm">
               {submitted ? (
                 <div className="flex flex-col items-center justify-center text-center py-8 gap-4">
                   <div className="w-14 h-14 rounded-full bg-emerald-100 dark:bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
@@ -232,27 +232,27 @@ const Contact = () => {
                       type="button"
                       onClick={() => setTab('audit')}
                       className={cn(
-                        'flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200',
+                        'flex-1 min-w-0 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] sm:text-xs font-semibold transition-all duration-200',
                         tab === 'audit'
                           ? 'bg-background text-foreground shadow-sm'
                           : 'text-muted-foreground hover:text-foreground'
                       )}
                     >
-                      <Sparkles className="w-3.5 h-3.5 text-primary" />
-                      <span>Free Listing Audit (30s)</span>
+                      <Sparkles className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                      <span className="truncate">Free Listing Audit (30s)</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => setTab('rfp')}
                       className={cn(
-                        'flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200',
+                        'flex-1 min-w-0 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg text-[11px] sm:text-xs font-semibold transition-all duration-200',
                         tab === 'rfp'
                           ? 'bg-background text-foreground shadow-sm'
                           : 'text-muted-foreground hover:text-foreground'
                       )}
                     >
-                      <FileText className="w-3.5 h-3.5 text-muted-foreground" />
-                      <span>Custom Project Brief</span>
+                      <FileText className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                      <span className="truncate">Custom Project Brief</span>
                     </button>
                   </div>
 

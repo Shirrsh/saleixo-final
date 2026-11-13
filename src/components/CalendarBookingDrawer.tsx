@@ -99,9 +99,9 @@ export default function CalendarBookingDrawer() {
             </div>
 
             {/* Calendly Inline Widget Container */}
-            <div className="flex-1 overflow-y-auto p-1 sm:p-2 bg-background relative min-h-[550px]">
+            <div className="flex-1 overflow-y-auto p-1 sm:p-2 bg-background relative min-h-0 sm:min-h-[480px]">
               <div
-                className="calendly-inline-widget w-full h-[580px] sm:h-[620px] rounded-xl overflow-hidden"
+                className="calendly-inline-widget w-full h-[440px] sm:h-[620px] rounded-xl overflow-hidden"
                 data-url={CALENDLY_URL}
               />
             </div>

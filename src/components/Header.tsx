@@ -783,7 +783,7 @@ const Header = () => {
           WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
         }}
       >
-        <div style={{ width: '100%', padding: '0 clamp(24px, 7vw, 140px)', height: '64px', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center' }}>
+        <div style={{ width: '100%', padding: '0 clamp(16px, 5vw, 140px)', height: '64px', display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center' }}>
 
             {/* ── Logo ─────────────────────────────────────────────────────── */}
             <Link
@@ -1043,7 +1043,7 @@ const Header = () => {
                               else {
                                 setMobileOpen(false);
                                 if (hasQuicklinks) {
-                                  window.location.href = item.href;
+                                  navigate(item.href);
                                 }
                               }
                             }}

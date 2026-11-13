@@ -35,18 +35,21 @@ export default function QuickAuditDrawer() {
 
     let hasTriggered = false;
 
-    // Trigger 1: Scroll > 40% after at least 12 seconds on site
+    const handleScroll = () => {
+      if (hasTriggered) return;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return;
+      const scrollPercent = (window.scrollY / maxScroll) * 100;
+      if (scrollPercent > 35) {
+        hasTriggered = true;
+        setIsOpen(true);
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+
+    // Trigger 1: Scroll > 35% after at least 10 seconds on site
     const timer = setTimeout(() => {
-      const handleScroll = () => {
-        if (hasTriggered) return;
-        const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        if (scrollPercent > 35) {
-          hasTriggered = true;
-          setIsOpen(true);
-          window.removeEventListener('scroll', handleScroll);
-        }
-      };
-      window.addEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScroll, { passive: true });
     }, 10000);
 
     // Trigger 2: Desktop exit intent (mouse leaving window top)
@@ -61,6 +64,7 @@ export default function QuickAuditDrawer() {
 
     return () => {
       clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);

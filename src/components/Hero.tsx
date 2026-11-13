@@ -166,40 +166,98 @@ const Hero = () => {
     return () => window.removeEventListener('bar-dismissed', onDismiss);
   }, []);
 
-  // Auto-scrolling strip
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return window.matchMedia('(min-width: 1024px)').matches;
+  });
+
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width: 1024px)');
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    setIsDesktop(mql.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
+  // Auto-scrolling strip — only runs on mobile when visible, caches scroll bounds to avoid 60fps reflow
   const stripRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = stripRef.current;
-    if (!el) return;
+    if (!el || isDesktop) return;
+
     const touching = { v: false };
-    let animId: number;
+    let inView = true;
+    let animId = 0;
     let lastT = 0;
+    let maxScroll = 0;
+    let resumeTimer: ReturnType<typeof setTimeout> | null = null;
     const SPEED = 45; // px/s
 
+    const measure = () => {
+      maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
+    };
+    measure();
+
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    ro?.observe(el);
+
     const step = (t: number) => {
+      if (!inView) {
+        animId = 0;
+        return;
+      }
       if (lastT) {
         const dt = Math.min((t - lastT) / 1000, 0.05);
-        if (!touching.v) {
-          const max = el.scrollWidth - el.clientWidth;
-          if (max > 0)
-            el.scrollLeft = el.scrollLeft >= max - 1 ? 0 : el.scrollLeft + SPEED * dt;
+        if (!touching.v && maxScroll > 0) {
+          el.scrollLeft = el.scrollLeft >= maxScroll - 1 ? 0 : el.scrollLeft + SPEED * dt;
         }
       }
       lastT = t;
       animId = requestAnimationFrame(step);
     };
-    animId = requestAnimationFrame(step);
 
-    const pause  = () => { touching.v = true; };
-    const resume = () => { setTimeout(() => { touching.v = false; }, 2200); };
+    const startLoop = () => {
+      if (!animId && inView) {
+        lastT = 0;
+        measure();
+        animId = requestAnimationFrame(step);
+      }
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView) {
+          startLoop();
+        } else if (animId) {
+          cancelAnimationFrame(animId);
+          animId = 0;
+        }
+      },
+      { rootMargin: '100px' },
+    );
+    io.observe(el);
+    startLoop();
+
+    const pause = () => {
+      touching.v = true;
+      if (resumeTimer) clearTimeout(resumeTimer);
+    };
+    const resume = () => {
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { touching.v = false; }, 2200);
+    };
     el.addEventListener('touchstart', pause,  { passive: true });
     el.addEventListener('touchend',   resume, { passive: true });
     return () => {
-      cancelAnimationFrame(animId);
+      if (animId) cancelAnimationFrame(animId);
+      if (resumeTimer) clearTimeout(resumeTimer);
+      io.disconnect();
+      ro?.disconnect();
       el.removeEventListener('touchstart', pause);
       el.removeEventListener('touchend',   resume);
     };
-  }, []);
+  }, [isDesktop]);
 
   const bgT80 = isLight ? 'rgba(255,255,255,0.8)' : 'hsl(220 30% 7% / 0.8)';
   const bgT40 = isLight ? 'rgba(255,255,255,0.4)' : 'hsl(220 30% 7% / 0.4)';
@@ -228,7 +286,7 @@ const Hero = () => {
       {!isLight && (
         <motion.div
           className="absolute inset-0 pointer-events-none"
-          style={{ opacity: bgOpacity }}
+          style={{ opacity: isDesktop ? bgOpacity : 1 }}
         >
           <div className="absolute inset-0" style={{
             background: 'linear-gradient(135deg, hsl(215 45% 14%) 0%, hsl(220 35% 10%) 40%, hsl(222 30% 9%) 100%)',
@@ -239,7 +297,7 @@ const Hero = () => {
           <div className="absolute rounded-full pointer-events-none" style={{
             top: '-10%', left: '-5%', width: '700px', height: '700px',
             background: 'radial-gradient(circle, hsl(210 85% 55% / 0.45) 0%, hsl(220 70% 35% / 0.2) 45%, transparent 70%)',
-            filter: 'blur(60px)',
+            filter: isDesktop ? 'blur(60px)' : undefined,
           }} />
         </motion.div>
       )}
@@ -455,16 +513,18 @@ const Hero = () => {
           <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none"
             style={{ height: '120px', background: `linear-gradient(to top, ${bgSolid}, ${bgT0})` }} />
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="flex gap-4 h-full"
-            style={{ paddingLeft: '16px' }}
-          >
-            <ScrollColumn srcs={col1} direction="up" duration={25} startOffset={0} isLight={isLight} />
-            <ScrollColumn srcs={col2} direction="up" duration={32} startOffset={-156} isLight={isLight} />
-          </motion.div>
+          {isDesktop && (
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="flex gap-4 h-full"
+              style={{ paddingLeft: '16px' }}
+            >
+              <ScrollColumn srcs={col1} direction="up" duration={25} startOffset={0} isLight={isLight} />
+              <ScrollColumn srcs={col2} direction="up" duration={32} startOffset={-156} isLight={isLight} />
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
@@ -472,12 +532,12 @@ const Hero = () => {
       <div className="lg:hidden relative z-10 flex flex-col w-full max-w-full overflow-hidden">
 
         {/* Text content */}
-        <div className="flex flex-col items-center text-center px-5 pb-8 w-full transition-[padding-top] duration-300 ease-out" style={{ paddingTop: heroPadTop }}>
+        <div className="flex flex-col items-center text-center px-4 sm:px-5 pb-8 w-full transition-[padding-top] duration-300 ease-out" style={{ paddingTop: heroPadTop }}>
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex self-center px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.15em] uppercase mb-5 whitespace-nowrap"
+            className="inline-flex self-center px-3 py-1 rounded-full text-[9.5px] sm:text-[10px] font-bold tracking-[0.11em] sm:tracking-[0.15em] uppercase mb-5 whitespace-nowrap max-w-full truncate"
             style={isLight ? {
               background: 'hsl(0 0% 94%)', border: '1px solid hsl(0 0% 82%)', color: 'hsl(0 0% 20%)',
             } : {
@@ -615,7 +675,13 @@ const Hero = () => {
                   boxShadow: isLight ? '0 6px 24px hsl(0 0% 0% / 0.10)' : '0 6px 24px hsl(220 30% 5% / 0.45)',
                 }}
               >
-                <img src={src} alt="Portfolio" className="w-full h-full object-cover" loading="lazy" />
+                <img
+                  src={src}
+                  alt="Portfolio"
+                  className="w-full h-full object-cover"
+                  loading={i < 3 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
               </div>
             ))}
           </div>
